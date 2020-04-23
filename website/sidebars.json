@@ -1,6 +1,6 @@
 {
     "Document": {
-        "Bystack": [
+        "Sipc介绍": [
             "docs_1",
             "docs_2",
             {
@@ -13,7 +13,7 @@
                 ]
             }
         ],
-        "Bytom主链": [
+        "Sipc协议": [
             "docs_5",
             "docs_6",
             "docs_7",
@@ -34,7 +34,7 @@
             },
             "docs_14"
         ],
-        "Vapor侧链": [
+        "Sipc和代币": [
             "docs_15",
             "docs_16",
             "docs_17",
@@ -62,19 +62,26 @@
             },
             "docs_28"
         ],
-        "智能合约": [
+        "Sipc架构": [
             "docs_29",
             "docs_30",
             "docs_31",
             "docs_33",
             "docs_34"
         ],
-        "合约虚拟机": [
+        "虚拟机": [
+            "docs_29",
+            "docs_30",
+            "docs_31",
+            "docs_33",
+            "docs_34"
+        ],
+        "智能合约": [
             "docs_35",
             "docs_36",
             "docs_37"
         ],
-        "Blockcenter": [
+        "API Guid": [
             "docs_38",
             "docs_39",
             "docs_63",
@@ -111,7 +118,7 @@
             "docs_57",
             "docs_58"
         ],
-        "白皮书": [
+        "落地方案": [
              "docs_59"  
         ],
         "FAQ": [      

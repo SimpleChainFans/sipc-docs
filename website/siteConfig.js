@@ -19,17 +19,17 @@ const users = [{
 }, ];
 
 const siteConfig = {
-    title: 'Bytom开发文档', // Title for your website.
-    tagline: 'A website for Bystack docs',
-    url: 'https://bytomfans.github.io', // Your website URL
-    baseUrl: '/bystack-docs/', // Base URL for your project */
+    title: 'SimpleChain开发文档', // Title for your website.
+    tagline: 'A website for SimpleChain docs',
+    url: 'https://simplechain.github.io', // Your website URL
+    baseUrl: '/sipc-docs/', // Base URL for your project */
     // For github.io type URLs, you would set the url and baseUrl like:
     //   url: 'https://facebook.github.io',
     //   baseUrl: '/test-site/',
 
     // Used for publishing and more
-    projectName: 'bystack-docs',
-    organizationName: 'BytomFans',
+    projectName: 'sipc-docs',
+    organizationName: 'SimpleChainFans',
     // For top-level user or org sites, the organization is still the same.
     // e.g., for the https://JoelMarcey.github.io site, it would be set like...
     //   organizationName: 'JoelMarcey'
@@ -37,6 +37,10 @@ const siteConfig = {
     // For no header links in the top nav bar -> headerLinks: [],
     headerLinks: [
         { doc: 'docs_1', label: '文档' },
+        { doc: 'docs_10', label: 'API' },
+        { doc: 'docs_20', label: 'FAQ' },
+        { doc: 'docs_30', label: '在线技术支持' },
+        
 
     ],
 
@@ -69,7 +73,7 @@ const siteConfig = {
     */
 
     // This copyright info is used in /core/Footer.js and blog RSS/Atom feeds.
-    copyright: `Copyright © ${new Date().getFullYear()} Bytom Community`,
+    copyright: `Copyright © ${new Date().getFullYear()} SimpleChain Community`,
 
     highlight: {
         // Highlight.js theme to use for syntax highlighting in code blocks.
