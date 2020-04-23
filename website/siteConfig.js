@@ -38,10 +38,9 @@ const siteConfig = {
     headerLinks: [
         { doc: 'docs_1', label: '文档' },
         { doc: 'docs_10', label: 'API' },
-        { doc: 'docs_20', label: 'FAQ' },
-        { doc: 'docs_30', label: '在线技术支持' },
+        { doc: 'docs_60', label: 'FAQ' },
+        { doc: 'docs_71', label: '在线技术支持' },
         
-
     ],
 
     // If you have users set above, you add it here:
