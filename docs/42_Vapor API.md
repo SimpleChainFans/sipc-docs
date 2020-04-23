@@ -1,5 +1,5 @@
 ---
 id: docs_42
-title: Vapor API
-sidebar_label: Vapor API
+title:  浏览器 API
+sidebar_label: 浏览器 API
 ---
