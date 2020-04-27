@@ -1,6 +1,6 @@
 ---
 id: docs_48
-title: Bycoin API
-sidebar_label: Bycoin API
+title: 钱包 API
+sidebar_label: 钱包 API
 ---
 

@@ -1,6 +1,6 @@
 # 文档链接
 
-此文档介绍了包含[bystack docs](https://github.com/BytomFans/bystack-docs)提供支持的网站配置和文档。
+此文档介绍了包含[Simple Chain docs](https://github.com/SimpleChain/sipc-docs)提供支持的网站配置和文档。
 
 ## 入门
 
@@ -75,7 +75,8 @@ root-directory
 
 ### 网站配置 
 
-该网站的配置文件可以在`website / siteConfig.js`找到，配置文件的详细信息可以在[Docusaurus如何构建网站](http://docusaurus.io/docs/en/site-config.html)中找到。修改以下内容：
+该网站的配置文件可以在`website / siteConfig.js`找到，配置文件的详细信息可以在[Docusaurus如何构建网站](
+     http://docusaurus.io/docs/en/site-config.html)中找到。修改以下内容：
 
 ```js
 const siteConfig = {
