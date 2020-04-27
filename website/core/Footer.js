@@ -68,8 +68,8 @@ class Footer extends React.Component {
           </div>
           <div>
             <h5>更多</h5>
-            <a href="https://bytom.io/zh/">官网</a>
-            <a href="https://github.com/BytomFans/bystack-docs">GitHub</a>
+            <a href="https://www.simplechain.com">官网</a>
+            <a href="https://github.com/simplechain-org">GitHub</a>
             <a
               className="github-button"
               href={this.props.config.repoUrl}
