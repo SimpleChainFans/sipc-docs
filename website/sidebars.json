@@ -102,38 +102,34 @@
             "docs_62"
         ],
         "Sapp开发": [
-            "docs_44",
-            "docs_45",
-            "docs_46",
-            "docs_47",
-            "docs_48",  
-            "docs_49"
+            "docs_56",
+            "docs_57",
+            "docs_58",  
+            "docs_59"
         ],
         "区块链浏览器": [
-            "docs_50",
-            "docs_51",
-            "docs_52"
+            "docs_60",
+            "docs_61"
         ],
         "矿池对接": [
-            "docs_53",
-            "docs_54",
-            "docs_55",
-            "docs_56",
-            "docs_65"
+            "docs_62",
+            "docs_63"
         ],
         "客户端下载": [
-            "docs_57",
-            "docs_58"
+            "docs_64",
+            "docs_65",
+            "docs_66",
+            "docs_67"
         ],
         "落地方案": [
-             "docs_59"  
+             "docs_68",
+             "docs_69"
         ],
         "FAQ": [      
-             "docs_60",
-             "docs_64"
+             "docs_70"
         ],
         "技术支持": [      
-            "docs_71"
+              "docs_71"
        ]
     }
 }

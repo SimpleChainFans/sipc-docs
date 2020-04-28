@@ -38,7 +38,7 @@ const siteConfig = {
     headerLinks: [
         { doc: 'docs_1', label: '文档' },
         { doc: 'docs_10', label: 'API' },
-        { doc: 'docs_64', label: 'FAQ' },
+        { doc: 'docs_70', label: 'FAQ' },
         { doc: 'docs_71', label: '在线技术支持' },
         
     ],

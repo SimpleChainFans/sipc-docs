@@ -49,21 +49,21 @@ class Footer extends React.Component {
           </div>
           <div>
             <h5>社区</h5>
-            <a href={this.pageUrl('https://t.me/BytomInternational', this.props.language)}>
+            <a href={this.pageUrl('https://t.me/SimpleChainOfficial', this.props.language)}>
               Telegram
             </a>
             <a
-              href="https://www.reddit.com/r/BytomBlockchain"
+              href="https://medium.com/@SimpleChain"
               target="_blank"
               rel="noreferrer noopener">
-              Reddit
+              Medium
             </a>
-            <a href="https://discordapp.com/invite/U3RSYr5">Discord</a>
+            <a href="https://twitter.com/SimpleChain">Twitter</a>
             <a
-              href="https://www.meetup.com/Bytomblockchain/"
+              href="https://www.linkedin.com/company/simplechain-foundation/"
               target="_blank"
               rel="noreferrer noopener">
-              Meetup
+              Linkedln
             </a>
           </div>
           <div>
