@@ -1,10 +1,8 @@
 ---
-id: docs_1
-title: sipc是什么
-sidebar_label: sipc是什么
+id: docs_3
+title: Simplechain
+sidebar_label: Simplechain
 ---
-
-上链（SimpleChain）是一款以一主链多子链结构为设计理念的公链，通过多层级的分布式价值网络设计，支持多共识、多业务场景的区块链部署与拓展，支持跨链交易，支持子链满足千万级别TPS，涉及分布式计算、司法数字化、数字拍卖、不动产、数娱游戏、交易结算等多应用场景，共同构建新数字经济生态系统。
 
 [SimpleChain](https://www.simplechain.com/)，简洁基础的安全区块链协议框架与简易可用的公链创建平台，以机器共识建立可信网络。[SimpleChain](https://www.simplechain.com/) 充分吸收现有区块链项目的优点、解决目前存在的 缺陷与问题、研发创新技术解决方案，目标为构建简洁易用的分布式链网，形成繁荣的 应用生态。
 
@@ -34,8 +32,6 @@ sidebar_label: sipc是什么
 **方便使用**
 
 [SimpleChain](https://www.simplechain.com/)致力于通过对用户需求和期望的深入研究来构建公用事业区块链产品。
-
-
 
 
 

@@ -3,80 +3,46 @@
         "快速了解": [
             "docs_1",
             "docs_2",
+            "docs_3"
+        ],
+        "基础数据结构": [
+            "docs_4",   
+            "docs_5",
+            "docs_6",
+            "docs_7",
+            "docs_8",
+            "docs_9"
+        ],
+        "挖矿核心": [
             {
                 "type": "subcategory",
-                "label": "架构实现",
+                "label": "交易池",
                 "ids": [
-                    "docs_66",
-                    "docs_3",
-                    "docs_4"
+                    "docs_10",
+                    "docs_11",
+                    "docs_12",
+                    "docs_13"
+                ]
+            },
+            {
+                "type": "subcategory",
+                "label": "挖矿",
+                "ids": [
+                    "docs_14",
+                    "docs_15",
+                    "docs_16"   
+                ]
+            },
+            {
+                "type": "subcategory",
+                "label": "共识算法",
+                "ids": [
+                    "docs_17",
+                    "docs_18"   
                 ]
             }
         ],
-        "基础数据结构": [
-            "docs_5",   
-            "docs_6",
-            "docs_7",
-            {
-                "type": "subcategory",
-                "label": "协议规范",
-                "ids": [
-                    "docs_67",
-                    "docs_68",
-                    "docs_8",
-                    "docs_9",
-                    "docs_10",
-                    "docs_11",
-                    "docs_69",
-                    "docs_70",
-                    "docs_12"
-                ]
-            },
-            "docs_14"
-        ],
-        "挖矿核心": [
-            "docs_15",
-            "docs_16",
-            "docs_17",
-            {
-                "type": "subcategory",
-                "label": "联邦节点",
-                "ids": [
-                    "docs_18",
-                    "docs_19",
-                    "docs_21"
-                ]
-            },
-            {
-                "type": "subcategory",
-                "label": "协议规范",
-                "ids": [
-                    "docs_21",
-                    "docs_22",
-                    "docs_23",
-                    "docs_24",
-                    "docs_25",
-                    "docs_26",
-                    "docs_27"   
-                ]
-            },
-            "docs_28"
-        ],
         "底层核心技术": [
-            "docs_29",
-            "docs_30",
-            "docs_31",
-            "docs_33",
-            "docs_34"
-        ],
-        "功能集": [
-            "docs_29",
-            "docs_30",
-            "docs_31",
-            "docs_33",
-            "docs_34"
-        ],
-        "区块同步": [
             "docs_29",
             "docs_30",
             "docs_31",
@@ -101,17 +67,24 @@
             "docs_61",
             "docs_62"
         ],
+        "SDK": [
+            "docs_41",
+            "docs_42",
+            "docs_43",
+            "docs_61",
+            "docs_62"
+        ],
         "Sapp开发": [
             "docs_56",
             "docs_57",
-            "docs_58",  
-            "docs_59"
+            "docs_58"
         ],
         "区块链浏览器": [
-            "docs_60",
-            "docs_61"
+            "docs_59",
+            "docs_60"
         ],
         "矿池对接": [
+            "docs_61",
             "docs_62",
             "docs_63"
         ],
