@@ -8,8 +8,7 @@ sidebar_label: ChainBox
 
 1. 苹果安卓安装地址:https://www.simplechain.com/download或者扫描下方二维码进行下载。
 
-![](https://upload-images.jianshu.io/upload_images/13694105-f55df6eeae185688.png?imageMogr2/auto-orient/strip|imageView2/2/w/300)
-
+![5.1.png](https://i.loli.net/2020/05/06/wW1zSoUEjA6eq84.png)
 
 IOS安装完成后，请打开设置--通用--设备管理-Broadway International Sp . z.o.o--信任应用--回到桌面打开钱包APP--创建注册咯。
 
@@ -17,7 +16,7 @@ IOS安装完成后，请打开设置--通用--设备管理-Broadway Internationa
 
 1. 先输入钱包名称（中英文都可），再输入钱包密码（至少8位，同时包含数字和字母），其次勾选协议，最后点击创建钱包，钱包创建完成。
 
-![](https://upload-images.jianshu.io/upload_images/13694105-fa2522a8be9a8a36.png?imageMogr2/auto-orient/strip|imageView2/2/w/416)
+![5.2.png](https://i.loli.net/2020/05/06/QduT7UxWNYSeb4h.png)
 
 三、钱包创建成功
 
@@ -25,8 +24,7 @@ IOS安装完成后，请打开设置--通用--设备管理-Broadway Internationa
 
 2. 如果想快速进入钱包页面--可选右上角暂不备份直接跳转至钱包页面---下次可在钱包设置中备份钱包（强烈建议先备份）
 
-![](https://upload-images.jianshu.io/upload_images/13694105-3bf9a79e49010e6c.png?imageMogr2/auto-orient/strip|imageView2/2/w/393)
-
+![5.3.png](https://i.loli.net/2020/05/06/dfn4zQ7vVUER2hs.png)
 
 四、导入钱包（左上角功能键进入）
 
@@ -34,7 +32,7 @@ IOS安装完成后，请打开设置--通用--设备管理-Broadway Internationa
 
 2. 可以用助记词，官方钱包（keystore），私钥，任意一种方式导入，然后重新设置密码。
 
-![](https://upload-images.jianshu.io/upload_images/13694105-cc63579dbc3c01f7.png?imageMogr2/auto-orient/strip|imageView2/2/w/268)
+![5.4.png](https://i.loli.net/2020/05/06/8DOvgMVCQLYSJ4p.png)
 
 五、钱包列表（左上角功能键进入）
 
@@ -42,7 +40,7 @@ IOS安装完成后，请打开设置--通用--设备管理-Broadway Internationa
 
 2. 同时也可以在钱包总览里选择你导入或创建的某个钱包。
 
-![](https://upload-images.jianshu.io/upload_images/13694105-e774febe346d6684.png?imageMogr2/auto-orient/strip|imageView2/2/w/277)
+![5.5.png](https://i.loli.net/2020/05/06/1KuoGLMm4jlYPZJ.png)
 
 六、钱包设置（左上角功能键进入）
 
@@ -52,7 +50,7 @@ IOS安装完成后，请打开设置--通用--设备管理-Broadway Internationa
 
 3. 如果你有多余的钱包，想删除也是可以从钱包设置中底下删除钱包
 
-![](https://upload-images.jianshu.io/upload_images/13694105-d4804f2e167910bc.png?imageMogr2/auto-orient/strip|imageView2/2/w/198)
+![5.6.png](https://i.loli.net/2020/05/06/bardMKoiuk5Ivy8.png)
 
 七、转账/收款（左上角功能键进入）
 
@@ -64,7 +62,7 @@ IOS安装完成后，请打开设置--通用--设备管理-Broadway Internationa
 
 4. [离线转账（冷钱包功能）：填写转账地址，收账地址，转账数量，矿工费。
 
-![](https://upload-images.jianshu.io/upload_images/13694105-cf8840c8a99e346c.png?imageMogr2/auto-orient/strip|imageView2/2/w/398)
+![5.7.png](https://i.loli.net/2020/05/06/ad3cKbJz796CoGp.png)
 
 八、通用：联系人/消息中心/检查更新（左上角功能键进入）
 
@@ -74,7 +72,7 @@ IOS安装完成后，请打开设置--通用--设备管理-Broadway Internationa
 
 3.检查更新：检查更新最新钱包版本
 
-![](https://upload-images.jianshu.io/upload_images/13694105-7f46d880098fc981.png?imageMogr2/auto-orient/strip|imageView2/2/w/408)
+![5.8.png](https://i.loli.net/2020/05/06/SQofOLn9uRZmg1d.png)
 
 
 
