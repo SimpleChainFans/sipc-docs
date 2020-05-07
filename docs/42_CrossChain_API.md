@@ -17,8 +17,6 @@ sidebar_label: 跨链 API
 - [`eth_mining`](#eth_mining)
 - [`eth_hashrate`](#eth_hashrate)
 - [`eth_gasPrice`](#eth_gasPrice)
----
-
 
 #### web3_clientVersion
 
