@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en"><head><meta charSet="utf-8"/><meta http-equiv="X-UA-Compatible" content="IE=edge"/><title>交易 · SimpleChain开发文档</title><meta name="viewport" content="width=device-width"/><meta name="generator" content="Docusaurus"/><meta name="description" content="交易(Transaction)是指由一个[外部账户]({{&lt; ref &quot;./account.md#外部账户&quot; &gt;}})转移一定资产给某个账户，"/><meta name="docsearch:language" content="en"/><meta property="og:title" content="交易 · SimpleChain开发文档"/><meta property="og:type" content="website"/><meta property="og:url" content="https://simplechain.github.io/sipc-docs/"/><meta property="og:description" content="交易(Transaction)是指由一个[外部账户]({{&lt; ref &quot;./account.md#外部账户&quot; &gt;}})转移一定资产给某个账户，"/><meta name="twitter:card" content="summary"/><link rel="shortcut icon" href="/sipc-docs/"/><link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/default.min.css"/><script type="text/javascript" src="https://buttons.github.io/buttons.js"></script><script src="/sipc-docs/js/scrollSpy.js"></script><link rel="stylesheet" href="/sipc-docs/css/main.css"/><script src="/sipc-docs/js/codetabs.js"></script></head><body class="sideNavVisible separateOnPageNav"><div class="fixedHeaderContainer"><div class="headerWrapper wrapper"><header><a href="/sipc-docs/"><h2 class="headerTitle">SimpleChain开发文档</h2></a><div class="navigationWrapper navigationSlider"><nav class="slidingNav"><ul class="nav-site nav-site-internal"><li class="siteNavGroupActive"><a href="/sipc-docs/docs/docs_1" target="_self">文档</a></li><li class="siteNavGroupActive"><a href="/sipc-docs/docs/docs_10" target="_self">API</a></li><li class="siteNavGroupActive"><a href="/sipc-docs/docs/docs_70" target="_self">FAQ</a></li><li class="siteNavGroupActive"><a href="/sipc-docs/docs/docs_71" target="_self">在线技术支持</a></li></ul></nav></div></header></div></div><div class="navPusher"><div class="docMainWrapper wrapper"><div class="docsNavContainer" id="docsNav"><nav class="toc"><div class="toggleNav"><section class="navWrapper wrapper"><div class="navBreadcrumb wrapper"><div class="navToggle" id="navToggler"><div class="hamburger-menu"><div class="line1"></div><div class="line2"></div><div class="line3"></div></div></div><h2><i>›</i><span>基础数据结构</span></h2><div class="tocToggler" id="tocToggler"><i class="icon-toc"></i></div></div><div class="navGroups"><div class="navGroup"><h3 class="navGroupCategoryTitle">快速了解</h3><ul class=""><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_1">概述</a></li><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_2">快速开始</a></li><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_3">搭建节点</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">基础数据结构</h3><ul class=""><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_4">配置</a></li><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_5">创世块</a></li><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_6">账户</a></li><li class="navListItem navListItemActive"><a class="navItem" href="/sipc-docs/docs/docs_7">交易</a></li><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_8">区块</a></li><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_9">交易回执</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">挖矿核心</h3><ul class=""><div class="navGroup subNavGroup"><h4 class="navGroupSubcategoryTitle">交易池</h4><ul><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_10">架构设计</a></li><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_11">交易存储</a></li><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_12">交易入队列</a></li><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_13">内存限制</a></li></ul></div><div class="navGroup subNavGroup"><h4 class="navGroupSubcategoryTitle">挖矿</h4><ul><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_14">架构</a></li><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_15">启动挖矿</a></li><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_16">挖矿流程</a></li></ul></div><div class="navGroup subNavGroup"><h4 class="navGroupSubcategoryTitle">共识算法</h4><ul><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_17">共识算法</a></li><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_18">算法实现</a></li></ul></div></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">底层核心技术</h3><ul class=""><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_31">智能合约</a></li><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_33">合约模版</a></li><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_34">合约开发和部署</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">智能合约</h3><ul class=""><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_35">虚拟机</a></li><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_36">运行机制</a></li><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_37">异常处理</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">SDK</h3><ul class=""><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_41">Sipc API</a></li><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_42">跨链 API</a></li><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_43">SDKS</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">区块链浏览器</h3><ul class=""><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_59">区块链浏览器</a></li><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_60">搭建测试链</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">矿池对接</h3><ul class=""><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_61">Sipc挖矿</a></li><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_62">GPU挖矿</a></li><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_63">矿池接入</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">客户端下载</h3><ul class=""><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_64">Sipc全节点钱包</a></li><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_65">SimPool</a></li><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_66">SIPC</a></li><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_67">ChainBox</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">落地方案</h3><ul class=""><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_68">落地案例1</a></li><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_69">落地案例2</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">FAQ</h3><ul class=""><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_70">FAQ</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">技术支持</h3><ul class=""><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_71">在线技术支持</a></li></ul></div></div></section></div><script>
+<!DOCTYPE html><html lang="en"><head><meta charSet="utf-8"/><meta http-equiv="X-UA-Compatible" content="IE=edge"/><title>创世块 · SimpleChain开发文档</title><meta name="viewport" content="width=device-width"/><meta name="generator" content="Docusaurus"/><meta name="description" content="创世区块作为第零个区块，其他区块直接或间接引用到创世区块。"/><meta name="docsearch:language" content="en"/><meta property="og:title" content="创世块 · SimpleChain开发文档"/><meta property="og:type" content="website"/><meta property="og:url" content="https://simplechain.github.io/sipc-docs/"/><meta property="og:description" content="创世区块作为第零个区块，其他区块直接或间接引用到创世区块。"/><meta name="twitter:card" content="summary"/><link rel="shortcut icon" href="/sipc-docs/"/><link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/default.min.css"/><script type="text/javascript" src="https://buttons.github.io/buttons.js"></script><script src="/sipc-docs/js/scrollSpy.js"></script><link rel="stylesheet" href="/sipc-docs/css/main.css"/><script src="/sipc-docs/js/codetabs.js"></script></head><body class="sideNavVisible separateOnPageNav"><div class="fixedHeaderContainer"><div class="headerWrapper wrapper"><header><a href="/sipc-docs/"><h2 class="headerTitle">SimpleChain开发文档</h2></a><div class="navigationWrapper navigationSlider"><nav class="slidingNav"><ul class="nav-site nav-site-internal"><li class="siteNavGroupActive"><a href="/sipc-docs/docs/docs_1" target="_self">文档</a></li><li class="siteNavGroupActive"><a href="/sipc-docs/docs/docs_25" target="_self">API</a></li><li class="siteNavGroupActive"><a href="/sipc-docs/docs/docs_50" target="_self">FAQ</a></li><li class="siteNavGroupActive"><a href="/sipc-docs/docs/docs_51" target="_self">在线技术支持</a></li></ul></nav></div></header></div></div><div class="navPusher"><div class="docMainWrapper wrapper"><div class="docsNavContainer" id="docsNav"><nav class="toc"><div class="toggleNav"><section class="navWrapper wrapper"><div class="navBreadcrumb wrapper"><div class="navToggle" id="navToggler"><div class="hamburger-menu"><div class="line1"></div><div class="line2"></div><div class="line3"></div></div></div><h2><i>›</i><span>基础数据结构</span></h2><div class="tocToggler" id="tocToggler"><i class="icon-toc"></i></div></div><div class="navGroups"><div class="navGroup"><h3 class="navGroupCategoryTitle">快速了解</h3><ul class=""><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_1">概述</a></li><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_2">快速开始</a></li><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_3">搭建节点</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">sipc和sipc代币协议</h3><ul class=""><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_4">sipc代币</a></li><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_5">在SIPC上发行代币</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">基础数据结构</h3><ul class=""><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_6">配置</a></li><li class="navListItem navListItemActive"><a class="navItem" href="/sipc-docs/docs/docs_7">创世块</a></li><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_8">账户</a></li><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_9">交易</a></li><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_10">区块</a></li><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_11">交易回执</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">架构</h3><ul class=""><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_12">架构设计</a></li><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_13">内存限制</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">底层核心技术</h3><ul class=""><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_14">共识算法</a></li><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_15">P2P网络</a></li><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_16">挖矿流程</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">虚拟机</h3><ul class=""><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_17">虚拟机</a></li><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_18">运行机制</a></li><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_19">异常处理</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">智能合约</h3><ul class=""><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_20">智能合约</a></li><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_22">合约模版</a></li><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_23">合约开发和部署</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">开发者工具</h3><ul class=""><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_24">搭建测试链</a></li><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_25">Sipc API</a></li><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_26">跨链API</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">Dapp开发</h3><ul class=""><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_31">合约编译器</a></li><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_32">编写合约</a></li><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_33">发布合约</a></li><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_34">开发流程</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">挖矿</h3><ul class=""><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_35">Sipc挖矿</a></li><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_36">矿池接入</a></li><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_37">GPU挖矿</a></li><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_38">SimPool</a></li><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_39">SimpleNode x1挖矿教程</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">客户端</h3><ul class=""><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_40">SIPC</a></li><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_41">Sipc全节点钱包</a></li><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_42">ChainBox</a></li><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_43">区块链浏览器</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">生态</h3><ul class=""><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_44">交易所</a></li><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_45">社区项目</a></li><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_46">社区活动</a></li><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_47">社区入口</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">落地方案</h3><ul class=""><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_48">落地案例1</a></li><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_49">落地案例2</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">FAQ</h3><ul class=""><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_50">FAQ</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">技术支持</h3><ul class=""><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_51">在线技术支持</a></li></ul></div></div></section></div><script>
             var coll = document.getElementsByClassName('collapsible');
             var checkActiveCategory = true;
             for (var i = 0; i < coll.length; i++) {
@@ -54,203 +54,272 @@
                 };
               }
             });
-        </script></nav></div><div class="container mainContainer docsContainer"><div class="wrapper"><div class="post"><header class="postHeader"><h1 id="__docusaurus" class="postHeaderTitle">交易</h1></header><article><div><span><p>交易(Transaction)是指由一个[外部账户]({{&lt; ref &quot;./account.md#外部账户&quot; &gt;}})转移一定资产给某个账户，
-或者发出一个消息指令到某个智能合约。</p>
-<p>在以太坊网络中，交易执行属于一个事务。具有原子性、一致性、隔离性、持久性特点。</p>
-<ul>
-<li>原子性： 是不可分割的最小执行单位，要么做，要么不做。</li>
-<li>一致性： 同一笔交易执行，必然是将以太坊账本从一个一致性状态变到另一个一致性状态。</li>
-<li>隔离性： 交易执行途中不会受其他交易干扰。</li>
-<li>持久性： 一旦交易提交，则对以太坊账本的改变是永久性的。后续的操作不会对其有任何影响。</li>
-</ul>
-<p>因为是事务型，因此我们需确保在执行事务前让交易符合一些设计要求。</p>
-<ol>
-<li>交易必须唯一，能区分不同交易且同一笔交易不能重复提交到账本中。</li>
-<li>交易内容不得变化，每个节点收到的交易都必须一致，交易执行时账本状态变化也是一致的。</li>
-<li>交易必须被合法签名，只有已正确签名的交易才能被执行。</li>
-<li>交易不能占用过多系统资源，影响其他交易执行。</li>
-</ol>
-<p>对交易的设计要求，涉及软件系统的方方面面，但最基础部分还是交易数据本身。下面，我细说下交易在 geth 中设计。</p>
-<h2><a class="anchor" aria-hidden="true" id="交易数据结构"></a><a href="#交易数据结构" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>交易数据结构</h2>
-<p>下图是以太坊交易数据结构，根据用途，我将其划分为四部分。</p>
-<p><img src="https://img.learnblockchain.cn/2019/04/24_transaction-struct.png!de" alt="以太坊交易数据结构"></p>
-<p>开头是一个 uint64 类型的数字，称之为随机数。用于撤销交易、防止双花和修改[以太坊账户]({{&lt; ref &quot;./account.md&quot; &gt;}}#账户数据结构)的 Nonce 值（细节在讲解交易执行流程时讲解）。</p>
-<p>第二部分是关于交易执行限制的设置，gas 为愿意供以太坊虚拟机运行的燃料上限。
-<code>gasPrice</code> 是愿意支付的燃料单价。<code>gasPrcie * gas</code> 则为愿意为这笔交易支付的最高手续费。关于 gas 更多内容请阅读[《理解Gas和手续费》]({{&lt; ref &quot;./gas.md&quot; &gt;}})。</p>
-<p>我从程序执行逻辑上可以这样解释第三部分。是交易发送者输入以太坊虚拟机执行此交易的初始信息：
-虚拟机操作对象（接收方 To）、从交易发送方转移到操作对象的资产（Value），以及虚拟机运行时入参(input)。其中 To 为空时，意味着虚拟机无可操作对象，此时虚拟机将利用 input 内容部署一个新合约。</p>
-<p>第四部分是交易发送方对交易的[签名]({{&lt; ref &quot;../part3/sign-and-valid.md&quot; &gt;}})结果，可以利用交易内容和签名结果反向推导出签名者，即交易发送方地址。</p>
-<p>四部分内容的组合，解决了交易安全问题、实现了智能合约的互动方式以及提供了灵活可调整的交易手续费。</p>
-<h2><a class="anchor" aria-hidden="true" id="交易对象定义"></a><a href="#交易对象定义" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>交易对象定义</h2>
-<p>具体到代码上，geth 将交易对象定义为一个对外可访问的<code>Transation</code>对象和内嵌的对外部包不可见的<code>txdata</code> 。</p>
-<blockquote>
-<p>小写的 <code>txdata</code> 是Go语言的特性。首字母小写，则相当于其他编程语言中的<code>private</code> 修饰符，表明该数据结构对外部包不可见。同样小写开头的对象字段(如 Transaction中的hash)，也表示外部包无法访问此字段。反之，首字母大写的类型、字段、方法等定义，视为<code>public</code>。</p>
-</blockquote>
-<pre><code class="hljs css language-go"><span class="hljs-comment">// core/types/transaction.go:38</span>
-<span class="hljs-keyword">type</span> Transaction <span class="hljs-keyword">struct</span> {
-    data txdata
-    <span class="hljs-comment">// caches</span>
-    hash atomic.Value
-    size atomic.Value
-    from atomic.Value
-}
-
-<span class="hljs-keyword">type</span> txdata <span class="hljs-keyword">struct</span> {
-    AccountNonce <span class="hljs-keyword">uint64</span>     
-    Price        *big.Int  
-    GasLimit     <span class="hljs-keyword">uint64</span>     
-    Recipient    *common.Address 
-    Amount       *big.Int
-    Payload      []<span class="hljs-keyword">byte</span>
-
-    <span class="hljs-comment">// Signature values</span>
-    V *big.Int
-    R *big.Int
-    S *big.Int
-
-    <span class="hljs-comment">// This is only used when marshaling to JSON.</span>
-    Hash *common.Hash <span class="hljs-string">`json:"hash" rlp:"-"`</span>
-}
-</code></pre>
-<p>首先看私有的 <code>txdata</code> 结构体中定义了交易消息中所有必要内容，依次对应前面所说的交易数据结构。有三点需要特别注意。</p>
-<p>一是因涉及哈希运算，因此不能随意调整字段定义顺序，非特殊处理情况下必须按要求定义字段。所以<code>txdata</code>中定义的字段，是符合以太坊交易消息内容顺序的。</p>
-<p>二是在涉及货币计算时，不能因为精度缺失引起计算不准确问题。因此在以太坊、比特币等所有区块链设计中，货币类型均是整数，但最小值<code>1</code>所代表的币值不一样。</p>
-<p>在以太坊中一个以太币等于 10的18次方 Amount，当要表示 100 亿以太币时，Amount 等于10的27次方。已远远超过Uint64所能表示的范围(0-18446744073709551615)。因此 geth 一律采用Go标准包提供的大数 <code>big.Int</code> 进行货币运算和定义货币。这里的<code>Price</code>和<code>Amount</code>均是 big.Int 指针类型。另外，关于签名的三个值也是因为数字太大，而采用 big.Int 类型。</p>
-<p>三是最后的<code>Hash</code>字段，这不属于交易内容的一部分，只是为了在交易的JSON中包含交易哈希。为了防止参与哈希运算，该字段被标记为<code>rlp:&quot;-&quot;</code>。</p>
-<p>其次，Transaction 还定义了三个缓存项：交易哈希值(hash)、交易大小(size)和交易发送方(from)。缓存的原因是使用频次高且CPU计算量大。</p>
-<p>在区块链中最见的是哈希运算，所有链上数据基本都要参与哈希运算。而哈希运算是CPU密集型的，因此有必要对一些哈希运算等进行缓存，降低CPU计算量。首次计算完交易哈希值后，便缓存交易哈希到 hash 字段上。</p>
-<pre><code class="hljs css language-go"><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-params">(tx *Transaction)</span> <span class="hljs-title">Hash</span><span class="hljs-params">()</span> <span class="hljs-title">common</span>.<span class="hljs-title">Hash</span></span> {
-   <span class="hljs-keyword">if</span> hash := tx.hash.Load(); hash != <span class="hljs-literal">nil</span> {
-      <span class="hljs-keyword">return</span> hash.(common.Hash)
-   }
-   v := rlpHash(tx)
-   tx.hash.Store(v)
-   <span class="hljs-keyword">return</span> v
-}
-</code></pre>
-<p>hash 是<code>atomic.Value</code>类型，这是Go标准包提供的原子操作对象。这样可防止并发引起多次哈希计算。首先原子加载哈希值，如果存在则返回。如果不存在，则对交易进行哈希计算(rlpHash，是以太坊的哈希算法)，将哈希结果保存并返回。</p>
-<p>第二个缓存是交易大小(size)。交易大小是指交易信息进行RLP编码后的数据大小。代表交易网络传输大小、代表交易占区块大小、代表交易存储大小。 每笔交易进入交易池都需要检查交易大小是否超过 <code>32KB</code>。推送交易数据给其他节点时也需结合交易大小，在不超过网络消息最大限制(默认10MB)下分包推送数据。为避免重复计算开销，在第一次计算后便缓存。</p>
-<pre><code class="hljs css language-go"><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-params">(tx *Transaction)</span> <span class="hljs-title">Size</span><span class="hljs-params">()</span> <span class="hljs-title">common</span>.<span class="hljs-title">StorageSize</span></span> {
-   <span class="hljs-keyword">if</span> size := tx.size.Load(); size != <span class="hljs-literal">nil</span> {
-      <span class="hljs-keyword">return</span> size.(common.StorageSize)
-   }
-   c := writeCounter(<span class="hljs-number">0</span>)
-   rlp.Encode(&amp;c, &amp;tx.data)
-   tx.size.Store(common.StorageSize(c))
-   <span class="hljs-keyword">return</span> common.StorageSize(c)
-}
-</code></pre>
-<p>如上，执行 <code>rlp.Encode</code>获得可得到数据大小，缓存结果并返回。</p>
-<blockquote>
-<p>rlp 是以太坊定义的一套区块链数据编码解码协议，而非采用常见的 gzip、json、Protobuf 编码格式。目的是为了尽可能地压缩数据，毕竟区块链数据结构中只有常见的几种数据类型，不需要复杂的协议涉及，即可满足要求。</p>
-</blockquote>
-<p>最后一个缓存项是交易发送方(from)。交易的发送方，是根据签名反向计算过程，同样是CPU密集型运算。为了保证交易合法性，程序中到处都有涉及取交易发送方地址和校验发送方的合法性。只有正确的签名才能得到发送方地址。因此对交易发送方也进行缓存。</p>
-<pre><code class="hljs css language-go"><span class="hljs-comment">//core/types/transaction_signing.go:72</span>
-<span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">Sender</span><span class="hljs-params">(signer Signer, tx *Transaction)</span> <span class="hljs-params">(common.Address, error)</span></span> {
-   <span class="hljs-keyword">if</span> sc := tx.from.Load(); sc != <span class="hljs-literal">nil</span> {
-      sigCache := sc.(sigCache) 
-      <span class="hljs-keyword">if</span> sigCache.signer.Equal(signer) {
-         <span class="hljs-keyword">return</span> sigCache.from, <span class="hljs-literal">nil</span>
-      }
-   }
-
-   addr, err := signer.Sender(tx)
-   <span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
-      <span class="hljs-keyword">return</span> common.Address{}, err
-   }
-   tx.from.Store(sigCache{signer: signer, from: addr})
-   <span class="hljs-keyword">return</span> addr, <span class="hljs-literal">nil</span>
-}
-</code></pre>
-<p>特殊指出是需要一个[Signer]({{&lt; ref &quot;../part3/sign-and-valid.md&quot; &gt;}})进行解签名，同时通过signer获取Sender，合法时缓存并返回。但在使用缓存内容时，还需要检查前后两个 Signer 是否一致，因为不一样的Signer 算法不一样，获得的交易签名者也不相同。</p>
-<p>需要注意，上面三个缓存使用都在有一个前提条件：交易对象一旦创建，交易内容不得修改。这也是为何交易对象中单独定义在私有的 txdata 中，而非直接定义在 Transaction 中的原因之一。如下图所示，只能通过调用交易对象方法获取交易内容，无任何途径修改一个现有交易对象内容。</p>
-<p><img src="https://img.learnblockchain.cn/2019/04/27_Transaction-method.png!de" alt="以太坊交易对象方法列表"></p>
-<h2><a class="anchor" aria-hidden="true" id="交易对象方法介绍"></a><a href="#交易对象方法介绍" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>交易对象方法介绍</h2>
-<p>交易对象 Transtion 除对外提供交易内容访问外，也定义了一些辅助方法。我们依次介绍下各个方法。</p>
-<ol>
-<li><code>ChainId()</code>和<code>Protected()</code></li>
-</ol>
-<pre><code class="hljs css language-go"><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-params">(tx *Transaction)</span> <span class="hljs-title">ChainId</span><span class="hljs-params">()</span> *<span class="hljs-title">big</span>.<span class="hljs-title">Int</span></span> {
-  <span class="hljs-keyword">return</span> deriveChainId(tx.data.V)
-}
-<span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-params">(tx *Transaction)</span> <span class="hljs-title">Protected</span><span class="hljs-params">()</span> <span class="hljs-title">bool</span></span> {
-  <span class="hljs-keyword">return</span> isProtectedV(tx.data.V)
-}
-</code></pre>
-<pre><code class="hljs">从交易签名内容`V`中提取[链ID]({{&lt; ref &quot;./config.md#ChainID)。用于在获取交易签名者时判断签名合法性，一旦属于受保护(`Protected()`)的交易，则签名信息中必须包含当前链ID，否则属于非法交易。这项交易保护特性是在以太坊硬分叉出以太经典链后，爆出简单重复攻击漏洞，在 [EIP 155: Simple replay attack protection](http://eips.ethereum.org/EIPS/eip-155) 中得以修复。签名细节请查看[《交易签名》](../part3/sign-and-valid.md&quot; &gt;}})。
-</code></pre>
-<ol start="2">
-<li><p>RLP接口实现方法</p>
-<pre><code class="hljs css language-go"><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-params">(tx *Transaction)</span> <span class="hljs-title">EncodeRLP</span><span class="hljs-params">(w io.Writer)</span> <span class="hljs-title">error</span></span> {
-   <span class="hljs-keyword">return</span> rlp.Encode(w, &amp;tx.data)
-}
-<span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-params">(tx *Transaction)</span> <span class="hljs-title">DecodeRLP</span><span class="hljs-params">(s *rlp.Stream)</span> <span class="hljs-title">error</span></span> {
-   _, size, _ := s.Kind()
-   err := s.Decode(&amp;tx.data)
-   <span class="hljs-keyword">if</span> err == <span class="hljs-literal">nil</span> {
-      tx.size.Store(common.StorageSize(rlp.ListSize(size)))
-   }
-   <span class="hljs-keyword">return</span> err
-}
-</code></pre>
-<p>和其他面向对象语言不同，Go语言中只要对象有实现某个接口的所有方法，则认为该对象属于某接口类型。这里Transaction 实现了rlp包中的<code>Encoder</code>和<code>Decoder</code>两个接口。</p></li>
-</ol>
-<pre><code class="hljs css language-go"><span class="hljs-comment">//rlp/encode.go:36</span>
-<span class="hljs-keyword">type</span> Encoder <span class="hljs-keyword">interface</span> {
-   EncodeRLP(io.Writer) error
-}
-<span class="hljs-keyword">type</span> Decoder <span class="hljs-keyword">interface</span> {
-  DecodeRLP(*Stream) error
-}
-</code></pre>
-<pre><code class="hljs">意味在进行RLP编码解码时，将通过自定义实现的两个方法进行。RLP编码解码交易，实际是将交易内容 txdata 进行编码解码。同时在解码交易时，缓存交易大小。
-</code></pre>
-<ol start="3">
-<li><p>JSON接口实现</p>
-<pre><code class="hljs css language-go"><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-params">(tx *Transaction)</span> <span class="hljs-title">MarshalJSON</span><span class="hljs-params">()</span> <span class="hljs-params">([]<span class="hljs-keyword">byte</span>, error)</span></span> {
-   hash := tx.Hash()
-   data := tx.data
-   data.Hash = &amp;hash
-   <span class="hljs-keyword">return</span> data.MarshalJSON()
-}
-<span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-params">(tx *Transaction)</span> <span class="hljs-title">UnmarshalJSON</span><span class="hljs-params">(input []<span class="hljs-keyword">byte</span>)</span> <span class="hljs-title">error</span></span> {
-   <span class="hljs-keyword">var</span> dec txdata
-   <span class="hljs-keyword">if</span> err := dec.UnmarshalJSON(input); err != <span class="hljs-literal">nil</span> {
-      <span class="hljs-keyword">return</span> err
-   }
-   withSignature := dec.V.Sign() != <span class="hljs-number">0</span> || dec.R.Sign() != <span class="hljs-number">0</span> || dec.S.Sign() != <span class="hljs-number">0</span>
-   <span class="hljs-keyword">if</span> withSignature {
-      <span class="hljs-keyword">var</span> V <span class="hljs-keyword">byte</span>
-      <span class="hljs-keyword">if</span> isProtectedV(dec.V) {
-         chainID := deriveChainId(dec.V).Uint64()
-         V = <span class="hljs-keyword">byte</span>(dec.V.Uint64() - <span class="hljs-number">35</span> - <span class="hljs-number">2</span>*chainID)
-      } <span class="hljs-keyword">else</span> {
-         V = <span class="hljs-keyword">byte</span>(dec.V.Uint64() - <span class="hljs-number">27</span>)
-      }
-      <span class="hljs-keyword">if</span> !crypto.ValidateSignatureValues(V, dec.R, dec.S, <span class="hljs-literal">false</span>) {
-         <span class="hljs-keyword">return</span> ErrInvalidSig
-      }
-   }
-   *tx = Transaction{data: dec}
-   <span class="hljs-keyword">return</span> <span class="hljs-literal">nil</span>
-}
-</code></pre>
-<p>这是实现了json标准包的编码解码方法，主要是给web3 api 调用时返回符合要求的JSON格式数据。编码时附加交易哈希，解码时还校验签名格式的正确性。下面是一个完整交易JSON格式数据示例。</p>
+        </script></nav></div><div class="container mainContainer docsContainer"><div class="wrapper"><div class="post"><header class="postHeader"><h1 id="__docusaurus" class="postHeaderTitle">创世块</h1></header><article><div><span><p>创世区块作为第零个区块，其他区块直接或间接引用到创世区块。
+因此节点启动之初必须载入正确的创世区块信息，且不得任意修改。</p>
+<p>以太坊允许通过创世配置文件来初始化创世区块，也可使用选择使用内置的多个网络环境的创世配置。
+默认使用以太坊主网创世配置。</p>
+<h2><a class="anchor" aria-hidden="true" id="创世配置文件"></a><a href="#创世配置文件" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>创世配置文件</h2>
+<p>如果你需要搭建以太坊私有链，那么了解创世配置是必须的，否则你大可不关心创世配置。
+下面是一份 JSON 格式的创世配置示例：</p>
 <pre><code class="hljs css language-json">{
- <span class="hljs-attr">"nonce"</span>: <span class="hljs-string">"0x16"</span>,
- <span class="hljs-attr">"gasPrice"</span>: <span class="hljs-string">"0x2"</span>,
- <span class="hljs-attr">"gas"</span>: <span class="hljs-string">"0x1"</span>,
- <span class="hljs-attr">"to"</span>: <span class="hljs-string">"0x0100000000000000000000000000000000000000"</span>,
- <span class="hljs-attr">"value"</span>: <span class="hljs-string">"0x0"</span>,
- <span class="hljs-attr">"input"</span>: <span class="hljs-string">"0x616263646566"</span>,
- <span class="hljs-attr">"v"</span>: <span class="hljs-string">"0x25"</span>,
- <span class="hljs-attr">"r"</span>: <span class="hljs-string">"0x3c46a1ff9d0dd2129a7f8fbc3e45256d85890d9d63919b42dac1eb8dfa443a32"</span>,
- <span class="hljs-attr">"s"</span>: <span class="hljs-string">"0x6b2be3f225ae31f7ca18efc08fa403eb73b848359a63cd9fdeb61e1b83407690"</span>,
- <span class="hljs-attr">"hash"</span>: <span class="hljs-string">"0xb848eb905affc383b4f431f8f9d3676733ea96bcae65638c0ada6e45038fb3a6"</span>
+    <span class="hljs-attr">"config"</span>: {
+        <span class="hljs-attr">"chainId"</span>: <span class="hljs-number">1</span>,
+        <span class="hljs-attr">"homesteadBlock"</span>: <span class="hljs-number">1150000</span>,
+        <span class="hljs-attr">"daoForkBlock"</span>: <span class="hljs-number">1920000</span>,
+        <span class="hljs-attr">"daoForkSupport"</span>: <span class="hljs-literal">true</span>,
+        <span class="hljs-attr">"eip150Block"</span>: <span class="hljs-number">2463000</span>,
+        <span class="hljs-attr">"eip150Hash"</span>: <span class="hljs-string">"0x2086799aeebeae135c246c65021c82b4e15a2c451340993aacfd2751886514f0"</span>,
+        <span class="hljs-attr">"eip155Block"</span>: <span class="hljs-number">2675000</span>,
+        <span class="hljs-attr">"eip158Block"</span>: <span class="hljs-number">2675000</span>,
+        <span class="hljs-attr">"byzantiumBlock"</span>: <span class="hljs-number">4370000</span>,
+        <span class="hljs-attr">"constantinopleBlock"</span>: <span class="hljs-number">7280000</span>,
+        <span class="hljs-attr">"petersburgBlock"</span>: <span class="hljs-number">7280000</span>,
+        <span class="hljs-attr">"ethash"</span>: {}
+    },
+    <span class="hljs-attr">"nonce"</span>: <span class="hljs-string">"0x42"</span>,
+    <span class="hljs-attr">"timestamp"</span>: <span class="hljs-string">"0x0"</span>,
+    <span class="hljs-attr">"extraData"</span>: <span class="hljs-string">"0x11bbe8db4e347b4e8c937c1c8370e4b5ed33adb3db69cbdb7a38e1e50b1b82fa"</span>,
+    <span class="hljs-attr">"gasLimit"</span>: <span class="hljs-string">"0x1388"</span>,
+    <span class="hljs-attr">"difficulty"</span>: <span class="hljs-string">"0x400000000"</span>,
+    <span class="hljs-attr">"mixHash"</span>: <span class="hljs-string">"0x0000000000000000000000000000000000000000000000000000000000000000"</span>,
+    <span class="hljs-attr">"coinbase"</span>: <span class="hljs-string">"0x0000000000000000000000000000000000000000"</span>,
+    <span class="hljs-attr">"number"</span>: <span class="hljs-string">"0x0"</span>,
+    <span class="hljs-attr">"gasUsed"</span>: <span class="hljs-string">"0x0"</span>,
+    <span class="hljs-attr">"parentHash"</span>: <span class="hljs-string">"0x0000000000000000000000000000000000000000000000000000000000000000"</span>,
+    <span class="hljs-attr">"alloc"</span>: {
+        <span class="hljs-attr">"000d836201318ec6899a67540690382780743280"</span>: {
+            <span class="hljs-attr">"balance"</span>: <span class="hljs-string">"0xad78ebc5ac6200000"</span>
+        },
+        <span class="hljs-attr">"001762430ea9c3a26e5749afdb70da5f78ddbb8c"</span>: {
+            <span class="hljs-attr">"balance"</span>: <span class="hljs-string">"0xad78ebc5ac6200000"</span>
+        }
+    }
 }
 </code></pre>
-<p>细心的你，应该有发现到所有数字类型的字段都是用十六进制数表示。这是为了统一所有数据格式，为大数 big.Int 服务。在 web3js 库中专门内置了 bignumber 库处理大数。那么，在Go代码中如何实现JSON输出十六进制数的呢？(待写<a href="">灵活的JSON自定义</a>)</p></li>
+<p>根据配置用途可分为三大类：</p>
+<ol>
+<li>链配置
+<br><code>config</code>项是定义链配置，会影响共识协议，虽然链配置对创世影响不大，但新区块的出块规则均依赖链配置。
+关于链配置更多细节，请查看文章《[链参数配置]({{&lt; ref &quot;./config.md&quot; &gt;}})》。</li>
+<li>创世区块头信息配置
+<ul>
+<li><code>nonce</code>：随机数，对应创世区块 <code>Nonce</code> 字段。</li>
+<li><code>timestamp</code>：UTC时间戳，对应创世区块 <code>Time</code>字段。</li>
+<li><code>extraData</code>：额外数据，对应创世区块 <code>Extra</code> 字段。</li>
+<li><code>gasLimit</code>：<strong>必填</strong>，燃料上限，对应创世区块 <code>GasLimit</code> 字段。</li>
+<li><code>difficulty</code>：<strong>必填</strong>，难度系数，对应创世区块 <code>Difficulty</code> 字段。搭建私有链时，需要根据情况选择合适的难度值，以便调整出块。</li>
+<li><code>mixHash</code>：一个哈希值，对应创世区块的<code>MixDigest</code>字段。和 nonce 值一起证明在区块上已经进行了足够的计算。</li>
+<li><code>coinbase</code>：一个地址，对应创世区块的<code>Coinbase</code>字段。</li>
+</ul></li>
+<li>初始账户资产配置
+<br><code>alloc</code> 项是创世中初始账户资产配置。在生成创世区块时，将此数据集中的账户资产写入区块中，相当于预挖矿。
+这对开发测试和私有链非常好用，不需要挖矿就可以直接为任意多个账户分配资产。</li>
 </ol>
-<h2><a class="anchor" aria-hidden="true" id="交易签名"></a><a href="#交易签名" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>交易签名</h2>
-<p>交易签名实在太过重要，我单独写一篇文章介绍[《以太坊交易签名》]({{&lt; ref &quot;../part3/sign-and-valid.md&quot; &gt;}})。</p>
-</span></div></article></div><div class="docs-prevnext"><a class="docs-prev button" href="/sipc-docs/docs/docs_6"><span class="arrow-prev">← </span><span>账户</span></a><a class="docs-next button" href="/sipc-docs/docs/docs_8"><span>区块</span><span class="arrow-next"> →</span></a></div></div></div><nav class="onPageNav"><ul class="toc-headings"><li><a href="#交易数据结构">交易数据结构</a></li><li><a href="#交易对象定义">交易对象定义</a></li><li><a href="#交易对象方法介绍">交易对象方法介绍</a></li><li><a href="#交易签名">交易签名</a></li></ul></nav></div><footer class="nav-footer" id="footer"><section class="sitemap"><a href="/sipc-docs/" class="nav-home"></a><div><h5>文档</h5><a href="/sipc-docs/docs/en/doc1.html">快速开始</a><a href="/sipc-docs/docs/en/doc2.html">引导</a><a href="/sipc-docs/docs/en/doc3.html">API接口</a></div><div><h5>社区</h5><a href="/sipc-docs/en/https://t.me/SimpleChainOfficial">Telegram</a><a href="https://medium.com/@SimpleChain" target="_blank" rel="noreferrer noopener">Medium</a><a href="https://twitter.com/SimpleChain">Twitter</a><a href="https://www.linkedin.com/company/simplechain-foundation/" target="_blank" rel="noreferrer noopener">Linkedln</a></div><div><h5>更多</h5><a href="https://www.simplechain.com">官网</a><a href="https://github.com/simplechain-org">GitHub</a><a class="github-button" data-icon="octicon-star" data-count-href="/facebook/docusaurus/stargazers" data-show-count="true" data-count-aria-label="# stargazers on GitHub" aria-label="Star this project on GitHub">Star</a></div></section><section class="copyright">Copyright © 2020 SimpleChain Community</section></footer></div></body></html>
+<h3><a class="anchor" aria-hidden="true" id="自定义创世"></a><a href="#自定义创世" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>自定义创世</h3>
+<p>如果你计划部署以太坊私有网络或者一个独立的测试环境，那么需要自定义创世，并初始化它。为了统一沟通，推荐先在用户根目录创建一个文件夹 <code>deepeth</code>，以做为《以太坊设计与实现》电子书学习工作目录。</p>
+<pre><code class="hljs css language-bash">mkdir <span class="hljs-variable">$HOME</span>/deepeth &amp;&amp; <span class="hljs-built_in">cd</span> <span class="hljs-variable">$HOME</span>/deepeth
+</code></pre>
+<p>再准备两个以太坊账户，以便在创世时存入资产。</p>
+<pre><code class="hljs css language-bash">dgeth --datadir <span class="hljs-variable">$HOME</span>/deepeth account new
+</code></pre>
+<blockquote>
+<p><strong>注意</strong>：命令中的 <code>dgeth</code> 是 <code>geth</code> 程序的重命名，下同。
+具体见文章《[开篇]({{&lt; ref &quot;first.md&quot; &gt;}})》。</p>
+</blockquote>
+<p>因为是学习使用，推荐使用统一密码 <code>foobar</code>，
+执行两次命令，创建好两个账户。
+这里使用 <code>--datadir</code> 参数指定以太坊运行时数据存放目录，是让大家将数据统一存放在一个本课程学习文件夹中。</p>
+<p>再将下面配置内容保存到 <code>$HOME/deepeth/genesis.json</code> 文件，其中 <code>alloc</code> 项替换成刚刚创建的两个以太坊账户地址。</p>
+<pre><code class="hljs css language-json">{
+    <span class="hljs-attr">"config"</span>: {
+        <span class="hljs-attr">"chainId"</span>: <span class="hljs-number">8888</span>,
+        <span class="hljs-attr">"homesteadBlock"</span>: <span class="hljs-number">0</span>,
+        <span class="hljs-attr">"daoForkBlock"</span>: <span class="hljs-number">0</span>,
+        <span class="hljs-attr">"daoForkSupport"</span>: <span class="hljs-literal">true</span>,
+        <span class="hljs-attr">"eip150Block"</span>: <span class="hljs-number">0</span>,
+        <span class="hljs-attr">"eip155Block"</span>: <span class="hljs-number">0</span>,
+        <span class="hljs-attr">"eip158Block"</span>: <span class="hljs-number">0</span>,
+        <span class="hljs-attr">"byzantiumBlock"</span>: <span class="hljs-number">0</span>,
+        <span class="hljs-attr">"constantinopleBlock"</span>: <span class="hljs-number">0</span>,
+        <span class="hljs-attr">"petersburgBlock"</span>: <span class="hljs-number">0</span>,
+        <span class="hljs-attr">"ethash"</span>: {}
+    },
+    <span class="hljs-attr">"nonce"</span>: <span class="hljs-string">"0x42"</span>,
+    <span class="hljs-attr">"timestamp"</span>: <span class="hljs-string">"0x0"</span>,
+    <span class="hljs-attr">"extraData"</span>: <span class="hljs-string">"0x11bbe8db4e347b4e8c937c1c8370e4b5ed33adb3db69cbdb7a38e1e50b1b82fa"</span>,
+    <span class="hljs-attr">"gasLimit"</span>: <span class="hljs-string">"0x1388"</span>,
+    <span class="hljs-attr">"difficulty"</span>: <span class="hljs-string">"0x1"</span>,
+    <span class="hljs-attr">"alloc"</span>: {
+        <span class="hljs-attr">"093f59f1d91017d30d8c2caa78feb5beb0d2cfaf"</span>: {
+            <span class="hljs-attr">"balance"</span>: <span class="hljs-string">"0xffffffffffffffff"</span>
+        },
+        <span class="hljs-attr">"ddf7202cbe0aaed1c2d5c4ef05e386501a054406"</span>: {
+            <span class="hljs-attr">"balance"</span>: <span class="hljs-string">"0xffffffffffffffff"</span>
+        }
+    }
+}
+</code></pre>
+<p>然后，执行 geth 子命令 init 初始化创世区块。</p>
+<pre><code class="hljs css language-bash">dgeth  --datadir <span class="hljs-variable">$HOME</span>/deepeth init genesis.json
+</code></pre>
+<p>执行成功后，便可启动该私有链：</p>
+<pre><code class="hljs css language-bash">dgeth --maxpeers 0 --datadir <span class="hljs-variable">$HOME</span>/deepeth  console
+</code></pre>
+<p>执行如下命令，可以查看到前面创建的两个账户，均已有资产：</p>
+<pre><code class="hljs css language-js">eth.getBalance(eth.accounts[<span class="hljs-number">0</span>])
+<span class="hljs-comment">// 18446744073709551615</span>
+eth.getBalance(eth.accounts[<span class="hljs-number">1</span>])
+<span class="hljs-comment">// 18446744073709551615</span>
+</code></pre>
+<p>至此，我们已完成创世定制版。</p>
+<h3><a class="anchor" aria-hidden="true" id="内置的创世配置"></a><a href="#内置的创世配置" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>内置的创世配置</h3>
+<p>上面我已完成自定义创世，但以太坊作为去中心平台，需要许多节点一起参与。
+仅仅为了测试，多个节点来搭建私有链比较麻烦。
+如果希望和别人一起联调，或者需要在测试网络中测试DAPP时，该怎么办呢？
+那么，可使用以太坊测试网络。以太坊公开的测试网络有 5 个，目前仍在运行的有 4 个，具体见下表格。</p>
+<p>|测试网|共识机制|出块间隔|提供方|上线时间|备注|状态|
+|---|---|---|---|---|---|---|---|
+| Morden | PoW || 以太坊官方 |2015.7|因难度炸弹被迫退役 |stopped|
+|<a href="https://ropsten.etherscan.io">Ropsten</a> |PoW |30秒|以太坊官方|2016.11|接替Morden| running|
+|<a href="https://kovan.etherscan.io/">Kovan</a> | PoA | 4秒|以太坊钱包<br>Parity开发团队| 2017.3 |不支持geth| running |
+|<a href="https://rinkeby.etherscan.io/">Rinkeby</a> | PoA |15秒| 以太坊官方| 2017.4|最常用，只支持geth | running|
+|<a href="https://sokol-explorer.poa.network/">Sokol</a> | PoA |5秒| 以太坊官方POA.network团队| 2017.12|不支持geth | running|
+|<a href="https://goerli.net/">Görli</a> | PoA | 15秒| 以太坊柏林社区 | 2018.9| 首个以太坊2.0实验场| running|</p>
+<p>支持 geth 的3个测试网络的创世配置已内置在以太坊代码中，具体见 <code>core/genesis.go</code> 文件：</p>
+<pre><code class="hljs css language-go"><span class="hljs-comment">// DefaultTestnetGenesisBlock returns the Ropsten network genesis block.</span>
+<span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">DefaultTestnetGenesisBlock</span><span class="hljs-params">()</span> *<span class="hljs-title">Genesis</span></span>{}
+<span class="hljs-comment">// DefaultRinkebyGenesisBlock returns the Rinkeby network genesis block.</span>
+<span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">DefaultRinkebyGenesisBlock</span><span class="hljs-params">()</span> *<span class="hljs-title">Genesis</span></span>
+<span class="hljs-comment">// DefaultGoerliGenesisBlock returns the Görli network genesis block.</span>
+<span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">DefaultGoerliGenesisBlock</span><span class="hljs-params">()</span> *<span class="hljs-title">Genesis</span></span>{}
+</code></pre>
+<p>当然不会缺以太坊主网创世配置，也是 geth 运行的默认配置。</p>
+<pre><code class="hljs css language-go"><span class="hljs-comment">// DefaultGenesisBlock returns the Ethereum main net genesis block.</span>
+<span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">DefaultGenesisBlock</span><span class="hljs-params">()</span> *<span class="hljs-title">Genesis</span></span>{}
+</code></pre>
+<p>如果你不想自定义创世配置文件用于开发测试，那么以太坊也提供一份专用于本地开发的配置。</p>
+<pre><code class="hljs css language-go">
+<span class="hljs-comment">// DeveloperGenesisBlock returns the 'geth --dev' genesis block. Note, this must</span>
+<span class="hljs-comment">// be seeded with the</span>
+<span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">DeveloperGenesisBlock</span><span class="hljs-params">(period <span class="hljs-keyword">uint64</span>, faucet common.Address)</span> *<span class="hljs-title">Genesis</span></span>
+</code></pre>
+<p>运行 <code>dgeth --dev console</code> 可临时运行使用。但如果需要长期使用此模式，则需要指定 <code>datadir</code>。</p>
+<pre><code class="hljs css language-bash">dgeth --dev --datadir <span class="hljs-variable">$HOME</span>/deepeth/dev console
+</code></pre>
+<p>首次运行 dev 模式会自动创建一个空密码的账户，并开启挖矿。
+当有新交易时，将立刻打包出块。</p>
+<h2><a class="anchor" aria-hidden="true" id="geth-创世区块加载流程"></a><a href="#geth-创世区块加载流程" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>geth 创世区块加载流程</h2>
+<p>在运行 geth 时需根据配置文件加载创世配置以及创世区块，并校验其合法性。
+如果配置信息随意变更，易引起共识校验不通过等问题。
+只有在加载并检查通过时，才能继续运行程序。</p>
+<p><img src="https://img.learnblockchain.cn/2019/04/07_20190407101509.png!de?width=400px" alt="创世加载流程"></p>
+<p>上图是一个简要流程，下面分别讲解“加载创世配置”和“安装创世区块”两个子流程。</p>
+<h3><a class="anchor" aria-hidden="true" id="加载创世配置"></a><a href="#加载创世配置" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>加载创世配置</h3>
+<p>应使用哪种创世配置，由用户在启动 geth 时决定。下图是创世配置选择流程图：
+<img src="https://img.learnblockchain.cn/2019/04/07_WX20190407-103229@2x.png!de" alt="以太坊创世配置选择流程图">
+通过 geth 命令参数可选择不同网络配置，可以通过 <code>networkid</code> 选择，也可使用网络名称启用。</p>
+<ol>
+<li><p>使用 networkid:</p>
+<p>不同网络使用不同ID标识。</p>
+<ul>
+<li>1=Frontier，主网环境，是默认选项。</li>
+<li>2=Morden 测试网络，但已禁用。</li>
+<li>3=Ropsten 测试网络。</li>
+<li>4=Rinkeby 测试网络。</li>
+</ul></li>
+<li><p>直接使用网络名称：</p>
+<ul>
+<li>testnet: Ropsten 测试网络。</li>
+<li>rinkeby: Rinkeby 测试网络。</li>
+<li>goerli: Görli 测试网络。</li>
+<li>dev: 本地开发环境。</li>
+</ul></li>
+</ol>
+<p>geth 启动时根据不同参数选择加载不同网络配置，并对应不同网络环境。
+如果不做任何选择，虽然在此不会做出选择，但在后面流程中会默认使用主网配置。</p>
+<h3><a class="anchor" aria-hidden="true" id="安装创世区块"></a><a href="#安装创世区块" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>安装创世区块</h3>
+<p>上面已初步选择创世配置，而这一步则根据配置加载或者初始化创世单元。
+下图是处理流程：</p>
+<p><img src="https://img.learnblockchain.cn/2019/04/07_安装创世区块.png!de" alt="安装创世区块"></p>
+<p>首先，需要从数据库中根据区块高度 0 读取创世区块哈希。
+如果不存在则说明本地属于第一次启动，直接使用运行时创世配置来构建创世区块。
+属于首次，还需要存储创世区块和链配置。</p>
+<p>如果存在，则需要使用运行时创世配置构建创世区块并和本次已存储的创世区块哈希进行对比。
+一旦不一致，则返回错误，不得继续。</p>
+<p>随后，还需要检查链配置。先从数据库获取链配置，如果不存在，则无需校验直接使用运行时链配置。
+否则，需要检查运行时链配置是否正确，只有正确时才能替换更新。
+但有一个例外：主网配置不得随意更改，由代码控制而非人为指定。</p>
+<p>总的来说，以太坊默认使用主网配置，只有在首次运行时才创建和存储创世区块，其他时候仅仅用于校验。
+而链配置除主网外则在规则下可随时变更。</p>
+<h2><a class="anchor" aria-hidden="true" id="构建创建区块"></a><a href="#构建创建区块" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>构建创建区块</h2>
+<p>上面我们已知晓总体流程，这里再细说下以太坊是如何根据创世配置生成创世区块。
+核心代码位于 <code>core/genesis.go:229</code>。</p>
+<pre><code class="hljs css language-go"><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-params">(g *Genesis)</span> <span class="hljs-title">ToBlock</span><span class="hljs-params">(db ethdb.Database)</span> *<span class="hljs-title">types</span>.<span class="hljs-title">Block</span></span>{
+    <span class="hljs-keyword">if</span> db == <span class="hljs-literal">nil</span> {
+        db = rawdb.NewMemoryDatabase()
+    }
+    statedb, _ := state.New(common.Hash{}, state.NewDatabase(db))<span class="hljs-comment">//❶</span>
+    <span class="hljs-keyword">for</span> addr, account := <span class="hljs-keyword">range</span> g.Alloc { <span class="hljs-comment">//❷</span>
+        statedb.AddBalance(addr, account.Balance)
+        statedb.SetCode(addr, account.Code)
+        statedb.SetNonce(addr, account.Nonce)
+        <span class="hljs-keyword">for</span> key, value := <span class="hljs-keyword">range</span> account.Storage {
+            statedb.SetState(addr, key, value)
+        }
+    }
+    root := statedb.IntermediateRoot(<span class="hljs-literal">false</span>)<span class="hljs-comment">//❸</span>
+    head := &amp;types.Header{<span class="hljs-comment">//❹</span>
+        Number:     <span class="hljs-built_in">new</span>(big.Int).SetUint64(g.Number),
+        Nonce:      types.EncodeNonce(g.Nonce),
+        Time:       g.Timestamp,
+        ParentHash: g.ParentHash,
+        Extra:      g.ExtraData,
+        GasLimit:   g.GasLimit,
+        GasUsed:    g.GasUsed,
+        Difficulty: g.Difficulty,
+        MixDigest:  g.Mixhash,
+        Coinbase:   g.Coinbase,
+        Root:       root,
+    }
+    <span class="hljs-comment">//❺</span>
+    <span class="hljs-keyword">if</span> g.GasLimit == <span class="hljs-number">0</span> {
+        head.GasLimit = params.GenesisGasLimit
+    }
+    <span class="hljs-keyword">if</span> g.Difficulty == <span class="hljs-literal">nil</span> {
+        head.Difficulty = params.GenesisDifficulty
+    }
+
+    statedb.Commit(<span class="hljs-literal">false</span>)<span class="hljs-comment">//❻</span>
+    statedb.Database().TrieDB().Commit(root, <span class="hljs-literal">true</span>)<span class="hljs-comment">//❼</span>
+
+    <span class="hljs-keyword">return</span> types.NewBlock(head, <span class="hljs-literal">nil</span>, <span class="hljs-literal">nil</span>, <span class="hljs-literal">nil</span>)<span class="hljs-comment">//❽</span>
+}
+</code></pre>
+<p>上面代码是根据创世配置生成创世区块的代码逻辑，细节如下：</p>
+<ul>
+<li><p>❶ 创世区块无父块，从零初始化全新的 <code>state</code>（后续文章会详细讲解 <code>state</code>对象）。</p></li>
+<li><p>❷ 遍历配置中 <code>Alloc</code> 项账户集合数据，直接写入 state 中。
+这里不单可以设置 <code>balance</code>，还可以设置 <code>code</code>、<code>nonce</code> 以及任意多个 <code>storage</code> 数据。
+意味着创世时便可以直接部署智能合约。例如下面配置则在创世时部署了一个名为<code>093f59f1d91017d30d8c2caa78feb5beb0d2cfaf</code> 的智能合约。</p>
+<pre><code class="hljs css language-json">"alloc": {
+        "093f59f1d91017d30d8c2caa78feb5beb0d2cfaf": {
+            "balance": "0xffffffffffffffff",
+            "nonce": "0x3",
+            "code":"0x606060",
+            "storage":{
+            "11bbe8db4e347b4e8c937c1c8370e4b5ed33adb3db69cbdb7a38e1e50b1b82fa":"1234ff"
+            }
+        }
+}
+</code></pre></li>
+<li><p>❸ 将账户数据写入 state 后，便可以计算出 state 数据的默克尔树的根值，称之为 <code>StateRoot</code>。
+此值记录在区块头 <code>Root</code> 字段中。</p></li>
+<li><p>❹ 创世配置的一部分配置，则直接映射到区块头中，完成创世区块头的构建。</p></li>
+<li><p>❺ 因为 <code>GasLimit</code> 和 <code>Difficulty</code> 直接影响到下一个区块出块处理。
+因此未设置时使用默认配置(Difficulty=131072，GasLimit=4712388)。</p></li>
+<li><p>❻ 提交 state，将 state 数据提交到底层的内存 trie 数据中。</p></li>
+<li><p>❼ 将内存 trie 数据更新到 db 中。
+这是多余的一步，因为提交到数据库是由外部进行，这里只需要负责生成区块。</p></li>
+<li><p>❽ 利用区块头创建区块，且区块中无交易记录。</p></li>
+</ul>
+</span></div></article></div><div class="docs-prevnext"><a class="docs-prev button" href="/sipc-docs/docs/docs_6"><span class="arrow-prev">← </span><span>配置</span></a><a class="docs-next button" href="/sipc-docs/docs/docs_8"><span>账户</span><span class="arrow-next"> →</span></a></div></div></div><nav class="onPageNav"><ul class="toc-headings"><li><a href="#创世配置文件">创世配置文件</a><ul class="toc-headings"><li><a href="#自定义创世">自定义创世</a></li><li><a href="#内置的创世配置">内置的创世配置</a></li></ul></li><li><a href="#geth-创世区块加载流程">geth 创世区块加载流程</a><ul class="toc-headings"><li><a href="#加载创世配置">加载创世配置</a></li><li><a href="#安装创世区块">安装创世区块</a></li></ul></li><li><a href="#构建创建区块">构建创建区块</a></li></ul></nav></div><footer class="nav-footer" id="footer"><section class="sitemap"><a href="/sipc-docs/" class="nav-home"></a><div><h5>文档</h5><a href="/sipc-docs/docs/en/doc1.html">快速开始</a><a href="/sipc-docs/docs/en/doc2.html">引导</a><a href="/sipc-docs/docs/en/doc3.html">API接口</a></div><div><h5>社区</h5><a href="/sipc-docs/en/https://t.me/SimpleChainOfficial">Telegram</a><a href="https://medium.com/@SimpleChain" target="_blank" rel="noreferrer noopener">Medium</a><a href="https://twitter.com/SimpleChain">Twitter</a><a href="https://www.linkedin.com/company/simplechain-foundation/" target="_blank" rel="noreferrer noopener">Linkedln</a></div><div><h5>更多</h5><a href="https://www.simplechain.com">官网</a><a href="https://github.com/simplechain-org">GitHub</a><a class="github-button" data-icon="octicon-star" data-count-href="/facebook/docusaurus/stargazers" data-show-count="true" data-count-aria-label="# stargazers on GitHub" aria-label="Star this project on GitHub">Star</a></div></section><section class="copyright">Copyright © 2020 SimpleChain Community</section></footer></div></body></html>

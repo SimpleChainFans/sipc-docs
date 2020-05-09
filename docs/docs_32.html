@@ -1,0 +1,368 @@
+<!DOCTYPE html><html lang="en"><head><meta charSet="utf-8"/><meta http-equiv="X-UA-Compatible" content="IE=edge"/><title>编写合约 · SimpleChain开发文档</title><meta name="viewport" content="width=device-width"/><meta name="generator" content="Docusaurus"/><meta name="description" content="以太坊所设计的合约数据存储模型，并非常见方式。"/><meta name="docsearch:language" content="en"/><meta property="og:title" content="编写合约 · SimpleChain开发文档"/><meta property="og:type" content="website"/><meta property="og:url" content="https://simplechain.github.io/sipc-docs/"/><meta property="og:description" content="以太坊所设计的合约数据存储模型，并非常见方式。"/><meta name="twitter:card" content="summary"/><link rel="shortcut icon" href="/sipc-docs/"/><link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/default.min.css"/><script type="text/javascript" src="https://buttons.github.io/buttons.js"></script><script src="/sipc-docs/js/scrollSpy.js"></script><link rel="stylesheet" href="/sipc-docs/css/main.css"/><script src="/sipc-docs/js/codetabs.js"></script></head><body class="sideNavVisible separateOnPageNav"><div class="fixedHeaderContainer"><div class="headerWrapper wrapper"><header><a href="/sipc-docs/"><h2 class="headerTitle">SimpleChain开发文档</h2></a><div class="navigationWrapper navigationSlider"><nav class="slidingNav"><ul class="nav-site nav-site-internal"><li class="siteNavGroupActive"><a href="/sipc-docs/docs/docs_1" target="_self">文档</a></li><li class="siteNavGroupActive"><a href="/sipc-docs/docs/docs_25" target="_self">API</a></li><li class="siteNavGroupActive"><a href="/sipc-docs/docs/docs_50" target="_self">FAQ</a></li><li class="siteNavGroupActive"><a href="/sipc-docs/docs/docs_51" target="_self">在线技术支持</a></li></ul></nav></div></header></div></div><div class="navPusher"><div class="docMainWrapper wrapper"><div class="docsNavContainer" id="docsNav"><nav class="toc"><div class="toggleNav"><section class="navWrapper wrapper"><div class="navBreadcrumb wrapper"><div class="navToggle" id="navToggler"><div class="hamburger-menu"><div class="line1"></div><div class="line2"></div><div class="line3"></div></div></div><h2><i>›</i><span>Dapp开发</span></h2><div class="tocToggler" id="tocToggler"><i class="icon-toc"></i></div></div><div class="navGroups"><div class="navGroup"><h3 class="navGroupCategoryTitle">快速了解</h3><ul class=""><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_1">概述</a></li><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_2">快速开始</a></li><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_3">搭建节点</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">sipc和sipc代币协议</h3><ul class=""><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_4">sipc代币</a></li><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_5">在SIPC上发行代币</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">基础数据结构</h3><ul class=""><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_6">配置</a></li><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_7">创世块</a></li><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_8">账户</a></li><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_9">交易</a></li><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_10">区块</a></li><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_11">交易回执</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">架构</h3><ul class=""><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_12">架构设计</a></li><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_13">内存限制</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">底层核心技术</h3><ul class=""><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_14">共识算法</a></li><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_15">P2P网络</a></li><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_16">挖矿流程</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">虚拟机</h3><ul class=""><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_17">虚拟机</a></li><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_18">运行机制</a></li><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_19">异常处理</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">智能合约</h3><ul class=""><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_20">智能合约</a></li><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_22">合约模版</a></li><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_23">合约开发和部署</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">开发者工具</h3><ul class=""><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_24">搭建测试链</a></li><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_25">Sipc API</a></li><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_26">跨链API</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">Dapp开发</h3><ul class=""><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_31">合约编译器</a></li><li class="navListItem navListItemActive"><a class="navItem" href="/sipc-docs/docs/docs_32">编写合约</a></li><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_33">发布合约</a></li><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_34">开发流程</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">挖矿</h3><ul class=""><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_35">Sipc挖矿</a></li><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_36">矿池接入</a></li><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_37">GPU挖矿</a></li><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_38">SimPool</a></li><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_39">SimpleNode x1挖矿教程</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">客户端</h3><ul class=""><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_40">SIPC</a></li><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_41">Sipc全节点钱包</a></li><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_42">ChainBox</a></li><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_43">区块链浏览器</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">生态</h3><ul class=""><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_44">交易所</a></li><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_45">社区项目</a></li><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_46">社区活动</a></li><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_47">社区入口</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">落地方案</h3><ul class=""><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_48">落地案例1</a></li><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_49">落地案例2</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">FAQ</h3><ul class=""><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_50">FAQ</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">技术支持</h3><ul class=""><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_51">在线技术支持</a></li></ul></div></div></section></div><script>
+            var coll = document.getElementsByClassName('collapsible');
+            var checkActiveCategory = true;
+            for (var i = 0; i < coll.length; i++) {
+              var links = coll[i].nextElementSibling.getElementsByTagName('*');
+              if (checkActiveCategory){
+                for (var j = 0; j < links.length; j++) {
+                  if (links[j].classList.contains('navListItemActive')){
+                    coll[i].nextElementSibling.classList.toggle('hide');
+                    coll[i].childNodes[1].classList.toggle('rotate');
+                    checkActiveCategory = false;
+                    break;
+                  }
+                }
+              }
+
+              coll[i].addEventListener('click', function() {
+                var arrow = this.childNodes[1];
+                arrow.classList.toggle('rotate');
+                var content = this.nextElementSibling;
+                content.classList.toggle('hide');
+              });
+            }
+
+            document.addEventListener('DOMContentLoaded', function() {
+              createToggler('#navToggler', '#docsNav', 'docsSliderActive');
+              createToggler('#tocToggler', 'body', 'tocActive');
+
+              var headings = document.querySelector('.toc-headings');
+              headings && headings.addEventListener('click', function(event) {
+                var el = event.target;
+                while(el !== headings){
+                  if (el.tagName === 'A') {
+                    document.body.classList.remove('tocActive');
+                    break;
+                  } else{
+                    el = el.parentNode;
+                  }
+                }
+              }, false);
+
+              function createToggler(togglerSelector, targetSelector, className) {
+                var toggler = document.querySelector(togglerSelector);
+                var target = document.querySelector(targetSelector);
+
+                if (!toggler) {
+                  return;
+                }
+
+                toggler.onclick = function(event) {
+                  event.preventDefault();
+
+                  target.classList.toggle(className);
+                };
+              }
+            });
+        </script></nav></div><div class="container mainContainer docsContainer"><div class="wrapper"><div class="post"><header class="postHeader"><h1 id="__docusaurus" class="postHeaderTitle">编写合约</h1></header><article><div><span><p>以太坊所设计的合约数据存储模型，并非常见方式。
+因此，即使你身为程序员在理解存储模型时也会觉得新奇。
+以太坊合约是经过 EVM 执行后，将从 KV 数据库中读写。这和常见的编程语言的内存数据模型差异很大。
+这是因为合约在执行后必须方便存储到KV 数据库，也需要能拥有引用指针访问数据能力。
+在主流编程语言中，数据的访问都可以通过指针访问，在以太坊中，访问数据是需要从 KV 数据中实时读取，因此在访问前必须知道某个数据确切的存储位置。
+如何读写数据是由合约编译器决定，和 EVM 无关。这里我们讨论以太坊 <strong>Solidity</strong> 智能合约编程语言所设计的数据存储模型。</p>
+<p>Solidity 合约数据存储采用的是为合约每项数据指定一个可计算的存储位置，数据存在容量为2<sup>256</sup>超级数组中，数组中每项数据的初始值为 0。
+你不用担心存储会占用太多空间，实际上存储是稀疏的。在存储到 KV 数据库中时只有非零(空值)数据才会被写入。</p>
+<p><img src="https://img.learnblockchain.cn/book_geth/2019-11-3-21-30-13.png!de?width=600px&amp;heigth=400px" alt="以太坊数据存储"></p>
+<p>每个插槽可存储 32 字节数据：</p>
+<p><img src="https://img.learnblockchain.cn/book_geth/2019-11-3-21-44-32.png!de?width=600px" alt=""></p>
+<p>当某项数据超过 32 字节，则需要占用多个连续插槽(data.length/32)。
+因此，当数据长度是已知时，则存储位置将在编译时指定存储位置，而对于长度不确定的类型（如 动态数组、字典）则按一定规则计算存储位置。</p>
+<p>2<sup>256</sup>是一个超级大的数字，足够容量合约需要任意大小的存储。</p>
+<p>{{% notice tip%}}
+2<sup>256</sup>是一个超级大的数字，等于2<sup>32</sup> * 8，而 2<sup>32</sup> 约等于40 亿。
+如果你无法直观理解的的话，可以做一个比较：地球上的沙子总数量大约为“7.5 *  10<sup>15</sup>”，
+而2<sup>256</sup>等于1.158*10<sup>77</sup>，相当于五倍多的全地区沙子总量。
+{{% /notice %}}</p>
+<h2><a class="anchor" aria-hidden="true" id="定长数据存储"></a><a href="#定长数据存储" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>定长数据存储</h2>
+<p>在 Solidity 语言中，一部分的值类型所需要占用的存储是确定的。
+比如布尔类型，只需要占用一字节，uint16 只需要占用 2 字节。
+Solidity 编译器在编译合约时，将严格的根据定义顺序，依次给他们设定存储位置。</p>
+<pre><code class="hljs css language-solidity">pragma solidity &gt;<span class="hljs-number">0.5</span><span class="hljs-number">.0</span>;
+
+contract StorageExample {
+    <span class="hljs-built_in">uint</span>8  <span class="hljs-keyword">public</span> a = <span class="hljs-number">11</span>;
+    <span class="hljs-built_in">uint</span>256 b=<span class="hljs-number">12</span>;
+    <span class="hljs-built_in">uint</span>[<span class="hljs-number">2</span>] c= [<span class="hljs-number">13</span>,<span class="hljs-number">14</span>];
+
+    struct Entry {
+        <span class="hljs-built_in">uint</span> id;
+        <span class="hljs-built_in">uint</span>  value;
+    }
+    Entry d;
+}
+</code></pre>
+<p>上面合约中，有定义 a、b、c、d 四个存储字段。a、b 分配在 0，1位置。
+而字段 c 是定长 2 且元素类型是 uint，需要用 32 字节存储一个元素，一共需要占用两个插槽 2和 3。
+字段 d 是一个结构类型数据，其中 Entry 的数据长度也是确定的 64 字节，因此字段 d 也占用两个插槽 4 和 5。</p>
+<p><img src="https://img.learnblockchain.cn/book_geth/2019-11-3-22-19-1.png!de?width=400px" alt=""></p>
+<p>当数据类型是值类型（固定大小的值）时，编译时将严格根据字段排序顺序，给每个要存储的值类型数据预分配存储位置。
+相当于已提前指定了固定不变的数据指针。</p>
+<p>部署上面合约，根据合约地址可以直接通过<code>eth_getStorageAt(contractAddress,slot)</code>API 获取存储数据。</p>
+<pre><code class="hljs css language-js">var contractAddr="0xe700184a875390d7c98371769315E9A2504Ad556"; # 我部署上方合约的合约地址。
+for(i=0;i&lt;6;i++){
+    console.log(web3.eth.getStorageAt(contractAddr,i))
+}
+// 输出
+0x000000000000000000000000000000000000000000000000000000000000000b
+0x000000000000000000000000000000000000000000000000000000000000000c
+0x000000000000000000000000000000000000000000000000000000000000000d
+0x000000000000000000000000000000000000000000000000000000000000000e
+0x0000000000000000000000000000000000000000000000000000000000000000
+0x0000000000000000000000000000000000000000000000000000000000000000
+</code></pre>
+<p>上面是根据存储位置遍历合约的所有存储， 存储到 DB 的数据是十六进制，我们可以直接使用工具类函数转换数据。</p>
+<pre><code class="hljs">web3.<span class="hljs-keyword">to</span><span class="hljs-constructor">BigNumber(<span class="hljs-params">web3</span>.<span class="hljs-params">eth</span>.<span class="hljs-params">getStorageAt</span>(<span class="hljs-params">contractAddr</span>,0)</span>)
+<span class="hljs-comment">// 输出： 11</span>
+</code></pre>
+<p>但如果数据长度是不确定的呢？如数组、Map等，或者说数据仅需要占用 1 字节呢？如 bool值。
+在存储模型中有包含一点规则来定义存储布局。</p>
+<p>{{% notice warning %}}
+注意，本文脚本运行在 geth 控制台中，和 NodeJs 运行有所差异。geth 控制台中有修改 web3 方法定义。
+{{% /notice %}}</p>
+<p>{{% notice tip   %}}
+<strong>如何快速跑一个开发环境？</strong></p>
+<ol>
+<li>下载 geth 安装 <a href="https://geth.ethereum.org/downloads/">https://geth.ethereum.org/downloads/</a></li>
+<li>命令行运行开发节点： <code>./geth --dev --rpc --rpccorsdomain &quot;*&quot; console</code></li>
+<li>打开 <a href="https://remix.ethereum.org/">https://remix.ethereum.org/</a> 编写合约</li>
+<li>修改 remix IDE 的连接环境，选择后，直接点击确定即可。
+<img src="https://img.learnblockchain.cn/book_geth/20191107162515.png!de?width=400px" alt="20191107162515.png"></li>
+<li>此时，remix 已经连接到第二步运行的 geth 中。
+{{% /notice %}}</li>
+</ol>
+<h2><a class="anchor" aria-hidden="true" id="紧凑存储"></a><a href="#紧凑存储" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>紧凑存储</h2>
+<p>一大部分值类型实际上不需要用到 32 字节，如布尔型、uint1 到 uint256。
+为了节约存储量，编译器在发现所用存储不超过 32 字节时，将会将其和后面字段尽可能的存储在一个存储中。</p>
+<pre><code class="hljs css language-solidity">pragma solidity &gt;<span class="hljs-number">0.5</span><span class="hljs-number">.0</span>;
+
+contract StorageExample2 {
+    <span class="hljs-built_in">uint</span>256 a = <span class="hljs-number">11</span>; <span class="hljs-comment">// 插槽 0</span>
+    <span class="hljs-built_in">uint</span>8 b = <span class="hljs-number">12</span>; <span class="hljs-comment">// 插槽1，1 字节</span>
+    <span class="hljs-built_in">uint</span>128 c = <span class="hljs-number">13</span>; <span class="hljs-comment">// 插槽1，16 字节</span>
+    <span class="hljs-built_in">bool</span> d = <span class="hljs-literal">true</span>; <span class="hljs-comment">// 插槽1，1 字节</span>
+    <span class="hljs-built_in">uint</span>128 e =  <span class="hljs-number">14</span>;<span class="hljs-comment">//插槽2</span>
+}
+</code></pre>
+<p>上面合约总共使用 3 个插槽存储数据。</p>
+<ul>
+<li>字段 a 需要 32 字节占用 1 个插槽，存于插槽 0 中。</li>
+<li>b 只需要 1 字节，存于插槽 1 中。</li>
+<li>因为 插槽 1 还剩余 31 字节可用，而 c 只需要 16 字节，因此 c 也可以存储在插槽 1 中。</li>
+<li>此时，插槽 1 剩余 15 字节，可以继续存放 d 的一字节。</li>
+<li>插槽 1 还剩余 14 字节，但是 e 需要 16 字节存储，插槽 1 已不能容纳 e。需将 e 存放到下一个插槽 2 中。</li>
+</ul>
+<p><img src="https://img.learnblockchain.cn/book_geth/2019-11-6-21-56-39.png!de?width=600px" alt="合约的存储布局"></p>
+<p>上图是合约的存储布局，被紧凑地存放在插槽 1 中的 b、c、d 他们将依次从右往左存储于插槽 1 中。读取插槽 1 中的数据得到 data 为：</p>
+<p>0x0000000000000000000000000000010000000000000000000000000000000d0c</p>
+<p>如果希望得到b、c、d 的值，则需要进行分割读取。data 是一串 Hex 字符串，两个字符代表一个字节。</p>
+<pre><code class="hljs css language-js">data = web3.eth.getStorageAt(contractAddr,<span class="hljs-number">1</span>);
+b = <span class="hljs-built_in">parseInt</span>(data.substr(<span class="hljs-number">66</span><span class="hljs-number">-1</span>*<span class="hljs-number">2</span>,<span class="hljs-number">1</span>*<span class="hljs-number">2</span>),<span class="hljs-number">16</span>);
+c = <span class="hljs-built_in">parseInt</span>(data.substr(<span class="hljs-number">66</span><span class="hljs-number">-1</span>*<span class="hljs-number">2</span><span class="hljs-number">-16</span>*<span class="hljs-number">2</span>,<span class="hljs-number">16</span>*<span class="hljs-number">2</span>),<span class="hljs-number">16</span>);
+d = <span class="hljs-built_in">parseInt</span>(data.substr(<span class="hljs-number">66</span><span class="hljs-number">-1</span>*<span class="hljs-number">2</span><span class="hljs-number">-16</span>*<span class="hljs-number">2</span><span class="hljs-number">-1</span>*<span class="hljs-number">2</span>,<span class="hljs-number">1</span>*<span class="hljs-number">2</span>),<span class="hljs-number">16</span>);
+</code></pre>
+<p>鉴于这种紧凑存储原则，有效降低了存储占用。而因以太坊存储是昂贵的，因此为了降低存储占用，
+你在编写合约时，记得注意字段的<strong>定义顺序</strong>。</p>
+<p>比如在合约中的结构类型字段，依次是 uint256、uint8和 uint8，占用两个插槽。如果你定义成： age、id、sex 顺序，则将占用 3 个插槽。</p>
+<pre><code class="hljs css language-solidity">contract StorageExample3 {
+    struct<span class="hljs-built_in"> User </span>{
+        uint256 id;
+        uint8 age;
+        uint8  sex
+    }
+}
+</code></pre>
+<p>但这种机制也引发了<strong>另一个问题</strong>。因为以太坊虚拟机每次读取数据都是 32 字节，当你的数据小于 32 字节时需要更多的指令操作才能将所需值取出。
+如上面实例中，当你取  c 值时，首先要读取插槽 1 的 32 字节数据外，还需要截取 32 字节的中间一小部分。
+在使得相比取 32 字节值的数据，需要花费更多的 gas 来获取小于 32 字节的数据。
+当然这种开销，相对于更多的存储占用要便宜得多。</p>
+<h2><a class="anchor" aria-hidden="true" id="动态大小数据存储"></a><a href="#动态大小数据存储" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>动态大小数据存储</h2>
+<p>当数据大小是不可预知时，无法在编译期直接确定其存储位置。因此 Solidity 在编译动态数字、字典数据时采用的是特定算法。</p>
+<h3><a class="anchor" aria-hidden="true" id="字符串"></a><a href="#字符串" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>字符串</h3>
+<p>字符串 string 和 bytes 实际是一个特殊的 array ，编译器对这类数据有进行优化。如果 <code>string</code> 和 <code>bytes</code> 的数据很短。那么它们的长度也会和数据一起存储到同一个插槽。
+具体为：</p>
+<ol>
+<li>如果数据长度小于等于 31 字节， 则它存储在高位字节（左对齐），最低位字节存储 length * 2。</li>
+<li>如果数据长度超出 31 字节，则在主插槽存储 length * 2 + 1， 数据照常存储在 keccak256(slot) 中。</li>
+</ol>
+<p>以下面示例说明：</p>
+<pre><code class="hljs css language-solidity"><span class="hljs-symbol">contract</span> StorageExample3 {
+   <span class="hljs-keyword">string </span>a  = <span class="hljs-string">"我比较短"</span><span class="hljs-comment">;</span>
+   <span class="hljs-keyword">string </span><span class="hljs-keyword">b </span> = <span class="hljs-string">"我特别特别长，已经超过了一个插槽存储量"</span><span class="hljs-comment">;</span>
+}
+</code></pre>
+<p>合约有两个字段 a 和 b，他们所需要占用的存储各不相同。根据规则一，a 的内容和长度一起存储在插槽 0 中。</p>
+<pre><code class="hljs">data=web3.eth.getStorageAt('0x24aA059A03bC2f1EdC<span class="hljs-number">8412</span>f673b6Bd<span class="hljs-number">3319</span>A2c5CB',<span class="hljs-number">0</span>)
+<span class="hljs-comment">//输出：`0xe68891e6af94e8be83e79fad0000000000000000000000000000000000000018`</span>
+</code></pre>
+<p>a 占用存储 12 (0x18/2) 字节，根据长度可解码 a 的值：</p>
+<pre><code class="hljs css language-js">web3.toUtf8( data.substr(<span class="hljs-number">2</span>,<span class="hljs-number">12</span>*<span class="hljs-number">2</span>))
+</code></pre>
+<p>而字段 b 需要占用57 字节 (=web3.fromUtf8('我特别特别长，已经超过了一个插槽存储量').length/2 -1)，已超过 31 字节。
+那么将在插槽 1 中存储值 115(= 57 * 2 + 1): &quot;0x0000000000000000000000000000000000000000000000000000000000000073&quot;。
+而 b 值起始存储在 keccak256(0x1) 中，需要使用连续两个插槽存储。</p>
+<p>调用 SlotHelp 函数 <code>dataSolot(1)</code>，得到 b 字符串的起始存储位置：start=0xb10e2d527612073b26eecdfd717e6a320cf44b4afac2b0732d9fcbe2b7fa0cf6。
+而 b 字符串需要两个插槽存储，下一个存储位置是 start +1 。</p>
+<pre><code class="hljs css language-js">b1 = web3.eth.getStorageAt(<span class="hljs-string">'0x0a4Efc37f85023Fae282DE0c885669DaEF02E02A'</span>,<span class="hljs-string">"0xb10e2d527612073b26eecdfd717e6a320cf44b4afac2b0732d9fcbe2b7fa0cf6"</span>)
+<span class="hljs-comment">//0xe68891e789b9e588abe789b9e588abe995bfefbc8ce5b7b2e7bb8fe8b685e8bf</span>
+b2 = web3.eth.getStorageAt(<span class="hljs-string">'0x0a4Efc37f85023Fae282DE0c885669DaEF02E02A'</span>,<span class="hljs-string">"0xb10e2d527612073b26eecdfd717e6a320cf44b4afac2b0732d9fcbe2b7fa0cf7"</span>)
+<span class="hljs-comment">//0x87e4ba86e4b880e4b8aae68f92e6a7bde5ad98e582a8e9878f00000000000000</span>
+str = web3.toUtf8(b1+b2.substr(<span class="hljs-number">2</span>))
+</code></pre>
+<p>至此，我们已得到完整的 b 字符串值。bytes 也是相同方式，不再复述。</p>
+<p>{{% notice tip%}}
+keccak256 是 Solidity 中合约中使用的 sha3 函数，不等同于 web3.sha 。
+为了计算方便，我定义了一个 Solot 的帮助类来计算存储位置，具体见<a href="#SlotHelp">文档底部</a>。
+{{% /notice%}}</p>
+<h3><a class="anchor" aria-hidden="true" id="动态数组"></a><a href="#动态数组" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>动态数组</h3>
+<p>动态数组 <code>T[]</code> 由两部分组成，数组长度和元素值。在 Solidity 中定义动态数组后，将在定义的插槽位置存储数组元素数量，
+元素数据存储的起始位置是：keccak256(slot)，每个元素需要根据下标和元素大小来读取数据。</p>
+<pre><code class="hljs css language-solidity">
+contract StorageExample4 {
+
+   <span class="hljs-built_in">uint</span>16[] <span class="hljs-keyword">public</span> a =  [<span class="hljs-number">401</span>,<span class="hljs-number">402</span>,<span class="hljs-number">403</span>,<span class="hljs-number">405</span>,<span class="hljs-number">406</span>];
+
+   <span class="hljs-built_in">uint</span>256[] <span class="hljs-keyword">public</span> b =  [<span class="hljs-number">401</span>,<span class="hljs-number">402</span>,<span class="hljs-number">403</span>,<span class="hljs-number">405</span>,<span class="hljs-number">406</span>];
+}
+</code></pre>
+<p>上面有定义两个数组 a 和 b，都有 5 个相同初始值。
+a 和 b 在插槽 0 和 1 上分别存储他们的长度值 5，而数组元素值存储有所不同（紧缩存储）。
+因为数组 a 元素宽度(width)是 2 字节，因此一个插槽可以存储 16 个元素，而数组 b 则只能是一个插槽存储一个元素（uint256 需要用 32 字节存储）。</p>
+<p>已知:</p>
+<ul>
+<li>keccak256(0)=0x290decd9548b62a8d60345a988386fc84ba6bc95484008f6362f93160ef3e563</li>
+<li>keccak256(1)=0xb10e2d527612073b26eecdfd717e6a320cf44b4afac2b0732d9fcbe2b7fa0cf6</li>
+</ul>
+<p>如果要获取 a[3] 值，首先确认 a[3]的存储位置:</p>
+<p><code>keccak256(0)+ index* width / 32</code> = 0x290decd9548b62a8d60345a988386fc84ba6bc95484008f6362f93160ef3e563</p>
+<p>可得到插槽中存储的数据:</p>
+<p>data=0x0000000000000000000000000000000000000000000001960195019301920191</p>
+<p>根据第一项以低位对齐(右对齐)的存储方式，可以知道 a[3] 需要向左偏移 <code>index*width</code>= 6 个字节，值为<code>data.substr(32*2+2-3*2*2,2*2)</code></p>
+<p><img src="https://img.learnblockchain.cn/book_geth/以太坊技术与实现-图2019-11-6-22-7-15!de?width=600px" alt="以太坊技术与实现-图1"></p>
+<p>同样取值b[3]，因为元素宽度为 32，一个插槽就是存储一个元素。</p>
+<h3><a class="anchor" aria-hidden="true" id="字典-mapping"></a><a href="#字典-mapping" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>字典 Mapping</h3>
+<p>字典的存储布局是直接存储 Key 对应的 value，每个 Key 对应一份存储。一个 Key 的对应存储位置是 <code>keccak256(key.slot)</code>，其中<code>.</code>是拼接符合，实际上编码时进行拼接<code>abi.encodePacked(key,slot)</code>;
+可直接获得  map[key] 的存储位置。</p>
+<pre><code class="hljs css language-solidity">contract StorageExample5 {
+   mappping(<span class="hljs-function"><span class="hljs-params">uint256</span> =&gt;</span> <span class="hljs-built_in">string</span>) a;
+
+   <span class="hljs-keyword">constructor</span>(<span class="hljs-params"></span>)public {
+       a[<span class="hljs-string">"u1"</span>]=<span class="hljs-number">18</span>;
+       a[<span class="hljs-string">"u2"</span>]=<span class="hljs-number">19</span>;
+   }
+}
+</code></pre>
+<p>如上面示例中，字段 a 定义在 0 插槽，初始化合约时有添加两个key u1 和 u2。那么 u1的存储位置就是：
+<code>keccak256(&quot;u1&quot;,0)</code>，u2 存储在 <code>keccak256(&quot;u2&quot;,0)</code>中。调用 <code>SlotHelp.mappingValueSlotString(0,&quot;u1&quot;)</code> (<a href="#slothelp">见下</a>) 可计算出存储位置，分别是：</p>
+<ol>
+<li>keccak256(&quot;u1&quot;,0) = 0x666a0898319983ee51fdb14dca8cb63a131f53ef02192cda872152628bb15fd7</li>
+<li>keccak256(&quot;u2&quot;,0) = 0xb8f3bac818d08a6d5c3fc2cecdc63de9db8e456c49b3877ea67282ec9d7ef62c</li>
+</ol>
+<p>取值为：</p>
+<pre><code class="hljs css language-js">addr="0xB793D15FF1e9F652D66a58E7C963c4c6766DA193" #部署后的合约地址
+web3.eth.getStorageAt(addr,'0x666a0898319983ee51fdb14dca8cb63a131f53ef02192cda872152628bb15fd7')
+// Result
+// "0x0000000000000000000000000000000000000000000000000000000000000012"
+web3.eth.getStorageAt(addr,'0xb8f3bac818d08a6d5c3fc2cecdc63de9db8e456c49b3877ea67282ec9d7ef62c')
+// Result
+// "0x0000000000000000000000000000000000000000000000000000000000000013"
+</code></pre>
+<p>{{% notice info %}}
+思考：为何在合约中无法对 mapping 进行遍历？可在评论中留言。
+{{% /notice %}}</p>
+<h3><a class="anchor" aria-hidden="true" id="组合型"></a><a href="#组合型" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>组合型</h3>
+<p>当前数据类型不是基础类型时，是进行内部递归处理，遵守上述规则来存储数据的。
+比如 结构、map 的值是一个结构等等。下面通过一个稍微复杂的合约来画出合约的存储分布。</p>
+<pre><code class="hljs css language-solidity">pragma solidity &gt;<span class="hljs-number">0.5</span><span class="hljs-number">.0</span>;
+
+contract StorageExample6 {
+    uint256 a = <span class="hljs-number">11</span>;
+    uint8 b = <span class="hljs-number">12</span>;
+    uint128 c = <span class="hljs-number">13</span>;
+    <span class="hljs-type">bool</span> d = <span class="hljs-keyword">true</span>;
+    uint128 e =  <span class="hljs-number">14</span>;
+    uint256[] <span class="hljs-built_in">public</span> <span class="hljs-keyword">array</span> =  [<span class="hljs-number">401</span>,<span class="hljs-number">402</span>,<span class="hljs-number">403</span>,<span class="hljs-number">405</span>,<span class="hljs-number">406</span>];
+
+    address <span class="hljs-keyword">owner</span>;
+    <span class="hljs-keyword">mapping</span>(address =&gt; UserInfo) <span class="hljs-built_in">public</span> users;
+    string  str="name value";
+
+    struct UserInfo {
+        string <span class="hljs-type">name</span>;
+        uint8 age;
+        uint8 weight;
+        uint256[] orders;
+        uint64[<span class="hljs-number">3</span>] lastLogins;
+    }
+
+   constructor()<span class="hljs-built_in">public</span> {
+       owner=msg.sender;
+
+       addUser(<span class="hljs-keyword">owner</span>,"admin",<span class="hljs-number">17</span>,<span class="hljs-number">120</span>);
+   }
+
+   <span class="hljs-keyword">function</span> addUser(address <span class="hljs-keyword">user</span>,string memory <span class="hljs-type">name</span>,uint8 age,uint8 weight) <span class="hljs-built_in">public</span> {
+       require(age&gt;<span class="hljs-number">0</span> &amp;&amp; age &lt;<span class="hljs-number">100</span> ,"bad age");
+
+       uint256[] memory orders;
+       uint64[<span class="hljs-number">3</span>] memory logins;
+
+       users[<span class="hljs-keyword">user</span>] = UserInfo({
+           <span class="hljs-type">name</span>: <span class="hljs-type">name</span>, age:    age,  weight:weight,
+           orders:orders,  lastLogins:logins
+       });
+   }
+   <span class="hljs-keyword">function</span> addLog(address <span class="hljs-keyword">user</span>,uint64 id1,uint64 id2,uint64 id3) <span class="hljs-built_in">public</span>{
+       UserInfo <span class="hljs-keyword">storage</span> u = users[<span class="hljs-keyword">user</span>];
+       <span class="hljs-keyword">assert</span>(u.age&gt;<span class="hljs-number">0</span>);
+
+       u.lastLogins[<span class="hljs-number">0</span>]=id1;
+       u.lastLogins[<span class="hljs-number">1</span>]=id2;
+       u.lastLogins[<span class="hljs-number">2</span>]=id3;
+   }
+
+   <span class="hljs-keyword">function</span> addOrder(address <span class="hljs-keyword">user</span>,uint256 orderID) <span class="hljs-built_in">public</span>{
+       UserInfo <span class="hljs-keyword">storage</span> u = users[<span class="hljs-keyword">user</span>];
+       <span class="hljs-keyword">assert</span>(u.age&gt;<span class="hljs-number">0</span>);
+       u.orders.push(orderID);
+   }
+   <span class="hljs-keyword">function</span> getLogins(address <span class="hljs-keyword">user</span>) <span class="hljs-built_in">public</span> <span class="hljs-keyword">view</span> <span class="hljs-keyword">returns</span> (uint64,uint64,uint64){
+        UserInfo <span class="hljs-keyword">storage</span> u = users[<span class="hljs-keyword">user</span>];
+       <span class="hljs-keyword">return</span>  (u.lastLogins[<span class="hljs-number">0</span>],u.lastLogins[<span class="hljs-number">1</span>],u.lastLogins[<span class="hljs-number">2</span>]);
+   }
+   <span class="hljs-keyword">function</span> getOrders(address <span class="hljs-keyword">user</span>) <span class="hljs-built_in">public</span> <span class="hljs-keyword">view</span> <span class="hljs-keyword">returns</span> (uint256[] memory){
+        UserInfo <span class="hljs-keyword">storage</span> u = users[<span class="hljs-keyword">user</span>];
+       <span class="hljs-keyword">return</span>  u.orders;
+   }
+}
+</code></pre>
+<p><img src="https://img.learnblockchain.cn/book_geth/20191107160911.png!de" alt="Solidity 合约存储布局示例.png"></p>
+<p>上图是针对上面合约 StorageExample6 而绘制的数据存储布局，基本包括了常见定义的数据存储。你可以根据前面所将的取数方式来尝试部署合约和读取合约数据。
+有任何疑问，都可以在下方留言。</p>
+<p>{{% notice info %}}
+思考：通过 keccak256(...) 来确定数据的存储插槽，是否出现重复，导致数据被覆盖？欢迎在评论区留言。
+{{% /notice %}}</p>
+<h2><a class="anchor" aria-hidden="true" id="slothelp"></a><a href="#slothelp" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>SlotHelp</h2>
+<pre><code class="hljs css language-solidity">pragma solidity &gt;<span class="hljs-number">0.5</span>.<span class="hljs-number">0</span>;
+
+
+contract SlotHelp {
+
+    <span class="hljs-comment">// 获取字符串的存储起始位置</span>
+    <span class="hljs-keyword">function</span> data<span class="hljs-constructor">Solot(<span class="hljs-params">uint256</span> <span class="hljs-params">slot</span>)</span> public pure returns (bytes32) {
+        <span class="hljs-built_in">bytes</span> memory slotEncoded  = abi.encode<span class="hljs-constructor">Packed(<span class="hljs-params">slot</span>)</span>;
+        return  keccak256(slotEncoded);
+    }
+
+    <span class="hljs-comment">// 获取字符串 Key 的字典值存储位置</span>
+    <span class="hljs-keyword">function</span> mapping<span class="hljs-constructor">ValueSlotString(<span class="hljs-params">uint256</span> <span class="hljs-params">slot</span>,<span class="hljs-params">string</span> <span class="hljs-params">memory</span> <span class="hljs-params">key</span> )</span> public pure returns (bytes32) {
+        <span class="hljs-built_in">bytes</span> memory slotEncoded  = abi.encode<span class="hljs-constructor">Packed(<span class="hljs-params">key</span>,<span class="hljs-params">slot</span>)</span>;
+        return  keccak256(slotEncoded);
+    }
+}
+</code></pre>
+<p>参考资料：</p>
+<ol>
+<li><a href="https://solidity.readthedocs.io/en/v0.5.10/types.html">https://solidity.readthedocs.io/en/v0.5.10/types.html</a></li>
+<li><a href="https://medium.com/@hayeah/diving-into-the-ethereum-vm-the-hidden-costs-of-arrays-28e119f04a9b">https://medium.com/@hayeah/diving-into-the-ethereum-vm-the-hidden-costs-of-arrays-28e119f04a9b</a></li>
+</ol>
+</span></div></article></div><div class="docs-prevnext"><a class="docs-prev button" href="/sipc-docs/docs/docs_31"><span class="arrow-prev">← </span><span>合约编译器</span></a><a class="docs-next button" href="/sipc-docs/docs/docs_33"><span>发布合约</span><span class="arrow-next"> →</span></a></div></div></div><nav class="onPageNav"><ul class="toc-headings"><li><a href="#定长数据存储">定长数据存储</a></li><li><a href="#紧凑存储">紧凑存储</a></li><li><a href="#动态大小数据存储">动态大小数据存储</a><ul class="toc-headings"><li><a href="#字符串">字符串</a></li><li><a href="#动态数组">动态数组</a></li><li><a href="#字典-mapping">字典 Mapping</a></li><li><a href="#组合型">组合型</a></li></ul></li><li><a href="#slothelp">SlotHelp</a></li></ul></nav></div><footer class="nav-footer" id="footer"><section class="sitemap"><a href="/sipc-docs/" class="nav-home"></a><div><h5>文档</h5><a href="/sipc-docs/docs/en/doc1.html">快速开始</a><a href="/sipc-docs/docs/en/doc2.html">引导</a><a href="/sipc-docs/docs/en/doc3.html">API接口</a></div><div><h5>社区</h5><a href="/sipc-docs/en/https://t.me/SimpleChainOfficial">Telegram</a><a href="https://medium.com/@SimpleChain" target="_blank" rel="noreferrer noopener">Medium</a><a href="https://twitter.com/SimpleChain">Twitter</a><a href="https://www.linkedin.com/company/simplechain-foundation/" target="_blank" rel="noreferrer noopener">Linkedln</a></div><div><h5>更多</h5><a href="https://www.simplechain.com">官网</a><a href="https://github.com/simplechain-org">GitHub</a><a class="github-button" data-icon="octicon-star" data-count-href="/facebook/docusaurus/stargazers" data-show-count="true" data-count-aria-label="# stargazers on GitHub" aria-label="Star this project on GitHub">Star</a></div></section><section class="copyright">Copyright © 2020 SimpleChain Community</section></footer></div></body></html>

@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en"><head><meta charSet="utf-8"/><meta http-equiv="X-UA-Compatible" content="IE=edge"/><title>区块 · SimpleChain开发文档</title><meta name="viewport" content="width=device-width"/><meta name="generator" content="Docusaurus"/><meta name="description" content="Simplechain可以视为一个数据库，数据库数据的变更由[交易]({{&lt; ref &quot;./transaction.md&quot; &gt;}})催化。为了有效、有序管理交易，必须将一笔或多笔交易组成一个数据块，才能提交到数据库中。这个数据块即区块(Block)。一个区块不但包含了多笔交易，还记录一些额外数据，以便正确提交到数据库中。"/><meta name="docsearch:language" content="en"/><meta property="og:title" content="区块 · SimpleChain开发文档"/><meta property="og:type" content="website"/><meta property="og:url" content="https://simplechain.github.io/sipc-docs/"/><meta property="og:description" content="Simplechain可以视为一个数据库，数据库数据的变更由[交易]({{&lt; ref &quot;./transaction.md&quot; &gt;}})催化。为了有效、有序管理交易，必须将一笔或多笔交易组成一个数据块，才能提交到数据库中。这个数据块即区块(Block)。一个区块不但包含了多笔交易，还记录一些额外数据，以便正确提交到数据库中。"/><meta name="twitter:card" content="summary"/><link rel="shortcut icon" href="/sipc-docs/"/><link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/default.min.css"/><script type="text/javascript" src="https://buttons.github.io/buttons.js"></script><script src="/sipc-docs/js/scrollSpy.js"></script><link rel="stylesheet" href="/sipc-docs/css/main.css"/><script src="/sipc-docs/js/codetabs.js"></script></head><body class="sideNavVisible separateOnPageNav"><div class="fixedHeaderContainer"><div class="headerWrapper wrapper"><header><a href="/sipc-docs/"><h2 class="headerTitle">SimpleChain开发文档</h2></a><div class="navigationWrapper navigationSlider"><nav class="slidingNav"><ul class="nav-site nav-site-internal"><li class="siteNavGroupActive"><a href="/sipc-docs/docs/docs_1" target="_self">文档</a></li><li class="siteNavGroupActive"><a href="/sipc-docs/docs/docs_10" target="_self">API</a></li><li class="siteNavGroupActive"><a href="/sipc-docs/docs/docs_70" target="_self">FAQ</a></li><li class="siteNavGroupActive"><a href="/sipc-docs/docs/docs_71" target="_self">在线技术支持</a></li></ul></nav></div></header></div></div><div class="navPusher"><div class="docMainWrapper wrapper"><div class="docsNavContainer" id="docsNav"><nav class="toc"><div class="toggleNav"><section class="navWrapper wrapper"><div class="navBreadcrumb wrapper"><div class="navToggle" id="navToggler"><div class="hamburger-menu"><div class="line1"></div><div class="line2"></div><div class="line3"></div></div></div><h2><i>›</i><span>基础数据结构</span></h2><div class="tocToggler" id="tocToggler"><i class="icon-toc"></i></div></div><div class="navGroups"><div class="navGroup"><h3 class="navGroupCategoryTitle">快速了解</h3><ul class=""><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_1">概述</a></li><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_2">快速开始</a></li><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_3">搭建节点</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">基础数据结构</h3><ul class=""><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_4">配置</a></li><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_5">创世块</a></li><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_6">账户</a></li><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_7">交易</a></li><li class="navListItem navListItemActive"><a class="navItem" href="/sipc-docs/docs/docs_8">区块</a></li><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_9">交易回执</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">挖矿核心</h3><ul class=""><div class="navGroup subNavGroup"><h4 class="navGroupSubcategoryTitle">交易池</h4><ul><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_10">架构设计</a></li><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_11">交易存储</a></li><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_12">交易入队列</a></li><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_13">内存限制</a></li></ul></div><div class="navGroup subNavGroup"><h4 class="navGroupSubcategoryTitle">挖矿</h4><ul><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_14">架构</a></li><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_15">启动挖矿</a></li><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_16">挖矿流程</a></li></ul></div><div class="navGroup subNavGroup"><h4 class="navGroupSubcategoryTitle">共识算法</h4><ul><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_17">共识算法</a></li><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_18">算法实现</a></li></ul></div></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">底层核心技术</h3><ul class=""><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_31">智能合约</a></li><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_33">合约模版</a></li><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_34">合约开发和部署</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">智能合约</h3><ul class=""><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_35">虚拟机</a></li><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_36">运行机制</a></li><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_37">异常处理</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">SDK</h3><ul class=""><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_41">Sipc API</a></li><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_42">跨链 API</a></li><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_43">SDKS</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">区块链浏览器</h3><ul class=""><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_59">区块链浏览器</a></li><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_60">搭建测试链</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">矿池对接</h3><ul class=""><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_61">Sipc挖矿</a></li><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_62">GPU挖矿</a></li><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_63">矿池接入</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">客户端下载</h3><ul class=""><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_64">Sipc全节点钱包</a></li><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_65">SimPool</a></li><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_66">SIPC</a></li><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_67">ChainBox</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">落地方案</h3><ul class=""><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_68">落地案例1</a></li><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_69">落地案例2</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">FAQ</h3><ul class=""><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_70">FAQ</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">技术支持</h3><ul class=""><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_71">在线技术支持</a></li></ul></div></div></section></div><script>
+<!DOCTYPE html><html lang="en"><head><meta charSet="utf-8"/><meta http-equiv="X-UA-Compatible" content="IE=edge"/><title>账户 · SimpleChain开发文档</title><meta name="viewport" content="width=device-width"/><meta name="generator" content="Docusaurus"/><meta name="description" content="对比比特币的 “UTXO” 余额模型，以太坊使用“账户”余额模型。"/><meta name="docsearch:language" content="en"/><meta property="og:title" content="账户 · SimpleChain开发文档"/><meta property="og:type" content="website"/><meta property="og:url" content="https://simplechain.github.io/sipc-docs/"/><meta property="og:description" content="对比比特币的 “UTXO” 余额模型，以太坊使用“账户”余额模型。"/><meta name="twitter:card" content="summary"/><link rel="shortcut icon" href="/sipc-docs/"/><link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/default.min.css"/><script type="text/javascript" src="https://buttons.github.io/buttons.js"></script><script src="/sipc-docs/js/scrollSpy.js"></script><link rel="stylesheet" href="/sipc-docs/css/main.css"/><script src="/sipc-docs/js/codetabs.js"></script></head><body class="sideNavVisible separateOnPageNav"><div class="fixedHeaderContainer"><div class="headerWrapper wrapper"><header><a href="/sipc-docs/"><h2 class="headerTitle">SimpleChain开发文档</h2></a><div class="navigationWrapper navigationSlider"><nav class="slidingNav"><ul class="nav-site nav-site-internal"><li class="siteNavGroupActive"><a href="/sipc-docs/docs/docs_1" target="_self">文档</a></li><li class="siteNavGroupActive"><a href="/sipc-docs/docs/docs_25" target="_self">API</a></li><li class="siteNavGroupActive"><a href="/sipc-docs/docs/docs_50" target="_self">FAQ</a></li><li class="siteNavGroupActive"><a href="/sipc-docs/docs/docs_51" target="_self">在线技术支持</a></li></ul></nav></div></header></div></div><div class="navPusher"><div class="docMainWrapper wrapper"><div class="docsNavContainer" id="docsNav"><nav class="toc"><div class="toggleNav"><section class="navWrapper wrapper"><div class="navBreadcrumb wrapper"><div class="navToggle" id="navToggler"><div class="hamburger-menu"><div class="line1"></div><div class="line2"></div><div class="line3"></div></div></div><h2><i>›</i><span>基础数据结构</span></h2><div class="tocToggler" id="tocToggler"><i class="icon-toc"></i></div></div><div class="navGroups"><div class="navGroup"><h3 class="navGroupCategoryTitle">快速了解</h3><ul class=""><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_1">概述</a></li><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_2">快速开始</a></li><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_3">搭建节点</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">sipc和sipc代币协议</h3><ul class=""><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_4">sipc代币</a></li><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_5">在SIPC上发行代币</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">基础数据结构</h3><ul class=""><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_6">配置</a></li><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_7">创世块</a></li><li class="navListItem navListItemActive"><a class="navItem" href="/sipc-docs/docs/docs_8">账户</a></li><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_9">交易</a></li><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_10">区块</a></li><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_11">交易回执</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">架构</h3><ul class=""><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_12">架构设计</a></li><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_13">内存限制</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">底层核心技术</h3><ul class=""><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_14">共识算法</a></li><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_15">P2P网络</a></li><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_16">挖矿流程</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">虚拟机</h3><ul class=""><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_17">虚拟机</a></li><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_18">运行机制</a></li><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_19">异常处理</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">智能合约</h3><ul class=""><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_20">智能合约</a></li><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_22">合约模版</a></li><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_23">合约开发和部署</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">开发者工具</h3><ul class=""><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_24">搭建测试链</a></li><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_25">Sipc API</a></li><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_26">跨链API</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">Dapp开发</h3><ul class=""><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_31">合约编译器</a></li><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_32">编写合约</a></li><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_33">发布合约</a></li><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_34">开发流程</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">挖矿</h3><ul class=""><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_35">Sipc挖矿</a></li><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_36">矿池接入</a></li><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_37">GPU挖矿</a></li><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_38">SimPool</a></li><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_39">SimpleNode x1挖矿教程</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">客户端</h3><ul class=""><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_40">SIPC</a></li><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_41">Sipc全节点钱包</a></li><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_42">ChainBox</a></li><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_43">区块链浏览器</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">生态</h3><ul class=""><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_44">交易所</a></li><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_45">社区项目</a></li><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_46">社区活动</a></li><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_47">社区入口</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">落地方案</h3><ul class=""><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_48">落地案例1</a></li><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_49">落地案例2</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">FAQ</h3><ul class=""><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_50">FAQ</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">技术支持</h3><ul class=""><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_51">在线技术支持</a></li></ul></div></div></section></div><script>
             var coll = document.getElementsByClassName('collapsible');
             var checkActiveCategory = true;
             for (var i = 0; i < coll.length; i++) {
@@ -54,111 +54,212 @@
                 };
               }
             });
-        </script></nav></div><div class="container mainContainer docsContainer"><div class="wrapper"><div class="post"><header class="postHeader"><h1 id="__docusaurus" class="postHeaderTitle">区块</h1></header><article><div><span><p>Simplechain可以视为一个数据库，数据库数据的变更由[交易]({{&lt; ref &quot;./transaction.md&quot; &gt;}})催化。为了有效、有序管理交易，必须将一笔或多笔交易组成一个数据块，才能提交到数据库中。这个数据块即区块(Block)。一个区块不但包含了多笔交易，还记录一些额外数据，以便正确提交到数据库中。</p>
-<p>下图是以太坊区块数据结构与关系，讲解区块数据结构时不得不将其他数据一并呈现，只有掌握区块中各项数据来源才能真正了解区块链数据。</p>
-<p><img src="https://img.learnblockchain.cn/2019/05/19_ethereum-full-block-data-struct.png!de" alt="以太坊区块结构"></p>
-<p>区块分为两部分：区块头(Header)和区块体(Body)。区块头信息量非常丰富，不但和上一个单元建立联系还记录了一些交易执行情况信息和矿工工作信息。在上图中涉及一个非常重要的概念 Trie，全名是默克尔压缩前缀树，这需要独立讲解。</p>
-<h2><a class="anchor" aria-hidden="true" id="区块头数据解释"></a><a href="#区块头数据解释" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>区块头数据解释</h2>
-<p>各个字段数据如下：</p>
-<h3><a class="anchor" aria-hidden="true" id="parenthash"></a><a href="#parenthash" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>parentHash</h3>
-<p>是一个哈希值，记录此区块直接引用的父区块哈希值。通过此记录，才能完整的将区块有序组织，形成一条区块链。并且可以防止父区块内容被修改，因为数据修改，区块哈希必然发生变化，因此一个区块直接或间接的强化了所有父辈区块，通过加密算法保证历史区块不可能被修改。</p>
-<p><img src="https://img.learnblockchain.cn/2019/05/19_blockchain1toN.png!de" alt="一条区块链"></p>
-<h3><a class="anchor" aria-hidden="true" id="sha3uncles"></a><a href="#sha3uncles" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>sha3Uncles</h3>
-<p>是一个哈希值，表示区块引用的多个叔辈区块。在区块体中也包含了多个叔辈的区块头信息，而sha3Uncles则是叔块集的 RLPHASH 哈希值。在比特币中只有成功挖出区块并被其他节点接受时才能获得奖励，是所有矿工在争取记账权和连带的奖励。而以太坊稍有不同，不能成为主链一部分的孤儿区块，如果有幸被后来的区块收留进区块链就变成了叔块。收留了孤块的区块有额外的奖励。孤块一旦成为叔块，该区块统一可获得奖励。通过叔块奖励机制，来降低以太坊软分叉和平衡网速慢的矿工利益。</p>
-<h3><a class="anchor" aria-hidden="true" id="miner"></a><a href="#miner" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>miner</h3>
-<p>是一个地址，表示区块是此账户的矿工挖出，挖矿奖励将下发到此账户。</p>
-<h3><a class="anchor" aria-hidden="true" id="stateroot"></a><a href="#stateroot" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>stateRoot</h3>
-<p>是一个哈希值，表示执行完此区块中的所有交易后以太坊状态快照ID。因为以太坊描述为一个状态机系统，因此快照ID称之为状态哈希值。又因为状态哈希是由所有账户状态按默克尔前缀树算法生成，因此称为状态默克尔树根值。</p>
-<h3><a class="anchor" aria-hidden="true" id="transactionsroot"></a><a href="#transactionsroot" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>transactionsRoot</h3>
-<p>是一个哈希值，表示该区块中所有交易生成一颗默克尔树根节点哈希值。是一个密码学保证交易集合摘要。通过此Root可以直接校验某交易是否包含在此区块中。</p>
-<h3><a class="anchor" aria-hidden="true" id="receiptroot"></a><a href="#receiptroot" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>receiptRoot</h3>
-<p>是一个哈希值，同样是默克尔树根节点哈希值。由区块交易在执行完成后生成的交易回执信息集合生成。</p>
-<h3><a class="anchor" aria-hidden="true" id="logsbloom"></a><a href="#logsbloom" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>logsBloom</h3>
-<p>是一个256长度Byte数组。提取自receipt，用于快速定位查找交易回执中的智能合约事件信息。</p>
-<h3><a class="anchor" aria-hidden="true" id="difficulty"></a><a href="#difficulty" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>difficulty</h3>
-<p>是 big.Int 值，表示此区块能被挖出的难度系数。</p>
-<h3><a class="anchor" aria-hidden="true" id="number"></a><a href="#number" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>number</h3>
-<p>是 big.Int 值，表示此区块高度。用于对区块标注序号，在一条区块链上，区块高度必须是连续递增。</p>
-<h3><a class="anchor" aria-hidden="true" id="gaslimit"></a><a href="#gaslimit" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>gasLimit</h3>
-<p>是 uint64 值，表示此区块所允许消耗的Gas燃料量。此数值根据父区块进行动态调整，调整的目的是调整区块所能包含的交易数量。</p>
-<h3><a class="anchor" aria-hidden="true" id="gasused"></a><a href="#gasused" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>gasUsed</h3>
-<p>是 uint64 值，表示此区块所有交易执行所实际消耗的Gas燃料量。</p>
-<h3><a class="anchor" aria-hidden="true" id="timestamp"></a><a href="#timestamp" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>timestamp</h3>
-<p>是 uint64 值，表示此区块创建的UTC时间戳，单位秒。因为以太坊<a href="https://etherscan.io/chart/blocktime">平均14.5s</a>出一个区块(白皮书中研究是 12秒)，因此区块时间戳可以充当时间戳服务，但不能完全信任。</p>
-<h3><a class="anchor" aria-hidden="true" id="extradata"></a><a href="#extradata" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>extraData</h3>
-<p>是一个长度不固定的Byte数组，最长32位。完全由矿工自定义，矿工一般会写一些公开推广类内容或者作为投票使用。</p>
-<h3><a class="anchor" aria-hidden="true" id="mixhash"></a><a href="#mixhash" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>mixHash</h3>
-<p>是一个哈希值。用于校验区块是否正确挖出。实际上是区块头数据不包含nonce时的一个哈希值。</p>
-<h3><a class="anchor" aria-hidden="true" id="nonce"></a><a href="#nonce" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>nonce</h3>
-<p>是一个8长度的Byte，实际是一个 uint64 值。用于校验区块是否正确挖出，mixHash 只有用一个正确的 nonce 才能进行PoW工作量证明。</p>
-<h2><a class="anchor" aria-hidden="true" id="区块体数据解释"></a><a href="#区块体数据解释" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>区块体数据解释</h2>
-<p>区块体 Body 中只有两项数据：[交易]({{&lt; ref &quot;./transaction.md&quot; &gt;}})集合和叔辈区块头集合。是交易促使以太坊世界态进行转变。</p>
-<p><img src="https://img.learnblockchain.cn/2019/05/19_ethereum-state-change!de" alt="以太坊世界态变化过程"></p>
-<p>从创世状态开始，每一个区块中的交易执行促使了以太坊世界态的转变。下一个状态是在上一个状态中执行交易或其他操作使得状态由A状态转变为B状态。</p>
-<p>而交易则为状态转变的催化酶，一个区块中的所有交易执行完成后，将使得以太坊进入一个新的状态。状态转变过程中记录了一些起始变量和结果数据，分别是交易默克尔哈希值transactionsRoot、交易回执默克尔哈希值 receiptRoot、事件布隆值logsBloom、新状态的默克尔哈希值stateRoot。</p>
-<h2><a class="anchor" aria-hidden="true" id="其他概念"></a><a href="#其他概念" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>其他概念</h2>
-<p>有三个重要概念尚未解释，是因为篇幅有限，后续将逐一讲解。</p>
+        </script></nav></div><div class="container mainContainer docsContainer"><div class="wrapper"><div class="post"><header class="postHeader"><h1 id="__docusaurus" class="postHeaderTitle">账户</h1></header><article><div><span><p>对比比特币的 “UTXO” 余额模型，以太坊使用“账户”余额模型。
+以太坊丰富了账户内容，除余额外还能自定义存放任意多数据。
+并利用账户数据的可维护性，构建智能合约账户。</p>
+<p>实际上以太坊是为了实现智能合约而提炼的账户模型。
+以账户为单位，安全隔离数据。
+账户间信息相互独立，互不干扰。
+再配合以太坊虚拟机，让智能合约沙盒运行。</p>
+<p>以太坊作为智能合约操作平台，将账户划分为两类：外部账户（EOAs）和合约账户（contract account）。</p>
+<h2><a class="anchor" aria-hidden="true" id="账户基本概念"></a><a href="#账户基本概念" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>账户基本概念</h2>
+<h3><a class="anchor" aria-hidden="true" id="外部账户"></a><a href="#外部账户" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>外部账户</h3>
+<p>EOAs-外部账户(external owned accouts)是由人们通过私钥创建的账户。
+是真实世界的金融账户的映射，拥有该账户私钥的任何人都可以控制该账户。
+如同银行卡，到ATM机取款时只需要密码输入正确即可交易。
+这也是人类与以太坊账本沟通的唯一媒介，因为以太坊中的交易需要签名，
+而只能使用拥有私有外部账户签名。</p>
+<p>外部账户特点总结：</p>
 <ol>
-<li>MPT：默克尔压缩前缀树， Merkle Patricia Tree，是一种经过改良的、融合了默克尔树和前缀树两种树结构优点的数据结构，是以太坊中用来组织管理账户数据、生成交易集合哈希的重要数据结构。</li>
-<li>Receipt，是方便对交易进行零知识证明、索引和搜索，将交易执行过程中的一些特定信息编码为交易收据。</li>
-<li>工作量证明，以太坊设计的的ETHHASH。</li>
+<li>拥有以太余额。</li>
+<li>能发送交易，包括转账和执行合约代码。</li>
+<li>被私钥控制。</li>
+<li>没有相关的可执行代码。</li>
 </ol>
-<h2><a class="anchor" aria-hidden="true" id="关键代码"></a><a href="#关键代码" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>关键代码</h2>
-<p>下面是以太坊代码中定义的区块头和区块体结构定义代码，所有核心代码均在<code>core/types/block.go</code>文件中：</p>
-<pre><code class="hljs css language-go"><span class="hljs-comment">//core/types/block.go:70</span>
-<span class="hljs-keyword">type</span> Header <span class="hljs-keyword">struct</span> {
-   ParentHash  common.Hash    <span class="hljs-string">`json:"parentHash"       gencodec:"required"`</span>
-   UncleHash   common.Hash    <span class="hljs-string">`json:"sha3Uncles"       gencodec:"required"`</span>
-   Coinbase    common.Address <span class="hljs-string">`json:"miner"            gencodec:"required"`</span>
-   Root        common.Hash    <span class="hljs-string">`json:"stateRoot"        gencodec:"required"`</span>
-   TxHash      common.Hash    <span class="hljs-string">`json:"transactionsRoot" gencodec:"required"`</span>
-   ReceiptHash common.Hash    <span class="hljs-string">`json:"receiptsRoot"     gencodec:"required"`</span>
-   Bloom       Bloom          <span class="hljs-string">`json:"logsBloom"        gencodec:"required"`</span>
-   Difficulty  *big.Int       <span class="hljs-string">`json:"difficulty"       gencodec:"required"`</span>
-   Number      *big.Int       <span class="hljs-string">`json:"number"           gencodec:"required"`</span>
-   GasLimit    <span class="hljs-keyword">uint64</span>         <span class="hljs-string">`json:"gasLimit"         gencodec:"required"`</span>
-   GasUsed     <span class="hljs-keyword">uint64</span>         <span class="hljs-string">`json:"gasUsed"          gencodec:"required"`</span>
-   Time        <span class="hljs-keyword">uint64</span>         <span class="hljs-string">`json:"timestamp"        gencodec:"required"`</span>
-   Extra       []<span class="hljs-keyword">byte</span>         <span class="hljs-string">`json:"extraData"        gencodec:"required"`</span>
-   MixDigest   common.Hash    <span class="hljs-string">`json:"mixHash"`</span>
-   Nonce       BlockNonce     <span class="hljs-string">`json:"nonce"`</span>
-}
-<span class="hljs-keyword">type</span> Body <span class="hljs-keyword">struct</span> {
-    Transactions []*Transaction
-    Uncles       []*Header
+<h3><a class="anchor" aria-hidden="true" id="合约账户"></a><a href="#合约账户" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>合约账户</h3>
+<p>含有合约代码的账户。
+被外部账户或者合约创建，合约在创建时被自动分配到一个账户地址，
+用于存储合约代码以及合约部署或执行过程中产生的存储数据。
+合约账户地址是通过SHA3哈希算法产生，而非私钥。
+因无私钥，因此无人可以拿合约账户当做外部账户使用。
+只能通过外部账户来驱动合约执行合约代码。</p>
+<p>下面是合约地址生成算法：<code>Keccak256(rlp([sender,nonce])[12:]</code></p>
+<pre><code class="hljs css language-go"><span class="hljs-comment">// crypto/crypto.go:74</span>
+<span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">CreateAddress</span><span class="hljs-params">(b common.Address, nonce <span class="hljs-keyword">uint64</span>)</span> <span class="hljs-title">common</span>.<span class="hljs-title">Address</span></span> {
+    data, _ := rlp.EncodeToBytes([]<span class="hljs-keyword">interface</span>{}{b, nonce})
+    <span class="hljs-keyword">return</span> common.BytesToAddress(Keccak256(data)[<span class="hljs-number">12</span>:])
 }
 </code></pre>
-<p>创建一个区块需要调用函数 NewBlock：</p>
-<pre><code class="hljs css language-go"><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">NewBlock</span><span class="hljs-params">(header *Header, txs []*Transaction, uncles []*Header, receipts []*Receipt)</span> *<span class="hljs-title">Block</span></span> {
-   b := &amp;Block{header: CopyHeader(header), td: <span class="hljs-built_in">new</span>(big.Int)}
-
-   <span class="hljs-comment">// <span class="hljs-doctag">TODO:</span> panic if len(txs) != len(receipts)</span>
-   <span class="hljs-keyword">if</span> <span class="hljs-built_in">len</span>(txs) == <span class="hljs-number">0</span> {
-      b.header.TxHash = EmptyRootHash
-   } <span class="hljs-keyword">else</span> {
-      b.header.TxHash = DeriveSha(Transactions(txs))
-      b.transactions = <span class="hljs-built_in">make</span>(Transactions, <span class="hljs-built_in">len</span>(txs))
-      <span class="hljs-built_in">copy</span>(b.transactions, txs)
-   }
-
-   <span class="hljs-keyword">if</span> <span class="hljs-built_in">len</span>(receipts) == <span class="hljs-number">0</span> {
-      b.header.ReceiptHash = EmptyRootHash
-   } <span class="hljs-keyword">else</span> {
-      b.header.ReceiptHash = DeriveSha(Receipts(receipts))
-      b.header.Bloom = CreateBloom(receipts)
-   }
-
-   <span class="hljs-keyword">if</span> <span class="hljs-built_in">len</span>(uncles) == <span class="hljs-number">0</span> {
-      b.header.UncleHash = EmptyUncleHash
-   } <span class="hljs-keyword">else</span> {
-      b.header.UncleHash = CalcUncleHash(uncles)
-      b.uncles = <span class="hljs-built_in">make</span>([]*Header, <span class="hljs-built_in">len</span>(uncles))
-      <span class="hljs-keyword">for</span> i := <span class="hljs-keyword">range</span> uncles {
-         b.uncles[i] = CopyHeader(uncles[i])
-      }
-   }
-
-   <span class="hljs-keyword">return</span> b
+<p>因为合约由其他账户创建，因此将创建者地址和该交易的随机数进行哈希后截取部分生成。</p>
+<p>特别需要注意的是，在<a href="http://eips.ethereum.org/EIPS/eip-1014">EIP1014</a>中提出的另一种生成合约地址的算法。
+其目的是为状态通道提供便利，通过确定内容输出稳定的合约地址。
+在部署合约前就可以知道确切的合约地址。下面是算法方法:<code>keccak256( 0xff ++ address ++ salt ++ keccak256(init_code))[12:]</code>。</p>
+<pre><code class="hljs css language-go"><span class="hljs-comment">// crypto/crypto.go:81</span>
+<span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">CreateAddress2</span><span class="hljs-params">(b common.Address, salt [32]<span class="hljs-keyword">byte</span>, inithash []<span class="hljs-keyword">byte</span>)</span> <span class="hljs-title">common</span>.<span class="hljs-title">Address</span></span> {
+    <span class="hljs-keyword">return</span> common.BytesToAddress(Keccak256([]<span class="hljs-keyword">byte</span>{<span class="hljs-number">0xff</span>}, b.Bytes(), salt[:], inithash)[<span class="hljs-number">12</span>:])
 }
 </code></pre>
-</span></div></article></div><div class="docs-prevnext"><a class="docs-prev button" href="/sipc-docs/docs/docs_7"><span class="arrow-prev">← </span><span>交易</span></a><a class="docs-next button" href="/sipc-docs/docs/docs_9"><span>交易回执</span><span class="arrow-next"> →</span></a></div></div></div><nav class="onPageNav"><ul class="toc-headings"><li><a href="#区块头数据解释">区块头数据解释</a><ul class="toc-headings"><li><a href="#parenthash">parentHash</a></li><li><a href="#sha3uncles">sha3Uncles</a></li><li><a href="#miner">miner</a></li><li><a href="#stateroot">stateRoot</a></li><li><a href="#transactionsroot">transactionsRoot</a></li><li><a href="#receiptroot">receiptRoot</a></li><li><a href="#logsbloom">logsBloom</a></li><li><a href="#difficulty">difficulty</a></li><li><a href="#number">number</a></li><li><a href="#gaslimit">gasLimit</a></li><li><a href="#gasused">gasUsed</a></li><li><a href="#timestamp">timestamp</a></li><li><a href="#extradata">extraData</a></li><li><a href="#mixhash">mixHash</a></li><li><a href="#nonce">nonce</a></li></ul></li><li><a href="#区块体数据解释">区块体数据解释</a></li><li><a href="#其他概念">其他概念</a></li><li><a href="#关键代码">关键代码</a></li></ul></nav></div><footer class="nav-footer" id="footer"><section class="sitemap"><a href="/sipc-docs/" class="nav-home"></a><div><h5>文档</h5><a href="/sipc-docs/docs/en/doc1.html">快速开始</a><a href="/sipc-docs/docs/en/doc2.html">引导</a><a href="/sipc-docs/docs/en/doc3.html">API接口</a></div><div><h5>社区</h5><a href="/sipc-docs/en/https://t.me/SimpleChainOfficial">Telegram</a><a href="https://medium.com/@SimpleChain" target="_blank" rel="noreferrer noopener">Medium</a><a href="https://twitter.com/SimpleChain">Twitter</a><a href="https://www.linkedin.com/company/simplechain-foundation/" target="_blank" rel="noreferrer noopener">Linkedln</a></div><div><h5>更多</h5><a href="https://www.simplechain.com">官网</a><a href="https://github.com/simplechain-org">GitHub</a><a class="github-button" data-icon="octicon-star" data-count-href="/facebook/docusaurus/stargazers" data-show-count="true" data-count-aria-label="# stargazers on GitHub" aria-label="Star this project on GitHub">Star</a></div></section><section class="copyright">Copyright © 2020 SimpleChain Community</section></footer></div></body></html>
+<p>合约账户特点总结：</p>
+<ol>
+<li>拥有以太余额。</li>
+<li>有相关的可执行代码（合约代码）。</li>
+<li>合约代码能够被交易或者其他合约消息调用。</li>
+<li>合约代码被执行时可再调用其他合约代码。</li>
+<li>合约代码被执行时可执行复杂运算，可永久地改变合约内部的数据存储。</li>
+</ol>
+<h3><a class="anchor" aria-hidden="true" id="差异对比"></a><a href="#差异对比" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>差异对比</h3>
+<p>综上，下面表格列出两类账户差异，合约账户更优于外部账户。
+但外部账户是人们和以太坊沟通的唯一媒介，和合约账户相辅相成。</p>
+<table>
+<thead>
+<tr><th>项</th><th>外部账户</th><th>合约账户</th></tr>
+</thead>
+<tbody>
+<tr><td>私钥 private Key</td><td>✔️</td><td>✖️</td></tr>
+<tr><td>余额 balance</td><td>✔️</td><td>✔️</td></tr>
+<tr><td>代码 code</td><td>✖️</td><td>✔️</td></tr>
+<tr><td>多重签名</td><td>✖️</td><td>✔️</td></tr>
+<tr><td>控制方式</td><td>私钥控制</td><td>通过外部账户执行合约</td></tr>
+</tbody>
+</table>
+<p>上面有列出多重签名，是因为以太坊外部账户只由一个独立私钥创建，无法进行多签。
+但合约具有可编程性，可编写符合多重签名的逻辑，实现一个支持多签的账户。</p>
+<h2><a class="anchor" aria-hidden="true" id="账户数据结构"></a><a href="#账户数据结构" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>账户数据结构</h2>
+<p>以太坊数据以账户为单位组织，账户数据的变更引起账户状态变化。
+从而引起以太坊状态变化（关于以太坊状态，后续另写文章介绍）。</p>
+<p>在程序逻辑上两类账户的数据结构一致：</p>
+<p><img src="https://img.learnblockchain.cn/2019/04/14_以太坊账户数据结构1.png!de" alt="以太坊账户数据结构"></p>
+<p>对应代码如下：</p>
+<pre><code class="hljs css language-go"><span class="hljs-comment">// core/state/state_object.go:100</span>
+<span class="hljs-keyword">type</span> Account <span class="hljs-keyword">struct</span> {
+    Nonce    <span class="hljs-keyword">uint64</span>
+    Balance  *big.Int
+    Root     common.Hash
+    CodeHash []<span class="hljs-keyword">byte</span>
+}
+</code></pre>
+<p>但在数据存储上稍有不同，
+因为外部账户无内部存储数据和合约代码，因此外部账户数据中 <code>StateRootHash</code> 和 <code>CodeHash</code> 是一个空默认值。
+一旦属于空默认值，则不会存储对应物理数据库中。
+在程序逻辑上，存在<code>code</code>则为合约账户。
+即 <code>CodeHash</code> 为空值时，账户是一个外部账户，否则是合约账户。</p>
+<p><img src="https://img.learnblockchain.cn/2019/04/14_以太坊账户数据存储结构.png!de" alt="以太坊账户数据存储结构"></p>
+<p>上图是以太坊账户数据存储结构，账户内部实际只存储关键数据，而合约代码以及合约自身数据则通过对应的哈希值关联。
+因为每个账户对象，将作为一个以太坊账户树的一个叶子数据存储，
+不能太大。</p>
+<p>从以太坊作为一个世界态(World State)状态机视角看数据关系如下：</p>
+<p><img src="https://img.learnblockchain.cn/2019/05/19_ethereum-global-state.png!de" alt="以太坊世界态"></p>
+<p>在密码学领域，Nonce 代表一个只使用一次的数字。它往往是一个随机或伪随机数，以避免重复。
+以太坊账户中加入 Nonce，可避免重放攻击（具体细节，在讲解以太坊交易流程时介绍），但不是随机产生。
+账户 Nonce 起始值是 0，后续每触发一次账户执行则 Nonce 值计加一次。
+其中一处的计数逻辑如下：</p>
+<pre><code class="hljs css language-go"><span class="hljs-comment">// core/state_transition.go:212</span>
+st.state.SetNonce(msg.From(), st.state.GetNonce(sender.Address())+<span class="hljs-number">1</span>)
+</code></pre>
+<p>这样的附加好处是，一般可将 Nonce 当做账户的交易次数计数器使用，特别是对于合约账户可以准确的记录合约被调用次数。</p>
+<p>而<code>Balance</code>则记录该账户所拥有的以太（ETH）数量，称为账户余额
+(注意，这里的余额的单位是 Wei )。
+转移资产(Transfer)是在一个账户的<code>Balance</code>上计加，在另外一个账户计减。</p>
+<pre><code class="hljs css language-go"><span class="hljs-comment">// core/evm.go:94</span>
+<span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">Transfer</span><span class="hljs-params">(db vm.StateDB, sender, recipient common.Address, amount *big.Int)</span></span> {
+    db.SubBalance(sender, amount)
+    db.AddBalance(recipient, amount)
+}
+<span class="hljs-comment">// core/vm/evm.go:191</span>
+<span class="hljs-keyword">if</span> !evm.Context.CanTransfer(evm.StateDB, caller.Address(), value) {
+    <span class="hljs-keyword">return</span> <span class="hljs-literal">nil</span>, gas, ErrInsufficientBalance
+}
+<span class="hljs-comment">// core/vm/evm.go:214</span>
+evm.Transfer(evm.StateDB, caller.Address(), to.Address(), value)
+</code></pre>
+<p>当然必须保证转账方余额充足，在转移前需要<code>CanTransfer</code>检查，
+如果余额充足，则执行<code>Transfer</code>转移<code>Value</code>数量的以太。</p>
+<p>账户状态哈希值 <code>StateRoot</code>，是合约所拥有的方法、字段信息构成的一颗默克尔压缩前缀树（Merkle Patricia Tree 后续独立文章讲解）的根值，简单地讲是一颗二叉树的根节点值。
+合约状态中的任意一项细微变动都最终引起 <code>StateRoot</code> 变化，因此合约状态变化会反映在账户的<code>StateRoot</code>上。</p>
+<p>同时，你可以直接利用 <code>StateRoot</code> 从 Leveldb 中快速读取具体的某个状态数据，如合约的创建者。
+通过以太坊API <a href="https://github.com/ethereum/wiki/wiki/JavaScript-API#web3ethgetstorageat">web3.eth.getStorageAt</a> 可读取合约中任意位置的数据。</p>
+<p>下面，我们通过一段示例代码，感受下以太坊账户数据存储。</p>
+<pre><code class="hljs css language-go"><span class="hljs-keyword">import</span>(...)
+<span class="hljs-keyword">var</span> toAddr =common.HexToAddress
+<span class="hljs-keyword">var</span> toHash =common.BytesToHash
+
+<span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span>  {
+    statadb, _ := state.New(common.Hash{},
+        state.NewDatabase(rawdb.NewMemoryDatabase()))<span class="hljs-comment">// ❶</span>
+
+    acct1:=toAddr(<span class="hljs-string">"0x0bB141C2F7d4d12B1D27E62F86254e6ccEd5FF9a"</span>)<span class="hljs-comment">// ❷</span>
+    acct2:=toAddr(<span class="hljs-string">"0x77de172A492C40217e48Ebb7EEFf9b2d7dF8151B"</span>)
+
+    statadb.AddBalance(acct1,big.NewInt(<span class="hljs-number">100</span>))
+    statadb.AddBalance(acct2,big.NewInt(<span class="hljs-number">888</span>))
+
+    contract:=crypto.CreateAddress(acct1,statadb.GetNonce(acct1))<span class="hljs-comment">//❸</span>
+    statadb.CreateAccount(contract)
+    statadb.SetCode(contract,[]<span class="hljs-keyword">byte</span>(<span class="hljs-string">"contract code bytes"</span>))<span class="hljs-comment">//❹</span>
+
+    statadb.SetNonce(contract,<span class="hljs-number">1</span>)
+    statadb.SetState(contract,toHash([]<span class="hljs-keyword">byte</span>(<span class="hljs-string">"owner"</span>)),toHash(acct1.Bytes()))<span class="hljs-comment">//❺</span>
+    statadb.SetState(contract,toHash([]<span class="hljs-keyword">byte</span>(<span class="hljs-string">"name"</span>)),toHash([]<span class="hljs-keyword">byte</span>(<span class="hljs-string">"ysqi"</span>)))
+
+    statadb.SetState(contract,toHash([]<span class="hljs-keyword">byte</span>(<span class="hljs-string">"online"</span>)),toHash([]<span class="hljs-keyword">byte</span>{<span class="hljs-number">1</span>})
+    statadb.SetState(contract,toHash([]<span class="hljs-keyword">byte</span>(<span class="hljs-string">"online"</span>)),toHash([]<span class="hljs-keyword">byte</span>{}))<span class="hljs-comment">//❻</span>
+
+    statadb.Commit(<span class="hljs-literal">true</span>)<span class="hljs-comment">//❼</span>
+    fmt.Println(<span class="hljs-keyword">string</span>(statadb.Dump()))<span class="hljs-comment">//❽</span>
+}
+
+</code></pre>
+<p>上面代码中，我们创建了三个账户，并且提交到数据库中。最终打印出当前数据中所有账户的数据信息：</p>
+<ul>
+<li>❶ 一行代码涉及多个操作。首先是创建一个内存KV数据库，再包装为 stata 数据库实例，
+最后利用一个空的DB级的<code>StateRoot</code>，初始化一个以太坊 statadb。</li>
+<li>❷ 定义两个账户 acct1和acct2，并分别添加100和888到账户余额。</li>
+<li>❸ 模拟合约账户的创建过程，由外部账户 acct1 创建合约账户地址，并将此地址载入 statadb。</li>
+<li>❹ 在将合约代码加入刚刚创建的合约账户中，在写入合约代码的同时，
+会利用<code>crypto.Keccak256Hash(code)</code>计算合约代码哈希，保留在账户数据中。</li>
+<li>❺ 模拟合约执行过程，涉及修改合约状态，新增三项状态数据<code>owner</code>,<code>name</code>和<code>online</code>，分别对应不同值。</li>
+<li>❻ 这里和前面不同的是，是给状态<code>online</code>赋值为空<code>[]byte{}</code>，因为所有状态的默认值均是<code>[]byte{}</code>，
+在提交到数据库时，如Leveldb 认为这些状态无有效值，会从数据库文件中删除此记录。
+因此，此操作实际是一个删除状态<code>online</code>操作。</li>
+<li>❼ 上面所有操作，还都只是发生在 statdb 内存中，并未真正的写入数据库文件。
+执行<code>Commit</code>，才会将关于 statadb 的所有变更更新到数据库文件中。</li>
+<li>❽ 一旦提交数据，则可以使用 <code>Dump</code> 命令从数据库中查找此 stata 相关的所有数据，包括所有账户。
+并以 JSON 格式返还。这里，我们将返还结果直接打印输出。</li>
+</ul>
+<p>代码执行输出结果如下：</p>
+<pre><code class="hljs css language-json">{
+    <span class="hljs-attr">"root"</span>: <span class="hljs-string">"3a25b0816cf007c0b878ca7a62ba35ee0337fa53703f281c41a791a137519f00"</span>,
+    <span class="hljs-attr">"accounts"</span>: {
+        <span class="hljs-attr">"0bb141c2f7d4d12b1d27e62f86254e6cced5ff9a"</span>: {
+            <span class="hljs-attr">"balance"</span>: <span class="hljs-string">"100"</span>,
+            <span class="hljs-attr">"nonce"</span>: <span class="hljs-number">0</span>,
+            <span class="hljs-attr">"root"</span>: <span class="hljs-string">"56e81f171bcc55a6ff8345e692c0f86e5b48e01b996cadc001622fb5e363b421"</span>,
+            <span class="hljs-attr">"codeHash"</span>: <span class="hljs-string">"c5d2460186f7233c927e7db2dcc703c0e500b653ca82273b7bfad8045d85a470"</span>,
+            <span class="hljs-attr">"code"</span>: <span class="hljs-string">""</span>,
+            <span class="hljs-attr">"storage"</span>: {}
+        },
+        <span class="hljs-attr">"77de172a492c40217e48ebb7eeff9b2d7df8151b"</span>: {
+            <span class="hljs-attr">"balance"</span>: <span class="hljs-string">"888"</span>,
+            <span class="hljs-attr">"nonce"</span>: <span class="hljs-number">0</span>,
+            <span class="hljs-attr">"root"</span>: <span class="hljs-string">"56e81f171bcc55a6ff8345e692c0f86e5b48e01b996cadc001622fb5e363b421"</span>,
+            <span class="hljs-attr">"codeHash"</span>: <span class="hljs-string">"c5d2460186f7233c927e7db2dcc703c0e500b653ca82273b7bfad8045d85a470"</span>,
+            <span class="hljs-attr">"code"</span>: <span class="hljs-string">""</span>,
+            <span class="hljs-attr">"storage"</span>: {}
+        },
+        <span class="hljs-attr">"80580f576731dc1e1dcc53d80b261e228c447cdd"</span>: {
+            <span class="hljs-attr">"balance"</span>: <span class="hljs-string">"0"</span>,
+            <span class="hljs-attr">"nonce"</span>: <span class="hljs-number">1</span>,
+            <span class="hljs-attr">"root"</span>: <span class="hljs-string">"1f6d937817f2ac217d8b123c4983c45141e50bd0c358c07f3c19c7b526dd4267"</span>,
+            <span class="hljs-attr">"codeHash"</span>: <span class="hljs-string">"c668dac8131a99c411450ba912234439ace20d1cc1084f8e198fee0a334bc592"</span>,
+            <span class="hljs-attr">"code"</span>: <span class="hljs-string">"636f6e747261637420636f6465206279746573"</span>,
+            <span class="hljs-attr">"storage"</span>: {
+                <span class="hljs-attr">"000000000000000000000000000000000000000000000000000000006e616d65"</span>: <span class="hljs-string">"8479737169"</span>,
+                <span class="hljs-attr">"0000000000000000000000000000000000000000000000000000006f776e6572"</span>: <span class="hljs-string">"940bb141c2f7d4d12b1d27e62f86254e6cced5ff9a"</span>
+            }
+        }
+    }
+}
+</code></pre>
+<p>我们看到这些显示数据，直接对应我们刚刚的所有操作。
+也只有合约账户才有 <code>storage</code> 和 <code>code</code>。而外部账户的<code>codeHash</code>和<code>root</code>值相同，是一个默认值。</p>
+</span></div></article></div><div class="docs-prevnext"><a class="docs-prev button" href="/sipc-docs/docs/docs_7"><span class="arrow-prev">← </span><span>创世块</span></a><a class="docs-next button" href="/sipc-docs/docs/docs_9"><span>交易</span><span class="arrow-next"> →</span></a></div></div></div><nav class="onPageNav"><ul class="toc-headings"><li><a href="#账户基本概念">账户基本概念</a><ul class="toc-headings"><li><a href="#外部账户">外部账户</a></li><li><a href="#合约账户">合约账户</a></li><li><a href="#差异对比">差异对比</a></li></ul></li><li><a href="#账户数据结构">账户数据结构</a></li></ul></nav></div><footer class="nav-footer" id="footer"><section class="sitemap"><a href="/sipc-docs/" class="nav-home"></a><div><h5>文档</h5><a href="/sipc-docs/docs/en/doc1.html">快速开始</a><a href="/sipc-docs/docs/en/doc2.html">引导</a><a href="/sipc-docs/docs/en/doc3.html">API接口</a></div><div><h5>社区</h5><a href="/sipc-docs/en/https://t.me/SimpleChainOfficial">Telegram</a><a href="https://medium.com/@SimpleChain" target="_blank" rel="noreferrer noopener">Medium</a><a href="https://twitter.com/SimpleChain">Twitter</a><a href="https://www.linkedin.com/company/simplechain-foundation/" target="_blank" rel="noreferrer noopener">Linkedln</a></div><div><h5>更多</h5><a href="https://www.simplechain.com">官网</a><a href="https://github.com/simplechain-org">GitHub</a><a class="github-button" data-icon="octicon-star" data-count-href="/facebook/docusaurus/stargazers" data-show-count="true" data-count-aria-label="# stargazers on GitHub" aria-label="Star this project on GitHub">Star</a></div></section><section class="copyright">Copyright © 2020 SimpleChain Community</section></footer></div></body></html>

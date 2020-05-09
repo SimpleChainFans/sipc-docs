@@ -1,0 +1,356 @@
+<!DOCTYPE html><html lang="en"><head><meta charSet="utf-8"/><meta http-equiv="X-UA-Compatible" content="IE=edge"/><title>合约模版 · SimpleChain开发文档</title><meta name="viewport" content="width=device-width"/><meta name="generator" content="Docusaurus"/><meta name="description" content="###############"/><meta name="docsearch:language" content="en"/><meta property="og:title" content="合约模版 · SimpleChain开发文档"/><meta property="og:type" content="website"/><meta property="og:url" content="https://simplechain.github.io/sipc-docs/"/><meta property="og:description" content="###############"/><meta name="twitter:card" content="summary"/><link rel="shortcut icon" href="/sipc-docs/"/><link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/default.min.css"/><script type="text/javascript" src="https://buttons.github.io/buttons.js"></script><script src="/sipc-docs/js/scrollSpy.js"></script><link rel="stylesheet" href="/sipc-docs/css/main.css"/><script src="/sipc-docs/js/codetabs.js"></script></head><body class="sideNavVisible separateOnPageNav"><div class="fixedHeaderContainer"><div class="headerWrapper wrapper"><header><a href="/sipc-docs/"><h2 class="headerTitle">SimpleChain开发文档</h2></a><div class="navigationWrapper navigationSlider"><nav class="slidingNav"><ul class="nav-site nav-site-internal"><li class="siteNavGroupActive"><a href="/sipc-docs/docs/docs_1" target="_self">文档</a></li><li class="siteNavGroupActive"><a href="/sipc-docs/docs/docs_25" target="_self">API</a></li><li class="siteNavGroupActive"><a href="/sipc-docs/docs/docs_50" target="_self">FAQ</a></li><li class="siteNavGroupActive"><a href="/sipc-docs/docs/docs_51" target="_self">在线技术支持</a></li></ul></nav></div></header></div></div><div class="navPusher"><div class="docMainWrapper wrapper"><div class="docsNavContainer" id="docsNav"><nav class="toc"><div class="toggleNav"><section class="navWrapper wrapper"><div class="navBreadcrumb wrapper"><div class="navToggle" id="navToggler"><div class="hamburger-menu"><div class="line1"></div><div class="line2"></div><div class="line3"></div></div></div><h2><i>›</i><span>智能合约</span></h2><div class="tocToggler" id="tocToggler"><i class="icon-toc"></i></div></div><div class="navGroups"><div class="navGroup"><h3 class="navGroupCategoryTitle">快速了解</h3><ul class=""><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_1">概述</a></li><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_2">快速开始</a></li><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_3">搭建节点</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">sipc和sipc代币协议</h3><ul class=""><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_4">sipc代币</a></li><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_5">在SIPC上发行代币</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">基础数据结构</h3><ul class=""><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_6">配置</a></li><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_7">创世块</a></li><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_8">账户</a></li><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_9">交易</a></li><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_10">区块</a></li><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_11">交易回执</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">架构</h3><ul class=""><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_12">架构设计</a></li><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_13">内存限制</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">底层核心技术</h3><ul class=""><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_14">共识算法</a></li><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_15">P2P网络</a></li><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_16">挖矿流程</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">虚拟机</h3><ul class=""><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_17">虚拟机</a></li><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_18">运行机制</a></li><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_19">异常处理</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">智能合约</h3><ul class=""><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_20">智能合约</a></li><li class="navListItem navListItemActive"><a class="navItem" href="/sipc-docs/docs/docs_22">合约模版</a></li><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_23">合约开发和部署</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">开发者工具</h3><ul class=""><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_24">搭建测试链</a></li><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_25">Sipc API</a></li><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_26">跨链API</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">Dapp开发</h3><ul class=""><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_31">合约编译器</a></li><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_32">编写合约</a></li><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_33">发布合约</a></li><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_34">开发流程</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">挖矿</h3><ul class=""><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_35">Sipc挖矿</a></li><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_36">矿池接入</a></li><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_37">GPU挖矿</a></li><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_38">SimPool</a></li><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_39">SimpleNode x1挖矿教程</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">客户端</h3><ul class=""><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_40">SIPC</a></li><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_41">Sipc全节点钱包</a></li><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_42">ChainBox</a></li><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_43">区块链浏览器</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">生态</h3><ul class=""><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_44">交易所</a></li><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_45">社区项目</a></li><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_46">社区活动</a></li><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_47">社区入口</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">落地方案</h3><ul class=""><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_48">落地案例1</a></li><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_49">落地案例2</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">FAQ</h3><ul class=""><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_50">FAQ</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">技术支持</h3><ul class=""><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_51">在线技术支持</a></li></ul></div></div></section></div><script>
+            var coll = document.getElementsByClassName('collapsible');
+            var checkActiveCategory = true;
+            for (var i = 0; i < coll.length; i++) {
+              var links = coll[i].nextElementSibling.getElementsByTagName('*');
+              if (checkActiveCategory){
+                for (var j = 0; j < links.length; j++) {
+                  if (links[j].classList.contains('navListItemActive')){
+                    coll[i].nextElementSibling.classList.toggle('hide');
+                    coll[i].childNodes[1].classList.toggle('rotate');
+                    checkActiveCategory = false;
+                    break;
+                  }
+                }
+              }
+
+              coll[i].addEventListener('click', function() {
+                var arrow = this.childNodes[1];
+                arrow.classList.toggle('rotate');
+                var content = this.nextElementSibling;
+                content.classList.toggle('hide');
+              });
+            }
+
+            document.addEventListener('DOMContentLoaded', function() {
+              createToggler('#navToggler', '#docsNav', 'docsSliderActive');
+              createToggler('#tocToggler', 'body', 'tocActive');
+
+              var headings = document.querySelector('.toc-headings');
+              headings && headings.addEventListener('click', function(event) {
+                var el = event.target;
+                while(el !== headings){
+                  if (el.tagName === 'A') {
+                    document.body.classList.remove('tocActive');
+                    break;
+                  } else{
+                    el = el.parentNode;
+                  }
+                }
+              }, false);
+
+              function createToggler(togglerSelector, targetSelector, className) {
+                var toggler = document.querySelector(togglerSelector);
+                var target = document.querySelector(targetSelector);
+
+                if (!toggler) {
+                  return;
+                }
+
+                toggler.onclick = function(event) {
+                  event.preventDefault();
+
+                  target.classList.toggle(className);
+                };
+              }
+            });
+        </script></nav></div><div class="container mainContainer docsContainer"><div class="wrapper"><div class="post"><header class="postHeader"><h1 id="__docusaurus" class="postHeaderTitle">合约模版</h1></header><article><div><span><p>###############
+合约通用模式
+###############</p>
+<hr>
+<p>从合约中提款</p>
+<hr>
+<p>在某个操作之后发送资金的推荐方式是使用取回（withdrawal）模式。尽管在某个操作之后，最直接地发送以太币方法是一个 <code>send</code> 调用，
+但这并不推荐；因为这会引入一个潜在的安全风险。你可能需要参考 :ref:<code>security_considerations</code> 来获取更多信息。</p>
+<p>这里是一个在合约中使用取回模式的示例，它目标是通过向合约发送最多的钱来成为“最富有的人”，
+其灵感来自 <code>King of the Ether &lt;https://www.kingoftheether.com/&gt;</code>_。</p>
+<p>在下边的合约中，如果你的“最富有”位置被其他人取代，你可以收到取代你成为“最富有”的人发送到合约的资金。</p>
+<p>::</p>
+<pre><code class="hljs">pragma solidity ^0.4.11;
+
+contract WithdrawalContract {
+    address public richest;
+    uint public mostSent;
+
+    mapping (address =&gt; uint) pendingWithdrawals;
+
+    function WithdrawalContract() public payable {
+        richest = msg.sender;
+        mostSent = msg.value;
+    }
+
+    function becomeRichest() public payable returns (bool) {
+        if (msg.value &gt; mostSent) {
+            pendingWithdrawals[richest] += msg.value;
+            richest = msg.sender;
+            mostSent = msg.value;
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    function withdraw() public {
+        uint amount = pendingWithdrawals[msg.sender];
+        // 记住，在发送资金之前将待发金额清零
+        // 来防止重入（re-entrancy）攻击
+        pendingWithdrawals[msg.sender] = 0;
+        msg.sender.transfer(amount);
+    }
+}
+</code></pre>
+<p>下面是一个相反的直接使用发送模式的例子：</p>
+<p>::</p>
+<pre><code class="hljs">pragma solidity ^0.4.11;
+
+contract SendContract {
+    address public richest;
+    uint public mostSent;
+
+    function SendContract() public payable {
+        richest = msg.sender;
+        mostSent = msg.value;
+    }
+
+    function becomeRichest() public payable returns (bool) {
+        if (msg.value &gt; mostSent) {
+            // 这一行会导致问题（详见下文）
+            richest.transfer(msg.value);
+            richest = msg.sender;
+            mostSent = msg.value;
+            return true;
+        } else {
+            return false;
+        }
+    }
+}
+</code></pre>
+<p>注意，在这个例子里，攻击者可以给这个合约设下陷阱，使其进入不可用状态，比如通过使一个 fallback 函数会失败的合约成为 <code>richest</code>
+（可以在 fallback 函数中调用 <code>revert()</code> 或者直接在 fallback 函数中使用超过 2300 gas 来使其执行失败）。这样，当这个合约调用 <code>transfer</code> 来给“下过毒”的合约
+发送资金时，调用会失败，从而导致 <code>becomeRichest</code> 函数失败，这个合约也就被永远卡住了。</p>
+<p>如果在合约中像第一个例子那样使用“取回（withdraw）”模式，那么攻击者只能使他/她自己的“取回”失败，并不会导致整个合约无法运作。</p>
+<p>.. index:: access;restricting</p>
+<hr>
+<p>限制访问</p>
+<hr>
+<p>限制访问是合约的一个通用模式。注意，你不可能限制任何人或机器读取你的交易内容或合约状态。
+你可以通过加密使这种访问变得困难一些，但如果你想让你的合约读取这些数据，那么其他人也将可以做到。</p>
+<p>你可以限制 <strong>其他合约</strong> 读取你的合约状态。
+这（其他合约不能读取你的合约状态）是默认的，除非你将合约状态变量声明为 <code>public</code>。</p>
+<p>此外，你可以对谁可以修改你的合约状态或调用你的合约函数加以限制，这是本节要介绍的内容。</p>
+<p>.. index:: function;modifier</p>
+<p>通过使用“函数 |modifier|”，可以使这些限制变得非常明确。</p>
+<p>::</p>
+<pre><code class="hljs">pragma solidity ^0.4.22;
+
+contract AccessRestriction {
+    // 这些将在构造阶段被赋值
+    // 其中，`msg.sender` 是
+    // 创建这个合约的账户。
+    address public owner = msg.sender;
+    uint public creationTime = now;
+
+    // 修饰器可以用来更改
+    // 一个函数的函数体。
+    // 如果使用这个修饰器，
+    // 它会预置一个检查，仅允许
+    // 来自特定地址的
+    // 函数调用。
+    modifier onlyBy(address _account)
+    {
+        require(
+            msg.sender == _account,
+            &quot;Sender not authorized.&quot;
+        );
+        // 不要忘记写 `_;`！
+        // 它会被实际使用这个修饰器的
+        // 函数体所替代。
+        _;
+    }
+
+    // 使 `_newOwner` 成为这个合约的
+    // 新所有者。
+    function changeOwner(address _newOwner)
+        public
+        onlyBy(owner)
+    {
+        owner = _newOwner;
+    }
+
+    modifier onlyAfter(uint _time) {
+        require(
+            now &gt;= _time,
+            &quot;Function called too early.&quot;
+        );
+        _;
+    }
+
+    // 抹掉所有者信息。
+    // 仅允许在合约创建成功 6 周以后
+    // 的时间被调用。
+    function disown()
+        public
+        onlyBy(owner)
+        onlyAfter(creationTime + 6 weeks)
+    {
+        delete owner;
+    }
+
+    // 这个修饰器要求对函数调用
+    // 绑定一定的费用。
+    // 如果调用方发送了过多的费用，
+    // 他/她会得到退款，但需要先执行函数体。
+    // 这在 0.4.0 版本以前的 Solidity 中很危险，
+    // 因为很可能会跳过 `_;` 之后的代码。
+    modifier costs(uint _amount) {
+        require(
+            msg.value &gt;= _amount,
+            &quot;Not enough Ether provided.&quot;
+        );
+        _;
+        if (msg.value &gt; _amount)
+            msg.sender.send(msg.value - _amount);
+    }
+
+    function forceOwnerChange(address _newOwner)
+        public
+        payable
+        costs(200 ether)
+    {
+        owner = _newOwner;
+        // 这只是示例条件
+        if (uint(owner) &amp; 0 == 1)
+            // 这无法在 0.4.0 版本之前的
+            // Solidity 上进行退还。
+            return;
+        // 退还多付的费用
+    }
+}
+</code></pre>
+<p>一个更专用地限制函数调用的方法将在下一个例子中介绍。</p>
+<p>.. index:: state machine</p>
+<hr>
+<p>状态机</p>
+<hr>
+<p>合约通常会像状态机那样运作，这意味着它们有特定的 <strong>阶段</strong>，使它们有不同的表现或者仅允许特定的不同函数被调用。
+一个函数调用通常会结束一个阶段，并将合约转换到下一个阶段（特别是如果一个合约是以 <strong>交互</strong> 来建模的时候）。
+通过达到特定的 <strong>时间</strong> 点来达到某些阶段也是很常见的。</p>
+<p>一个典型的例子是盲拍（blind auction）合约，它起始于“接受盲目出价”，
+然后转换到“公示出价”，最后结束于“确定拍卖结果”。</p>
+<p>.. index:: function;modifier</p>
+<p>函数 |modifier| 可以用在这种情况下来对状态进行建模，并确保合约被正常的使用。</p>
+<h1><a class="anchor" aria-hidden="true" id="示例"></a><a href="#示例" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>示例</h1>
+<p>在下边的示例中， |modifier| <code>atStage</code> 确保了函数仅在特定的阶段才可以被调用。</p>
+<p>根据时间来进行的自动阶段转换，是由 |modifier| <code>timeTransitions</code> 来处理的，
+它应该用在所有函数上。</p>
+<p>.. note::
+|modifier| <strong>的顺序非常重要</strong>。
+如果 atStage 和 timedTransitions 要一起使用，
+请确保在 timedTransitions 之后声明 atStage，
+以便新的状态可以
+首先被反映到账户中。</p>
+<p>最后， |modifier| <code>transitionNext</code> 能够用来在函数执行结束时自动转换到下一个阶段。</p>
+<p>.. note::
+|modifier| <strong>可以被忽略</strong>。
+以下特性仅在 0.4.0 版本之前的 Solidity 中有效：
+由于 |modifier| 是通过简单的替换代码
+而不是使用函数调用来提供的，
+如果函数本身使用了 return，那么 transitionNext |modifier|
+的代码是可以被忽略的。
+如果你希望这么做，
+请确保你在这些函数中手工调用了 nextStage。
+从 0.4.0 版本开始，即使函数明确地 return 了，
+|modifier| 的代码也会执行。</p>
+<p>::</p>
+<pre><code class="hljs">pragma solidity ^0.4.22;
+
+contract StateMachine {
+    enum Stages {
+        AcceptingBlindedBids,
+        RevealBids,
+        AnotherStage,
+        AreWeDoneYet,
+        Finished
+    }
+
+    // 这是当前阶段。
+    Stages public stage = Stages.AcceptingBlindedBids;
+
+    uint public creationTime = now;
+
+    modifier atStage(Stages _stage) {
+        require(
+            stage == _stage,
+            &quot;Function cannot be called at this time.&quot;
+        );
+        _;
+    }
+
+    function nextStage() internal {
+        stage = Stages(uint(stage) + 1);
+    }
+
+    // 执行基于时间的阶段转换。
+    // 请确保首先声明这个修饰器，
+    // 否则新阶段不会被带入账户。
+    modifier timedTransitions() {
+        if (stage == Stages.AcceptingBlindedBids &amp;&amp;
+                    now &gt;= creationTime + 10 days)
+            nextStage();
+        if (stage == Stages.RevealBids &amp;&amp;
+                now &gt;= creationTime + 12 days)
+            nextStage();
+        // 由交易触发的其他阶段转换
+        _;
+    }
+
+    // 这里的修饰器顺序非常重要！
+    function bid()
+        public
+        payable
+        timedTransitions
+        atStage(Stages.AcceptingBlindedBids)
+    {
+        // 我们不会在这里实现实际功能（因为这仅是个代码示例，译者注）
+    }
+
+    function reveal()
+        public
+        timedTransitions
+        atStage(Stages.RevealBids)
+    {
+    }
+
+    // 这个修饰器在函数执行结束之后
+    // 使合约进入下一个阶段。
+    modifier transitionNext()
+    {
+        _;
+        nextStage();
+    }
+
+    function g()
+        public
+        timedTransitions
+        atStage(Stages.AnotherStage)
+        transitionNext
+    {
+    }
+
+    function h()
+        public
+        timedTransitions
+        atStage(Stages.AreWeDoneYet)
+        transitionNext
+    {
+    }
+
+    function i()
+        public
+        timedTransitions
+        atStage(Stages.Finished)
+    {
+    }
+}
+</code></pre>
+</span></div></article></div><div class="docs-prevnext"><a class="docs-prev button" href="/sipc-docs/docs/docs_21"><span class="arrow-prev">← </span><span>Previous</span></a><a class="docs-next button" href="/sipc-docs/docs/docs_23"><span>合约开发和部署</span><span class="arrow-next"> →</span></a></div></div></div><nav class="onPageNav"></nav></div><footer class="nav-footer" id="footer"><section class="sitemap"><a href="/sipc-docs/" class="nav-home"></a><div><h5>文档</h5><a href="/sipc-docs/docs/en/doc1.html">快速开始</a><a href="/sipc-docs/docs/en/doc2.html">引导</a><a href="/sipc-docs/docs/en/doc3.html">API接口</a></div><div><h5>社区</h5><a href="/sipc-docs/en/https://t.me/SimpleChainOfficial">Telegram</a><a href="https://medium.com/@SimpleChain" target="_blank" rel="noreferrer noopener">Medium</a><a href="https://twitter.com/SimpleChain">Twitter</a><a href="https://www.linkedin.com/company/simplechain-foundation/" target="_blank" rel="noreferrer noopener">Linkedln</a></div><div><h5>更多</h5><a href="https://www.simplechain.com">官网</a><a href="https://github.com/simplechain-org">GitHub</a><a class="github-button" data-icon="octicon-star" data-count-href="/facebook/docusaurus/stargazers" data-show-count="true" data-count-aria-label="# stargazers on GitHub" aria-label="Star this project on GitHub">Star</a></div></section><section class="copyright">Copyright © 2020 SimpleChain Community</section></footer></div></body></html>
