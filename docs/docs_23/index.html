@@ -61,7 +61,6 @@
 <p><em>我们推荐使用 Remix 来开发简单合约和快速学习 Solidity。</em></p>
 <p><code>Remix &lt;https://remix.ethereum.org/&gt;</code>_ 可在线使用，而无需安装任何东西。如果你想离线使用，可按 <a href="https://github.com/ethereum/browser-solidity/tree/gh-pages">https://github.com/ethereum/browser-solidity/tree/gh-pages</a> 的页面说明下载 zip 文件来使用。
 该页面有进一步详细说明如何安装 Solidity 命令行编译器到你计算机上。如果你刚好要处理大型合约，或者需要更多的编译选项，那么你应该选择使用命令行编译器 solc。</p>
-<p>.. _solcjs:</p>
 <h1><a class="anchor" aria-hidden="true" id="npm--nodejs"></a><a href="#npm--nodejs" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>npm / Node.js</h1>
 <p>使用 <code>npm</code> 可以便捷地安装Solidity编译器solcjs。但该 <code>solcjs</code> 程序的功能相对于本页下面的所有其他选项都要少。在 :ref:<code>commandline-compiler</code> 一章中，我们假定你使用的是完整功能的编译器。 所以，如果你是从 <code>npm</code> 安装 <code>solcjs</code> ，就此打住，直接跳到 <code>solc-js &lt;https://github.com/ethereum/solc-js&gt;</code>_ 去了解。</p>
 <p>注意: solc-js 项目是利用 Emscripten 从 C++ 版的 solc 跨平台编译为 JavaScript 的，因此，可在 JavaScript 项目中使用 solcjs（如同 Remix）。
