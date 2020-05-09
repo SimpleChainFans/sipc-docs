@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en"><head><meta charSet="utf-8"/><meta http-equiv="X-UA-Compatible" content="IE=edge"/><title>账户 · SimpleChain开发文档</title><meta name="viewport" content="width=device-width"/><meta name="generator" content="Docusaurus"/><meta name="description" content="对比比特币的 “UTXO” 余额模型，以太坊使用“账户”余额模型。"/><meta name="docsearch:language" content="en"/><meta property="og:title" content="账户 · SimpleChain开发文档"/><meta property="og:type" content="website"/><meta property="og:url" content="https://simplechain.github.io/sipc-docs/"/><meta property="og:description" content="对比比特币的 “UTXO” 余额模型，以太坊使用“账户”余额模型。"/><meta name="twitter:card" content="summary"/><link rel="shortcut icon" href="/sipc-docs/"/><link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/default.min.css"/><script type="text/javascript" src="https://buttons.github.io/buttons.js"></script><script src="/sipc-docs/js/scrollSpy.js"></script><link rel="stylesheet" href="/sipc-docs/css/main.css"/><script src="/sipc-docs/js/codetabs.js"></script></head><body class="sideNavVisible separateOnPageNav"><div class="fixedHeaderContainer"><div class="headerWrapper wrapper"><header><a href="/sipc-docs/"><h2 class="headerTitle">SimpleChain开发文档</h2></a><div class="navigationWrapper navigationSlider"><nav class="slidingNav"><ul class="nav-site nav-site-internal"><li class="siteNavGroupActive"><a href="/sipc-docs/docs/docs_1" target="_self">文档</a></li><li class="siteNavGroupActive"><a href="/sipc-docs/docs/docs_25" target="_self">API</a></li><li class="siteNavGroupActive"><a href="/sipc-docs/docs/docs_50" target="_self">FAQ</a></li><li class="siteNavGroupActive"><a href="/sipc-docs/docs/docs_51" target="_self">在线技术支持</a></li></ul></nav></div></header></div></div><div class="navPusher"><div class="docMainWrapper wrapper"><div class="docsNavContainer" id="docsNav"><nav class="toc"><div class="toggleNav"><section class="navWrapper wrapper"><div class="navBreadcrumb wrapper"><div class="navToggle" id="navToggler"><div class="hamburger-menu"><div class="line1"></div><div class="line2"></div><div class="line3"></div></div></div><h2><i>›</i><span>基础数据结构</span></h2><div class="tocToggler" id="tocToggler"><i class="icon-toc"></i></div></div><div class="navGroups"><div class="navGroup"><h3 class="navGroupCategoryTitle">快速了解</h3><ul class=""><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_1">概述</a></li><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_2">快速开始</a></li><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_3">搭建节点</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">sipc和sipc代币协议</h3><ul class=""><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_4">sipc代币</a></li><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_5">在SIPC上发行代币</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">基础数据结构</h3><ul class=""><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_6">配置</a></li><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_7">创世块</a></li><li class="navListItem navListItemActive"><a class="navItem" href="/sipc-docs/docs/docs_8">账户</a></li><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_9">交易</a></li><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_10">区块</a></li><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_11">交易回执</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">架构</h3><ul class=""><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_12">架构设计</a></li><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_13">内存限制</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">底层核心技术</h3><ul class=""><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_14">共识算法</a></li><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_15">P2P网络</a></li><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_16">挖矿流程</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">虚拟机</h3><ul class=""><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_17">虚拟机</a></li><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_18">运行机制</a></li><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_19">异常处理</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">智能合约</h3><ul class=""><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_20">智能合约</a></li><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_22">合约模版</a></li><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_23">合约开发和部署</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">开发者工具</h3><ul class=""><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_24">搭建测试链</a></li><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_25">Sipc API</a></li><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_26">跨链API</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">Dapp开发</h3><ul class=""><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_31">合约编译器</a></li><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_32">编写合约</a></li><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_33">发布合约</a></li><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_34">开发流程</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">挖矿</h3><ul class=""><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_35">Sipc挖矿</a></li><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_36">矿池接入</a></li><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_37">GPU挖矿</a></li><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_38">SimPool</a></li><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_39">SimpleNode x1挖矿教程</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">客户端</h3><ul class=""><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_40">SIPC</a></li><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_41">Sipc全节点钱包</a></li><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_42">ChainBox</a></li><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_43">区块链浏览器</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">生态</h3><ul class=""><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_44">交易所</a></li><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_45">社区项目</a></li><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_46">社区活动</a></li><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_47">社区入口</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">落地方案</h3><ul class=""><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_48">落地案例1</a></li><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_49">落地案例2</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">FAQ</h3><ul class=""><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_50">FAQ</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">技术支持</h3><ul class=""><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_51">在线技术支持</a></li></ul></div></div></section></div><script>
+<!DOCTYPE html><html lang="en"><head><meta charSet="utf-8"/><meta http-equiv="X-UA-Compatible" content="IE=edge"/><title>账户 · SimpleChain开发文档</title><meta name="viewport" content="width=device-width"/><meta name="generator" content="Docusaurus"/><meta name="description" content="对比比特币的 “UTXO” 余额模型，[SimpleChain](https://www.simplechain.com/)和以太坊类似使用“账户”余额模型。"/><meta name="docsearch:language" content="en"/><meta property="og:title" content="账户 · SimpleChain开发文档"/><meta property="og:type" content="website"/><meta property="og:url" content="https://simplechain.github.io/sipc-docs/"/><meta property="og:description" content="对比比特币的 “UTXO” 余额模型，[SimpleChain](https://www.simplechain.com/)和以太坊类似使用“账户”余额模型。"/><meta name="twitter:card" content="summary"/><link rel="shortcut icon" href="/sipc-docs/"/><link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/default.min.css"/><script type="text/javascript" src="https://buttons.github.io/buttons.js"></script><script src="/sipc-docs/js/scrollSpy.js"></script><link rel="stylesheet" href="/sipc-docs/css/main.css"/><script src="/sipc-docs/js/codetabs.js"></script></head><body class="sideNavVisible separateOnPageNav"><div class="fixedHeaderContainer"><div class="headerWrapper wrapper"><header><a href="/sipc-docs/"><h2 class="headerTitle">SimpleChain开发文档</h2></a><div class="navigationWrapper navigationSlider"><nav class="slidingNav"><ul class="nav-site nav-site-internal"><li class="siteNavGroupActive"><a href="/sipc-docs/docs/docs_1" target="_self">文档</a></li><li class="siteNavGroupActive"><a href="/sipc-docs/docs/docs_25" target="_self">API</a></li><li class="siteNavGroupActive"><a href="/sipc-docs/docs/docs_50" target="_self">FAQ</a></li><li class="siteNavGroupActive"><a href="/sipc-docs/docs/docs_51" target="_self">在线技术支持</a></li></ul></nav></div></header></div></div><div class="navPusher"><div class="docMainWrapper wrapper"><div class="docsNavContainer" id="docsNav"><nav class="toc"><div class="toggleNav"><section class="navWrapper wrapper"><div class="navBreadcrumb wrapper"><div class="navToggle" id="navToggler"><div class="hamburger-menu"><div class="line1"></div><div class="line2"></div><div class="line3"></div></div></div><h2><i>›</i><span>基础数据结构</span></h2><div class="tocToggler" id="tocToggler"><i class="icon-toc"></i></div></div><div class="navGroups"><div class="navGroup"><h3 class="navGroupCategoryTitle">快速了解</h3><ul class=""><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_1">概述</a></li><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_2">快速开始</a></li><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_3">搭建节点</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">sipc和sipc代币协议</h3><ul class=""><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_4">sipc代币</a></li><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_5">在SIPC上发行代币</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">基础数据结构</h3><ul class=""><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_6">配置</a></li><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_7">创世块</a></li><li class="navListItem navListItemActive"><a class="navItem" href="/sipc-docs/docs/docs_8">账户</a></li><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_9">交易</a></li><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_10">区块</a></li><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_11">交易回执</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">架构</h3><ul class=""><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_12">架构设计</a></li><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_13">内存限制</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">底层核心技术</h3><ul class=""><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_14">共识算法</a></li><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_15">P2P网络</a></li><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_16">挖矿流程</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">虚拟机</h3><ul class=""><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_17">虚拟机</a></li><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_18">运行机制</a></li><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_19">异常处理</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">智能合约</h3><ul class=""><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_20">智能合约</a></li><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_22">合约模版</a></li><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_23">合约开发和部署</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">开发者工具</h3><ul class=""><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_24">搭建测试链</a></li><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_25">Sipc API</a></li><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_26">跨链API</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">Dapp开发</h3><ul class=""><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_31">合约编译器</a></li><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_32">编写合约</a></li><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_33">发布合约</a></li><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_34">开发流程</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">挖矿</h3><ul class=""><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_35">Sipc挖矿</a></li><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_36">矿池接入</a></li><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_37">GPU挖矿</a></li><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_38">SimPool</a></li><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_39">SimpleNode x1挖矿教程</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">客户端</h3><ul class=""><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_40">SIPC</a></li><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_41">Sipc全节点钱包</a></li><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_42">ChainBox</a></li><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_43">区块链浏览器</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">生态</h3><ul class=""><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_44">交易所</a></li><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_45">社区项目</a></li><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_46">社区活动</a></li><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_47">社区入口</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">落地方案</h3><ul class=""><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_48">落地案例1</a></li><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_49">落地案例2</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">FAQ</h3><ul class=""><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_50">FAQ</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">技术支持</h3><ul class=""><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_51">在线技术支持</a></li></ul></div></div></section></div><script>
             var coll = document.getElementsByClassName('collapsible');
             var checkActiveCategory = true;
             for (var i = 0; i < coll.length; i++) {
@@ -54,24 +54,24 @@
                 };
               }
             });
-        </script></nav></div><div class="container mainContainer docsContainer"><div class="wrapper"><div class="post"><header class="postHeader"><h1 id="__docusaurus" class="postHeaderTitle">账户</h1></header><article><div><span><p>对比比特币的 “UTXO” 余额模型，以太坊使用“账户”余额模型。
-以太坊丰富了账户内容，除余额外还能自定义存放任意多数据。
+        </script></nav></div><div class="container mainContainer docsContainer"><div class="wrapper"><div class="post"><header class="postHeader"><h1 id="__docusaurus" class="postHeaderTitle">账户</h1></header><article><div><span><p>对比比特币的 “UTXO” 余额模型，<a href="https://www.simplechain.com/">SimpleChain</a>和以太坊类似使用“账户”余额模型。
+<a href="https://www.simplechain.com/">SimpleChain</a>丰富了账户内容，除余额外还能自定义存放任意多数据。
 并利用账户数据的可维护性，构建智能合约账户。</p>
-<p>实际上以太坊是为了实现智能合约而提炼的账户模型。
+<p>实际上<a href="https://www.simplechain.com/">SimpleChain</a>是为了实现智能合约而提炼的账户模型。
 以账户为单位，安全隔离数据。
 账户间信息相互独立，互不干扰。
-再配合以太坊虚拟机，让智能合约沙盒运行。</p>
-<p>以太坊作为智能合约操作平台，将账户划分为两类：外部账户（EOAs）和合约账户（contract account）。</p>
+再配合<a href="https://www.simplechain.com/">SimpleChain</a>虚拟机，让智能合约沙盒运行。</p>
+<p><a href="https://www.simplechain.com/">SimpleChain</a>作为智能合约操作平台，将账户划分为两类：外部账户（EOAs）和合约账户（contract account）。</p>
 <h2><a class="anchor" aria-hidden="true" id="账户基本概念"></a><a href="#账户基本概念" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>账户基本概念</h2>
 <h3><a class="anchor" aria-hidden="true" id="外部账户"></a><a href="#外部账户" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>外部账户</h3>
 <p>EOAs-外部账户(external owned accouts)是由人们通过私钥创建的账户。
 是真实世界的金融账户的映射，拥有该账户私钥的任何人都可以控制该账户。
 如同银行卡，到ATM机取款时只需要密码输入正确即可交易。
-这也是人类与以太坊账本沟通的唯一媒介，因为以太坊中的交易需要签名，
+这也是人类与以太坊账本沟通的唯一媒介，因为<a href="https://www.simplechain.com/">SimpleChain</a>中的交易需要签名，
 而只能使用拥有私有外部账户签名。</p>
 <p>外部账户特点总结：</p>
 <ol>
-<li>拥有以太余额。</li>
+<li>拥有sipc余额。</li>
 <li>能发送交易，包括转账和执行合约代码。</li>
 <li>被私钥控制。</li>
 <li>没有相关的可执行代码。</li>
@@ -101,7 +101,7 @@
 </code></pre>
 <p>合约账户特点总结：</p>
 <ol>
-<li>拥有以太余额。</li>
+<li>拥有sipc余额。</li>
 <li>有相关的可执行代码（合约代码）。</li>
 <li>合约代码能够被交易或者其他合约消息调用。</li>
 <li>合约代码被执行时可再调用其他合约代码。</li>
@@ -122,13 +122,13 @@
 <tr><td>控制方式</td><td>私钥控制</td><td>通过外部账户执行合约</td></tr>
 </tbody>
 </table>
-<p>上面有列出多重签名，是因为以太坊外部账户只由一个独立私钥创建，无法进行多签。
+<p>上面有列出多重签名，是因为<a href="https://www.simplechain.com/">SimpleChain</a>外部账户只由一个独立私钥创建，无法进行多签。
 但合约具有可编程性，可编写符合多重签名的逻辑，实现一个支持多签的账户。</p>
 <h2><a class="anchor" aria-hidden="true" id="账户数据结构"></a><a href="#账户数据结构" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>账户数据结构</h2>
-<p>以太坊数据以账户为单位组织，账户数据的变更引起账户状态变化。
-从而引起以太坊状态变化（关于以太坊状态，后续另写文章介绍）。</p>
+<p><a href="https://www.simplechain.com/">SimpleChain</a>数据以账户为单位组织，账户数据的变更引起账户状态变化。
+从而引起以太坊状态变化。</p>
 <p>在程序逻辑上两类账户的数据结构一致：</p>
-<p><img src="https://img.learnblockchain.cn/2019/04/14_以太坊账户数据结构1.png!de" alt="以太坊账户数据结构"></p>
+<p><img src="https://i.loli.net/2020/05/09/Nrj4wSvnWyPtEkg.png" alt="Simplechain账户数据结构"></p>
 <p>对应代码如下：</p>
 <pre><code class="hljs css language-go"><span class="hljs-comment">// core/state/state_object.go:100</span>
 <span class="hljs-keyword">type</span> Account <span class="hljs-keyword">struct</span> {
@@ -138,28 +138,17 @@
     CodeHash []<span class="hljs-keyword">byte</span>
 }
 </code></pre>
-<p>但在数据存储上稍有不同，
-因为外部账户无内部存储数据和合约代码，因此外部账户数据中 <code>StateRootHash</code> 和 <code>CodeHash</code> 是一个空默认值。
-一旦属于空默认值，则不会存储对应物理数据库中。
-在程序逻辑上，存在<code>code</code>则为合约账户。
-即 <code>CodeHash</code> 为空值时，账户是一个外部账户，否则是合约账户。</p>
-<p><img src="https://img.learnblockchain.cn/2019/04/14_以太坊账户数据存储结构.png!de" alt="以太坊账户数据存储结构"></p>
-<p>上图是以太坊账户数据存储结构，账户内部实际只存储关键数据，而合约代码以及合约自身数据则通过对应的哈希值关联。
-因为每个账户对象，将作为一个以太坊账户树的一个叶子数据存储，
-不能太大。</p>
-<p>从以太坊作为一个世界态(World State)状态机视角看数据关系如下：</p>
-<p><img src="https://img.learnblockchain.cn/2019/05/19_ethereum-global-state.png!de" alt="以太坊世界态"></p>
+<p>但在数据存储上稍有不同，因为外部账户无内部存储数据和合约代码，因此外部账户数据中 <code>StateRootHash</code> 和 <code>CodeHash</code> 是一个空默认值。一旦属于空默认值，则不会存储对应物理数据库中。在程序逻辑上，存在<code>code</code>则为合约账户。即 <code>CodeHash</code> 为空值时，账户是一个外部账户，否则是合约账户。</p>
+<p><img src="https://i.loli.net/2020/05/09/J4iywoUuEhBM695.png" alt="14_sipc账户数据存储结构.png"></p>
+<p>上图是<a href="https://www.simplechain.com/">SimpleChain</a>账户数据存储结构，账户内部实际只存储关键数据，而合约代码以及合约自身数据则通过对应的哈希值关联。因为每个账户对象，将作为一个<a href="https://www.simplechain.com/">SimpleChain</a>账户树的一个叶子数据存储，不能太大。</p>
 <p>在密码学领域，Nonce 代表一个只使用一次的数字。它往往是一个随机或伪随机数，以避免重复。
-以太坊账户中加入 Nonce，可避免重放攻击（具体细节，在讲解以太坊交易流程时介绍），但不是随机产生。
-账户 Nonce 起始值是 0，后续每触发一次账户执行则 Nonce 值计加一次。
-其中一处的计数逻辑如下：</p>
+<a href="https://www.simplechain.com/">SimpleChain</a>账户中加入 Nonce，可避免重放攻击，但不是随机产生。
+账户 Nonce 起始值是 0，后续每触发一次账户执行则 Nonce 值计加一次。其中一处的计数逻辑如下：</p>
 <pre><code class="hljs css language-go"><span class="hljs-comment">// core/state_transition.go:212</span>
 st.state.SetNonce(msg.From(), st.state.GetNonce(sender.Address())+<span class="hljs-number">1</span>)
 </code></pre>
 <p>这样的附加好处是，一般可将 Nonce 当做账户的交易次数计数器使用，特别是对于合约账户可以准确的记录合约被调用次数。</p>
-<p>而<code>Balance</code>则记录该账户所拥有的以太（ETH）数量，称为账户余额
-(注意，这里的余额的单位是 Wei )。
-转移资产(Transfer)是在一个账户的<code>Balance</code>上计加，在另外一个账户计减。</p>
+<p>而<code>Balance</code>则记录该账户所拥有的sipc数量，称为账户余额.转移资产(Transfer)是在一个账户的<code>Balance</code>上计加，在另外一个账户计减。</p>
 <pre><code class="hljs css language-go"><span class="hljs-comment">// core/evm.go:94</span>
 <span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">Transfer</span><span class="hljs-params">(db vm.StateDB, sender, recipient common.Address, amount *big.Int)</span></span> {
     db.SubBalance(sender, amount)
@@ -174,11 +163,10 @@ evm.Transfer(evm.StateDB, caller.Address(), to.Address(), value)
 </code></pre>
 <p>当然必须保证转账方余额充足，在转移前需要<code>CanTransfer</code>检查，
 如果余额充足，则执行<code>Transfer</code>转移<code>Value</code>数量的以太。</p>
-<p>账户状态哈希值 <code>StateRoot</code>，是合约所拥有的方法、字段信息构成的一颗默克尔压缩前缀树（Merkle Patricia Tree 后续独立文章讲解）的根值，简单地讲是一颗二叉树的根节点值。
-合约状态中的任意一项细微变动都最终引起 <code>StateRoot</code> 变化，因此合约状态变化会反映在账户的<code>StateRoot</code>上。</p>
+<p>账户状态哈希值 <code>StateRoot</code>，是合约所拥有的方法、字段信息构成的一颗默克尔压缩前缀树（Merkle Patricia Tree）的根值，简单地讲是一颗二叉树的根节点值。合约状态中的任意一项细微变动都最终引起 <code>StateRoot</code> 变化，因此合约状态变化会反映在账户的<code>StateRoot</code>上。</p>
 <p>同时，你可以直接利用 <code>StateRoot</code> 从 Leveldb 中快速读取具体的某个状态数据，如合约的创建者。
-通过以太坊API <a href="https://github.com/ethereum/wiki/wiki/JavaScript-API#web3ethgetstorageat">web3.eth.getStorageAt</a> 可读取合约中任意位置的数据。</p>
-<p>下面，我们通过一段示例代码，感受下以太坊账户数据存储。</p>
+通过<a href="https://www.simplechain.com/">SimpleChain</a>API <a href="">web3.eth.getStorageAt</a> 可读取合约中任意位置的数据。</p>
+<p>下面，我们通过一段示例代码，感受<a href="https://www.simplechain.com/">SimpleChain</a>数据存储。</p>
 <pre><code class="hljs css language-go"><span class="hljs-keyword">import</span>(...)
 <span class="hljs-keyword">var</span> toAddr =common.HexToAddress
 <span class="hljs-keyword">var</span> toHash =common.BytesToHash
@@ -211,19 +199,19 @@ evm.Transfer(evm.StateDB, caller.Address(), to.Address(), value)
 </code></pre>
 <p>上面代码中，我们创建了三个账户，并且提交到数据库中。最终打印出当前数据中所有账户的数据信息：</p>
 <ul>
-<li>❶ 一行代码涉及多个操作。首先是创建一个内存KV数据库，再包装为 stata 数据库实例，
+<li>一行代码涉及多个操作。首先是创建一个内存KV数据库，再包装为 stata 数据库实例，
 最后利用一个空的DB级的<code>StateRoot</code>，初始化一个以太坊 statadb。</li>
-<li>❷ 定义两个账户 acct1和acct2，并分别添加100和888到账户余额。</li>
-<li>❸ 模拟合约账户的创建过程，由外部账户 acct1 创建合约账户地址，并将此地址载入 statadb。</li>
-<li>❹ 在将合约代码加入刚刚创建的合约账户中，在写入合约代码的同时，
+<li>定义两个账户 acct1和acct2，并分别添加100和888到账户余额。</li>
+<li>模拟合约账户的创建过程，由外部账户 acct1 创建合约账户地址，并将此地址载入 statadb。</li>
+<li>在将合约代码加入刚刚创建的合约账户中，在写入合约代码的同时，
 会利用<code>crypto.Keccak256Hash(code)</code>计算合约代码哈希，保留在账户数据中。</li>
-<li>❺ 模拟合约执行过程，涉及修改合约状态，新增三项状态数据<code>owner</code>,<code>name</code>和<code>online</code>，分别对应不同值。</li>
-<li>❻ 这里和前面不同的是，是给状态<code>online</code>赋值为空<code>[]byte{}</code>，因为所有状态的默认值均是<code>[]byte{}</code>，
+<li>模拟合约执行过程，涉及修改合约状态，新增三项状态数据<code>owner</code>,<code>name</code>和<code>online</code>，分别对应不同值。</li>
+<li>这里和前面不同的是，是给状态<code>online</code>赋值为空<code>[]byte{}</code>，因为所有状态的默认值均是<code>[]byte{}</code>，
 在提交到数据库时，如Leveldb 认为这些状态无有效值，会从数据库文件中删除此记录。
 因此，此操作实际是一个删除状态<code>online</code>操作。</li>
-<li>❼ 上面所有操作，还都只是发生在 statdb 内存中，并未真正的写入数据库文件。
+<li>上面所有操作，还都只是发生在 statdb 内存中，并未真正的写入数据库文件。
 执行<code>Commit</code>，才会将关于 statadb 的所有变更更新到数据库文件中。</li>
-<li>❽ 一旦提交数据，则可以使用 <code>Dump</code> 命令从数据库中查找此 stata 相关的所有数据，包括所有账户。
+<li>一旦提交数据，则可以使用 <code>Dump</code> 命令从数据库中查找此 stata 相关的所有数据，包括所有账户。
 并以 JSON 格式返还。这里，我们将返还结果直接打印输出。</li>
 </ul>
 <p>代码执行输出结果如下：</p>

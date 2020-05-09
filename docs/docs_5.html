@@ -55,7 +55,6 @@
               }
             });
         </script></nav></div><div class="container mainContainer docsContainer"><div class="wrapper"><div class="post"><header class="postHeader"><h1 id="__docusaurus" class="postHeaderTitle">在SIPC上发行代币</h1></header><article><div><span><h3><a class="anchor" aria-hidden="true" id="如何在simplechain上发行数字资产"></a><a href="#如何在simplechain上发行数字资产" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>如何在SimpleChain上发行数字资产</h3>
-<p>本章旨在通过一个简单的链上发币demo，向开发者展示合约的部署与执行，帮助开发者了解合约，为开发者后续的链上开发打下基础。</p>
 <p><strong>前提条件</strong></p>
 <p>实现链上发币的准备工作，包括:</p>
 <ul>
@@ -97,70 +96,68 @@ contract ERC20Token {
     event Approval(address indexed _owner, address indexed _spender, uint256 _value);
 }
 </code></pre>
-<ol start="2">
-<li><p>编写符合ERC20标准的代币合约。</p>
+<p>2.编写符合ERC20标准的代币合约。</p>
 <pre><code class="hljs">//Mytoken.sol
 pragma solidity ^0.4.26;
 import &quot;./ERC20Token.sol&quot;;
-
+  
 contract MyToken is ERC20Token {
-     string private _name;
-     string private _symbol;
-     uint8 private _decimals = 18; //此处建议为 18，代表最小单位为 0.1^18 
-     uint256 private _totalSupply;
+    string private _name;
+    string private _symbol;
+    uint8 private _decimals = 18; //此处建议为 18，代表最小单位为 0.1^18 
+    uint256 private _totalSupply;
 
-     //存储账户的 token 总量
-     mapping(address =&gt; uint256) private _balances;
-     //存储前一个address允许后一个address转出token的剩余数量 
-     mapping(address =&gt; mapping(address =&gt; uint256)) private _allowances;
+    //存储账户的 token 总量
+    mapping(address =&gt; uint256) private _balances;
+    //存储前一个address允许后一个address转出token的剩余数量 
+    mapping(address =&gt; mapping(address =&gt; uint256)) private _allowances;
 
-function MyToken(uint256 initialSupply, string tokenName, string tokenSymbol) public{
-     _name = tokenName;
-     _symbol = tokenSymbol;
-     _totalSupply = initialSupply * 10 ** uint256(_decimals);
-     _balances[msg.sender] = _totalSupply;
-}
+    function MyToken(uint256 initialSupply, string tokenName, string tokenSymbol) public{
+        _name = tokenName;
+        _symbol = tokenSymbol;
+        _totalSupply = initialSupply * 10 ** uint256(_decimals);
+        _balances[msg.sender] = _totalSupply;
+   }
 
-function name() public constant returns (string name){ 
-     name = _name;
+   function name() public constant returns (string name){ 
+        name = _name;
+   }
+   function symbol() public constant returns (string symbol){ 
+        symbol = _symbol;
+   }
+   function decimals() public constant returns (uint8 decimals){ 
+        decimals = _decimals;
+   }
+   function totalSupply() public constant returns (uint256 totalSupply){ 
+        totalSupply = _totalSupply;                
+   }
+   function balanceOf(address _owner) public constant returns (uint256 balance){ 
+        balance = _balances[_owner];
+   }
+   function transfer(address _to, uint256 _value) public returns (bool success){ 
+       require(_balances[msg.sender] &gt;= _value); //保证发出交易的账户 token 足够完成转账
+       _balances[msg.sender] -= _value; _balances[_to] += value; Transfer(msg.sender, _to, _value); success = true;
+   }
+   function transferFrom(address _from, address _to, uint256 _value) public returns (bool success){
+       require(_balances[_from] &gt;= _value); //保证_from 账户 token 足够完成转 账
+       require(_allowances[_from][msg.sender] &gt;= _value); //保证_from 账户允许 执行账户转出的 token 剩余量足够
+       _balances[_from] -= _value; _allowances[_from][msg.sender] -= _value; _balances[_to] += _value;
+       Transfer(_from, _to, _value);
+       success = true;
+   }
+                             }
+   //许可_spender 能从调用合约方法的账户转出总量为_value 的 token
+   function approve(address _spender, uint256 _value) public returns (bool success){
+       _allowances[msg.sender][_spender] = _value; 
+       Approval(msg.sender, _spender, _value); success = true;
+   }
+              
+   //获取_spender 可以从账户_owner 中转出 token 的剩余数量
+   function allowance(address _owner, address _spender) public constant returns (uint256 remaining){
+        remaining = _allowances[_owner][_spender]; 
+    }
 }
-function symbol() public constant returns (string symbol){ 
-     symbol = _symbol;
-}
-function decimals() public constant returns (uint8 decimals){ 
-     decimals = _decimals;
-}
-function totalSupply() public constant returns (uint256 totalSupply){ 
-     totalSupply = _totalSupply;                
-}
-function balanceOf(address _owner) public constant returns (uint256 balance){ 
-     balance = _balances[_owner];
-}
-function transfer(address _to, uint256 _value) public returns (bool success){ 
-    require(_balances[msg.sender] &gt;= _value); //保证发出交易的账户 token 足够完成转账
-    _balances[msg.sender] -= _value; _balances[_to] += value; Transfer(msg.sender, _to, _value); success = true;
-}
-function transferFrom(address _from, address _to, uint256 _value) public returns (bool success){
-    require(_balances[_from] &gt;= _value); //保证_from 账户 token 足够完成转 账
-    require(_allowances[_from][msg.sender] &gt;= _value); //保证_from 账户允许 执行账户转出的 token 剩余量足够
-    _balances[_from] -= _value; _allowances[_from][msg.sender] -= _value; _balances[_to] += _value;
-    Transfer(_from, _to, _value);
-    success = true;
-}
-                          }
-//许可_spender 能从调用合约方法的账户转出总量为_value 的 token
-function approve(address _spender, uint256 _value) public returns (bool success){
-    _allowances[msg.sender][_spender] = _value; 
-    Approval(msg.sender, _spender, _value); success = true;
-}
-           
-//获取_spender 可以从账户_owner 中转出 token 的剩余数量
-function allowance(address _owner, address _spender) public constant returns (uint256 remaining){
-     remaining = _allowances[_owner][_spender]; 
- }
 </code></pre>
-<p>}</p></li>
-</ol>
 <p><strong>合约编译</strong></p>
 <ol>
 <li>使用浏览器打开 Remix Solidity IDE。</li>

@@ -66,15 +66,16 @@
 <p><img src="https://i.loli.net/2020/05/08/4MisHXPjFYnpDRm.png" alt="8.5.png"></p>
 <h3><a class="anchor" aria-hidden="true" id="源码搭建"></a><a href="#源码搭建" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>源码搭建</h3>
 <p><code>前期准备:Go 语言环境(1.10 或以上版本)、C 语言编译器</code></p>
-<p>1.下载 SimpleChain</p>
+<p><strong>1.下载 SimpleChain</strong></p>
 <p>可以通过 git 将项目 clone 到本地，也可以在 <a href="https://github.com/simplechain-org/go-">https://github.com/simplechain-org/go-</a>
 simplechain 页面直接下载。</p>
 <pre><code class="hljs">git clone https://github.com/simplechain-org/go-simplechain.git 
 </code></pre>
-<p>2.安装 sipe
-1)进入 go-simplechain 根目录。
-cd go-simplechain
-2)使用 make 工具安装 sipe。</p>
+<p><strong>2.安装 sipe</strong></p>
+<p>1.进入 go-simplechain 根目录。</p>
+<pre><code class="hljs css language-javascript">cd go-simplechain
+</code></pre>
+<p>2.使用 make 工具安装 sipe。</p>
 <pre><code class="hljs">make sipe
 &gt;&gt;&gt; /usr/local/go/bin/go install -ldflags -X main.gitCommit=9d73f67e1dc5587a95f52c13fee93be6434b42ac -s -v ./cmd/sipe github.com/simplechain-org/go-simplechain/core
 ...
@@ -85,9 +86,10 @@ Run &quot;/Users/yuanchao/go/src/github.com/simplechain-org/go-simplechain/build
 <p>当终端出现以上输出时，表示 make 执行成功，此时在 go-simplechain/build/bin 目录下 将会生成 sipe 可执行文件。可以将其移动到任何目录下或将其加入到环境变量中，以此 来便利得运行sipe程序。</p>
 <h3><a class="anchor" aria-hidden="true" id="启动sipe"></a><a href="#启动sipe" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>启动sipe</h3>
 <p><strong>1.创建用于存储节点数据的文件夹</strong></p>
-<p>mkdir chaindata</p>
+<pre><code class="hljs">mkdir chaindata
+</code></pre>
 <p><strong>2.启动sipe主网节点</strong></p>
-<p>开启 RPC 服务并指定 RPC 监听地址为 127.0.0.1，端口 8545。节点数据存储目录为 chaindata</p>
+<p>开启 RPC 服务并指定 RPC 监听地址为 127.0.0.1，端口 <code>8545</code>。节点数据存储目录为 <code>chaindata</code></p>
 <pre><code class="hljs">sipe --rpc --rpcaddr 127.0.0.1 --rpcport 8545 --datadir chaindata 
 </code></pre>
 <p>当出现类似以下输出时，表示启动成功，并开始同步 SimpleChain 主网区块。</p>
@@ -100,12 +102,13 @@ elapsed=22.273ms number=192 hash=bb758a...bea1b6 ignored=0
 </code></pre>
 <p><strong>3.启动sipe控制台</strong></p>
 <p>新建终端窗口，通过以下命令开启一个连接到此节点的交互控制台。</p>
-<p>sipe attach chaindata/sipe.ipc</p>
+<pre><code class="hljs">sipe attach chaindata/sipe.ipc
+</code></pre>
 <p><strong>4.创建账户</strong></p>
 <p>在启动的控制台下使用以下命令创建一个账户。</p>
-<pre><code class="hljs"> &gt; personal.newAccount()
-   Passphrase:
-   Repeat passphrase: &quot;0xc8d8ba3bdba3a1e3ca1d6cd48106d84036f6c0bd&quot; //账户地址
+<pre><code class="hljs">&gt; personal.newAccount()
+  Passphrase:
+  Repeat passphrase: &quot;0xc8d8ba3bdba3a1e3ca1d6cd48106d84036f6c0bd&quot; //账户地址
 </code></pre>
 <p>创建成功后，控制台会返回账户地址，同时会在chaindata/keystore 生成账户的json文件，此文件可以通过密码解析获得账户私钥。</p>
 <p><strong>5.启用挖矿</strong></p>
