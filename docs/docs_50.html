@@ -66,10 +66,10 @@
 <p><strong>5. 为什么我的收益在减少？</strong></p>
 <p>首先确认以下几点：</p>
 <ul>
-<li><p>（1）挖矿设备是否正常运行；</p></li>
-<li><p>（2）挖矿配置是否正确；</p></li>
-<li><p>（3）网络连接是否正常；</p></li>
-<li><p>（4）挖矿难度是否变化（若难度变动之后收益会有波动）；并且随着挖矿设备的增多、全网算力的增加，挖矿难度会增大，单个设备挖矿收益会逐渐变少。</p></li>
+<li><p>(1) 挖矿设备是否正常运行；</p></li>
+<li><p>(2) 挖矿配置是否正确；</p></li>
+<li><p>(3) 网络连接是否正常；</p></li>
+<li><p>(4) 挖矿难度是否变化（若难度变动之后收益会有波动）；并且随着挖矿设备的增多、全网算力的增加，挖矿难度会增大，单个设备挖矿收益会逐渐变少。</p></li>
 </ul>
 <p><strong>5. 每日收益什么时候结算？</strong></p>
 <p>每个小时进行一次整点结算，然后凌晨12点打币，个人收益（每小时）具体计算方法如下：</p>
@@ -82,9 +82,9 @@
 <p><strong>7. 算力下降了怎么办？</strong></p>
 <p>请您先检查如下问题:</p>
 <ul>
-<li><p>（1）挖矿设备是否正常运行；</p></li>
-<li><p>（2）挖矿配置是否正确；</p></li>
-<li><p>（3）网络连接是否正常；</p></li>
+<li><p>(1) 挖矿设备是否正常运行；</p></li>
+<li><p>(2) 挖矿配置是否正确；</p></li>
+<li><p>(3) 网络连接是否正常；</p></li>
 </ul>
 <p>上述故障排除后算力仍然下降请在Simpool群内找客服解决。</p>
 <p><strong>8. 什么是工作量？网络难度是什么？</strong></p>
@@ -96,22 +96,31 @@
 <p><strong>11. 用SimpleNode钱包选择矿池挖矿时，高级选项显卡参数怎么设置？</strong></p>
 <p>已知显卡调优参数：</p>
 <ul>
-<li>（1）NVIDIA GTX-750-Ti</li>
+<li><p>(1) <code>NVIDIA GTX-750-Ti</code></p>
+<pre><code class="hljs">gpuplatform=2, memsize=1999, globalworksize=10240, localworksize=512, lookupgap=4
+</code></pre></li>
+<li><p>(2) <code>AMD Ellesmere RX 570</code></p>
+<pre><code class="hljs">gpuplatform=1, memsize=2048, globalworksize=8000, localworksize=64, lookupgap=2
+</code></pre></li>
+<li><p>(3) <code>GeForce GT 1030</code></p>
+<pre><code class="hljs">gpuplatform=2, memsize=2048, globalworksize=4096, localworksize=64, lookupgap=4
+</code></pre></li>
 </ul>
-<p>gpuplatform=2, memsize=1999, globalworksize=10240, localworksize=512, lookupgap=4</p>
-<ul>
-<li>（2）AMD Ellesmere RX 570</li>
-</ul>
-<p>gpuplatform=1, memsize=2048, globalworksize=8000, localworksize=64, lookupgap=2</p>
-<ul>
-<li>（3）GeForce GT 1030</li>
-</ul>
-<p>gpuplatform=2, memsize=2048, globalworksize=4096, localworksize=64, lookupgap=4</p>
-<p><strong>gpuplatform:</strong> AMD显卡填1, NVIDIA显卡填2</p>
-<p><strong>memsize:</strong> 筛选不小于这个显存容量(默认2048MB)的显卡，NVIDIA GTX-750-Ti 显存是1999MB</p>
-<p><strong>globalworksize:</strong> 并行计算项，一般是1024的倍数，最大不能大于显卡的Max work item sizes ，但调优时，AMD的RX570设置8000效率最高。</p>
-<p><strong>localworksize:</strong> 每个显卡计算单元的工作项，一般是64/128/256/512，globalworksize/localworksize不能大于显卡支持的 Max work group size</p>
-<p><strong>lookupgap:</strong> 这个值最后调，取值范围1/2/4/8，默认是2，在性能与显存之间做调整。等于1时，用的显存最多，以此为基准，等于2时用其二分之一，等于8时用其八分之一。</p>
+<blockquote>
+<p><code>gpuplatform</code>: AMD显卡填1, NVIDIA显卡填2</p>
+</blockquote>
+<blockquote>
+<p><code>memsize:</code> 筛选不小于这个显存容量(默认2048MB)的显卡，NVIDIA GTX-750-Ti 显存是1999MB</p>
+</blockquote>
+<blockquote>
+<p><code>globalworksize:</code> 并行计算项，一般是1024的倍数，最大不能大于显卡的Max work item sizes ，但调优时，AMD的RX570设置8000效率最高。</p>
+</blockquote>
+<blockquote>
+<p><code>localworksize:</code> 每个显卡计算单元的工作项，一般是64/128/256/512，globalworksize/localworksize不能大于显卡支持的 Max work group size</p>
+</blockquote>
+<blockquote>
+<p><code>lookupgap:</code> 这个值最后调，取值范围1/2/4/8，默认是2，在性能与显存之间做调整。等于1时，用的显存最多，以此为基准，等于2时用其二分之一，等于8时用其八分之一。</p>
+</blockquote>
 <h3><a class="anchor" aria-hidden="true" id="simplenode-x1"></a><a href="#simplenode-x1" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>SimpleNode X1</h3>
 <p><strong>1.一个账户可以多关联几台矿机吗？</strong></p>
 <p>可以，只要保证矿机的供电量充足，一台电脑上可以串联多台矿机。</p>
@@ -123,6 +132,5 @@
 <p>如有多台矿机同时挖矿，在SimpleNode软件上点击“停止挖矿”后面的小箭头即可查看各台矿机的状态。</p>
 <p><img src="https://i.loli.net/2020/05/07/H6j7wUXFPvMNu1R.png" alt="7.18.png"></p>
 <p><strong>3.家里的网络和电脑最多可以拖几台矿机？</strong></p>
-<p>网络带宽对矿机影响较小，只要保证SimpleNode能连上Simpool矿池即可；</p>
-<p>只要保证矿机的供电量充足，每台电脑可以串联多台矿机，一般最多可支持2-3台左右；增加需要外接电源。</p>
+<p>网络带宽对矿机影响较小，只要保证SimpleNode能连上Simpool矿池即可；只要保证矿机的供电量充足，每台电脑可以串联多台矿机，一般最多可支持2-3台左右；增加需要外接电源。</p>
 </span></div></article></div><div class="docs-prevnext"><a class="docs-prev button" href="/sipc-docs/docs/docs_49"><span class="arrow-prev">← </span><span>落地案例2</span></a><a class="docs-next button" href="/sipc-docs/docs/docs_51"><span>在线技术支持</span><span class="arrow-next"> →</span></a></div></div></div><nav class="onPageNav"></nav></div><footer class="nav-footer" id="footer"><section class="sitemap"><a href="/sipc-docs/" class="nav-home"></a><div><h5>文档</h5><a href="/sipc-docs/docs/docs_1">概述</a><a href="/sipc-docs/docs/docs_24">开发者工具</a><a href="/sipc-docs/docs/docs_25">API接口</a></div><div><h5>社区</h5><a href="/sipc-docs/en/https://t.me/SimpleChainOfficial">Telegram</a><a href="https://medium.com/@SimpleChain" target="_blank" rel="noreferrer noopener">Medium</a><a href="https://twitter.com/SimpleChain">Twitter</a><a href="https://www.linkedin.com/company/simplechain-foundation/" target="_blank" rel="noreferrer noopener">Linkedln</a></div><div><h5>更多</h5><a href="https://www.simplechain.com">官网</a><a href="https://github.com/simplechain-org">GitHub</a><a class="github-button" data-icon="octicon-star" data-count-href="/facebook/docusaurus/stargazers" data-show-count="true" data-count-aria-label="# stargazers on GitHub" aria-label="Star this project on GitHub">Star</a></div></section><section class="copyright">Copyright © 2020 SimpleChain Community</section></footer></div></body></html>
