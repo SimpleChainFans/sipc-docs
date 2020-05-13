@@ -1,0 +1,226 @@
+<!DOCTYPE html><html lang="en"><head><meta charSet="utf-8"/><meta http-equiv="X-UA-Compatible" content="IE=edge"/><title>js_sdk · SimpleChain开发文档</title><meta name="viewport" content="width=device-width"/><meta name="generator" content="Docusaurus"/><meta name="description" content="# 介绍"/><meta name="docsearch:language" content="en"/><meta property="og:title" content="js_sdk · SimpleChain开发文档"/><meta property="og:type" content="website"/><meta property="og:url" content="https://simplechain.github.io/sipc-docs/"/><meta property="og:description" content="# 介绍"/><meta name="twitter:card" content="summary"/><link rel="shortcut icon" href="/sipc-docs/"/><link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/default.min.css"/><script type="text/javascript" src="https://buttons.github.io/buttons.js"></script><script src="/sipc-docs/js/scrollSpy.js"></script><link rel="stylesheet" href="/sipc-docs/css/main.css"/><script src="/sipc-docs/js/codetabs.js"></script></head><body class="sideNavVisible separateOnPageNav"><div class="fixedHeaderContainer"><div class="headerWrapper wrapper"><header><a href="/sipc-docs/"><h2 class="headerTitle">SimpleChain开发文档</h2></a><div class="navigationWrapper navigationSlider"><nav class="slidingNav"><ul class="nav-site nav-site-internal"><li class=""><a href="/sipc-docs/docs/docs_1" target="_self">文档</a></li><li class=""><a href="/sipc-docs/docs/docs_10" target="_self">API</a></li><li class=""><a href="/sipc-docs/docs/docs_70" target="_self">FAQ</a></li><li class=""><a href="/sipc-docs/docs/docs_71" target="_self">在线技术支持</a></li></ul></nav></div></header></div></div><div class="navPusher"><div class="docMainWrapper wrapper"><div class="container mainContainer docsContainer"><div class="wrapper"><div class="post"><header class="postHeader"><h1 id="__docusaurus" class="postHeaderTitle">js_sdk</h1></header><article><div><span><h1><a class="anchor" aria-hidden="true" id="介绍"></a><a href="#介绍" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>介绍</h1>
+<p><code>Node.js SDK &lt;https://github.com/FISCO-BCOS/nodejs-sdk&gt;</code>_ 提供了访问 <code>FISCO BCOS &lt;https://github.com/FISCO-BCOS/FISCO-BCOS&gt;</code>_ 节点的Node.js API，支持节点状态查询、部署和调用合约等功能，基于Node.js SDK可快速开发区块链应用，目前支持 <code>FISCO BCOS 2.0+ &lt;../../../&gt;</code>_</p>
+<p>.. admonition:: <strong>注意</strong>
+:class: red</p>
+<pre><code class="hljs">**Node.js SDK目前仅处于个人开发者体验阶段，开发企业级应用请使用** `Web3SDK &lt;../java_sdk.html&gt;`_
+</code></pre>
+<p>.. admonition:: <strong>主要特性</strong></p>
+<pre><code class="hljs">- 提供调用FISCO BCOS `JSON-RPC &lt;../../api.html&gt;`_ 的Node.js API
+- 提供部署及调用Solidity合约（支持Solidity 0.4.x 及Solidity 0.5.x）的Node.js API
+- 提供调用预编译（Precompiled）合约的Node.js API
+- 使用 `Channel协议 &lt;../../design/protocol_description.html#channelmessage&gt;`_ 与FISCO BCOS节点通信，双向认证更安全
+- 提供CLI（Command-Line Interface）工具供用户在命令行中方便快捷地与区块链交互
+</code></pre>
+<h1><a class="anchor" aria-hidden="true" id="快速安装"></a><a href="#快速安装" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>快速安装</h1>
+<h2><a class="anchor" aria-hidden="true" id="环境要求"></a><a href="#环境要求" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>环境要求</h2>
+<ul>
+<li><p>Node.js开发环境</p>
+<ul>
+<li>Node.js &gt;= 8.10.0</li>
+<li>npm &gt;= 5.6.0</li>
+</ul>
+<p>如果您没有部署过Node.js环境，可以参考下列部署方式：</p>
+<ul>
+<li><p>如果您使用Linux或MacOS：</p>
+<p>推荐使用<a href="https://github.com/nvm-sh/nvm/blob/master/README.md">nvm</a>快速部署，使用nvm同时也能够避免潜在的导致Node.js SDK部署失败的权限问题。以部署Node.js 8为例，部署步骤如下：</p>
+<pre><code class="hljs css language-bash"><span class="hljs-comment"># 安装nvm</span>
+curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.2/install.sh | bash
+<span class="hljs-comment"># 加载nvm配置</span>
+<span class="hljs-built_in">source</span> ~/.$(basename <span class="hljs-variable">$SHELL</span>)rc
+<span class="hljs-comment"># 安装Node.js 8</span>
+nvm install 8
+<span class="hljs-comment"># 使用Node.js 8</span>
+nvm use 8
+</code></pre></li>
+<li><p>如果您使用Windows：</p>
+<p>请前往<a href="https://nodejs.org/en/download/">Node.js官网</a>下载Windows下的安装包进行安装。</p></li>
+</ul></li>
+<li><p>基本开发组件</p>
+<ul>
+<li>Python 2（Windows、Linux及MacOS需要）</li>
+<li>g++（Linux及MacOS需要）</li>
+<li>make（Linux及MacOS需要）</li>
+<li>Git（Windows、Linux及MacOS需要）</li>
+<li>Git bash（仅Windows需要）</li>
+<li>MSBuild构建环境（仅Windows需要）</li>
+</ul></li>
+<li><p>FISCO BCOS节点：请参考<a href="https://fisco-bcos-documentation.readthedocs.io/zh_CN/latest/docs/installation.html#fisco-bcos">FISCO BCOS安装</a>搭建</p></li>
+</ul>
+<h2><a class="anchor" aria-hidden="true" id="部署nodejs-sdk"></a><a href="#部署nodejs-sdk" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>部署Node.js SDK</h2>
+<h3><a class="anchor" aria-hidden="true" id="拉取源代码"></a><a href="#拉取源代码" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>拉取源代码</h3>
+<pre><code class="hljs css language-bash">git <span class="hljs-built_in">clone</span> https://github.com/FISCO-BCOS/nodejs-sdk.git
+</code></pre>
+<h3><a class="anchor" aria-hidden="true" id="使用npm安装依赖项"></a><a href="#使用npm安装依赖项" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>使用npm安装依赖项</h3>
+<p><em>如果您的网络中使用了代理，请先为npm配置代理：</em></p>
+<pre><code class="hljs css language-bash">npm config <span class="hljs-built_in">set</span> proxy &lt;your proxy&gt;
+npm config <span class="hljs-built_in">set</span> https-proxy &lt;your proxy&gt;
+</code></pre>
+<p><em>如果您所在的网络不便访问npm官方镜像，请使用其他镜像代替，如淘宝：</em></p>
+<pre><code class="hljs css language-bash">npm config <span class="hljs-built_in">set</span> registry https://registry.npm.taobao.org
+</code></pre>
+<pre><code class="hljs css language-bash"><span class="hljs-comment"># 部署过程中请确保能够访问外网以能够安装第三方依赖包</span>
+<span class="hljs-built_in">cd</span> nodejs-sdk
+npm install
+npm run repoclean
+npm run bootstrap
+</code></pre>
+<h2><a class="anchor" aria-hidden="true" id="nodejs-cli"></a><a href="#nodejs-cli" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Node.js CLI</h2>
+<p>Node.js SDK内嵌CLI工具，供用户在命令行中方便地与区块链进行交互。CLI工具在Node.js SDK提供的API的基础上开发而成，使用方式与结果输出对脚本友好，同时也是一个展示如何调用Node.js API进行二次开发的范例。</p>
+<p><strong>快速建链（可选）</strong></p>
+<p><em>若您的系统中已经搭建了FISCO BCOS链，请跳过本节。</em></p>
+<pre><code class="hljs css language-bash"><span class="hljs-comment"># 获取开发部署工具</span>
+curl -LO https://github.com/FISCO-BCOS/FISCO-BCOS/releases/download/`curl -s https://api.github.com/repos/FISCO-BCOS/FISCO-BCOS/releases | grep <span class="hljs-string">"\"v2\.[0-9]\.[0-9]\""</span> | sort -u | tail -n 1 | cut -d \" -f 4`/build_chain.sh &amp;&amp; chmod u+x build_chain.sh
+<span class="hljs-comment"># 在本地建一个4节点的FISCO BCOS链</span>
+bash build_chain.sh -l <span class="hljs-string">"127.0.0.1:4"</span> -p 30300,20200,8545 -i
+<span class="hljs-comment"># 启动FISCO BCOS链</span>
+bash nodes/127.0.0.1/start_all.sh
+</code></pre>
+<p><strong>配置证书及Channel端口</strong></p>
+<ul>
+<li><p>配置证书</p>
+<p>修改配置文件，证书配置位于<code>packages/cli/conf/config.json</code>文件的<code>authentication</code>配置项中。你需要根据您实际使用的证书文件的路径修改该配置项的<code>key</code>、<code>cert</code>及<code>ca</code>配置，其中<code>key</code>为SDK私钥文件的路径，<code>cert</code>为SDK证书文件的路径，<code>ca</code>为链根证书文件的路径，这些文件可以由<a href="https://fisco-bcos-documentation.readthedocs.io/zh_CN/latest/docs/manual/build_chain.html">开发部署工具</a>或<a href="https://fisco-bcos-documentation.readthedocs.io/zh_CN/latest/docs/enterprise_tools/index.html">运维部署工具</a>自动生成，具体的生成方式及文件位置请参阅上述工具的说明文档。</p></li>
+<li><p>配置Channel端口</p>
+<p>修改配置文件，节点IP及端口配置位于<code>packages/cli/conf/config.json</code>文件的<code>nodes</code>配置项中。您需要根据您要连接FISCO BCOS节点的实际配置修改该配置项的<code>ip</code>及<code>port</code>配置，其中<code>ip</code>为所连节点的IP地址，<code>port</code>为节点目录下的 config.ini 文件中的<code>channel_listen_port</code>配置项的值。如果您使用了快速搭链，可以跳过此步。</p></li>
+</ul>
+<p>配置完成后，即可开始使用CLI工具，CLI工具位于<code>packages/cli/cli.js</code>，所有操作均需要在<code>packages/cli/</code>目录下执行，您需要先切换至该目录：</p>
+<pre><code class="hljs"><span class="hljs-keyword">cd</span> packages/<span class="hljs-keyword">cli</span>
+</code></pre>
+<p><strong>开启自动补全（仅针对bash及zsh用户，可选）</strong></p>
+<p>为方便用户使用CLI工具，CLI工具支持在bash或zsh中进行自动补全，此功能需要手动启用，执行命令：</p>
+<pre><code class="hljs css language-bash">rcfile=~/.$(basename <span class="hljs-variable">$SHELL</span>)rc &amp;&amp; ./cli.js completion &gt;&gt; <span class="hljs-variable">$rcfile</span> &amp;&amp; <span class="hljs-built_in">source</span> <span class="hljs-variable">$rcfile</span>
+</code></pre>
+<p>便可启用自动补全。使用CLI工具时，按下<code>Tab</code>键（依据系统配置的不同，可能需要按两下）便可弹出候选命令或参数的列表并自动补全。</p>
+<p><strong>示例</strong></p>
+<p>以下给出几个使用示例：</p>
+<p><strong>查看CLI工具的帮助</strong></p>
+<pre><code class="hljs css language-bash">./cli.js --<span class="hljs-built_in">help</span>
+</code></pre>
+<p><strong>查看CLI工具能够调用的命令及对应的功能</strong></p>
+<pre><code class="hljs css language-bash">./cli.js list
+</code></pre>
+<p><em>以下示例中的输入、输出及参数仅供举例</em></p>
+<p><strong>查看所连的FISCO BCOS节点版本</strong></p>
+<pre><code class="hljs css language-bash">./cli.js getClientVersion
+</code></pre>
+<p>输出如下：</p>
+<pre><code class="hljs css language-JSON">{
+  <span class="hljs-attr">"id"</span>: <span class="hljs-number">1</span>,
+  <span class="hljs-attr">"jsonrpc"</span>: <span class="hljs-string">"2.0"</span>,
+  <span class="hljs-attr">"result"</span>: {
+    <span class="hljs-attr">"Build Time"</span>: <span class="hljs-string">"20190705 21:19:13"</span>,
+    <span class="hljs-attr">"Build Type"</span>: <span class="hljs-string">"Linux/g++/RelWithDebInfo"</span>,
+    <span class="hljs-attr">"Chain Id"</span>: <span class="hljs-string">"1"</span>,
+    <span class="hljs-attr">"FISCO-BCOS Version"</span>: <span class="hljs-string">"2.0.0"</span>,
+    <span class="hljs-attr">"Git Branch"</span>: <span class="hljs-string">"master"</span>,
+    <span class="hljs-attr">"Git Commit Hash"</span>: <span class="hljs-string">"d8605a73e30148cfb9b63807fb85fa211d365014"</span>,
+    <span class="hljs-attr">"Supported Version"</span>: <span class="hljs-string">"2.0.0"</span>
+  }
+}
+</code></pre>
+<p><strong>获取当前的块高</strong></p>
+<pre><code class="hljs css language-bash">./cli.js getBlockNumber
+</code></pre>
+<p>输出如下：</p>
+<pre><code class="hljs css language-JSON">{
+  <span class="hljs-attr">"id"</span>: <span class="hljs-number">1</span>,
+  <span class="hljs-attr">"jsonrpc"</span>: <span class="hljs-string">"2.0"</span>,
+  <span class="hljs-attr">"result"</span>: <span class="hljs-string">"0xfa"</span>
+}
+</code></pre>
+<p><strong>部署SDK自带的HelloWorld合约</strong></p>
+<pre><code class="hljs css language-bash">./cli.js deploy HelloWorld
+</code></pre>
+<p>输出如下：</p>
+<pre><code class="hljs css language-JSON">{
+  <span class="hljs-attr">"contractAddress"</span>: <span class="hljs-string">"0x11b6d7495f2f04bdca45e9685ceadea4d4bd1832"</span>
+}
+</code></pre>
+<p><strong>调用HelloWorld合约的set接口，请将合约地址改为实际地址</strong></p>
+<pre><code class="hljs css language-bash">./cli.js call HelloWorld 0x11b6d7495f2f04bdca45e9685ceadea4d4bd1832 <span class="hljs-built_in">set</span> vita
+</code></pre>
+<p>输出如下：</p>
+<pre><code class="hljs css language-JSON">{
+  <span class="hljs-attr">"transactionHash"</span>: <span class="hljs-string">"0xa71f136107389348d5a092a345aa6bc72770d98805a7dbab0dbf8fe569ff3f37"</span>,
+  <span class="hljs-attr">"status"</span>: <span class="hljs-string">"0x0"</span>
+}
+</code></pre>
+<p><strong>调用HelloWorld合约的get接口，请将合约地址改为实际地址</strong></p>
+<pre><code class="hljs css language-bash">./cli.js call HelloWorld 0xab09b29dd07e003776d22566ae5c078f2cb2279e get
+</code></pre>
+<p>输出如下：</p>
+<pre><code class="hljs css language-JSON">{
+  <span class="hljs-attr">"status"</span>: <span class="hljs-string">"0x0"</span>,
+  <span class="hljs-attr">"output"</span>: {
+    <span class="hljs-attr">"0"</span>: <span class="hljs-string">"vita"</span>
+  }
+}
+</code></pre>
+<p><strong>CLI帮助</strong></p>
+<p>如果您想知道某一个命令该如何使用，可以使用如下的命令：</p>
+<pre><code class="hljs css language-bash">./cli.js &lt;<span class="hljs-built_in">command</span>&gt; ?
+</code></pre>
+<p>其中command为一个命令名，使用<code>?</code>作为参数便可获取该命令的使用提示，如：</p>
+<pre><code class="hljs css language-bash">./cli.js call ?
+</code></pre>
+<p>会得到如下的输出：</p>
+<pre><code class="hljs css language-bash">cli.js call &lt;contractName&gt; &lt;contractAddress&gt; &lt;<span class="hljs-keyword">function</span>&gt; [parameters...]
+
+Call a contract by a <span class="hljs-keyword">function</span> and parameters
+
+位置：
+  contractName     The name of a contract                        [字符串] [必需]
+  contractAddress  20 Bytes - The address of a contract          [字符串] [必需]
+  <span class="hljs-keyword">function</span>         The <span class="hljs-keyword">function</span> of a contract                    [字符串] [必需]
+  parameters       The parameters(splited by a space) of a <span class="hljs-keyword">function</span>
+                                                             [数组] [默认值: []]
+
+选项：
+  --<span class="hljs-built_in">help</span>     显示帮助信息                                                 [布尔]
+  --version  显示版本号                                                   [布尔]
+</code></pre>
+<h1><a class="anchor" aria-hidden="true" id="配置说明"></a><a href="#配置说明" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>配置说明</h1>
+<p>Node.js SDK的配置文件为一个JSON文件，主要包括<strong>通用配置</strong>，<strong>群组配置</strong>，<strong>通信配置</strong>和<strong>证书配置</strong>。</p>
+<h2><a class="anchor" aria-hidden="true" id="通用配置"></a><a href="#通用配置" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>通用配置</h2>
+<ul>
+<li><code>privateKey</code>: <code>object</code>，必需。外部账户的私钥，可以为一个256 bits的随机整数，也可以是一个pem或p12格式的私钥文件，后两者需要结合<a href="https://fisco-bcos-documentation.readthedocs.io/zh_CN/latest/docs/manual/account.html">get_account.sh</a>生成的私钥文件使用。<code>privateKey</code>包含两个必需字段，一个可选字段：
+<ul>
+<li><code>type</code>: <code>string</code>，必需。用于指示私钥类型。<code>type</code>的值必需为下列三个值之一：
+<ul>
+<li><code>ecrandom</code>：随机整数</li>
+<li><code>pem</code>：pem格式的文件</li>
+<li><code>p12</code>：p12格式的文件</li>
+</ul></li>
+<li><code>value</code>：<code>string</code>，必需。用于指示私钥具体的值：
+<ul>
+<li>如果<code>type</code>为<code>ecrandom</code>，则<code>value</code>为一个长度为256 bits 的随机整数，其值介于1 ~ 0xFFFF FFFF FFFF FFFF FFFF FFFF FFFF FFFE BAAE DCE6 AF48 A03B BFD2 5E8C D036 4141之间。</li>
+<li>如果<code>type</code>为<code>pem</code>，则<code>value</code>为pem文件的路径，如果是相对路径，需要以配置文件所在的目录为相对路径起始位置。</li>
+<li>如果<code>type</code>为<code>p12</code>，则<code>value</code>为p12文件的路径，如果是相对路径，需要以配置文件所在的目录为相对路径起始位置。</li>
+</ul></li>
+<li><code>password</code>：<code>string</code>，可选。如果<code>type</code>为<code>p12</code>，则需要此字段以解密私钥，否则会忽略该字段。</li>
+</ul></li>
+<li><code>timeout</code>: <code>number</code>。Node.js SDK所连节点可能会陷入停止响应的状态。为避免陷入无限等待，Node.js SDK的每一次API调用在<code>timeout</code>之后若仍没有得到结果，则强制返回一个错误对象。<code>timeout</code>的单位为毫秒。</li>
+<li><code>solc</code>: <code>string</code>，可选。Node.js SDK已经自带0.4.26及0.5.10版本的Solidity编译器，如果您有特殊的编译器需求，可以设置本配置项为您的编译器的执行路径或全局命令</li>
+</ul>
+<h2><a class="anchor" aria-hidden="true" id="群组配置"></a><a href="#群组配置" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>群组配置</h2>
+<ul>
+<li><code>groupID</code>: <code>number</code>。Node.js SDK访问的链的群组ID</li>
+</ul>
+<h2><a class="anchor" aria-hidden="true" id="通信配置"></a><a href="#通信配置" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>通信配置</h2>
+<ul>
+<li><code>nodes</code>: <code>list</code>，必需。FISCO BCOS节点列表，Node.js SDK在访问节点时时会从该列表中随机挑选一个节点进行通信，要求节点数目必须 &gt;= 1。在FISCO BCOS中，一笔交易上链并不代表网络中的所有节点都已同步到了最新的状态，如果Node.js SDK连接了多个节点，则可能会出现读取不到最新状态的情况，因此在对状态同步有较高要求的场合，请谨慎连接多个节点。每个节点包含两个字段：
+<ul>
+<li><code>ip</code>: <code>string</code>，必需。FISCO BCOS节点的IP地址</li>
+<li><code>port</code>: <code>string</code>，必需，FISCO BCOS节点的Channel端口</li>
+</ul></li>
+</ul>
+<h2><a class="anchor" aria-hidden="true" id="证书配置"></a><a href="#证书配置" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>证书配置</h2>
+<ul>
+<li><code>authentication</code>：<code>object</code>。必需，包含建立Channel通信时所需的认证信息，一般在建链过程中自动生成。<code>authentication</code>包含三个必需字段：
+<ul>
+<li><code>key</code>: <code>string</code>，必需。私钥文件路径，如果是相对路径，需要以配置文件所在的目录为相对路径起始位置。</li>
+<li><code>cert</code>: <code>string</code>，必需。证书文件路径，如果是相对路径，需要以配置文件所在的目录为相对路径起始位置。</li>
+<li><code>ca</code>: <code>string</code>，必需。CA根证书文件路径，如果是相对路径，需要以配置文件所在的目录为相对路径起始位置。</li>
+</ul></li>
+</ul>
+<h1><a class="anchor" aria-hidden="true" id="api"></a><a href="#api" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>API</h1>
+</span></div></article></div><div class="docs-prevnext"></div></div></div><nav class="onPageNav"><ul class="toc-headings"><li><a href="#环境要求">环境要求</a></li><li><a href="#部署nodejs-sdk">部署Node.js SDK</a><ul class="toc-headings"><li><a href="#拉取源代码">拉取源代码</a></li><li><a href="#使用npm安装依赖项">使用npm安装依赖项</a></li></ul></li><li><a href="#nodejs-cli">Node.js CLI</a></li><li><a href="#通用配置">通用配置</a></li><li><a href="#群组配置">群组配置</a></li><li><a href="#通信配置">通信配置</a></li><li><a href="#证书配置">证书配置</a></li></ul></nav></div><footer class="nav-footer" id="footer"><section class="sitemap"><a href="/sipc-docs/" class="nav-home"></a><div><h5>文档</h5><a href="/sipc-docs/docs/en/doc1.html">快速开始</a><a href="/sipc-docs/docs/en/doc2.html">引导</a><a href="/sipc-docs/docs/en/doc3.html">API接口</a></div><div><h5>社区</h5><a href="/sipc-docs/en/https://t.me/SimpleChainOfficial">Telegram</a><a href="https://medium.com/@SimpleChain" target="_blank" rel="noreferrer noopener">Medium</a><a href="https://twitter.com/SimpleChain">Twitter</a><a href="https://www.linkedin.com/company/simplechain-foundation/" target="_blank" rel="noreferrer noopener">Linkedln</a></div><div><h5>更多</h5><a href="https://www.simplechain.com">官网</a><a href="https://github.com/simplechain-org">GitHub</a><a class="github-button" data-icon="octicon-star" data-count-href="/facebook/docusaurus/stargazers" data-show-count="true" data-count-aria-label="# stargazers on GitHub" aria-label="Star this project on GitHub">Star</a></div></section><section class="copyright">Copyright © 2020 SimpleChain Community</section></footer></div></body></html>

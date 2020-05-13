@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en"><head><meta charSet="utf-8"/><meta http-equiv="X-UA-Compatible" content="IE=edge"/><title>交易 · SimpleChain开发文档</title><meta name="viewport" content="width=device-width"/><meta name="generator" content="Docusaurus"/><meta name="description" content="[SimpleChain](https://www.simplechain.com/)的交易(Transaction)是指由一个外部账户转移一定资产给某个账户，"/><meta name="docsearch:language" content="en"/><meta property="og:title" content="交易 · SimpleChain开发文档"/><meta property="og:type" content="website"/><meta property="og:url" content="https://simplechain.github.io/sipc-docs/"/><meta property="og:description" content="[SimpleChain](https://www.simplechain.com/)的交易(Transaction)是指由一个外部账户转移一定资产给某个账户，"/><meta name="twitter:card" content="summary"/><link rel="shortcut icon" href="/sipc-docs/"/><link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/default.min.css"/><script type="text/javascript" src="https://buttons.github.io/buttons.js"></script><script src="/sipc-docs/js/scrollSpy.js"></script><link rel="stylesheet" href="/sipc-docs/css/main.css"/><script src="/sipc-docs/js/codetabs.js"></script></head><body class="sideNavVisible separateOnPageNav"><div class="fixedHeaderContainer"><div class="headerWrapper wrapper"><header><a href="/sipc-docs/"><h2 class="headerTitle">SimpleChain开发文档</h2></a><div class="navigationWrapper navigationSlider"><nav class="slidingNav"><ul class="nav-site nav-site-internal"><li class="siteNavGroupActive"><a href="/sipc-docs/docs/docs_1" target="_self">文档</a></li><li class="siteNavGroupActive"><a href="/sipc-docs/docs/docs_25" target="_self">API</a></li><li class="siteNavGroupActive"><a href="/sipc-docs/docs/docs_50" target="_self">FAQ</a></li><li class="siteNavGroupActive"><a href="/sipc-docs/docs/docs_51" target="_self">在线技术支持</a></li></ul></nav></div></header></div></div><div class="navPusher"><div class="docMainWrapper wrapper"><div class="docsNavContainer" id="docsNav"><nav class="toc"><div class="toggleNav"><section class="navWrapper wrapper"><div class="navBreadcrumb wrapper"><div class="navToggle" id="navToggler"><div class="hamburger-menu"><div class="line1"></div><div class="line2"></div><div class="line3"></div></div></div><h2><i>›</i><span>基础数据结构</span></h2><div class="tocToggler" id="tocToggler"><i class="icon-toc"></i></div></div><div class="navGroups"><div class="navGroup"><h3 class="navGroupCategoryTitle">快速了解</h3><ul class=""><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_1">概述</a></li><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_2">快速开始</a></li><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_3">搭建节点</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">sipc和sipc代币协议</h3><ul class=""><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_4">sipc代币</a></li><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_5">在SIPC上发行代币</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">基础数据结构</h3><ul class=""><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_6">配置</a></li><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_7">创世块</a></li><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_8">账户</a></li><li class="navListItem navListItemActive"><a class="navItem" href="/sipc-docs/docs/docs_9">交易</a></li><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_10">区块</a></li><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_11">交易回执</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">架构</h3><ul class=""><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_12">架构设计</a></li><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_13">内存限制</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">底层核心技术</h3><ul class=""><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_14">共识算法</a></li><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_15">P2P网络</a></li><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_16">挖矿流程</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">虚拟机</h3><ul class=""><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_17">虚拟机</a></li><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_18">运行机制</a></li><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_19">异常处理</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">智能合约</h3><ul class=""><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_20">智能合约</a></li><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_22">合约模版</a></li><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_23">合约开发和部署</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">开发者工具</h3><ul class=""><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_24">搭建测试链</a></li><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_25">Sipc API</a></li><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_26">跨链API</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">Dapp开发</h3><ul class=""><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_31">合约编译器</a></li><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_32">编写合约</a></li><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_33">发布合约</a></li><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_34">开发流程</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">挖矿</h3><ul class=""><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_35">Sipc挖矿</a></li><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_36">矿池接入</a></li><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_37">GPU挖矿</a></li><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_38">SimPool</a></li><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_39">SimpleNode x1挖矿教程</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">客户端</h3><ul class=""><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_40">SIPC</a></li><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_41">Sipc全节点钱包</a></li><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_42">ChainBox</a></li><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_43">区块链浏览器</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">生态</h3><ul class=""><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_44">交易所</a></li><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_45">社区项目</a></li><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_46">社区活动</a></li><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_47">社区入口</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">落地方案</h3><ul class=""><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_48">落地案例1</a></li><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_49">落地案例2</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">FAQ</h3><ul class=""><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_50">FAQ</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">技术支持</h3><ul class=""><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_51">在线技术支持</a></li></ul></div></div></section></div><script>
+<!DOCTYPE html><html lang="en"><head><meta charSet="utf-8"/><meta http-equiv="X-UA-Compatible" content="IE=edge"/><title>交易回执 · SimpleChain开发文档</title><meta name="viewport" content="width=device-width"/><meta name="generator" content="Docusaurus"/><meta name="description" content="不同于比特币，Simplechain作为智能合约平台。每一笔交易作为消息在Simplechain虚拟机中执行时，均会获得一个交易回执信息(Receipt)。这份交易回执记录了关于此笔交易的处理结果信息："/><meta name="docsearch:language" content="en"/><meta property="og:title" content="交易回执 · SimpleChain开发文档"/><meta property="og:type" content="website"/><meta property="og:url" content="https://simplechain.github.io/sipc-docs/"/><meta property="og:description" content="不同于比特币，Simplechain作为智能合约平台。每一笔交易作为消息在Simplechain虚拟机中执行时，均会获得一个交易回执信息(Receipt)。这份交易回执记录了关于此笔交易的处理结果信息："/><meta name="twitter:card" content="summary"/><link rel="shortcut icon" href="/sipc-docs/"/><link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/default.min.css"/><script type="text/javascript" src="https://buttons.github.io/buttons.js"></script><script src="/sipc-docs/js/scrollSpy.js"></script><link rel="stylesheet" href="/sipc-docs/css/main.css"/><script src="/sipc-docs/js/codetabs.js"></script></head><body class="sideNavVisible separateOnPageNav"><div class="fixedHeaderContainer"><div class="headerWrapper wrapper"><header><a href="/sipc-docs/"><h2 class="headerTitle">SimpleChain开发文档</h2></a><div class="navigationWrapper navigationSlider"><nav class="slidingNav"><ul class="nav-site nav-site-internal"><li class="siteNavGroupActive"><a href="/sipc-docs/docs/docs_1" target="_self">文档</a></li><li class="siteNavGroupActive"><a href="/sipc-docs/docs/docs_10" target="_self">API</a></li><li class="siteNavGroupActive"><a href="/sipc-docs/docs/docs_70" target="_self">FAQ</a></li><li class="siteNavGroupActive"><a href="/sipc-docs/docs/docs_71" target="_self">在线技术支持</a></li></ul></nav></div></header></div></div><div class="navPusher"><div class="docMainWrapper wrapper"><div class="docsNavContainer" id="docsNav"><nav class="toc"><div class="toggleNav"><section class="navWrapper wrapper"><div class="navBreadcrumb wrapper"><div class="navToggle" id="navToggler"><div class="hamburger-menu"><div class="line1"></div><div class="line2"></div><div class="line3"></div></div></div><h2><i>›</i><span>基础数据结构</span></h2><div class="tocToggler" id="tocToggler"><i class="icon-toc"></i></div></div><div class="navGroups"><div class="navGroup"><h3 class="navGroupCategoryTitle">快速了解</h3><ul class=""><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_1">Overview</a></li><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_2">Quick_start</a></li><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_3">Simplechain</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">基础数据结构</h3><ul class=""><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_4">配置</a></li><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_5">创世块</a></li><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_6">账户</a></li><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_7">交易</a></li><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_8">区块</a></li><li class="navListItem navListItemActive"><a class="navItem" href="/sipc-docs/docs/docs_9">交易回执</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">挖矿核心</h3><ul class=""><div class="navGroup subNavGroup"><h4 class="navGroupSubcategoryTitle">交易池</h4><ul><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_10">架构设计</a></li><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_11">交易存储</a></li><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_12">交易入队列</a></li><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_13">内存限制</a></li></ul></div><div class="navGroup subNavGroup"><h4 class="navGroupSubcategoryTitle">挖矿</h4><ul><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_14">架构</a></li><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_15">启动挖矿</a></li><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_16">挖矿流程</a></li></ul></div><div class="navGroup subNavGroup"><h4 class="navGroupSubcategoryTitle">共识算法</h4><ul><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_17">虚拟机</a></li><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_18">算法实现</a></li></ul></div></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">底层核心技术</h3><ul class=""><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_31">智能合约</a></li><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_33">合约模版</a></li><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_34">合约开发和部署</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">智能合约</h3><ul class=""><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_35">虚拟机</a></li><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_36">运行机制</a></li><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_37">GPU挖矿</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">API Guid</h3><ul class=""><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_40">SIPC.VIP</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">SDK</h3><ul class=""><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_41">Sipc API</a></li><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_42">跨链 API</a></li><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_43">SDKS</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">区块链浏览器</h3><ul class=""><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_59">区块链浏览器</a></li><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_60">搭建SimpleChain测试网络</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">矿池对接</h3><ul class=""><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_61">Sipc挖矿</a></li><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_62">GPU挖矿</a></li><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_63">矿池接入</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">客户端下载</h3><ul class=""><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_64">Sipc全节点钱包</a></li><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_65">SimPool</a></li><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_66">SIPC</a></li><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_67">ChainBox</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">落地方案</h3><ul class=""><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_68">落地案例1</a></li><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_69">落地案例2</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">FAQ</h3><ul class=""><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_70">FAQ</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">技术支持</h3><ul class=""><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_71">在线技术支持</a></li></ul></div></div></section></div><script>
             var coll = document.getElementsByClassName('collapsible');
             var checkActiveCategory = true;
             for (var i = 0; i < coll.length; i++) {
@@ -54,197 +54,170 @@
                 };
               }
             });
-        </script></nav></div><div class="container mainContainer docsContainer"><div class="wrapper"><div class="post"><header class="postHeader"><h1 id="__docusaurus" class="postHeaderTitle">交易</h1></header><article><div><span><p><a href="https://www.simplechain.com/">SimpleChain</a>的交易(Transaction)是指由一个外部账户转移一定资产给某个账户，
-或者发出一个消息指令到某个智能合约。</p>
-<p>在<a href="https://www.simplechain.com/">SimpleChain</a>网络中，交易执行属于一个事务。具有原子性、一致性、隔离性、持久性特点。</p>
+        </script></nav></div><div class="container mainContainer docsContainer"><div class="wrapper"><div class="post"><header class="postHeader"><h1 id="__docusaurus" class="postHeaderTitle">交易回执</h1></header><article><div><span><p>不同于比特币，Simplechain作为智能合约平台。每一笔交易作为消息在Simplechain虚拟机中执行时，均会获得一个交易回执信息(Receipt)。这份交易回执记录了关于此笔交易的处理结果信息：</p>
+<p><img src="https://i.loli.net/2020/04/27/wlzWLg9Us7i5o3m.png" alt="21.png"></p>
+<p>回执信息分为三部分：共识信息、交易信息、区块信息。下面分别介绍各类信息。</p>
+<p><img src="https://i.loli.net/2020/04/27/sAWCrbGlmoEV6p8.png" alt="22.png"></p>
+<h3><a class="anchor" aria-hidden="true" id="交易回执内容介绍"></a><a href="#交易回执内容介绍" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>交易回执内容介绍</h3>
+<p><strong>交易回执共识信息</strong></p>
+<p>共识意味在在校验区块合法性时，这部分信息也参与校验。这些信息参与校验的原因是确保交易必须在区块中的固定顺序中执行，且记录了交易执行后的状态信息。这样可强化交易顺序。</p>
 <ul>
-<li><code>原子性</code>： 是不可分割的最小执行单位，要么做，要么不做。</li>
-<li><code>一致性</code>： 同一笔交易执行，必然是将以太坊账本从一个一致性状态变到另一个一致性状态。</li>
-<li><code>隔离性</code>： 交易执行途中不会受其他交易干扰。</li>
-<li><code>持久性</code>： 一旦交易提交，则对以太坊账本的改变是永久性的。后续的操作不会对其有任何影响。</li>
+<li>Status： 成功与否，1表示成功，0表示失败。注意在高度1035301前，并非1或0，而是 StateRoot，表示此交易执行完毕后的以太坊状态。</li>
 </ul>
-<p>因为是事务型，因此我们需确保在执行事务前让交易符合一些设计要求。</p>
+<pre><code class="hljs css language-javascript"><span class="hljs-comment">//core/state_processor.go:104</span>
+<span class="hljs-keyword">var</span> root []byte
+<span class="hljs-keyword">if</span> config.IsByzantium(header.Number) {
+    statedb.Finalise(<span class="hljs-literal">true</span>)
+} <span class="hljs-keyword">else</span> {
+    root = statedb.IntermediateRoot(config.IsEIP158(header.Number)).Bytes()
+}
+<span class="hljs-comment">//...</span>
+<span class="hljs-attr">receipt</span> := types.NewReceipt(root, failed, *usedGas)
+</code></pre>
 <ul>
-<li>交易必须唯一，能区分不同交易且同一笔交易不能重复提交到账本中。</li>
-<li>交易内容不得变化，每个节点收到的交易都必须一致，交易执行时账本状态变化也是一致的。</li>
-<li>交易必须被合法签名，只有已正确签名的交易才能被执行。</li>
-<li>交易不能占用过多系统资源，影响其他交易执行。</li>
+<li>CumulativeGasUsed： 区块中已执行的交易累计消耗的Gas，包含当前交易。</li>
+<li>Logs: 当前交易执行所产生的智能合约事件列表。</li>
+<li>Bloom：是从 Logs 中提取的事件布隆过滤器，用于快速检测某主题的事件是否存在于Logs中。</li>
 </ul>
-<p>对交易的设计要求，涉及软件系统的方方面面，但最基础部分还是交易数据本身。</p>
-<h2><a class="anchor" aria-hidden="true" id="交易数据结构"></a><a href="#交易数据结构" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>交易数据结构</h2>
-<p>下图是<a href="https://www.simplechain.com/">SimpleChain</a>交易数据结构，根据用途，我将其划分为四部分。</p>
-<p><img src="https://i.loli.net/2020/05/09/LtvZ9Q5MrPbH4zG.png" alt="交易数据结构.png"></p>
-<p>开头是一个 uint64 类型的数字，称之为随机数。用于撤销交易、防止双花和修改<a href="https://www.simplechain.com/">SimpleChain</a>账户(账户数据结构)的 Nonce值。</p>
-<p>第二部分是关于交易执行限制的设置，<code>gas</code>为愿意供<a href="https://www.simplechain.com/">SimpleChain</a>虚拟机运行的燃料上限。
-<code>gasPrice</code> 是愿意支付的燃料单价。<code>gasPrcie * gas</code> 则为愿意为这笔交易支付的最高手续费。</p>
-<p>第三部分是交易发送者输入<a href="https://www.simplechain.com/">SimpleChain</a>虚拟机执行此交易的初始信息： 虚拟机操作对象（接收方 To）、从交易发送方转移到操作对象的资产（Value），以及虚拟机运行时入参(input)。其中To为空时，意味着虚拟机无可操作对象，此时虚拟机将利用input内容部署一个新合约。</p>
-<p>第四部分是交易发送方对交易的签名结果，可以利用交易内容和签名结果反向推导出签名者，即交易发送方地址。四部分内容的组合，解决了交易安全问题、实现了智能合约的互动方式以及提供了灵活可调整的交易手续费。</p>
-<h2><a class="anchor" aria-hidden="true" id="交易对象定义"></a><a href="#交易对象定义" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>交易对象定义</h2>
-<p>具体到代码上，<a href="https://www.simplechain.com/">SimpleChain</a>将交易对象定义为一个对外可访问的<code>Transation</code>对象和内嵌的对外部包不可见的<code>txdata</code> 。</p>
-<blockquote>
-<p>小写的 <code>txdata</code> 是Go语言的特性。首字母小写，则相当于其他编程语言中的<code>private</code> 修饰符，表明该数据结构对外部包不可见。同样小写开头的对象字段(如 Transaction中的hash)，也表示外部包无法访问此字段。反之，首字母大写的类型、字段、方法等定义，视为<code>public</code>。</p>
-</blockquote>
-<pre><code class="hljs css language-go"><span class="hljs-comment">// core/types/transaction.go:38</span>
-<span class="hljs-keyword">type</span> Transaction <span class="hljs-keyword">struct</span> {
-    data txdata
-    <span class="hljs-comment">// caches</span>
-    hash atomic.Value
-    size atomic.Value
-    from atomic.Value
-}
-
-<span class="hljs-keyword">type</span> txdata <span class="hljs-keyword">struct</span> {
-    AccountNonce <span class="hljs-keyword">uint64</span>     
-    Price        *big.Int  
-    GasLimit     <span class="hljs-keyword">uint64</span>     
-    Recipient    *common.Address 
-    Amount       *big.Int
-    Payload      []<span class="hljs-keyword">byte</span>
-
-    <span class="hljs-comment">// Signature values</span>
-    V *big.Int
-    R *big.Int
-    S *big.Int
-
-    <span class="hljs-comment">// This is only used when marshaling to JSON.</span>
-    Hash *common.Hash <span class="hljs-string">`json:"hash" rlp:"-"`</span>
+<p>这些信息是如何参与共识校验的呢？实际上参与校验的仅仅是回执哈希，而回执哈希计算只包含这些信息。 首先，在校验时获取整个区块回执信息的默克尔树的根哈希值。再判断此哈希值是否同区块头定义内容相同。</p>
+<pre><code class="hljs css language-javascript"><span class="hljs-comment">//core/block_validator.go:92</span>
+<span class="hljs-attr">receiptSha</span> := types.DeriveSha(receipts)
+<span class="hljs-keyword">if</span> receiptSha != header.ReceiptHash {
+   <span class="hljs-keyword">return</span> fmt.Errorf(<span class="hljs-string">"invalid receipt root hash (remote: %x local: %x)"</span>,
+   header.ReceiptHash, receiptSha)
 }
 </code></pre>
-<p>首先看私有的<code>txdata</code>结构体中定义了交易消息中所有必要内容，依次对应前面所说的交易数据结构。有三点需要特别注意。</p>
+<p>而函数types.DeriveSha中生成根哈希值，是将列表元素（这里是交易回执）的RLP编码信息构成默克树，最终获得列表的哈希值。</p>
+<pre><code class="hljs css language-javascript"><span class="hljs-comment">//core/types/derive_sha.go:32</span>
+func DeriveSha(list DerivableList) common.Hash {
+   <span class="hljs-attr">keybuf</span> := <span class="hljs-keyword">new</span>(bytes.Buffer)
+   <span class="hljs-attr">trie</span> := <span class="hljs-keyword">new</span>(trie.Trie)
+   <span class="hljs-keyword">for</span> i := <span class="hljs-number">0</span>; i &lt; list.Len(); i++ {
+      keybuf.Reset()
+      rlp.Encode(keybuf, uint(i))
+      trie.Update(keybuf.Bytes(), list.GetRlp(i))
+   }
+   <span class="hljs-keyword">return</span> trie.Hash()
+}
+<span class="hljs-comment">// core/types/receipt.go:237</span>
+func (r Receipts) GetRlp(i int) []byte {
+   bytes, <span class="hljs-attr">err</span> := rlp.EncodeToBytes(r[i])
+   <span class="hljs-keyword">if</span> err != nil {
+      panic(err)
+   }
+   <span class="hljs-keyword">return</span> bytes
+}
+</code></pre>
+<p>交易回执实现了 RLP 编码接口。在方法EncodeRLP中是构建了一个私有的receiptRLP。</p>
+<pre><code class="hljs css language-javascript"><span class="hljs-comment">//core/types/receipt.go:119</span>
+func (r *Receipt) EncodeRLP(w io.Writer) error {
+    <span class="hljs-keyword">return</span> rlp.Encode(w, 
+    &amp;receiptRLP{r.statusEncoding(), r.CumulativeGasUsed, r.Bloom, r.Logs})
+}
+
+</code></pre>
+<h3><a class="anchor" aria-hidden="true" id="交易回执交易信息"></a><a href="#交易回执交易信息" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>交易回执交易信息</h3>
+<p>这部分信息记录的是关于回执所对应的交易信息，有：</p>
 <ul>
-<li><p>一是因涉及哈希运算，因此不能随意调整字段定义顺序，非特殊处理情况下必须按要求定义字段。所以<code>txdata</code>中定义的字段，是符合以太坊交易消息内容顺序的。</p></li>
-<li><p>二是在涉及货币计算时，不能因为精度缺失引起计算不准确问题。因此在以太坊、比特币等所有区块链设计中，货币类型均是整数，但最小值<code>1</code>所代表的币值不一样。在<a href="https://www.simplechain.com/">SimpleChain</a>中一个sipc等于10的18次方Amount，当要表示100亿sipc时，Amount等于10的27次方。已远远超过Uint64所能表示的范围(0-18446744073709551615)。因此<a href="https://www.simplechain.com/">SimpleChain</a>一律采用Go标准包提供的大数 <code>big.Int</code> 进行货币运算和定义货币。这里的<code>Price</code>和<code>Amount</code>均是 big.Int 指针类型。另外，关于签名的三个值也是因为数字太大，而采用 big.Int 类型。</p></li>
-<li><p>三是最后的<code>Hash</code>字段，这不属于交易内容的一部分，只是为了在交易的JSON中包含交易哈希。为了防止参与哈希运算，该字段被标记为<code>rlp:&quot;-&quot;</code>。其次，Transaction 还定义了三个缓存项：交易哈希值(hash)、交易大小(size)和交易发送方(from)。缓存的原因是使用频次高且CPU计算量大。</p></li>
+<li>TxHash ： 交易回执所对应的交易哈希。</li>
+<li>ContractAddress： 当这笔交易是部署新合约时，记录新合约的地址。</li>
 </ul>
-<p>在区块链中最见的是哈希运算，所有链上数据基本都要参与哈希运算。而哈希运算是CPU密集型的，因此有必要对一些哈希运算等进行缓存，降低CPU计算量。首次计算完交易哈希值后，便缓存交易哈希到hash字段上。</p>
-<pre><code class="hljs css language-go"><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-params">(tx *Transaction)</span> <span class="hljs-title">Hash</span><span class="hljs-params">()</span> <span class="hljs-title">common</span>.<span class="hljs-title">Hash</span></span> {
-   <span class="hljs-keyword">if</span> hash := tx.hash.Load(); hash != <span class="hljs-literal">nil</span> {
-      <span class="hljs-keyword">return</span> hash.(common.Hash)
-   }
-   v := rlpHash(tx)
-   tx.hash.Store(v)
-   <span class="hljs-keyword">return</span> v
+<pre><code class="hljs css language-javascript"><span class="hljs-comment">//core/state_processor.go:118</span>
+<span class="hljs-keyword">if</span> msg.To() == nil {
+ receipt.ContractAddress = crypto.CreateAddress(vmenv.Context.Origin, tx.Nonce())
 }
-</code></pre>
-<p>hash 是<code>atomic.Value</code>类型，这是Go标准包提供的原子操作对象。这样可防止并发引起多次哈希计算。首先原子加载哈希值，如果存在则返回。如果不存在，则对交易进行哈希计算(rlpHash，是<a href="https://www.simplechain.com/">SimpleChain</a>的哈希算法)，将哈希结果保存并返回。</p>
-<p>第二个缓存是交易大小(size)。交易大小是指交易信息进行RLP编码后的数据大小。代表交易网络传输大小、代表交易占区块大小、代表交易存储大小。 每笔交易进入交易池都需要检查交易大小是否超过 <code>32KB</code>。推送交易数据给其他节点时也需结合交易大小，在不超过网络消息最大限制(默认10MB)下分包推送数据。为避免重复计算开销，在第一次计算后便缓存。</p>
-<pre><code class="hljs css language-go"><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-params">(tx *Transaction)</span> <span class="hljs-title">Size</span><span class="hljs-params">()</span> <span class="hljs-title">common</span>.<span class="hljs-title">StorageSize</span></span> {
-   <span class="hljs-keyword">if</span> size := tx.size.Load(); size != <span class="hljs-literal">nil</span> {
-      <span class="hljs-keyword">return</span> size.(common.StorageSize)
-   }
-   c := writeCounter(<span class="hljs-number">0</span>)
-   rlp.Encode(&amp;c, &amp;tx.data)
-   tx.size.Store(common.StorageSize(c))
-   <span class="hljs-keyword">return</span> common.StorageSize(c)
-}
-</code></pre>
-<p>如上，执行 <code>rlp.Encode</code>获得可得到数据大小，缓存结果并返回。</p>
-<blockquote>
-<p>rlp 是以太坊定义的一套区块链数据编码解码协议，而非采用常见的 gzip、json、Protobuf 编码格式。目的是为了尽可能地压缩数据，毕竟区块链数据结构中只有常见的几种数据类型，不需要复杂的协议涉及，即可满足要求。</p>
-</blockquote>
-<p>最后一个缓存项是交易发送方(from)。交易的发送方，是根据签名反向计算过程，同样是CPU密集型运算。为了保证交易合法性，程序中到处都有涉及取交易发送方地址和校验发送方的合法性。只有正确的签名才能得到发送方地址。因此对交易发送方也进行缓存。</p>
-<pre><code class="hljs css language-go"><span class="hljs-comment">//core/types/transaction_signing.go:72</span>
-<span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">Sender</span><span class="hljs-params">(signer Signer, tx *Transaction)</span> <span class="hljs-params">(common.Address, error)</span></span> {
-   <span class="hljs-keyword">if</span> sc := tx.from.Load(); sc != <span class="hljs-literal">nil</span> {
-      sigCache := sc.(sigCache) 
-      <span class="hljs-keyword">if</span> sigCache.signer.Equal(signer) {
-         <span class="hljs-keyword">return</span> sigCache.from, <span class="hljs-literal">nil</span>
-      }
-   }
 
-   addr, err := signer.Sender(tx)
-   <span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
-      <span class="hljs-keyword">return</span> common.Address{}, err
-   }
-   tx.from.Store(sigCache{signer: signer, from: addr})
-   <span class="hljs-keyword">return</span> addr, <span class="hljs-literal">nil</span>
+</code></pre>
+<ul>
+<li>GasUsed: 这笔交易执行所消耗的Gas手续费</li>
+</ul>
+<h3><a class="anchor" aria-hidden="true" id="交易回执区块信息"></a><a href="#交易回执区块信息" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>交易回执区块信息</h3>
+<p>这部分信息完全是为了方便外部读取交易回执，不但知道交易执行情况，还能方便的指定该交易属于哪个区块中第几笔交易。</p>
+<ul>
+<li>BlockHash: 交易所在区块哈希。</li>
+<li>BlockNumber: 交易所在区块高度。</li>
+<li>TransactionIndex： 交易在区块中的序号。</li>
+</ul>
+<p>这三项信息，主要是在数据库 Leveldb 中读取交易回执时，实时指定。</p>
+<pre><code class="hljs css language-javascript"><span class="hljs-comment">//core/rawdb/accessors_chain.go:315</span>
+<span class="hljs-attr">receipts</span> := make(types.Receipts, len(storageReceipts))
+<span class="hljs-attr">logIndex</span> := uint(<span class="hljs-number">0</span>)
+<span class="hljs-keyword">for</span> i, <span class="hljs-attr">receipt</span> := range storageReceipts {
+   <span class="hljs-comment">//...</span>
+   receipts[i] = (*types.Receipt)(receipt)
+   receipts[i].BlockHash = hash
+   receipts[i].BlockNumber = big.NewInt(<span class="hljs-number">0</span>).SetUint64(number)
+   receipts[i].TransactionIndex = uint(i)
 }
 </code></pre>
-<p>特殊指出是需要一个<code>Signer</code>进行解签名，同时通过<code>Signer</code>获取Sender，合法时缓存并返回。但在使用缓存内容时，还需要检查前后两个Signer是否一致，因为不一样的Signer 算法不一样，获得的交易签名者也不相同。</p>
-<p>需要注意，上面三个缓存使用都在有一个前提条件：交易对象一旦创建，交易内容不得修改。这也是为何交易对象中单独定义在私有的txdata中，而非直接定义在 Transaction中的原因之一。如下图所示，只能通过调用交易对象方法获取交易内容，无任何途径修改一个现有交易对象内容。</p>
-<p><img src="https://img.learnblockchain.cn/2019/04/27_Transaction-method.png!de" alt="交易对象方法列表"></p>
-<h2><a class="anchor" aria-hidden="true" id="交易对象方法介绍"></a><a href="#交易对象方法介绍" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>交易对象方法介绍</h2>
-<p>交易对象 Transtion 除对外提供交易内容访问外，也定义了一些辅助方法。我们依次介绍下各个方法。</p>
-<ol>
-<li><code>ChainId()</code>和<code>Protected()</code></li>
-</ol>
-<pre><code class="hljs css language-go"><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-params">(tx *Transaction)</span> <span class="hljs-title">ChainId</span><span class="hljs-params">()</span> *<span class="hljs-title">big</span>.<span class="hljs-title">Int</span></span> {
-  <span class="hljs-keyword">return</span> deriveChainId(tx.data.V)
+<h3><a class="anchor" aria-hidden="true" id="交易回执构造"></a><a href="#交易回执构造" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>交易回执构造</h3>
+<p>交易回执是在以太坊虚拟机处理完交易后，根据结果整理出的交易执行结果信息。反映了交易执行前后以太坊变化以及交易执行状态。</p>
+<p>构造细节，已经在前面提及，不再细说。这里给出的完整的交易回执构造代码。</p>
+<pre><code class="hljs css language-javascript"><span class="hljs-comment">// core/state_processor.go:94</span>
+<span class="hljs-attr">context</span> := NewEVMContext(msg, header, bc, author) 
+<span class="hljs-attr">vmenv</span> := vm.NewEVM(context, statedb, config, cfg) 
+_, gas, failed, <span class="hljs-attr">err</span> := ApplyMessage(vmenv, msg, gp)
+<span class="hljs-keyword">if</span> err != nil {
+   <span class="hljs-keyword">return</span> nil, <span class="hljs-number">0</span>, err
+} 
+<span class="hljs-keyword">var</span> root []byte
+<span class="hljs-keyword">if</span> config.IsByzantium(header.Number) {
+   statedb.Finalise(<span class="hljs-literal">true</span>)
+} <span class="hljs-keyword">else</span> {
+   root = statedb.IntermediateRoot(config.IsEIP158(header.Number)).Bytes()
 }
-<span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-params">(tx *Transaction)</span> <span class="hljs-title">Protected</span><span class="hljs-params">()</span> <span class="hljs-title">bool</span></span> {
-  <span class="hljs-keyword">return</span> isProtectedV(tx.data.V)
+*usedGas += gas
+ 
+<span class="hljs-attr">receipt</span> := types.NewReceipt(root, failed, *usedGas)
+receipt.TxHash = tx.Hash()
+receipt.GasUsed = gas 
+<span class="hljs-keyword">if</span> msg.To() == nil {
+   receipt.ContractAddress = crypto.CreateAddress(vmenv.Context.Origin, tx.Nonce())
+} 
+receipt.Logs = statedb.GetLogs(tx.Hash())
+receipt.Bloom = types.CreateBloom(types.Receipts{receipt})
+receipt.BlockHash = statedb.BlockHash()
+receipt.BlockNumber = header.Number
+receipt.TransactionIndex = uint(statedb.TxIndex())
+
+<span class="hljs-keyword">return</span> receipt, gas, err
+</code></pre>
+<h3><a class="anchor" aria-hidden="true" id="交易回执存储"></a><a href="#交易回执存储" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>交易回执存储</h3>
+<p>交易回执作为交易执行中间产物，为了方便快速获取某笔交易的执行明细。以太坊中有跟随区块存储时实时存储交易回执。但为了降低存储量，只存储了必要内容。</p>
+<p>首先，在存储时，将交易回执对象转换为精简内容。</p>
+<pre><code class="hljs css language-javascript"><span class="hljs-comment">//core/rawdb/accessors_chain.go:338</span>
+<span class="hljs-attr">storageReceipts</span> := make([]*types.ReceiptForStorage, len(receipts))
+<span class="hljs-keyword">for</span> i, <span class="hljs-attr">receipt</span> := range receipts {
+   storageReceipts[i] = (*types.ReceiptForStorage)(receipt)
 }
 </code></pre>
-<p>从交易签名内容<code>V</code>中提取<code>链ID</code>。用于在获取交易签名者时判断签名合法性，一旦属于受保护<code>Protected()</code>的交易，则签名信息中必须包含当前链ID，否则属于非法交易。</p>
-<ol start="2">
-<li><p>RLP接口实现方法</p>
-<pre><code class="hljs css language-go"><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-params">(tx *Transaction)</span> <span class="hljs-title">EncodeRLP</span><span class="hljs-params">(w io.Writer)</span> <span class="hljs-title">error</span></span> {
-   <span class="hljs-keyword">return</span> rlp.Encode(w, &amp;tx.data)
-}
-<span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-params">(tx *Transaction)</span> <span class="hljs-title">DecodeRLP</span><span class="hljs-params">(s *rlp.Stream)</span> <span class="hljs-title">error</span></span> {
-   _, size, _ := s.Kind()
-   err := s.Decode(&amp;tx.data)
-   <span class="hljs-keyword">if</span> err == <span class="hljs-literal">nil</span> {
-      tx.size.Store(common.StorageSize(rlp.ListSize(size)))
-   }
-   <span class="hljs-keyword">return</span> err
-}
-</code></pre></li>
-</ol>
-<p>和其他面向对象语言不同，Go语言中只要对象有实现某个接口的所有方法，则认为该对象属于某接口类型。这里Transaction 实现了rlp包中的<code>Encoder</code>和<code>Decoder</code>两个接口。</p>
-<pre><code class="hljs css language-go"><span class="hljs-comment">//rlp/encode.go:36</span>
-<span class="hljs-keyword">type</span> Encoder <span class="hljs-keyword">interface</span> {
-   EncodeRLP(io.Writer) error
-}
-<span class="hljs-keyword">type</span> Decoder <span class="hljs-keyword">interface</span> {
-  DecodeRLP(*Stream) error
+<p>精简内容是专门为存储定义的一个结构ReceiptForStorage。存储时将交易回执集进行RLP编码存储。</p>
+<pre><code class="hljs css language-javascript"><span class="hljs-comment">//core/rawdb/accessors_chain.go:342</span>
+bytes, <span class="hljs-attr">err</span> := rlp.EncodeToBytes(storageReceipts)
+<span class="hljs-keyword">if</span> err != nil {
+   log.Crit(<span class="hljs-string">"Failed to encode block receipts"</span>, <span class="hljs-string">"err"</span>, err)
+} 
+<span class="hljs-keyword">if</span> err := db.Put(blockReceiptsKey(number, hash), bytes); err != nil {
+   log.Crit(<span class="hljs-string">"Failed to store block receipts"</span>, <span class="hljs-string">"err"</span>, err)
 }
 </code></pre>
-<p>意味在进行RLP编码解码时，将通过自定义实现的两个方法进行。RLP编码解码交易，实际是将交易内容 txdata 进行编码解码。同时在解码交易时，缓存交易大小。</p>
-<ol start="3">
-<li><p>JSON接口实现</p>
-<pre><code class="hljs css language-go"><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-params">(tx *Transaction)</span> <span class="hljs-title">MarshalJSON</span><span class="hljs-params">()</span> <span class="hljs-params">([]<span class="hljs-keyword">byte</span>, error)</span></span> {
-   hash := tx.Hash()
-   data := tx.data
-   data.Hash = &amp;hash
-   <span class="hljs-keyword">return</span> data.MarshalJSON()
-}
-<span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-params">(tx *Transaction)</span> <span class="hljs-title">UnmarshalJSON</span><span class="hljs-params">(input []<span class="hljs-keyword">byte</span>)</span> <span class="hljs-title">error</span></span> {
-   <span class="hljs-keyword">var</span> dec txdata
-   <span class="hljs-keyword">if</span> err := dec.UnmarshalJSON(input); err != <span class="hljs-literal">nil</span> {
-      <span class="hljs-keyword">return</span> err
+<p>看ReceiptForStorage的EncodeRLP方法就知道存储了哪些内容</p>
+<pre><code class="hljs css language-javascript"><span class="hljs-comment">//core/types/receipt.go:179</span>
+func (r *ReceiptForStorage) EncodeRLP(w io.Writer) error {
+   <span class="hljs-attr">enc</span> := &amp;receiptStorageRLP{
+      <span class="hljs-attr">PostStateOrStatus</span>: (*Receipt)(r).statusEncoding(),
+      <span class="hljs-attr">CumulativeGasUsed</span>: r.CumulativeGasUsed,
+      <span class="hljs-attr">TxHash</span>:            r.TxHash,
+      <span class="hljs-attr">ContractAddress</span>:   r.ContractAddress,
+      <span class="hljs-attr">Logs</span>:              make([]*LogForStorage, len(r.Logs)),
+      <span class="hljs-attr">GasUsed</span>:           r.GasUsed,
    }
-   withSignature := dec.V.Sign() != <span class="hljs-number">0</span> || dec.R.Sign() != <span class="hljs-number">0</span> || dec.S.Sign() != <span class="hljs-number">0</span>
-   <span class="hljs-keyword">if</span> withSignature {
-      <span class="hljs-keyword">var</span> V <span class="hljs-keyword">byte</span>
-      <span class="hljs-keyword">if</span> isProtectedV(dec.V) {
-         chainID := deriveChainId(dec.V).Uint64()
-         V = <span class="hljs-keyword">byte</span>(dec.V.Uint64() - <span class="hljs-number">35</span> - <span class="hljs-number">2</span>*chainID)
-      } <span class="hljs-keyword">else</span> {
-         V = <span class="hljs-keyword">byte</span>(dec.V.Uint64() - <span class="hljs-number">27</span>)
-      }
-      <span class="hljs-keyword">if</span> !crypto.ValidateSignatureValues(V, dec.R, dec.S, <span class="hljs-literal">false</span>) {
-         <span class="hljs-keyword">return</span> ErrInvalidSig
-      }
+   <span class="hljs-keyword">for</span> i, <span class="hljs-attr">log</span> := range r.Logs {
+      enc.Logs[i] = (*LogForStorage)(log)
    }
-   *tx = Transaction{data: dec}
-   <span class="hljs-keyword">return</span> <span class="hljs-literal">nil</span>
-}
-</code></pre></li>
-</ol>
-<p>这是实现了json标准包的编码解码方法，主要是给web3 api 调用时返回符合要求的JSON格式数据。编码时附加交易哈希，解码时还校验签名格式的正确性。下面是一个完整交易JSON格式数据示例。</p>
-<pre><code class="hljs css language-json">{
- <span class="hljs-attr">"nonce"</span>: <span class="hljs-string">"0x16"</span>,
- <span class="hljs-attr">"gasPrice"</span>: <span class="hljs-string">"0x2"</span>,
- <span class="hljs-attr">"gas"</span>: <span class="hljs-string">"0x1"</span>,
- <span class="hljs-attr">"to"</span>: <span class="hljs-string">"0x0100000000000000000000000000000000000000"</span>,
- <span class="hljs-attr">"value"</span>: <span class="hljs-string">"0x0"</span>,
- <span class="hljs-attr">"input"</span>: <span class="hljs-string">"0x616263646566"</span>,
- <span class="hljs-attr">"v"</span>: <span class="hljs-string">"0x25"</span>,
- <span class="hljs-attr">"r"</span>: <span class="hljs-string">"0x3c46a1ff9d0dd2129a7f8fbc3e45256d85890d9d63919b42dac1eb8dfa443a32"</span>,
- <span class="hljs-attr">"s"</span>: <span class="hljs-string">"0x6b2be3f225ae31f7ca18efc08fa403eb73b848359a63cd9fdeb61e1b83407690"</span>,
- <span class="hljs-attr">"hash"</span>: <span class="hljs-string">"0xb848eb905affc383b4f431f8f9d3676733ea96bcae65638c0ada6e45038fb3a6"</span>
+   <span class="hljs-keyword">return</span> rlp.Encode(w, enc)
 }
 </code></pre>
-<p>json里面所有数字类型的字段都是用十六进制数表示。这是为了统一所有数据格式，为大数 big.Int 服务。在web3js库中专门内置了bignumber库处理大数。</p>
-</span></div></article></div><div class="docs-prevnext"><a class="docs-prev button" href="/sipc-docs/docs/docs_8"><span class="arrow-prev">← </span><span>账户</span></a><a class="docs-next button" href="/sipc-docs/docs/docs_10"><span>区块</span><span class="arrow-next"> →</span></a></div></div></div><nav class="onPageNav"><ul class="toc-headings"><li><a href="#交易数据结构">交易数据结构</a></li><li><a href="#交易对象定义">交易对象定义</a></li><li><a href="#交易对象方法介绍">交易对象方法介绍</a></li></ul></nav></div><footer class="nav-footer" id="footer"><section class="sitemap"><a href="/sipc-docs/" class="nav-home"></a><div><h5>文档</h5><a href="/sipc-docs/docs/docs_1">概述</a><a href="/sipc-docs/docs/docs_24">开发者工具</a><a href="/sipc-docs/docs/docs_25">API接口</a></div><div><h5>社区</h5><a href="/sipc-docs/en/https://t.me/SimpleChainOfficial">Telegram</a><a href="https://medium.com/@SimpleChain" target="_blank" rel="noreferrer noopener">Medium</a><a href="https://twitter.com/SimpleChain">Twitter</a><a href="https://www.linkedin.com/company/simplechain-foundation/" target="_blank" rel="noreferrer noopener">Linkedln</a></div><div><h5>更多</h5><a href="https://www.simplechain.com">官网</a><a href="https://github.com/simplechain-org">GitHub</a><a class="github-button" data-icon="octicon-star" data-count-href="/facebook/docusaurus/stargazers" data-show-count="true" data-count-aria-label="# stargazers on GitHub" aria-label="Star this project on GitHub">Star</a></div></section><section class="copyright">Copyright © 2020 SimpleChain Community</section></footer></div></body></html>
+<p>根据EncodeRLP方法实现，可以得出在存储时仅仅存储了部分内容，且 Logs 内容同样进行了特殊处理LogForStorage</p>
+<p><img src="https://i.loli.net/2020/04/27/CmHSaJXIyLcYfbV.png" alt="23.png"></p>
+</span></div></article></div><div class="docs-prevnext"><a class="docs-prev button" href="/sipc-docs/docs/docs_8"><span class="arrow-prev">← </span><span>区块</span></a><a class="docs-next button" href="/sipc-docs/docs/docs_10"><span>架构设计</span><span class="arrow-next"> →</span></a></div></div></div><nav class="onPageNav"></nav></div><footer class="nav-footer" id="footer"><section class="sitemap"><a href="/sipc-docs/" class="nav-home"></a><div><h5>文档</h5><a href="/sipc-docs/docs/en/doc1.html">快速开始</a><a href="/sipc-docs/docs/en/doc2.html">引导</a><a href="/sipc-docs/docs/en/doc3.html">API接口</a></div><div><h5>社区</h5><a href="/sipc-docs/en/https://t.me/SimpleChainOfficial">Telegram</a><a href="https://medium.com/@SimpleChain" target="_blank" rel="noreferrer noopener">Medium</a><a href="https://twitter.com/SimpleChain">Twitter</a><a href="https://www.linkedin.com/company/simplechain-foundation/" target="_blank" rel="noreferrer noopener">Linkedln</a></div><div><h5>更多</h5><a href="https://www.simplechain.com">官网</a><a href="https://github.com/simplechain-org">GitHub</a><a class="github-button" data-icon="octicon-star" data-count-href="/facebook/docusaurus/stargazers" data-show-count="true" data-count-aria-label="# stargazers on GitHub" aria-label="Star this project on GitHub">Star</a></div></section><section class="copyright">Copyright © 2020 SimpleChain Community</section></footer></div></body></html>
