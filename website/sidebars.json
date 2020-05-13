@@ -5,104 +5,82 @@
             "docs_2",
             "docs_3"
         ],
-        "基础数据结构": [
+        "sipc和sipc代币协议": [
+            "docs_52",
             "docs_4",   
-            "docs_5",
-            "docs_6",
+            "docs_5"
+        ],
+        "基础数据结构": [
+            "docs_6",   
             "docs_7",
             "docs_8",
-            "docs_9"
+            "docs_9",
+            "docs_10",
+            "docs_11"
         ],
-        "挖矿核心": [
-            {
-                "type": "subcategory",
-                "label": "交易池",
-                "ids": [
-                    "docs_10",
-                    "docs_11",
-                    "docs_12",
-                    "docs_13"
-                ]
-            },
-            {
-                "type": "subcategory",
-                "label": "挖矿",
-                "ids": [
-                    "docs_14",
-                    "docs_15",
-                    "docs_16"   
-                ]
-            },
-            {
-                "type": "subcategory",
-                "label": "共识算法",
-                "ids": [
-                    "docs_17",
-                    "docs_18"   
-                ]
-            }
-        ],
+        "架构": [
+            "docs_12",   
+            "docs_13"
+        ], 
         "底层核心技术": [
+            "docs_14",
+            "docs_15",
+            "docs_16"
+        ],
+        "虚拟机": [
+            "docs_17",
+            "docs_18",
+            "docs_19"
+        ],
+        "智能合约": [
+            "docs_20",
+            "docs_21",
+            "docs_22",
+            "docs_23"
+        ],
+        "开发者工具": [
+            "docs_24",
+            "docs_25",
+            "docs_26",
+            "docs_27",
+            "docs_28",
             "docs_29",
-            "docs_30",
+            "docs_30"
+        ],
+        "Dapp开发": [
             "docs_31",
+            "docs_32",
             "docs_33",
             "docs_34"
         ],
-        "智能合约": [
+        "挖矿": [
             "docs_35",
             "docs_36",
-            "docs_37"
-        ],
-        "API Guid": [
+            "docs_37",
             "docs_38",
-            "docs_39",
-            "docs_63",
-            "docs_40"
+            "docs_39"
         ],
-        "开发工具": [
+        "客户端": [
+            "docs_40",
             "docs_41",
             "docs_42",
-            "docs_43",
-            "docs_61",
-            "docs_62"
+            "docs_43"
         ],
-        "SDK": [
-            "docs_41",
-            "docs_42",
-            "docs_43",
-            "docs_61",
-            "docs_62"
-        ],
-        "Sapp开发": [
-            "docs_56",
-            "docs_57",
-            "docs_58"
-        ],
-        "区块链浏览器": [
-            "docs_59",
-            "docs_60"
-        ],
-        "矿池对接": [
-            "docs_61",
-            "docs_62",
-            "docs_63"
-        ],
-        "客户端下载": [
-            "docs_64",
-            "docs_65",
-            "docs_66",
-            "docs_67"
+        "生态": [
+            "docs_44",
+            "docs_45",
+            "docs_46",
+            "docs_47"
         ],
         "落地方案": [
-             "docs_68",
-             "docs_69"
+            "docs_48",
+            "docs_49"
         ],
         "FAQ": [      
-             "docs_70"
+             "docs_50"
         ],
         "技术支持": [      
-              "docs_71"
+              "docs_51"
        ]
     }
 }

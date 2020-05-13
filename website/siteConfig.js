@@ -37,9 +37,9 @@ const siteConfig = {
     // For no header links in the top nav bar -> headerLinks: [],
     headerLinks: [
         { doc: 'docs_1', label: '文档' },
-        { doc: 'docs_10', label: 'API' },
-        { doc: 'docs_70', label: 'FAQ' },
-        { doc: 'docs_71', label: '在线技术支持' },
+        { doc: 'docs_25', label: 'API' },
+        { doc: 'docs_50', label: 'FAQ' },
+        { doc: 'docs_51', label: '在线技术支持' },
         
     ],
 
@@ -53,7 +53,7 @@ const siteConfig = {
 
     /* Colors for website */
     colors: {
-        primaryColor: '#2E8555',
+        primaryColor: '#3a416f',
         secondaryColor: '#205C3B',
     },
 

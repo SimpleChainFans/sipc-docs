@@ -37,6 +37,7 @@ https://github.com/simplechain-org/gpuminer/releases
 
 把压缩文件解压成文件夹
 
+
 ![](https://upload-images.jianshu.io/upload_images/13694105-5b536f012545d352.png?imageMogr2/auto-orient/strip|imageView2/2/w/94)
 
 点进去，找到文件start.bat文件，用记事本编辑它：
