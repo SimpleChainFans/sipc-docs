@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en"><head><meta charSet="utf-8"/><meta http-equiv="X-UA-Compatible" content="IE=edge"/><title>交易所对接 · SimpleChain开发文档</title><meta name="viewport" content="width=device-width"/><meta name="generator" content="Docusaurus"/><meta name="description" content="交易所钱包服务是加密货币交易所系统中的重要组成部分，它负责与各种不同的区块链的交互，实现用户地址生成、充值与提现等功能。本文以对接以太坊区块链的钱包服务为例，介绍交易所系统平台中钱包管理服务的设计与实现。"/><meta name="docsearch:language" content="en"/><meta property="og:title" content="交易所对接 · SimpleChain开发文档"/><meta property="og:type" content="website"/><meta property="og:url" content="https://simplechain.github.io/sipc-docs/"/><meta property="og:description" content="交易所钱包服务是加密货币交易所系统中的重要组成部分，它负责与各种不同的区块链的交互，实现用户地址生成、充值与提现等功能。本文以对接以太坊区块链的钱包服务为例，介绍交易所系统平台中钱包管理服务的设计与实现。"/><meta name="twitter:card" content="summary"/><link rel="shortcut icon" href="/sipc-docs/"/><link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/default.min.css"/><script type="text/javascript" src="https://buttons.github.io/buttons.js"></script><script src="/sipc-docs/js/scrollSpy.js"></script><link rel="stylesheet" href="/sipc-docs/css/main.css"/><script src="/sipc-docs/js/codetabs.js"></script></head><body class="sideNavVisible separateOnPageNav"><div class="fixedHeaderContainer"><div class="headerWrapper wrapper"><header><a href="/sipc-docs/"><h2 class="headerTitle">SimpleChain开发文档</h2></a><div class="navigationWrapper navigationSlider"><nav class="slidingNav"><ul class="nav-site nav-site-internal"><li class="siteNavGroupActive"><a href="/sipc-docs/docs/docs_1" target="_self">文档</a></li><li class="siteNavGroupActive"><a href="/sipc-docs/docs/docs_25" target="_self">API</a></li><li class="siteNavGroupActive"><a href="/sipc-docs/docs/docs_50" target="_self">FAQ</a></li><li class="siteNavGroupActive"><a href="/sipc-docs/docs/docs_51" target="_self">在线技术支持</a></li></ul></nav></div></header></div></div><div class="navPusher"><div class="docMainWrapper wrapper"><div class="docsNavContainer" id="docsNav"><nav class="toc"><div class="toggleNav"><section class="navWrapper wrapper"><div class="navBreadcrumb wrapper"><div class="navToggle" id="navToggler"><div class="hamburger-menu"><div class="line1"></div><div class="line2"></div><div class="line3"></div></div></div><h2><i>›</i><span>生态</span></h2><div class="tocToggler" id="tocToggler"><i class="icon-toc"></i></div></div><div class="navGroups"><div class="navGroup"><h3 class="navGroupCategoryTitle">快速了解</h3><ul class=""><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_1">概述</a></li><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_2">快速开始</a></li><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_3">搭建节点</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">sipc和sipc代币协议</h3><ul class=""><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_52">技术术语</a></li><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_4">sipc代币</a></li><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_5">在SIPC上发行代币</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">基础数据结构</h3><ul class=""><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_6">配置</a></li><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_7">创世块</a></li><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_8">账户</a></li><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_9">交易</a></li><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_10">区块</a></li><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_11">交易回执</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">架构</h3><ul class=""><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_12">架构设计</a></li><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_13">MPT</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">底层核心技术</h3><ul class=""><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_14">共识算法</a></li><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_15">P2P网络</a></li><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_16">交易存储</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">虚拟机</h3><ul class=""><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_17">虚拟机</a></li><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_18">运行机制</a></li><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_19">异常处理</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">智能合约</h3><ul class=""><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_20">智能合约</a></li><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_22">合约模版</a></li><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_23">合约开发和部署</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">开发者工具</h3><ul class=""><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_24">搭建测试链</a></li><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_25">Sipc API</a></li><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_26">跨链API</a></li><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_27">js_sdk</a></li><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_28">java_sdk</a></li><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_29">python_sdk</a></li><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_30">子链模版</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">Dapp开发</h3><ul class=""><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_31">合约编译器</a></li><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_32">编写合约</a></li><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_33">发布合约</a></li><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_34">开发流程</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">挖矿</h3><ul class=""><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_35">Sipc挖矿</a></li><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_36">矿池接入</a></li><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_37">GPU挖矿</a></li><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_38">SimPool</a></li><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_39">SimpleNode x1挖矿教程</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">客户端</h3><ul class=""><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_40">SIPC.VIP</a></li><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_41">Sipc全节点钱包</a></li><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_42">ChainBox</a></li><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_43">区块链浏览器</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">生态</h3><ul class=""><li class="navListItem navListItemActive"><a class="navItem" href="/sipc-docs/docs/docs_44">交易所对接</a></li><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_45">社区项目</a></li><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_46">社区活动</a></li><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_47">社区入口</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">落地方案</h3><ul class=""><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_48">落地案例</a></li><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_49">构建应用</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">FAQ</h3><ul class=""><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_50">FAQ</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">技术支持</h3><ul class=""><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_51">在线技术支持</a></li></ul></div></div></section></div><script>
+<!DOCTYPE html><html lang="en"><head><meta charSet="utf-8"/><meta http-equiv="X-UA-Compatible" content="IE=edge"/><title>交易所对接 · SimpleChain开发文档</title><meta name="viewport" content="width=device-width"/><meta name="generator" content="Docusaurus"/><meta name="description" content="# 搭建SimpleChain节点"/><meta name="docsearch:language" content="en"/><meta property="og:title" content="交易所对接 · SimpleChain开发文档"/><meta property="og:type" content="website"/><meta property="og:url" content="https://simplechain.github.io/sipc-docs/"/><meta property="og:description" content="# 搭建SimpleChain节点"/><meta name="twitter:card" content="summary"/><link rel="shortcut icon" href="/sipc-docs/"/><link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/default.min.css"/><script type="text/javascript" src="https://buttons.github.io/buttons.js"></script><script src="/sipc-docs/js/scrollSpy.js"></script><link rel="stylesheet" href="/sipc-docs/css/main.css"/><script src="/sipc-docs/js/codetabs.js"></script></head><body class="sideNavVisible separateOnPageNav"><div class="fixedHeaderContainer"><div class="headerWrapper wrapper"><header><a href="/sipc-docs/"><h2 class="headerTitle">SimpleChain开发文档</h2></a><div class="navigationWrapper navigationSlider"><nav class="slidingNav"><ul class="nav-site nav-site-internal"><li class="siteNavGroupActive"><a href="/sipc-docs/docs/docs_1" target="_self">文档</a></li><li class="siteNavGroupActive"><a href="/sipc-docs/docs/docs_25" target="_self">API</a></li><li class="siteNavGroupActive"><a href="/sipc-docs/docs/docs_50" target="_self">FAQ</a></li><li class="siteNavGroupActive"><a href="/sipc-docs/docs/docs_51" target="_self">在线技术支持</a></li></ul></nav></div></header></div></div><div class="navPusher"><div class="docMainWrapper wrapper"><div class="docsNavContainer" id="docsNav"><nav class="toc"><div class="toggleNav"><section class="navWrapper wrapper"><div class="navBreadcrumb wrapper"><div class="navToggle" id="navToggler"><div class="hamburger-menu"><div class="line1"></div><div class="line2"></div><div class="line3"></div></div></div><h2><i>›</i><span>生态</span></h2><div class="tocToggler" id="tocToggler"><i class="icon-toc"></i></div></div><div class="navGroups"><div class="navGroup"><h3 class="navGroupCategoryTitle">快速了解</h3><ul class=""><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_1">概述</a></li><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_2">快速开始</a></li><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_3">搭建节点</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">sipc和sipc代币协议</h3><ul class=""><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_52">技术术语</a></li><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_4">sipc代币</a></li><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_5">在SIPC上发行代币</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">基础数据结构</h3><ul class=""><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_6">配置</a></li><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_7">创世块</a></li><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_8">账户</a></li><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_9">交易</a></li><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_10">区块</a></li><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_11">交易回执</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">架构</h3><ul class=""><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_12">架构设计</a></li><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_13">MPT</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">底层核心技术</h3><ul class=""><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_14">共识算法</a></li><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_15">P2P网络</a></li><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_16">交易存储</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">虚拟机</h3><ul class=""><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_17">虚拟机</a></li><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_18">运行机制</a></li><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_19">异常处理</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">智能合约</h3><ul class=""><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_20">智能合约</a></li><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_22">合约模版</a></li><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_23">合约开发和部署</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">开发者工具</h3><ul class=""><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_24">搭建测试链</a></li><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_25">Sipc API</a></li><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_26">跨链API</a></li><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_27">js_sdk</a></li><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_28">java_sdk</a></li><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_29">python_sdk</a></li><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_30">子链模版</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">Dapp开发</h3><ul class=""><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_31">合约编译器</a></li><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_32">编写合约</a></li><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_33">发布合约</a></li><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_34">开发流程</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">挖矿</h3><ul class=""><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_35">Sipc挖矿</a></li><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_36">矿池接入</a></li><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_37">GPU挖矿</a></li><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_38">SimPool</a></li><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_39">SimpleNode x1挖矿教程</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">客户端</h3><ul class=""><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_40">SIPC.VIP</a></li><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_41">Sipc全节点钱包</a></li><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_42">ChainBox</a></li><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_43">区块链浏览器</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">生态</h3><ul class=""><li class="navListItem navListItemActive"><a class="navItem" href="/sipc-docs/docs/docs_44">交易所对接</a></li><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_45">社区项目</a></li><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_46">社区活动</a></li><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_47">社区入口</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">落地方案</h3><ul class=""><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_48">落地案例</a></li><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_49">构建应用</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">FAQ</h3><ul class=""><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_50">FAQ</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">技术支持</h3><ul class=""><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_51">在线技术支持</a></li></ul></div></div></section></div><script>
             var coll = document.getElementsByClassName('collapsible');
             var checkActiveCategory = true;
             for (var i = 0; i < coll.length; i++) {
@@ -54,314 +54,188 @@
                 };
               }
             });
-        </script></nav></div><div class="container mainContainer docsContainer"><div class="wrapper"><div class="post"><header class="postHeader"><h1 id="__docusaurus" class="postHeaderTitle">交易所对接</h1></header><article><div><span><p>交易所钱包服务是加密货币交易所系统中的重要组成部分，它负责与各种不同的区块链的交互，实现用户地址生成、充值与提现等功能。本文以对接以太坊区块链的钱包服务为例，介绍交易所系统平台中钱包管理服务的设计与实现。</p>
-<p>交易所系统中钱包服务是一个非常重要的组件，它的主要功能包括：</p>
-<p>生成以太坊充值地址
-当监听地址发生新交易时获取通知
-广播签名交易
-处理ERC20代币的充值
-在区块链中部署新的合约并操作合约方法
-如果希望快速掌握区块链应用的开发，推荐汇智网的区块链应用开发系列教程，   内容涵盖比特币、以太坊、eos、超级账本fabric和tendermint等多种区块链，以及   java、go、nodejs、python、php、dart等多种开发语言。</p>
-<p>1、开发与运行环境概述
-在我们继续之前，首先要满足以下环境要求：</p>
-<p>Docker： Docker已经成为新应用开发的必备工具，它使得应用的构建、分享与部署都极其简单。
-Docker Compose：我们使用Docker Compose来管理所有的服务，以便轻松地进行扩展。
-其他的需求都由Docker镜像来满足，我们不需要安装其他任何东西了，只需要写一个简单的Docker Compos配置文档 —— docker-compose.yml：</p>
-<p>version: '3'
-services:
-ganache:
-image: trufflesuite/ganache-cli
-command: -m
-redis:
-image: redis:alpine
-ports:
-- &quot;6379:6379&quot;
-command: redis-server --appendonly yes
-volumes:
-- redis:/data
-zookeeper:
-image: wurstmeister/zookeeper
-ports:
-- &quot;2181:2181&quot;
-kafka:
-image: wurstmeister/kafka
-ports:
-- &quot;9092:9092&quot;
-environment:
-KAFKA_ADVERTISED_HOST_NAME: 127.0.0.1
-KAFKA_CREATE_TOPICS: &quot;command:1:1,address.created:1:1,transaction:1:1,errors:1:1&quot;
-KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181</p>
-<p>volumes:
-redis:
-只要运行docker-compose up -d就可以轻松地启动服务，这个命令会自动从Docker中心下载必要的镜像，然后启动。下面让我们看看都有哪些服务。</p>
-<p>1.1 Ganache-cli
-如果没有接入以太坊区块链的节点，我们的钱包服务就不会有什么用。在开发期我们不需要下载整个以太坊区块链，因此只要使用Ganache仿真器即可。使用Ganache的好处是开发效率高，因为出块极快。不过在生产环境中就需要使用像Geth这样的节点软件来接入以太坊主网了。</p>
-<p>1.2 Redis
-我们需要数据库来保存我们创建的地址，并且监听这些地址相关的交易。Redis是一个很出色的内存键/值数据库，非常适合我们的应用场景。</p>
-<p>在这个教程中，我们将使用Redis数据库来保存我们为地址生成的私钥，但是在生产服务器上应当使用更安全的硬件设施来保护这些私钥。</p>
-<p>1.3 Kafka/Zookeeper
-Apache Kafka在交易所架构中扮演着核心的角色，它负责接收所有服务的消息并分发给订阅这些消息的节点。</p>
-<p>对于以太坊钱包服务而言，我们将使用以下这些主题进行通信：</p>
-<p>command
-address.created
-transaction
-errors
-Apache Kafka服务器可以独立地进行扩展，为我们的服务提供了一个分布式的消息处理集群。</p>
-<p>2、开发语言选择
-就我个人而言，是非常喜欢Elixir的，因为可以用它写出极其可靠的分布式应用，而且代码也很容易理解和维护。但是考虑到以太坊的生态，Elixir就没有什么优势了。</p>
-<p>对于以太坊开发而言最好的选择还是使用Node.js/Javascript。因为有很多你可以直接就用的组件。因此我们的以太坊钱包服务最终决定使用Node.js开发。</p>
-<p>3、初始开发环境搭建
-首先运行npm init命令来创建默认的node包：</p>
-<p>~/exchange-hubwiz/eth-wallet$ npm init
-然后我们可以添加一些钱包服务要用到的node依赖包，执行如下命令：</p>
-<p>~/exhcange-hubwiz/eth-wallet$ npm install --save web3 redis kafka-node ethereumjs-tx bluebird
-前三个依赖包的作用容易理解：</p>
-<p>web3：通过websocket连接到Ganache或其他以太坊节点
-redis：连接到Redis服务器以便保存或提取数据
-kafka-node：接入Zookeeper，获取Kafka访问端结点，生产或消费Kafka消息
-最后的两个依赖包有助于让我们的代码更容易理解，并且可以利用async/await的异步编程模式的优势。</p>
-<p>接下来，我们将利用这些node包连接Redis、以太坊和Kafka服务器。</p>
-<p>4、连接服务器
-4.1 连接Redis服务器
-连接Redis非常简单，创建一个redis.js文件，然后编写如下代码：</p>
-<p>// load configuration
-const config = require('../../config')
-const redis = require('redis')
-const bluebird = require('bluebird')</p>
-<p>// promisify the redis client using bluebird
-bluebird.promisifyAll(redis.RedisClient.prototype);
-bluebird.promisifyAll(redis.Multi.prototype);</p>
-<p>// create a new redis client and connect to the redis instance
-const client = redis.createClient(config.redis_port, config.redis_host);</p>
-<p>// if an error occurs, print it to the console
-client.on('error', function (err) {
-console.error(&quot;[REDIS] Error encountered&quot;, err)
-})</p>
-<p>module.exports = client;
-4.2 连接以太坊节点
-如果你认为连接Redis很简单了，那么使用web3连接以太坊节点简单的会让你吃惊。 创建一个ethereum.js，然后编写如下代码：</p>
-<p>const config = require('../../config')
-const Web3 = require('web3')
-module.exports = new Web3(config.uri)
-4.3 连接Kafka服务器
-Kafka，需要从队列中提取消息进行消费，或者生产消息存入队列。因此我们也需要继续相关的配置。</p>
-<p>创建一个新的文件query.js，然后编写如下的代码：</p>
-<p>const kafka = require('kafka-node')
-const config = require('../../config')</p>
-<p>// configure how the consumers should connect to the broker/servers
-// each consumer creates his own connecto to a broker</p>
-<p>const default_options = {
-host: config.kafka_zookeeper_uri,
-autoCommit: true,
-fromOffset: 'earliest',
-}</p>
-<p>module.exports.consumer = (group_id = &quot;ethereum_wallet_manager_consumer&quot;, topics = [], opts = {}) =&gt; {
-const options = Object.assign({ groupId: group_id }, default_options, opts)
-const consumer = new kafka.ConsumerGroup(options, topics)
-return consumer
-}</p>
-<p>// configure how the producer connects to the Apache Kafka broker</p>
-<p>// initiate the connection to the kafka client
-const client = new kafka.Client(config.kafka_zookeeper_uri, config.kafka_client_id)
-module.exports.client = client
-const producer = new kafka.Producer(client)</p>
-<p>// add a listener to the ready event
-async function on_ready(cb) {
-producer.on('ready', cb)
-}</p>
-<p>// define a method to send multiple messages to the given topic
-// this will return a promise that will resolve with the response from Kafka
-// messages are converted to JSON strings before they are added in the queue
-async function send(topic, messages) {
-return new Promise((resolve, reject) =&gt; {
-// convert objects to JSON strings
-messages = messages.map(JSON.stringify)
-// add the messages to the given topic
-producer.send([{ topic, messages}], function (err, data) {
-if (err) return reject(err)
-resolve(data)
-})
-})
-}</p>
-<p>// expose only these methods to the rest of the application and abstract away
-// the implementation of the producer to easily change it later
-module.exports.on_ready = on_ready
-module.exports.send = send
-5、打造以太坊钱包服务
-现在我们开始进入以太坊钱包服务的核心特性开发阶段。</p>
-<p>5.1 创建新的以太坊账户
-交易所和支付网关需要为客户生成新地址，以便用户可以向服务充值，或者为产品付费。生成一个没有用过的以太坊地址是任何虚拟货币服务的基本需求，因此让我们看看如何实现。</p>
+        </script></nav></div><div class="container mainContainer docsContainer"><div class="wrapper"><div class="post"><header class="postHeader"><h1 id="__docusaurus" class="postHeaderTitle">交易所对接</h1></header><article><div><span><h1><a class="anchor" aria-hidden="true" id="搭建simplechain节点"></a><a href="#搭建simplechain节点" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>搭建SimpleChain节点</h1>
+<h2><a class="anchor" aria-hidden="true" id="docker-搭建"></a><a href="#docker-搭建" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>docker 搭建</h2>
+<h2><a class="anchor" aria-hidden="true" id="源码搭建"></a><a href="#源码搭建" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>源码搭建</h2>
+<h2><a class="anchor" aria-hidden="true" id="社区节点信"></a><a href="#社区节点信" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>社区节点信</h2>
+<h1><a class="anchor" aria-hidden="true" id="连接simplechain节点"></a><a href="#连接simplechain节点" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>连接SimpleChain节点</h1>
+<p>创建一个 sipc.js，然后编写如下代码：</p>
+<pre><code class="hljs css language-javascript"><span class="hljs-keyword">const</span> config = <span class="hljs-built_in">require</span>(<span class="hljs-string">'../../config'</span>) <span class="hljs-comment">//节点服务器的配置信息</span>
+<span class="hljs-keyword">const</span> Web3 = <span class="hljs-built_in">require</span>(<span class="hljs-string">'web3'</span>)
+<span class="hljs-built_in">module</span>.exports = <span class="hljs-keyword">new</span> Web3(config.uri)
+</code></pre>
+<h1><a class="anchor" aria-hidden="true" id="创建simplechain钱包服务"></a><a href="#创建simplechain钱包服务" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>创建SimpleChain钱包服务</h1>
+<p>现在我们开始进入Simplechain钱包服务的核心特性开发阶段。</p>
+<h2><a class="anchor" aria-hidden="true" id="创建新的以太坊账户"></a><a href="#创建新的以太坊账户" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>创建新的以太坊账户</h2>
+<p>交易所和支付网关需要为客户生成新地址，以便用户可以向服务充值，或者为产品付费。生成一个没有用过的<code>sipc</code>地址是任何数字资产服务的基本需求，因此看一下具体实现。</p>
 <p>首先，创建一个commands.js，在其中我们订阅队列中的消息。主要包括以下几个步骤：</p>
 <p>连接到command主题，监听新的create_account命令
 当收到新的create_account命令时，创建新的密钥对并存入密码库
 生成account_created消息并发送到队列的account_created主题
 代码如下：</p>
-<p>const web3 = require(&quot;./ethereum&quot;)
-const redis = require('./redis')
-const queue = require('./queue')</p>
-<p>/**</p>
+<pre><code class="hljs css language-javascript"><span class="hljs-keyword">const</span> web3 = <span class="hljs-built_in">require</span>(<span class="hljs-string">"./ethereum"</span>)
+<span class="hljs-comment">/**
+ * Create a new ethereum address and return the address 
+ */</span>
+<span class="hljs-keyword">async</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">create_account</span>(<span class="hljs-params">meta = {}</span>) </span>{
+  <span class="hljs-comment">// generate the address</span>
+  <span class="hljs-keyword">const</span> account = <span class="hljs-keyword">await</span> web3.eth.accounts.create()
+  
+  <span class="hljs-comment">// disable checksum when storing the address</span>
+  <span class="hljs-keyword">const</span> address = account.address.toLowerCase()
+  
+  <span class="hljs-comment">// save the public address in Redis without any transactions received yet</span>
+  <span class="hljs-keyword">await</span> redis.setAsync(<span class="hljs-string">`eth:address:public:<span class="hljs-subst">${address}</span>`</span>, <span class="hljs-built_in">JSON</span>.stringify({}))
+  
+  <span class="hljs-comment">// Store the private key in a vault.</span>
+  <span class="hljs-comment">// For demo purposes we use the same Redis instance, but this should be changed in production</span>
+  <span class="hljs-keyword">await</span> redis.setAsync(<span class="hljs-string">`eth:address:private:<span class="hljs-subst">${address}</span>`</span>, account.privateKey)
+  
+  <span class="hljs-keyword">return</span> <span class="hljs-built_in">Object</span>.assign({}, meta, {<span class="hljs-attr">address</span>: account.address})
+}
+
+<span class="hljs-built_in">module</span>.exports.listen_to_commands = listen_to_commands
+</code></pre>
+<h3><a class="anchor" aria-hidden="true" id="处理新交易"></a><a href="#处理新交易" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>处理新交易</h3>
+<p>我们的钱包还没写完，当我们创建的地址收到用户充值时应当得到通知才对。为此，以太坊的web3客户端提供了newBlockHeaders订阅机制。此外，如果我们的服务偶然宕机，那么服务就会错过在宕机期间生产的区块，因此我们还需要检查钱包是否已经同步到了网络的最新区块。</p>
+<p>创建 <code>sync_blocks.js</code> 文件，编写如下代码：</p>
+<pre><code class="hljs css language-javascript"><span class="hljs-keyword">const</span> web3 = <span class="hljs-built_in">require</span>(<span class="hljs-string">'./ethereum'</span>)
+
+<span class="hljs-comment">/**
+ * Sync blocks and start listening for new blocks
+ * <span class="hljs-doctag">@param <span class="hljs-type">{Number}</span> <span class="hljs-variable">current_block_number</span></span> - The last block processed
+ * <span class="hljs-doctag">@param <span class="hljs-type">{Object}</span> <span class="hljs-variable">opts</span></span> - A list of options with callbacks for events
+ */</span>
+<span class="hljs-keyword">async</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">sync_blocks</span>(<span class="hljs-params">current_block_number, opts</span>) </span>{
+  <span class="hljs-comment">// first sync the wallet to the latest block</span>
+  <span class="hljs-keyword">let</span> latest_block_number = <span class="hljs-keyword">await</span> web3.eth.getBlockNumber()
+  <span class="hljs-keyword">let</span> synced_block_number = <span class="hljs-keyword">await</span> sync_to_block(current_block_number, latest_block_number, opts)
+
+  <span class="hljs-comment">// subscribe to new blocks</span>
+  web3.eth.subscribe(<span class="hljs-string">'newBlockHeaders'</span>, (error, result) =&gt; error &amp;&amp; <span class="hljs-built_in">console</span>.log(error))
+  .on(<span class="hljs-string">"data"</span>, <span class="hljs-keyword">async</span> <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">blockHeader</span>) </span>{
+    <span class="hljs-keyword">return</span> <span class="hljs-keyword">await</span> process_block(blockHeader.number, opts)
+  })
+
+  <span class="hljs-keyword">return</span> synced_block_number
+}
+
+<span class="hljs-comment">// Load all data about the given block and call the callbacks if defined</span>
+<span class="hljs-keyword">async</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">process_block</span>(<span class="hljs-params">block_hash_or_id, opts</span>) </span>{
+  <span class="hljs-comment">// load block information by id or hash</span>
+  <span class="hljs-keyword">const</span> block = <span class="hljs-keyword">await</span> web3.eth.getBlock(block_hash_or_id, <span class="hljs-literal">true</span>)
+  <span class="hljs-comment">// call the onTransactions callback if defined</span>
+  opts.onTransactions ? opts.onTransactions(block.transactions) : <span class="hljs-literal">null</span>;
+  <span class="hljs-comment">// call the onBlock callback if defined</span>
+  opts.onBlock ? opts.onBlock(block_hash_or_id) : <span class="hljs-literal">null</span>;
+  <span class="hljs-keyword">return</span> block
+}
+
+<span class="hljs-comment">// Traverse all unprocessed blocks between the current index and the lastest block number</span>
+<span class="hljs-keyword">async</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">sync_to_block</span>(<span class="hljs-params">index, latest, opts</span>) </span>{
+  <span class="hljs-keyword">if</span> (index &gt;= latest) {
+    <span class="hljs-keyword">return</span> index;
+  }
+  <span class="hljs-keyword">await</span> process_block(index + <span class="hljs-number">1</span>, opts)
+  <span class="hljs-keyword">return</span> <span class="hljs-keyword">await</span> sync_to_block(index + <span class="hljs-number">1</span>, latest, opts)
+}
+
+<span class="hljs-built_in">module</span>.exports = sync_blocks
+</code></pre>
+<p>在上面的代码中，我们从钱包服务之前处理的最新区块开始，一直同步到区块链的当前最新区块。一旦我们同步到最新区块，就开始订阅新区块事件。对于每一个区块，我们都执行如下的回调函数以处理区块头以及区块中的交易列表：</p>
 <ul>
-<li>Listen to new commands from the queue
-*/
-async function listen_to_commands() {
-const queue_consumer = queue.consumer('eth.wallet.manager.commands', ['command'])
-// process messages
-queue_consumer.on('message', async function (topic_message) {
-try {
-const message = JSON.parse(topic_message.value)
-// create the new address with some reply metadata to match the response to the request
-const resp = await create_address(message.meta)
-// if successful then post the response to the queue
-if (resp) {
-await queue_producer.send('address.created', [resp])
-}
-} catch (err) {
-// in case something goes wrong catch the error and send it back in the 'errors' topic
-console.error(topic_message, err)
-queue_producer.send('errors', [{type: 'command', request: topic_message, error_code: err.code, error_message: err.message, error_stack: err.stack}])
-}
-})
-return queue_consumer
-}</li>
+<li><code>onTransactions</code></li>
+<li><code>onBlock</code></li>
 </ul>
-<p>/**</p>
+<p><strong>通常包含如下的处理步骤：</strong></p>
 <ul>
-<li>Create a new ethereum address and return the address
-*/
-async function create_account(meta = {}) {
-// generate the address
-const account = await web3.eth.accounts.create()</li>
+<li><code>监听新区块，获取区块中的全部交易</code></li>
+<li><code>过滤掉与钱包地址无关的交易</code></li>
+<li><code>将每个相关的交易都发往队列</code></li>
+<li><code>将地址上的资金归集到安全的存储</code></li>
+<li><code>更新已处理的区块编号</code></li>
 </ul>
-<p>// disable checksum when storing the address
-const address = account.address.toLowerCase()</p>
-<p>// save the public address in Redis without any transactions received yet
-await redis.setAsync(<code>eth:address:public:${address}</code>, JSON.stringify({}))</p>
-<p>// Store the private key in a vault.
-// For demo purposes we use the same Redis instance, but this should be changed in production
-await redis.setAsync(<code>eth:address:private:${address}</code>, account.privateKey)</p>
-<p>return Object.assign({}, meta, {address: account.address})
-}</p>
-<p>module.exports.listen_to_commands = listen_to_commands
-5.2 处理新交易
-我们的钱包还没写完，当我们创建的地址收到用户充值时应当得到通知才对。为此，以太坊的web3客户端提供了newBlockHeaders订阅机制。此外，如果我们的服务偶然宕机，那么服务就会错过在宕机期间生产的区块，因此我们还需要检查钱包是否已经同步到了网络的最新区块。</p>
-<p>创建 sync_blocks.js文件，编写如下代码：</p>
-<p>const web3 = require('./ethereum')</p>
-<p>/**</p>
+<p><strong>最终的代码如下：</strong></p>
+<pre><code class="hljs css language-javascript"><span class="hljs-keyword">const</span> web3 = <span class="hljs-built_in">require</span>(<span class="hljs-string">"web3"</span>) <span class="hljs-comment">//调用web3</span>
+<span class="hljs-keyword">const</span> redis = <span class="hljs-built_in">require</span>(<span class="hljs-string">'./redis'</span>) <span class="hljs-comment">//调用redis数据库，将区块数据获取下来存入redis数据库中</span>
+<span class="hljs-keyword">const</span> queue = <span class="hljs-built_in">require</span>(<span class="hljs-string">'./queue'</span>) <span class="hljs-comment">//调用消息队列</span>
+<span class="hljs-keyword">const</span> sync_blocks = <span class="hljs-built_in">require</span>(<span class="hljs-string">'./sync_blocks'</span>)  <span class="hljs-comment">//同步区块</span>
+
+<span class="hljs-comment">/**
+ * Start syncing blocks and listen for new transactions on the blockchain
+ */</span>
+<span class="hljs-keyword">async</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">start_syncing_blocks</span>(<span class="hljs-params"></span>) </span>{
+  <span class="hljs-comment">// start from the last block number processed or 0 (you can use the current block before deploying for the first time)</span>
+  <span class="hljs-keyword">let</span> last_block_number = <span class="hljs-keyword">await</span> redis.getAsync(<span class="hljs-string">'eth:last-block'</span>)
+  last_block_number = last_block_number || <span class="hljs-number">0</span>
+  <span class="hljs-comment">// start syncing blocks</span>
+  sync_blocks(last_block_number, {
+    <span class="hljs-comment">// for every new block update the latest block value in redis</span>
+    <span class="hljs-attr">onBlock</span>: update_block_head,
+    <span class="hljs-comment">// for new transactions check each transaction and see if it's new</span>
+    <span class="hljs-attr">onTransactions</span>: <span class="hljs-keyword">async</span> (transactions) =&gt; {
+      <span class="hljs-keyword">for</span> (<span class="hljs-keyword">let</span> i <span class="hljs-keyword">in</span> transactions) {
+        <span class="hljs-keyword">await</span> process_transaction(transactions[i])
+      }
+    }
+  })
+}
+
+<span class="hljs-comment">// save the lastest block on redis</span>
+<span class="hljs-keyword">async</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">update_block_head</span>(<span class="hljs-params">head</span>) </span>{
+  <span class="hljs-keyword">return</span> <span class="hljs-keyword">await</span> redis.setAsync(<span class="hljs-string">'eth:last-block'</span>, head)
+}
+
+<span class="hljs-comment">// process a new transaction</span>
+<span class="hljs-keyword">async</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">process_transaction</span>(<span class="hljs-params">transaction</span>) </span>{
+  <span class="hljs-keyword">const</span> address = transaction.to.toLowerCase()
+  <span class="hljs-keyword">const</span> amount_in_ether = web3.utils.fromWei(transaction.value)
+
+  <span class="hljs-comment">// check if the receiving address has been generated by our wallet</span>
+  <span class="hljs-keyword">const</span> watched_address = <span class="hljs-keyword">await</span> redis.existsAsync(<span class="hljs-string">`eth:address:public:<span class="hljs-subst">${address}</span>`</span>)
+  <span class="hljs-keyword">if</span> (watched_address !== <span class="hljs-number">1</span>) {
+    <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>
+  }
+
+  <span class="hljs-comment">// then check if it's a new transaction that should be taken into account</span>
+  <span class="hljs-keyword">const</span> transaction_exists = <span class="hljs-keyword">await</span> redis.existsAsync(<span class="hljs-string">`eth:address:public:<span class="hljs-subst">${address}</span>`</span>)
+  <span class="hljs-keyword">if</span> (transaction_exists === <span class="hljs-number">1</span>) {
+    <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>
+  }
+
+  <span class="hljs-comment">// update the list of transactions for that address</span>
+  <span class="hljs-keyword">const</span> data = <span class="hljs-keyword">await</span> redis.getAsync(<span class="hljs-string">`eth:address:public:<span class="hljs-subst">${address}</span>`</span>)
+  <span class="hljs-keyword">let</span> addr_data = <span class="hljs-built_in">JSON</span>.parse(data)
+  addr_data[transaction.hash] = {
+    <span class="hljs-attr">value</span>: amount_in_ether
+  }
+
+  <span class="hljs-keyword">await</span> redis.setAsync(<span class="hljs-string">`eth:address:public:<span class="hljs-subst">${address}</span>`</span>, <span class="hljs-built_in">JSON</span>.stringify(addr_data))
+  <span class="hljs-keyword">await</span> redis.setAsync(<span class="hljs-string">`eth:transaction:<span class="hljs-subst">${transaction.hash}</span>`</span>, transaction)
+  
+  <span class="hljs-comment">// move funds to the cold wallet address</span>
+  <span class="hljs-comment">// const cold_txid = await move_to_cold_storage(address, amount_in_ether)</span>
+  
+  <span class="hljs-comment">// send notification to the kafka server</span>
+  <span class="hljs-keyword">await</span> queue_producer.send(<span class="hljs-string">'transaction'</span>, [{
+    <span class="hljs-attr">txid</span>: transaction.hash,
+    <span class="hljs-attr">value</span>: amount_in_ether,
+    <span class="hljs-attr">to</span>: transaction.to,
+    <span class="hljs-attr">from</span>: transaction.from,
+    <span class="hljs-comment">//cold_txid: cold_txid,</span>
+  }])
+
+  <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>
+}
+
+<span class="hljs-built_in">module</span>.exports = start_syncing_blocks
+</code></pre>
+<h1><a class="anchor" aria-hidden="true" id="总结"></a><a href="#总结" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>总结</h1>
+<p>我们已经完成了交易所Simplechain钱包服务的设计与实现，这个服务还可以从以下几个方面加以改进：</p>
 <ul>
-<li>Sync blocks and start listening for new blocks</li>
-<li>@param {Number} current_block_number - The last block processed</li>
-<li>@param {Object} opts - A list of options with callbacks for events
-*/
-async function sync_blocks(current_block_number, opts) {
-// first sync the wallet to the latest block
-let latest_block_number = await web3.eth.getBlockNumber()
-let synced_block_number = await sync_to_block(current_block_number, latest_block_number, opts)</li>
+<li>增加错误处理</li>
+<li>增加命令类型</li>
+<li>交易签名与交易广播</li>
+<li>部署合约</li>
 </ul>
-<p>// subscribe to new blocks
-web3.eth.subscribe('newBlockHeaders', (error, result) =&gt; error &amp;&amp; console.log(error))
-.on(&quot;data&quot;, async function(blockHeader) {
-return await process_block(blockHeader.number, opts)
-})</p>
-<p>return synced_block_number
-}</p>
-<p>// Load all data about the given block and call the callbacks if defined
-async function process_block(block_hash_or_id, opts) {
-// load block information by id or hash
-const block = await web3.eth.getBlock(block_hash_or_id, true)
-// call the onTransactions callback if defined
-opts.onTransactions ? opts.onTransactions(block.transactions) : null;
-// call the onBlock callback if defined
-opts.onBlock ? opts.onBlock(block_hash_or_id) : null;
-return block
-}</p>
-<p>// Traverse all unprocessed blocks between the current index and the lastest block number
-async function sync_to_block(index, latest, opts) {
-if (index &gt;= latest) {
-return index;
-}
-await process_block(index + 1, opts)
-return await sync_to_block(index + 1, latest, opts)
-}</p>
-<p>module.exports = sync_blocks
-在上面的代码中，我们从钱包服务之前处理的最新区块开始，一直同步到区块链的当前最新区块。一旦我们同步到最新区块，就开始订阅新区块事件。对于每一个区块，我们都执行如下的回调函数以处理区块头以及区块中的交易列表：</p>
-<p>onTransactions
-onBlock
-通常包含如下的处理步骤：</p>
-<p>监听新区块，获取区块中的全部交易
-过滤掉与钱包地址无关的交易
-将每个相关的交易都发往队列
-将地址上的资金归集到安全的存储
-更新已处理的区块编号
-最终的代码如下：</p>
-<p>const web3 = require(&quot;web3&quot;)
-const redis = require('./redis')
-const queue = require('./queue')
-const sync_blocks = require('./sync_blocks')</p>
-<p>/**</p>
-<ul>
-<li>Start syncing blocks and listen for new transactions on the blockchain
-*/
-async function start_syncing_blocks() {
-// start from the last block number processed or 0 (you can use the current block before deploying for the first time)
-let last_block_number = await redis.getAsync('eth:last-block')
-last_block_number = last_block_number || 0
-// start syncing blocks
-sync_blocks(last_block_number, {
-// for every new block update the latest block value in redis
-onBlock: update_block_head,
-// for new transactions check each transaction and see if it's new
-onTransactions: async (transactions) =&gt; {
-for (let i in transactions) {
-await process_transaction(transactions[i])
-}
-}
-})
-}</li>
-</ul>
-<p>// save the lastest block on redis
-async function update_block_head(head) {
-return await redis.setAsync('eth:last-block', head)
-}</p>
-<p>// process a new transaction
-async function process_transaction(transaction) {
-const address = transaction.to.toLowerCase()
-const amount_in_ether = web3.utils.fromWei(transaction.value)</p>
-<p>// check if the receiving address has been generated by our wallet
-const watched_address = await redis.existsAsync(<code>eth:address:public:${address}</code>)
-if (watched_address !== 1) {
-return false
-}</p>
-<p>// then check if it's a new transaction that should be taken into account
-const transaction_exists = await redis.existsAsync(<code>eth:address:public:${address}</code>)
-if (transaction_exists === 1) {
-return false
-}</p>
-<p>// update the list of transactions for that address
-const data = await redis.getAsync(<code>eth:address:public:${address}</code>)
-let addr_data = JSON.parse(data)
-addr_data[transaction.hash] = {
-value: amount_in_ether
-}</p>
-<p>await redis.setAsync(<code>eth:address:public:${address}</code>, JSON.stringify(addr_data))
-await redis.setAsync(<code>eth:transaction:${transaction.hash}</code>, transaction)</p>
-<p>// move funds to the cold wallet address
-// const cold_txid = await move_to_cold_storage(address, amount_in_ether)</p>
-<p>// send notification to the kafka server
-await queue_producer.send('transaction', [{
-txid: transaction.hash,
-value: amount_in_ether,
-to: transaction.to,
-from: transaction.from,
-//cold_txid: cold_txid,
-}])</p>
-<p>return true
-}</p>
-<p>module.exports = start_syncing_blocks
-6、总结
-我们已经完成了交易所以太坊钱包服务的设计与实现，这个服务还可以从以下几个方面加以改进：</p>
-<p>增加错误处理
-增加命令类型
-交易签名与交易广播
-部署合约
-你可以试着自己来设计实现上述这些特性！</p>
-</span></div></article></div><div class="docs-prevnext"><a class="docs-prev button" href="/sipc-docs/docs/docs_43"><span class="arrow-prev">← </span><span>区块链浏览器</span></a><a class="docs-next button" href="/sipc-docs/docs/docs_45"><span>社区项目</span><span class="arrow-next"> →</span></a></div></div></div><nav class="onPageNav"></nav></div><footer class="nav-footer" id="footer"><section class="sitemap"><a href="/sipc-docs/" class="nav-home"></a><div><h5>文档</h5><a href="/sipc-docs/docs/en/doc1.html">快速开始</a><a href="/sipc-docs/docs/en/doc2.html">引导</a><a href="/sipc-docs/docs/en/doc3.html">API接口</a></div><div><h5>社区</h5><a href="/sipc-docs/en/https://t.me/SimpleChainOfficial">Telegram</a><a href="https://medium.com/@SimpleChain" target="_blank" rel="noreferrer noopener">Medium</a><a href="https://twitter.com/SimpleChain">Twitter</a><a href="https://www.linkedin.com/company/simplechain-foundation/" target="_blank" rel="noreferrer noopener">Linkedln</a></div><div><h5>更多</h5><a href="https://www.simplechain.com">官网</a><a href="https://github.com/simplechain-org">GitHub</a><a class="github-button" data-icon="octicon-star" data-count-href="/facebook/docusaurus/stargazers" data-show-count="true" data-count-aria-label="# stargazers on GitHub" aria-label="Star this project on GitHub">Star</a></div></section><section class="copyright">Copyright © 2020 SimpleChain Community</section></footer></div></body></html>
+</span></div></article></div><div class="docs-prevnext"><a class="docs-prev button" href="/sipc-docs/docs/docs_43"><span class="arrow-prev">← </span><span>区块链浏览器</span></a><a class="docs-next button" href="/sipc-docs/docs/docs_45"><span>社区项目</span><span class="arrow-next"> →</span></a></div></div></div><nav class="onPageNav"><ul class="toc-headings"><li><a href="#docker-搭建">docker 搭建</a></li><li><a href="#源码搭建">源码搭建</a></li><li><a href="#社区节点信">社区节点信</a></li><li><a href="#创建新的以太坊账户">创建新的以太坊账户</a><ul class="toc-headings"><li><a href="#处理新交易">处理新交易</a></li></ul></li></ul></nav></div><footer class="nav-footer" id="footer"><section class="sitemap"><a href="/sipc-docs/" class="nav-home"></a><div><h5>文档</h5><a href="/sipc-docs/docs/en/doc1.html">快速开始</a><a href="/sipc-docs/docs/en/doc2.html">引导</a><a href="/sipc-docs/docs/en/doc3.html">API接口</a></div><div><h5>社区</h5><a href="/sipc-docs/en/https://t.me/SimpleChainOfficial">Telegram</a><a href="https://medium.com/@SimpleChain" target="_blank" rel="noreferrer noopener">Medium</a><a href="https://twitter.com/SimpleChain">Twitter</a><a href="https://www.linkedin.com/company/simplechain-foundation/" target="_blank" rel="noreferrer noopener">Linkedln</a></div><div><h5>更多</h5><a href="https://www.simplechain.com">官网</a><a href="https://github.com/simplechain-org">GitHub</a><a class="github-button" data-icon="octicon-star" data-count-href="/facebook/docusaurus/stargazers" data-show-count="true" data-count-aria-label="# stargazers on GitHub" aria-label="Star this project on GitHub">Star</a></div></section><section class="copyright">Copyright © 2020 SimpleChain Community</section></footer></div></body></html>
