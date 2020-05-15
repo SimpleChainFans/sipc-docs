@@ -62,7 +62,7 @@
 <p><strong>交易回执共识信息</strong></p>
 <p>共识意味在在校验区块合法性时，这部分信息也参与校验。这些信息参与校验的原因是确保交易必须在区块中的固定顺序中执行，且记录了交易执行后的状态信息。这样可强化交易顺序。</p>
 <ul>
-<li>Status： 成功与否，1表示成功，0表示失败。注意在高度1035301前，并非1或0，而是 StateRoot，表示此交易执行完毕后的以太坊状态。</li>
+<li>Status： 成功与否，1表示成功，0表示失败。注意在高度1035301前，并非1或0，而是 StateRoot，表示此交易执行完毕后的Simplechain状态。</li>
 </ul>
 <pre><code class="hljs css language-javascript"><span class="hljs-comment">//core/state_processor.go:104</span>
 <span class="hljs-keyword">var</span> root []byte
@@ -151,7 +151,7 @@ func (r *Receipt) EncodeRLP(w io.Writer) error {
 }
 </code></pre>
 <h3><a class="anchor" aria-hidden="true" id="交易回执构造"></a><a href="#交易回执构造" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>交易回执构造</h3>
-<p>交易回执是在以太坊虚拟机处理完交易后，根据结果整理出的交易执行结果信息。反映了交易执行前后以太坊变化以及交易执行状态。</p>
+<p>交易回执是在Simplechain虚拟机处理完交易后，根据结果整理出的交易执行结果信息。反映了交易执行前后Simplechain变化以及交易执行状态。</p>
 <p>构造细节，已经在前面提及，不再细说。这里给出的完整的交易回执构造代码。</p>
 <pre><code class="hljs css language-javascript"><span class="hljs-comment">// core/state_processor.go:94</span>
 <span class="hljs-attr">context</span> := NewEVMContext(msg, header, bc, author) 
@@ -183,7 +183,7 @@ receipt.TransactionIndex = uint(statedb.TxIndex())
 <span class="hljs-keyword">return</span> receipt, gas, err
 </code></pre>
 <h3><a class="anchor" aria-hidden="true" id="交易回执存储"></a><a href="#交易回执存储" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>交易回执存储</h3>
-<p>交易回执作为交易执行中间产物，为了方便快速获取某笔交易的执行明细。以太坊中有跟随区块存储时实时存储交易回执。但为了降低存储量，只存储了必要内容。</p>
+<p>交易回执作为交易执行中间产物，为了方便快速获取某笔交易的执行明细。Simplechain中有跟随区块存储时实时存储交易回执。但为了降低存储量，只存储了必要内容。</p>
 <p>首先，在存储时，将交易回执对象转换为精简内容。</p>
 <pre><code class="hljs css language-javascript"><span class="hljs-comment">//core/rawdb/accessors_chain.go:338</span>
 <span class="hljs-attr">storageReceipts</span> := make([]*types.ReceiptForStorage, len(receipts))

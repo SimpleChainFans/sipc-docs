@@ -59,9 +59,9 @@
 <p>在<a href="https://www.simplechain.com/">SimpleChain</a>网络中，交易执行属于一个事务。具有原子性、一致性、隔离性、持久性特点。</p>
 <ul>
 <li><code>原子性</code>： 是不可分割的最小执行单位，要么做，要么不做。</li>
-<li><code>一致性</code>： 同一笔交易执行，必然是将以太坊账本从一个一致性状态变到另一个一致性状态。</li>
+<li><code>一致性</code>： 同一笔交易执行，必然是将Simplechain账本从一个一致性状态变到另一个一致性状态。</li>
 <li><code>隔离性</code>： 交易执行途中不会受其他交易干扰。</li>
-<li><code>持久性</code>： 一旦交易提交，则对以太坊账本的改变是永久性的。后续的操作不会对其有任何影响。</li>
+<li><code>持久性</code>： 一旦交易提交，则对Simplechain账本的改变是永久性的。后续的操作不会对其有任何影响。</li>
 </ul>
 <p>因为是事务型，因此我们需确保在执行事务前让交易符合一些设计要求。</p>
 <ul>
@@ -112,8 +112,8 @@
 </code></pre>
 <p>首先看私有的<code>txdata</code>结构体中定义了交易消息中所有必要内容，依次对应前面所说的交易数据结构。有三点需要特别注意。</p>
 <ul>
-<li><p>一是因涉及哈希运算，因此不能随意调整字段定义顺序，非特殊处理情况下必须按要求定义字段。所以<code>txdata</code>中定义的字段，是符合以太坊交易消息内容顺序的。</p></li>
-<li><p>二是在涉及货币计算时，不能因为精度缺失引起计算不准确问题。因此在以太坊、比特币等所有区块链设计中，货币类型均是整数，但最小值<code>1</code>所代表的币值不一样。在<a href="https://www.simplechain.com/">SimpleChain</a>中一个sipc等于10的18次方Amount，当要表示100亿sipc时，Amount等于10的27次方。已远远超过Uint64所能表示的范围(0-18446744073709551615)。因此<a href="https://www.simplechain.com/">SimpleChain</a>一律采用Go标准包提供的大数 <code>big.Int</code> 进行货币运算和定义货币。这里的<code>Price</code>和<code>Amount</code>均是 big.Int 指针类型。另外，关于签名的三个值也是因为数字太大，而采用 big.Int 类型。</p></li>
+<li><p>一是因涉及哈希运算，因此不能随意调整字段定义顺序，非特殊处理情况下必须按要求定义字段。所以<code>txdata</code>中定义的字段，是符合Simplechain交易消息内容顺序的。</p></li>
+<li><p>二是在涉及货币计算时，不能因为精度缺失引起计算不准确问题。因此在Simplechain、比特币等所有区块链设计中，货币类型均是整数，但最小值<code>1</code>所代表的币值不一样。在<a href="https://www.simplechain.com/">SimpleChain</a>中一个sipc等于10的18次方Amount，当要表示100亿sipc时，Amount等于10的27次方。已远远超过Uint64所能表示的范围(0-18446744073709551615)。因此<a href="https://www.simplechain.com/">SimpleChain</a>一律采用Go标准包提供的大数 <code>big.Int</code> 进行货币运算和定义货币。这里的<code>Price</code>和<code>Amount</code>均是 big.Int 指针类型。另外，关于签名的三个值也是因为数字太大，而采用 big.Int 类型。</p></li>
 <li><p>三是最后的<code>Hash</code>字段，这不属于交易内容的一部分，只是为了在交易的JSON中包含交易哈希。为了防止参与哈希运算，该字段被标记为<code>rlp:&quot;-&quot;</code>。其次，Transaction 还定义了三个缓存项：交易哈希值(hash)、交易大小(size)和交易发送方(from)。缓存的原因是使用频次高且CPU计算量大。</p></li>
 </ul>
 <p>在区块链中最见的是哈希运算，所有链上数据基本都要参与哈希运算。而哈希运算是CPU密集型的，因此有必要对一些哈希运算等进行缓存，降低CPU计算量。首次计算完交易哈希值后，便缓存交易哈希到hash字段上。</p>
@@ -140,7 +140,7 @@
 </code></pre>
 <p>如上，执行 <code>rlp.Encode</code>获得可得到数据大小，缓存结果并返回。</p>
 <blockquote>
-<p>rlp 是以太坊定义的一套区块链数据编码解码协议，而非采用常见的 gzip、json、Protobuf 编码格式。目的是为了尽可能地压缩数据，毕竟区块链数据结构中只有常见的几种数据类型，不需要复杂的协议涉及，即可满足要求。</p>
+<p>rlp 是Simplechain定义的一套区块链数据编码解码协议，而非采用常见的 gzip、json、Protobuf 编码格式。目的是为了尽可能地压缩数据，毕竟区块链数据结构中只有常见的几种数据类型，不需要复杂的协议涉及，即可满足要求。</p>
 </blockquote>
 <p>最后一个缓存项是交易发送方(from)。交易的发送方，是根据签名反向计算过程，同样是CPU密集型运算。为了保证交易合法性，程序中到处都有涉及取交易发送方地址和校验发送方的合法性。只有正确的签名才能得到发送方地址。因此对交易发送方也进行缓存。</p>
 <pre><code class="hljs css language-go"><span class="hljs-comment">//core/types/transaction_signing.go:72</span>

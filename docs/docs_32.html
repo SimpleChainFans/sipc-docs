@@ -56,7 +56,7 @@
             });
         </script></nav></div><div class="container mainContainer docsContainer"><div class="wrapper"><div class="post"><header class="postHeader"><h1 id="__docusaurus" class="postHeaderTitle">编写合约</h1></header><article><div><span><h1><a class="anchor" aria-hidden="true" id="cns方案"></a><a href="#cns方案" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>CNS方案</h1>
 <h2><a class="anchor" aria-hidden="true" id="概述"></a><a href="#概述" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>概述</h2>
-<p>调用以太坊智能合约的流程包括：</p>
+<p>调用Simplechain智能合约的流程包括：</p>
 <ol>
 <li>编写合约；</li>
 <li>编译合约得到合约接口abi描述；</li>
@@ -70,21 +70,21 @@
 <li>合约重新部署后，一个或多个调用方都需更新合约地址；</li>
 <li>不便于进行版本管理以及合约灰度升级。</li>
 </ol>
-<p>为解决以上问题，给调用者提供良好的智能合约调用体验，FISCO BCOS提出<strong>CNS合约命名服务</strong>。</p>
+<p>为解决以上问题，给调用者提供良好的智能合约调用体验，Simplechain提出<strong>CNS合约命名服务</strong>。</p>
 <h2><a class="anchor" aria-hidden="true" id="名词解释"></a><a href="#名词解释" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>名词解释</h2>
 <ul>
 <li><strong>CNS</strong>（Contract Name Service）通过提供链上合约名称与合约地址映射关系的记录及相应的查询功能，方便调用者通过记忆简单的合约名来实现对链上合约的调用。</li>
 <li><strong>CNS信息</strong>为合约名称、合约版本、合约地址和合约abi</li>
 <li><strong>CNS表</strong>用于存储CNS信息</li>
 </ul>
-<h2><a class="anchor" aria-hidden="true" id="cns对比以太坊原有调用方式的优势"></a><a href="#cns对比以太坊原有调用方式的优势" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>CNS对比以太坊原有调用方式的优势</h2>
+<h2><a class="anchor" aria-hidden="true" id="cns对比simplechain原有调用方式的优势"></a><a href="#cns对比simplechain原有调用方式的优势" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>CNS对比Simplechain原有调用方式的优势</h2>
 <ul>
 <li>简化调用合约方式；</li>
 <li>合约升级对调用者透明，支持合约灰度升级。</li>
 </ul>
 <h2><a class="anchor" aria-hidden="true" id="对标ens"></a><a href="#对标ens" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>对标ENS</h2>
-<p>ENS (Ethereum Name Service) ，以太坊名称服务。</p>
-<p>ENS的功能类似我们较熟悉的DNS(Domain Name Service)域名系统，但提供的不是Internet网址，而是将以太坊(Ethereum)合约地址和钱包地址以xxxxxx.eth网址的方式表示，用于存取合约或转账。两者相比：</p>
+<p>ENS (Ethereum Name Service) ，Simplechain名称服务。</p>
+<p>ENS的功能类似我们较熟悉的DNS(Domain Name Service)域名系统，但提供的不是Internet网址，而是将Simplechain(Ethereum)合约地址和钱包地址以xxxxxx.eth网址的方式表示，用于存取合约或转账。两者相比：</p>
 <ul>
 <li>ENS映射的地址类型包括合约地址及钱包地址，CNS可支持，当地址类型为钱包地址时合约abi为空。</li>
 <li>ENS有竞拍功能，CNS不需支持。</li>
@@ -99,7 +99,7 @@
 <p><center>SDK部署合约及调用合约流程</center></p>
 <ul>
 <li>部署合约时，SDK生成合约对应的Java类，调用类的deploy接口发布合约获得合约地址，然后调用CNS合约insert接口上链CNS信息。</li>
-<li>调用合约时，SDK引入合约的Java类，并加载实例化。load加载接口可传入合约地址（原有以太坊方式）或合约名称和合约版本的组合（CNS方式），SDK处理CNS方式时通过调用CNS模块查询链上信息来获取合约地址。</li>
+<li>调用合约时，SDK引入合约的Java类，并加载实例化。load加载接口可传入合约地址（原有Simplechain方式）或合约名称和合约版本的组合（CNS方式），SDK处理CNS方式时通过调用CNS模块查询链上信息来获取合约地址。</li>
 <li>对于缺少版本号的合约调用，由SDK实现默认调用合约的最新版本。</li>
 <li>上链的合约abi信息属于可选字段。</li>
 </ul>
@@ -136,7 +136,7 @@ contract CNS
 <li>selectByNameAndVersion接口参数为合约名称name和合约版本version，返回表中该合约该版本的唯一地址。</li>
 </ul>
 <h4><a class="anchor" aria-hidden="true" id="更新cns表方式"></a><a href="#更新cns表方式" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>更新CNS表方式</h4>
-<p><strong>预编译合约</strong>是FISCO BCOS底层通过C++实现的一种高效智能合约，用于FISCO BCOS底层的系统信息配置与管理。引入precompiled逻辑后，FISCO BCOS节点执行交易的流程如下：</p>
+<p><strong>预编译合约</strong>是Simplechain底层通过C++实现的一种高效智能合约，用于Simplechain底层的系统信息配置与管理。引入precompiled逻辑后，Simplechain节点执行交易的流程如下：</p>
 <p>CNS合约属于预编译合约类型，节点将通过内置C++代码逻辑实现对CNS表的插入和查询操作，不经EVM执行，因此CNS合约只提供了函数接口描述而没有函数实现。<strong>预置CNS合约的precompiled地址为0x1004。</strong></p>
 <h4><a class="anchor" aria-hidden="true" id="合约接口返回示例"></a><a href="#合约接口返回示例" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>合约接口返回示例</h4>
 <p>selectByName和selectByNameAndVersion接口返回的string为Json格式，示例如下：</p>
@@ -189,4 +189,4 @@ nstant\":true,\"inputs\":[],\"name\":\"get\",\"outputs\":[{\"name\":\"\",\"type\
 <li>callByCNS：通过CNS方式调用合约</li>
 <li>queryCNS：根据合约名称和合约版本号（可选参数）查询CNS表信息</li>
 </ul>
-</span></div></article></div><div class="docs-prevnext"><a class="docs-prev button" href="/sipc-docs/docs/docs_31"><span class="arrow-prev">← </span><span>合约编译器</span></a><a class="docs-next button" href="/sipc-docs/docs/docs_33"><span>发布合约</span><span class="arrow-next"> →</span></a></div></div></div><nav class="onPageNav"><ul class="toc-headings"><li><a href="#概述">概述</a></li><li><a href="#名词解释">名词解释</a></li><li><a href="#cns对比以太坊原有调用方式的优势">CNS对比以太坊原有调用方式的优势</a></li><li><a href="#对标ens">对标ENS</a></li><li><a href="#模块架构">模块架构</a></li><li><a href="#核心流程">核心流程</a></li><li><a href="#数据结构">数据结构</a><ul class="toc-headings"><li><a href="#cns表结构">CNS表结构</a></li><li><a href="#合约接口">合约接口</a></li></ul></li><li><a href="#sdk_api">SDK_API</a><ul class="toc-headings"><li><a href="#registercns">registerCns</a></li><li><a href="#resolve">resolve</a></li></ul></li><li><a href="#操作工具">操作工具</a></li></ul></nav></div><footer class="nav-footer" id="footer"><section class="sitemap"><a href="/sipc-docs/" class="nav-home"></a><div><h5>文档</h5><a href="/sipc-docs/docs/en/doc1.html">快速开始</a><a href="/sipc-docs/docs/en/doc2.html">引导</a><a href="/sipc-docs/docs/en/doc3.html">API接口</a></div><div><h5>社区</h5><a href="/sipc-docs/en/https://t.me/SimpleChainOfficial">Telegram</a><a href="https://medium.com/@SimpleChain" target="_blank" rel="noreferrer noopener">Medium</a><a href="https://twitter.com/SimpleChain">Twitter</a><a href="https://www.linkedin.com/company/simplechain-foundation/" target="_blank" rel="noreferrer noopener">Linkedln</a></div><div><h5>更多</h5><a href="https://www.simplechain.com">官网</a><a href="https://github.com/simplechain-org">GitHub</a><a class="github-button" data-icon="octicon-star" data-count-href="/facebook/docusaurus/stargazers" data-show-count="true" data-count-aria-label="# stargazers on GitHub" aria-label="Star this project on GitHub">Star</a></div></section><section class="copyright">Copyright © 2020 SimpleChain Community</section></footer></div></body></html>
+</span></div></article></div><div class="docs-prevnext"><a class="docs-prev button" href="/sipc-docs/docs/docs_31"><span class="arrow-prev">← </span><span>合约编译器</span></a><a class="docs-next button" href="/sipc-docs/docs/docs_33"><span>发布合约</span><span class="arrow-next"> →</span></a></div></div></div><nav class="onPageNav"><ul class="toc-headings"><li><a href="#概述">概述</a></li><li><a href="#名词解释">名词解释</a></li><li><a href="#cns对比simplechain原有调用方式的优势">CNS对比Simplechain原有调用方式的优势</a></li><li><a href="#对标ens">对标ENS</a></li><li><a href="#模块架构">模块架构</a></li><li><a href="#核心流程">核心流程</a></li><li><a href="#数据结构">数据结构</a><ul class="toc-headings"><li><a href="#cns表结构">CNS表结构</a></li><li><a href="#合约接口">合约接口</a></li></ul></li><li><a href="#sdk_api">SDK_API</a><ul class="toc-headings"><li><a href="#registercns">registerCns</a></li><li><a href="#resolve">resolve</a></li></ul></li><li><a href="#操作工具">操作工具</a></li></ul></nav></div><footer class="nav-footer" id="footer"><section class="sitemap"><a href="/sipc-docs/" class="nav-home"></a><div><h5>文档</h5><a href="/sipc-docs/docs/en/doc1.html">快速开始</a><a href="/sipc-docs/docs/en/doc2.html">引导</a><a href="/sipc-docs/docs/en/doc3.html">API接口</a></div><div><h5>社区</h5><a href="/sipc-docs/en/https://t.me/SimpleChainOfficial">Telegram</a><a href="https://medium.com/@SimpleChain" target="_blank" rel="noreferrer noopener">Medium</a><a href="https://twitter.com/SimpleChain">Twitter</a><a href="https://www.linkedin.com/company/simplechain-foundation/" target="_blank" rel="noreferrer noopener">Linkedln</a></div><div><h5>更多</h5><a href="https://www.simplechain.com">官网</a><a href="https://github.com/simplechain-org">GitHub</a><a class="github-button" data-icon="octicon-star" data-count-href="/facebook/docusaurus/stargazers" data-show-count="true" data-count-aria-label="# stargazers on GitHub" aria-label="Star this project on GitHub">Star</a></div></section><section class="copyright">Copyright © 2020 SimpleChain Community</section></footer></div></body></html>
