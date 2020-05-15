@@ -4,7 +4,7 @@ title: Sipc API
 sidebar_label: Sipc API
 ---
 
-#### API方法
+#### Sipc API方法列表：
 
 - [`web3_clientVersion`](#web3_clientVersion)
 - [`web3_sha3`](#web3_sha3)
@@ -48,23 +48,53 @@ sidebar_label: Sipc API
 - [`eth_blockNumber`](#eth_blockNumber)
 ---
 
-#### web3_clientVersion
+## JSON-RPC Endpoint
+
+Default JSON-RPC endpoints:
+
+| Client | URL                                             |
+| ------ | ----------------------------------------------- |
+| Go     | [http://localhost:8545](http://localhost:8545/) |
+
+---
+
+##  默认区块参数
+
+以下方法有一个额外的默认区块参数:
+
+- eth_getBalance
+- eth.getCode
+- eth.getTransactionCount
+- eth_getStorageAt
+- eth_call
+
+当请求作用于simplechain的状态时，最后一个默认的区块参数决定了区块的高度。
+
+以下选项可用于默认区块参数:
+
+- `HEX String` -整数区块数
+- `String "earliest"` 最早的/创世块
+- `String "latest"` - 最新挖出来的区块
+- `String "pending"` - 对于待处理状态/交易
+
+
+## web3_clientVersion
 
 返回当前的客户端版本
 
 **参数**
 
-`无`
+- `无`
 
 **返回**
 
-`string:` 当前客户端版本
+- `string:` 当前客户端版本
 
 **示例**
 
 ```javascript
 // Request
-curl -X POST --data '{"jsonrpc":"2.0","method":"web3_clientVersion","params":[],"id":67}'
+curl -X POST localhost:8545  -H "Content-Type:application/json" --data '{"jsonrpc":"2.0","method":"web3_clientVersion","params":[],"id":68}'
 
 //Result
 {
@@ -73,24 +103,25 @@ curl -X POST --data '{"jsonrpc":"2.0","method":"web3_clientVersion","params":[],
    "result": "Mist/v0.9.3/darwin/go1.4.1" 
 }
 ```
+-----
 
-#### web3_sha3
+## web3_sha3
 
-返回指定数据的 Keccak-256(不同于标准的SHA3-256算法)哈希值。
+返回给定数据的keccak-256（不是标准化的sha3-256）
 
 **参数**
 
-`string:` 要计算 SHA3 哈希的数据
+- `string:` 要计算 SHA3 哈希的数据必须是（hex string）
 
 **返回值**
 
-`string:` 指定字符串的 SHA3 结果
+- `string:` 指定字符串的 SHA3 结果
 
 **示例**
 
 ```javascript
   // Request
-curl -X POST --data '{"jsonrpc":"2.0","method":"web3_sha3","params":["0x68656c6c6f20776f726c64"],"id":64}'
+curl -X POST localhost:8545  -H "Content-Type:application/json" --data '{"jsonrpc":"2.0","method":"web3_sha3","params":["0x68656c6c6f20776f726c64"],"id":64}'
 
 //Result
 {
@@ -98,94 +129,128 @@ curl -X POST --data '{"jsonrpc":"2.0","method":"web3_sha3","params":["0x68656c6c
   "jsonrpc": "2.0",
   "result": "0x47173285a8d7341e5e972fc677286384f802f8ef42a5ec5f03bbfa254cb01fad" 
 }
- ```
- #### net_version
+```
+----
 
-返回当前连接网络的 ID。 
+## net_version
+
+返回当前连接网络的ID
 
 **参数**
 
-`无`
+- `无`
 
 **返回值**
 
-`string:` 当前连接网络的ID
+- `String:` 当前连接网络的ID,`"1": Simplechain主网`,`"3": 测试网络`;
 
 **示例**
 
 ```javascript
 //Request
-curl -X POST --data '{"jsonrpc":"2.0","method":"net_version","params":[],"id":67}'
+curl -X POST localhost:8545  -H "Content-Type:application/json" --data '{"jsonrpc":"2.0","method":"net_version","params":[],"id":67}'
 
 //Response
 {
-   "id":67,
    "jsonrpc": "2.0",
+   "id":67,
    "result": "3" 
 }
 ```
-#### net_listening
+----
 
-返回客户端是否处于监听网络连接状态。
+## net_listening
+
+返回客户端是否处于监听网络连接状态，如果处于监听则返回`true`,否则返回`false`.
 
 **参数**
 
-`无`
+- `无`
 
 **返回值**
 
-`bool:` 客户端处于监听状态时返回 true，否则返回 false
+- `bool:` 客户端处于监听状态时返回 true，否则返回 false
 
 **示例**
 
 ```javascript
 //Request
-curl -X POST --data '{"jsonrpc":"2.0","method":"net_listening","params":[],"id":67}'
+curl -X POST localhost:8545  -H "Content-Type:application/json" --data '{"jsonrpc":"2.0","method":"net_listening","params":[],"id":67}'
 
 //Response
 {
-   "id":67,
    "jsonrpc":"2.0",
+   "id":67,
    "result":true 
 }
 ```
+---
 
-#### net_peerCount
+## net_peerCount
 
-返回当前客户端所连接的对端节点数量。
+返回当前连接到客户端的节点数。
 
 **参数**
 
-`无`
+- `无`
   
 **返回值**
 
-`quantity:` 整数，所连接对端节点旳数量
+- `Quantity:` 已经连接的节点数
 
 **示例**
 
 ```javascript
 //Request
-curl -X POST --data '{"jsonrpc":"2.0","method":"net_peerCount","params":[],"id":74}'
+curl -X POST localhost:8545  -H "Content-Type:application/json" --data '{"jsonrpc":"2.0","method":"net_peerCount","params":[],"id":74}'
 
 //Response
 {
   "id":74,
   "jsonrpc": "2.0",
-  "result": "0x2" 
+  "result": "0xf" 
 }
 ```
- #### eth_syncing
+---
 
-对于已经同步的客户端，该调用返回一个描述同步状态的对象;对于未同步的客户 端，返回 false。
+## eth_protocolVersion
+
+返回当前simplechain的协议版本。
+
+**参数**
+
+- 无
+
+**返回**
+
+- `String` 当前simplechain的协议版本.
+
+**示例**
+
+```javascript
+//Request
+curl -X POST localhost:8545  -H "Content-Type:application/json" --data '{"jsonrpc":"2.0","method":"eth_protocolVersion","params":[],"id":67}'
+
+//Response
+{
+  "jsonrpc":"2.0",
+  "id":67,
+  "result":"0x40"
+}
+```
+------
+
+## eth_syncing
+
+返回包含有关同步状态的数据的对象 或者false
 
 **数参**
 
-`无`
+- `无`
 
 **返回值**
 
-`Object|Boolean`, 同步状态对象或 false。同步对象的结构如下: 
+- `Object|Boolean`, 同步状态对象或 false。同步对象的结构如下: 
 - `startingBlock:` QUANTITY - 开始块
 - `currentBlock:` QUANTITY - 当前块，同eth_blockNumber 
 - `highestBlock:` QUANTITY - 预估最高块
@@ -194,8 +259,9 @@ curl -X POST --data '{"jsonrpc":"2.0","method":"net_peerCount","params":[],"id":
 
 ```javascript
 //Request
-curl -X POST --data '{"jsonrpc":"2.0","method":"eth_syncing","params":[],"id":1}'
+curl -X POST localhost:8545  -H "Content-Type:application/json" --data '{"jsonrpc":"2.0","method":"eth_syncing","params":[],"id":1}'
 //Response
+//在同步过程中
 {
    "id":1,
    "jsonrpc": "2.0", 
@@ -205,30 +271,31 @@ curl -X POST --data '{"jsonrpc":"2.0","method":"eth_syncing","params":[],"id":1}
        highestBlock: '0x454' 
    }
 }
-//如果未同步则结果如下:
+//未同步则结果如下:
 {
-   "id":1,
    "jsonrpc": "2.0",
+   "id":1,
    "result": false 
 }
 ```
-#### eth_coinbase
+## eth_coinbase
 
-返回客户端的 coinbase 地址。 
+返回客户端矿工地址。 
 
 **参数**
 
-`无`
+- `无`
 
 **返回值**
 
-`data:`20 bytes - 当前 coinbase 地址
+- `Data:` 20 bytes - 当前 coinbase 地址
 
 **示例**
 
 ```javascript
 //Request
-curl -X POST --data '{"jsonrpc":"2.0","method":"eth_coinbase","params":[],"id":64}'
+curl -X POST localhost:8545  -H "Content-Type:application/json" --data '{"jsonrpc":"2.0","method":"eth_coinbase","params":[],"id":64}'
+
 //Response
 {
 "id":64,
@@ -236,23 +303,23 @@ curl -X POST --data '{"jsonrpc":"2.0","method":"eth_coinbase","params":[],"id":6
 "result": "0x407d73d8a49eeb85d32cf465507dd71d507100c1" }
 ```
 
-#### eth_mining
+## eth_mining
 
-如果客户端在挖矿则返回 true。 
+如果客户端在挖矿则返回`true`, 否则返回`false`。
 
 **参数**
 
-`无`
+- `无`
 
 **返回值**
 
-`boolean` 当客户端在挖矿时返回 true，否则返回 false
+- `boolean` 当客户端在挖矿时返回 `true`，否则返回 `false`。
 
 **示例**
 
 ```javascript
 //Request
-curl -X POST --data '{"jsonrpc":"2.0","method":"eth_mining","params":[],"id":71}'
+curl -X POST localhost:8545  -H "Content-Type:application/json" --data '{"jsonrpc":"2.0","method":"eth_mining","params":[],"id":71}'
 
 //Response
 {
@@ -262,263 +329,265 @@ curl -X POST --data '{"jsonrpc":"2.0","method":"eth_mining","params":[],"id":71}
 }
 ```
 
-#### eth_hashrate
+## eth_hashrate
 
-返回节点挖矿时每秒可算出的哈希数量。
+返回节点挖矿时每秒可算出的哈希率。
  
 **参数**
 
-`无`
+- `无`
 
 **返回**
 
-`quantity:` 每秒算出的哈希数量
+- `quantity:` 每秒算出的哈希率
 
 **示例**
 
 ```javascript
 //Request
-curl -X POST --data '{"jsonrpc":"2.0","method":"eth_hashrate","params":[],"id":71}'
+curl -X POST localhost:8545  -H "Content-Type:application/json" --data '{"jsonrpc":"2.0","method":"eth_hashrate","params":[],"id":71}'
+
 //Response
 {
-"id":71,
-"jsonrpc": "2.0",
-"result": "0x38a" }
+   "jsonrpc": "2.0",
+   "id":71,
+   "result": "0x38a" 
+}
 ```
-#### eth_gasPrice
+## eth_gasPrice
  
-返回当前的 gas 价格，单位:wei。 
+返回当前每一`gas`价格，单位:`wei`。 
 
 **参数**
 
-`无`
+- `无`
 
 **返回值**
 
-`quantity:`整数，以 wei 为单位的当前 gas 价格
+- `quantity:`整数，以 `wei`为单位的当前 `gas` 价格
 
 **示例**
 
 ```javascript
 //Request
-curl -X POST --data '{"jsonrpc":"2.0","method":"eth_gasPrice","params":[],"id":73}'
+curl -X POST localhost:8545  -H "Content-Type:application/json" --data '{"jsonrpc":"2.0","method":"eth_gasPrice","params":[],"id":73}'
+
 //Response
 {
-"id":73,
-"jsonrpc": "2.0",
-"result": "0x09184e72a000" // 10000000000000 }
+  "jsonrpc": "2.0",
+  "id":73,
+  "result": "0x09184e72a000" // 10000000000000 
+}
 ```
 
-#### eth_accounts
+## eth_accounts
 
 返回客户端持有的地址列表。
 
 **参数**
 
-`无`
+- `无`
 
 **返回**
 
-`string:`客户端持有的地址字符串列表
+- `string[]:`字符串数组，客户端持有的地址字符串列表。
 
 **示例**
 
 ```javascript
 //Request
-curl -X POST --data '{"jsonrpc":"2.0","method":"eth_accounts","params":[],"id":1}'
+curl -X POST localhost:8545  -H "Content-Type:application/json" --data '{"jsonrpc":"2.0","method":"eth_accounts","params":[],"id":1}'
+
 //Response
 {
 "id":1,
 "jsonrpc": "2.0",
 "result": ["0x407d73d8a49eeb85d32cf465507dd71d507100c1"] }
  ```
- #### eth_getBalance
+
+## eth_blockNumber
+
+返回最新块的块号（区块高度）
+
+**参数**
+
+- `无`
+
+**返回**
+
+- 客户端所在的当前块号的整数
+ 
+**示例**
+
+```javascript
+//Request
+curl -X POST localhost:8545  -H "Content-Type:application/json" --data '{"jsonrpc":"2.0","method":"eth_blockNumber","params":[],"id":1}'
+
+//Response
+{
+  "jsonrpc":"2.0",
+  "id":1,
+  "result":"0x5a0d"
+}
+```
+------
+
+## eth_getBalance
 
 返回指定地址账户的余额。
  
 **参数**
 
-`string:`20 字节，要检查余额的地址
-`quantity|tag` - 整数块编号，或者字符串"latest", "earliest" 或 "pending"
+- `data`20 字节，要检查余额的地址
+- `quantity|tag` - 整数块编号，或者字符串"latest", "earliest" 或 "pending"
 
 **返回值**
 
-`quantity:`当前余额，单位:wei
+- `quantity:`当前余额，单位:wei
 
 **示例**
 
 ```javascript
 //Request
-curl -X POST --data '{"jsonrpc":"2.0","method":"eth_getBalance","params":["0x407d73d8a 49eeb85d32cf465507dd71d507100c1", "latest"],"id":1}'
+curl -X POST localhost:8545  -H "Content-Type:application/json" --data '{"jsonrpc":"2.0","method":"eth_getBalance","params":["0x51e766a7f073955c8061073bbba60b10bf12d48a", "latest"],"id":1}'
 //Response
 {
-"id":1,
- "jsonrpc": "2.0",
-"result": "0x0234c8a3397aab58" // 158972490234375000 }
- ```
-
- #### eth_getStorageAt
-
-返回指定地址存储位置的值。
-
-**参数**
-
-`DATA:` 20 字节，存储地址
-`QUANTITY:` 存储中的位置号
-`QUANTITY|TAG` 整数块号，或字符串"latest"、"earliest" 或"pending" 
-
-**返回值**
-
-`DATA:` 指定存储位置的值
-
-**示例**
-
-根据存储计算正确的地址。下面的合约是由上的:`0x391694e7e0b0cce554cb130d723a9d27458f9298`部署在地址`0x295a70b2de5e3953354a6a8344e616ed314d7251`上的
-  
-    contract Storage { 
-        uint pos0;
-        mapping(address => uint) pos1;
-        function Storage() { 
-           pos0 = 1234;
-           pos1[msg.sender] = 5678; 
-        }
-    }
-
-直接提取 pos0 的值:
-
-```javascript
-//Resquest
-curl -X POST --data '{"jsonrpc":"2.0", "method": "eth_getStorageAt", "params": ["0x295 a70b2de5e3953354a6a8344e616ed314d7251", "0x0", "latest"], "id": 1}' localhost:8545
-//Response
-{"jsonrpc":"2.0","id":1,"result":"0x0000000000000000000000000000000000000000000000 0000000000000004d2"}
+  "jsonrpc": "2.0",
+  "id":1,
+  "result": "0x0234c8a3397aab58" // 158972490234375000 
+}
 ```
 
-要提取映射表中的成员就难一些了。映射表中成员位置的计算如下:
-
-    keccack(LeftPad32(key, 0), LeftPad32(map position, 0))
-
-这意味着为了提取`pos1["0x391694e7e0b0cce554cb130d723a9d27458f9298"]`的值， 我们需要如下计算:
-
-    keccak(decodeHex("000000000000000000000000391694e7e0b0cce554cb130d723a9d27 458f9298" + "000000000000000000000000000000000000000000000000000000000000 0001"))
-
-geth 控制台自带的 web3 库可以用来进行这个计算:
-
-    > var key = "000000000000000000000000391694e7e0b0cce554cb130d723a9d27458f9 298" + "0000000000000000000000000000000000000000000000000000000000000001"
-    
-    undefined
-
-    > web3.sha3(key, {"encoding": "hex"}) 
-    "0x6661e9d6d8b923d5bbaab1b96e1dd51ff6ea2a93520fdc9eb75d059238b8c5e9"
-
-现在可以提取指定地址的值了:
-
-```javascript
-//Request
-curl -X POST --data '{"jsonrpc":"2.0", "method": "eth_getStorageAt", "params": ["0x295
- a70b2de5e3953354a6a8344e616ed314d7251", "0x6661e9d6d8b923d5bbaab1b96e1dd5 1ff6ea2a93520fdc9eb75d059238b8c5e9", "latest"], "id": 1}' localhost:8545
-//Response
-{"jsonrpc":"2.0","id":1,"result":"0x0000000000000000000000000000000000000000000000 00000000000000162e"}
-```
-#### eth_getTransactionCount
+## eth_getTransactionCount
 
 返回指定地址发生的交易数量。
 
 **参数**
 
-`DATA:` 20 字节，地址
-`QUANTITY|TAG` 整数块编号，或字符串"latest"、"earliest"或"pending"
+- `DATA:` 20 字节，地址
+- `QUANTITY|TAG` 整数块编号，或字符串"latest"、"earliest"或"pending"
  
 **返回**
 
-`QUANTITY` 从指定地址发出的交易数量，整数
+- `QUANTITY` 从指定地址发出的交易数量，整数。
 
 **示例**
 
 ```javascript
 //Request
-curl -X POST --data '{"jsonrpc":"2.0","method":"eth_getTransactionCount","params":["0x4 07d73d8a49eeb85d32cf465507dd71d507100c1","latest"],"id":1}'
+curl -X POST localhost:8545  -H "Content-Type:application/json" --data '{"jsonrpc":"2.0","method":"eth_getTransactionCount","params":["0xd79b8287a827e1387e6f0ff6d300fc663e10f592","latest"],"id":1}'
+
 //Response
 {
-"id":1,
-"jsonrpc": "2.0",
-"result": "0x1" // 1 }
+  "jsonrpc":"2.0",
+  "id":1,
+  "result":"0x1303"
+} // 1
 ```
 
-#### eth_getBlockTransactionCountByHash
+## eth_getBlockTransactionCountByHash
 
-返回指定块内的交易数量，使用哈希来指定块。
+使用哈希返回指定块内的交易数量。
 
 **参数**
 
-`DATA:` 32 字节，块哈希
+- `DATA:` 32 字节，块哈希
 
 **返回**
 
-`QUANTITY` 指定块内的交易数量，整数
+- `QUANTITY` 指定块内的交易数量，整数
 
 **示例**
 
 ```javascript
 //Request
-curl -X POST --data '{"jsonrpc":"2.0","method":"eth_getBlockTransactionCountByHash"," params":["0xb903239f8543d04b5dc1ba6579132b143087c68db1b2168786408fcbce56823 8"],"id":1}'
+curl -X POST localhost:8545  -H "Content-Type:application/json" --data '{"jsonrpc":"2.0","method":"eth_getBlockTransactionCountByHash","params":["0x268343647d0fcf63628446a29959feccf57136dac58fd1c17e0df3babafce3b6"],"id":1}'
 //Response
 {
 "id":1,
 "jsonrpc": "2.0",
-"result": "0xb" 
+"result": "0x2" 
 }
 ```
  
-#### eth_getBlockTransactionCountByNumb 
+## eth_getBlockTransactionCountByNumber 
 
-返回指定块内的交易数量，使用块编号指定块。
+返回与给定块号匹配的块中的交易数。
 
 **参数**
 
-`QUANTITY|TAG:` 整数块编号，或字符串"earliest"、"latest"或"pending" 
+- `QUANTITY|TAG:` 整数块编号，或字符串"earliest"、"latest"或"pending" 
 
 **返回**
 
-`QUANTITY:` 指定块内的交易数量
+- `QUANTITY:` 指定块内的交易数量
 
 **示例**
 
 ```javascript
 //Request
-curl -X POST --data '{"jsonrpc":"2.0","method":"eth_getBlockTransactionCountByNumber ","params":["0xe8"],"id":1}'
+curl -X POST localhost:8545  -H "Content-Type:application/json" --data '{"jsonrpc":"2.0","method":"eth_getBlockTransactionCountByNumber","params":["0x11c7"],"id":1}'
 //Response
 {
-"id":1,
-"jsonrpc": "2.0",
-"result": "0xa" 
+  "jsonrpc": "2.0",
+  "id":1,
+  "result": "0xa" 
 }
 ```
-#### eth_getUncleCountByBlockHash
+## eth_getUncleCountByBlockHash
 
-返回指定块的叔数量，使用哈希指定块。
+从与给定块哈希匹配的块中返回叔块数。
  
 **参数**
 
-- `string` DATA, 32 字节，块哈希
+- `QUANTITY` DATA, 32 字节，块哈希
 
 **返回值**
 
-- `string:` QUANTITY，指定块的叔数量，整数
+- `QUANTITY:` DATA，指定块的叔数，整数
 
 **示例**
 
 ```javascript
 //Request
-curl -X POST --data '{"jsonrpc":"2.0","method":"eth_getUncleCountByBlockHash","param s":["0xb903239f8543d04b5dc1ba6579132b143087c68db1b2168786408fcbce568238"],"id ":1}'
+curl -X POST localhost:8545  -H "Content-Type:application/json" --data '{"jsonrpc":"2.0","method":"eth_getUncleCountByBlockHash","params":["0x58052e3424b8c03643a3cd3595cad1a6104ab195cc78108318699f2bfa429d8f"],"id":1}'
 //Response
 {
-"id":1,
-"jsonrpc": "2.0",
-"result": "0x1"
+  "jsonrpc": "2.0",
+  "id":1,
+  "result": "0x1"
 }
 ```
 
-#### eth_getCode
+## eth_getUncleCountByBlockNumber
+
+从与给定块号匹配的块中返回块中的叔块数。
+
+**参数**
+
+- `QUANTITY|TAG` -区块数, 或者字符串 "latest", "earliest" or "pending"
+
+**返回**
+
+- `QUANTITY:` DATA，指定块的叔数，整数
+
+**示例**
+
+```json
+//Request
+curl -X POST localhost:8545  -H "Content-Type:application/json" --data '{"jsonrpc":"2.0","method":"eth_getUncleCountByBlockNumber","params":["0x1bb"],"id":1}'
+
+//Response
+{
+  "jsonrpc":"2.0",
+  "id":1,
+  "result":"0x1"
+}
+```
+
+------
+
+## eth_getCode
 
 返回指定地址的代码。
 
@@ -535,43 +604,45 @@ curl -X POST --data '{"jsonrpc":"2.0","method":"eth_getUncleCountByBlockHash","p
 
 ```javascript
 //Request
-curl -X POST --data '{"jsonrpc":"2.0","method":"eth_getCode","params":["0xa94f5374fce5 edbc8e2a8697c15331677e6ebf0b", "0x2"],"id":1}'
+curl -X POST localhost:8545  -H "Content-Type:application/json" --data '{"jsonrpc":"2.0","method":"eth_getCode","params":["0xe558562c906c69787b8fabb6d0efb3f1163a20e4","latest"],"id":1}'
+
 //Response
 {
-"id":1,
-"jsonrpc": "2.0",
-"result": "0x600160008035811a818181146012578301005b601b6001356025565b8060005260206000f25b600060078202905091905056"
+  "jsonrpc": "2.0",
+  "id":1,
+  "result": "0x"
 }
 ```
-#### eth_sign
+## eth_sign
 
-使用如下公式计算签名:`sign(keccak256("\x19 Signed Message:\n" + len(message) + message)))`
-通过给消息添加一个前缀，可以让结果签名被识别为签名。这可以组织恶意 DApp 签名任意数据(例如交易)并使用签名冒充受害者。需要指出的是，进行签名的地址必须是解锁的。
+通过向消息添加前缀，可以将计算出的签名识别为特定于simplechain的签名。这可以防止恶意DAPP在签署任意数据（如事务）并使用签名来冒充受害者时的误用。
+
+> **注意:** 必须先解锁要签名的地址.
 
 **参数**
 
-- `string` DATA 20 字节，地址
-- `string` 要签名的消息
+- `DATA` 20字节，地址
+- `DATA` 要签名的消息
 
 **返回值**
 
-- `string` DATA: 签名
+- `DATA` 签名
 
 **示例**
 
 ```javascript
 //Request
-curl -X POST --data '{"jsonrpc":"2.0","method":"eth_sign","params":["0x9b2055d370f73ec
- 7d8a03e965129118dc8f5bf83", "0xdeadbeaf"],"id":1}'
+curl -X POST localhost:8545  -H "Content-Type:application/json" --data '{"jsonrpc":"2.0","method":"eth_sign","params":["0xb014763d71459855510255647be8cf39b0e82acb","0xdeadbeaf"],"id":1}'
+
 //Response
 {
-"id":1,
-"jsonrpc": "2.0",
-"result": "0xa3f20717a250c2b0b729b7e5becbff67fdaef7e0699da4de7ca5895b02a170a12d887fd3b17bfdce3481f10bea41f45ba9f709d39ce8325427b57afcfc994cee1b"
+  "jsonrpc": "2.0",
+  "id":1,
+  "result": "0xa3f20717a250c2b0b729b7e5becbff67fdaef7e0699da4de7ca5895b02a170a12d887fd3b17bfdce3481f10bea41f45ba9f709d39ce8325427b57afcfc994cee1b"
 }
 ```
 
-#### eth_sendTransaction
+## eth_sendTransaction ######
 
 创建一个新的消息调用交易，如果数据字段中包含代码，则创建一个合约。
 
@@ -602,7 +673,7 @@ curl -X POST --data '{"jsonrpc":"2.0","method":"eth_sendTransaction","params":[{
 }
 ```
 
-#### eth_sendRawTransaction
+## eth_sendRawTransaction
 
 为签名交易创建一个新的消息调用交易或合约。
 
@@ -626,7 +697,7 @@ curl -X POST --data '{"jsonrpc":"2.0","method":"eth_sendRawTransaction","params"
 "result": "0xe670ec64341771606e55d6b4ca35a1a6b75ee3d5145a99d05921026d1527331"
 }
 ```
-#### eth_call
+## eth_call
 
 立刻执行一个新的消息调用，无需在区块链上创建交易。
 
@@ -655,7 +726,8 @@ curl -X POST --data '{"jsonrpc":"2.0","method":"eth_call","params":["0xd46e8dd67
 "jsonrpc": "2.0",
 "result": "0x" }
 ```
-####  eth_estimateGas
+
+## eth_estimateGas
 
 执行并估算一个交易需要的 gas 用量。该次交易不会写入区块链。注意，由于多 种原因，例如 EVM 的机制及节点的性能，估算的数值可能比实际用量大的多。
 
@@ -686,7 +758,7 @@ curl -X POST --data '{"jsonrpc":"2.0","method":"eth_estimateGas","params":[{see 
  }
  ```
 
-#### eth_getBlockByHash
+## eth_getBlockByHash
 
 返回具有指定哈希的块。
 
@@ -748,7 +820,7 @@ curl -X POST --data '{"jsonrpc":"2.0","method":"eth_getBlockByHash","params":["0
 }
 ```
 
-#### eth_getTransactionByHash
+## eth_getTransactionByHash
 
 返回指定哈希对应的交易。
 
@@ -794,7 +866,7 @@ curl -X POST --data '{"jsonrpc":"2.0","method":"eth_getTransactionByHash","param
 }
 ```
 
-#### eth_getTransactionByBlockHashAndIn
+## eth_getTransactionByBlockHashAndIn
 
 返回指定块内具有指定索引序号的交易。
 
@@ -841,7 +913,7 @@ curl -X POST --data '{"jsonrpc":"2.0","method":"eth_getTransactionByBlockHashAnd
 }
 ```
 
-### eth_getTransactionByBlockNumberAndIndex
+## eth_getTransactionByBlockNumberAndIndex
 
 返回指定编号的块内具有指定索引序号的交易。
 
@@ -888,7 +960,7 @@ curl -X POST --data '{"jsonrpc":"2.0","method":"eth_getTransactionByBlockNumberA
 }
 ```
 
-#### eth_getTransactionReceipt
+## eth_getTransactionReceipt
 
 返回指定交易的收据，使用哈希指定交易。需要指出的是，挂起的交易其收据无效
 
@@ -934,7 +1006,7 @@ logsBloom: "0x00...0", // 256 byte bloom filter
 status: '0x1' }
 }
 ```
-#### eth_getUncleByBlockHashAndIndex
+## eth_getUncleByBlockHashAndIndex
 
 根据指定的块哈希和索引位置查找的叔块。
 
@@ -952,7 +1024,6 @@ status: '0x1' }
 
 //Response
 
- 
 示例
 
 **参数**
@@ -963,7 +1034,7 @@ curl -X POST --data '{"jsonrpc":"2.0","method":"eth_getUncleByBlockHashAndIndex"
 //Response
 ```
 
-#### eth_getUncleByBlockNumberAndIndex
+## eth_getUncleByBlockNumberAndIndex
 
 根据制定的编号和索引序号查找叔块
 
@@ -984,7 +1055,7 @@ curl -X POST --data '{"jsonrpc":"2.0","method":"eth_getUncleByBlockNumberAndInde
 
 ```
 
-#### eth_newFilter
+## eth_newFilter
 
 基于给定的选项创建一个过滤器对象，接收状态变化时的通知。要检查状态是否变化，请调用`eth_getFilterChanges`。
 
@@ -1020,7 +1091,7 @@ curl -X POST --data '{"jsonrpc":"2.0","method":"eth_newBlockFilter","params":[],
 "jsonrpc": "2.0", "result": "0x1" // 1
 }
 ```
-#### eth_newBlockFilter
+## eth_newBlockFilter
 
 在节点中创建一个过滤器，以便当新块生成时进行通知。要检查状态是否变化，请调用`eth_getFilterChanges`.
 
@@ -1044,7 +1115,7 @@ curl -X POST --data '{"jsonrpc":"2.0","method":"eth_newBlockFilter","params":[],
 }
 ```
 
-#### eth_newPendingTransactionFilter
+## eth_newPendingTransactionFilter
 
 在节点中创建一个过滤器，以便当产生挂起交易时进行通知。要检查状态是否发生变化，请调用`eth_getFilterChanges`。
 
@@ -1068,7 +1139,7 @@ curl -X POST --data '{"jsonrpc":"2.0","method":"eth_newPendingTransactionFilter"
 "result": "0x1" // 1 
 }
 ```
-#### eth_uninstallFilter
+## eth_uninstallFilter
 
 卸载具有指定编号的过滤器。当不在需要监听时，总是需要执行该调用。另外，过滤器如果在一定时间内未接收到`eth_getFilterChanges`调用会自动超时。
 
@@ -1093,7 +1164,7 @@ curl -X POST --data '{"jsonrpc":"2.0","method":"eth_uninstallFilter","params":["
 }
 ```
 
-#### eth_getFilterChanges
+## eth_getFilterChanges
 
 轮询指定的过滤器，并返回自上次轮询之后新生成的日志数组。
 
@@ -1136,7 +1207,7 @@ curl -X POST --data '{"jsonrpc":"2.0","method":"eth_getFilterChanges","params":[
 }  
 ```
 
-#### eth_getFilterLogs
+## eth_getFilterLogs
 
 返回指定编号过滤器中的全部日志。
 
@@ -1176,7 +1247,7 @@ curl -X POST --data '{"jsonrpc":"2.0","method":"eth_getFilterLogs","params":["0x
 }  
 ```
  
-#### eth_getLogs
+## eth_getLogs
 
 返回指定过滤器中的所有日志。
 
@@ -1209,7 +1280,7 @@ curl -X POST --data '{"jsonrpc":"2.0","method":"eth_getLogs","params":[{"topics"
 }  
 
 ```
-#### eth_getWork
+## eth_getWork
 
 返回当前块的哈希、种子哈希，以及要满足的边界条件，即目标。
 
@@ -1238,7 +1309,7 @@ curl -X POST --data '{"jsonrpc":"2.0","method":"eth_getWork","params":[],"id":73
 }
 ```
 
-#### eth_submitWork
+## eth_submitWork
 
 用于提交POW解决方案。
  
@@ -1263,7 +1334,7 @@ curl -X POST --data '{"jsonrpc":"2.0", "method":"eth_submitWork", "params":["0x0
 
 ```
 
-#### eth_submitHashrate
+## eth_submitHashrate
 
 用于提交挖矿的哈希速率。
  
@@ -1288,7 +1359,7 @@ curl -X POST --data '{"jsonrpc":"2.0", "method":"eth_submitHashrate", "params":[
 }
 ```
 
-#### eth_blockNumber
+## eth_blockNumber
 
 返回最新块的编号。
 
