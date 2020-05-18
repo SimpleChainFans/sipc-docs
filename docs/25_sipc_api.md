@@ -626,7 +626,7 @@ curl -X POST localhost:8545  -H "Content-Type:application/json" --data '{"jsonrp
 
 **返回值**
 
-- `DATA` 签名
+- `DATA` 数据的签名
 
 **示例**
 
@@ -642,7 +642,7 @@ curl -X POST localhost:8545  -H "Content-Type:application/json" --data '{"jsonrp
 }
 ```
 
-## eth_sendTransaction ######
+## eth_sendTransaction
 
 创建一个新的消息调用交易，如果数据字段中包含代码，则创建一个合约。
 
@@ -658,13 +658,22 @@ curl -X POST localhost:8545  -H "Content-Type:application/json" --data '{"jsonrp
 
 **返回**
 
-- `string:` DATA, 32 字节 - 交易哈希，如果交易还未生效则返回 0 值哈希。当创建合约时，在交易生效后，使用 eth_getTransactionReceipt 调用获取合约地址。
+- `DATA:`32 字节 - 交易哈希，如果交易还未生效则返回 0 值哈希。当创建合约时，在交易生效后，使用 eth_getTransactionReceipt 调用获取合约地址。
 
 **示例**
 
 ```javascript
 //Request
-curl -X POST --data '{"jsonrpc":"2.0","method":"eth_sendTransaction","params":[{see ab ove}],"id":1}'
+curl -X POST localhost:8545  -H "Content-Type:application/json" --data '{"jsonrpc":"2.0","method":"eth_sendTransaction",
+"params":[{
+  "from": "0xb014763d71459855510255647be8cf39b0e82acb",
+  "to": "0xac49f5e5b9161e0cb42372c90183d8428b060ff1",
+  "gas": "0x76c0", 
+  "gasPrice": "0x9184e72a000", 
+  "value": "0x9184e72a", 
+  "data": "0xd46e8dd67c5d32be8d46e8dd67c5d32be8058bb8eb970870f072445675058bb8eb970870f072445675"
+}],"id":1}'
+
 //Response
 {
 "id":1,
@@ -675,21 +684,21 @@ curl -X POST --data '{"jsonrpc":"2.0","method":"eth_sendTransaction","params":[{
 
 ## eth_sendRawTransaction
 
-为签名交易创建一个新的消息调用交易或合约。
+为已签名的交易创建新的消息调用交易或合约创建。
 
 **参数**
 
-- `string:` DATA, 签名的交易数据
+- `DATA:` 签名的交易数据
 
 **返回值**
 
-- `string:` DATA ,32字节，交易哈希，如果交易未生效则返回全0哈希。当创建合约时，在交易生效后，使用eth_getTransactionReceipt获取合约地址。
+- `DATA:` 32字节，交易哈希，如果交易未生效则返回全0哈希。当创建合约时，在交易生效后，使用eth_getTransactionReceipt获取合约地址。
 
 **示例**
 
 ```javascript
 //Request
-curl -X POST --data '{"jsonrpc":"2.0","method":"eth_sendRawTransaction","params":["0xd46e8dd67c5d32be8d46e8dd67c5d32be8058bb8eb970870f072445675058bb8eb970870f072445675" ],"id":1}'
+curl -X POST localhost:8545  -H "Content-Type:application/json" --data '{"jsonrpc":"2.0","method":"eth_sendRawTransaction","params":["0xd46e8dd67c5d32be8d46e8dd67c5d32be8058bb8eb970870f072445675058bb8eb970870f072445675"],"id":1}'
 //Response
 {
 "id":1,
@@ -719,7 +728,7 @@ curl -X POST --data '{"jsonrpc":"2.0","method":"eth_sendRawTransaction","params"
 
 ```javascript
 //Request
-curl -X POST --data '{"jsonrpc":"2.0","method":"eth_call","params":["0xd46e8dd67c5d32be8d46e8dd67c5d32be8058bb8eb970870f072445675058bb8eb970870f072445675" ],"id":1}'
+curl -X POST localhost:8545  -H "Content-Type:application/json" --data '{"jsonrpc":"2.0","method":"eth_call","params":["0xd46e8dd67c5d32be8d46e8dd67c5d32be8058bb8eb970870f072445675058bb8eb970870f072445675" ],"id":1}'
 //Response
 {
 "id":1,
@@ -729,7 +738,7 @@ curl -X POST --data '{"jsonrpc":"2.0","method":"eth_call","params":["0xd46e8dd67
 
 ## eth_estimateGas
 
-执行并估算一个交易需要的 gas 用量。该次交易不会写入区块链。注意，由于多 种原因，例如 EVM 的机制及节点的性能，估算的数值可能比实际用量大的多。
+执行并估算一个交易需要的gas用量。该次交易不会写入区块链。注意，由于多种原因，例如`EVM`的机制及节点的性能，估算的数值可能比实际用量大的多。
 
 **参数**
 
@@ -749,23 +758,31 @@ curl -X POST --data '{"jsonrpc":"2.0","method":"eth_call","params":["0xd46e8dd67
 
 ```javascript
 //Request
-curl -X POST --data '{"jsonrpc":"2.0","method":"eth_estimateGas","params":[{see abov e}],"id":1}'
+curl -X POST localhost:8545  -H "Content-Type:application/json" --data '{"jsonrpc":"2.0","method":"eth_estimateGas","params":[{
+  "from": "0xb014763d71459855510255647be8cf39b0e82acb",
+  "to": "0xac49f5e5b9161e0cb42372c90183d8428b060ff1",
+  "gas": "0x76c0", 
+  "gasPrice": "0x9184e72a000", 
+  "value": "0x9184e72a", 
+  "data": "0xd46e8dd67c5d32be8d46e8dd67c5d32be8058bb8eb970870f072445675058bb8eb970870f072445675"
+}],"id":1}'
+
 //response
 {
 "id":1,
 "jsonrpc": "2.0",
-"result": "0x5208" // 21000
+"result": "0x5cec" // 21000
  }
  ```
 
 ## eth_getBlockByHash
 
-返回具有指定哈希的块。
+根据给定的哈希返回有关块的信息。
 
 **参数**
 
-- DATA, 32 字节 - 块哈希
-- Boolean - 为 true 时返回完整的交易对象，否则仅返回交易哈希
+- DATA, 32个字节 - 区块的哈希
+- Boolean - 如果为true，则返回完整的交易对象，否则仅返回交易哈希
 
 **返回值**
 
@@ -793,7 +810,7 @@ curl -X POST --data '{"jsonrpc":"2.0","method":"eth_estimateGas","params":[{see 
 
 ```javascript
 //Request
-curl -X POST --data '{"jsonrpc":"2.0","method":"eth_getBlockByHash","params":["0xe670 ec64341771606e55d6b4ca35a1a6b75ee3d5145a99d05921026d1527331", true],"id":1}'
+curl -X POST localhost:8545  -H "Content-Type:application/json" --data '{"jsonrpc":"2.0","method":"eth_getBlockByHash","params":["0xbe024aeab6138b6adffd616314c707e2af8d165f871c8068d1a4a9c38a59c69b", true],"id":1}'
 //Response
 {
 "id":1, 
@@ -820,60 +837,130 @@ curl -X POST --data '{"jsonrpc":"2.0","method":"eth_getBlockByHash","params":["0
 }
 ```
 
-## eth_getTransactionByHash
+## eth_getBlockByNumber
 
-返回指定哈希对应的交易。
+根据区块数（区块高度）返回有关块的信息。
 
 **参数**
 
-- DATA ,32 字节 - 交易哈希
+- `QUANTITY|TAG` 区块数, 或者字符串 `"earliest"`, `"latest"` or `"pending"`
+- `Boolean` - 如果为true，则返回完整的交易对象；如果为false，则仅返回交易的哈希值。
 
-**返回值**
- 
-- `hash:` DATA, 32 字节 - 交易哈希
-- `nonce:` QUANTITY - 本次交易之前发送方已经生成的交易数量
-- `blockHash:` DATA, 32 字节 - 交易所在块的哈希，对于挂起块，该值为 null 
-- `blockNumber:` QUANTITY - 交易所在块的编号，对于挂起块，该值为 null
-- `transactionIndex:` QUANTITY - 交易在块中的索引位置，挂起块该值为 null
-- `from:` DATA, 20 字节 - 交易发送方地址
-- `to:` DATA, 20 字节 - 交易接收方地址，对于合约创建交易，该值为 null
-- `value:` QUANTITY - 发送的 sipc 数量，单位:wei
-- `gasPrice:` QUANTITY - 发送方提供的 gas 价格，单位:wei 
-- `gas:` QUANTITY - 发送方提供的 gas 可用量
-- `input:` DATA - 随交易发送的数据
+**返回**
 
-示例代码
+- `number:` QUANTITY - 块编号，挂起块为 null
+- `hash:` DATA, 32 Bytes - 块哈希，挂起块为 null
+- `parentHash:` DATA, 32 Bytes - 父块的哈希
+- `nonce:` DATA, 8 Bytes - 生成的 pow 哈希，挂起块为 null
+- `sha3Uncles:` DATA, 32 Bytes - 块中叔数据的 SHA3 哈希
+- `logsBloom:` DATA, 256 Bytes - 块日志的 bloom 过滤器，挂起块为null
+- `ansactionsRoot:` DATA, 32 Bytes - 块中的交易树根节点
+- `stateRoot:` DATA, 32 Bytes - 块最终状态树的根节点
+- `receiptsRoot:` DATA, 32 Bytes - 块交易收据树的根节点 
+- `miner:` DATA, 20 Bytes - 挖矿奖励的接收账户
+- `difficulty`: QUANTITY - 块难度，整数
+- `totalDifficulty:` QUANTITY - 截止到本块的链上总难度 
+- `extraData:` DATA - 块额外数据
+- `size:` QUANTITY - 本块字节数
+- `gasLimit:` QUANTITY - 本块允许的最大 gas 用量
+- `gasUsed:` QUANTITY - 本块中所有交易使用的总 gas 用量
+- `timestamp:` QUANTITY - 块时间戳
+- `transactions:` Array - 交易对象数组，或 32 字节长的交易哈希数组
+- `uncles:` Array - 叔哈希数组
+
+**示例**
 
 ```javascript
 //Request
-curl -X POST --data '{"jsonrpc":"2.0","method":"eth_getTransactionByHash","params":["0 xb903239f8543d04b5dc1ba6579132b143087c68db1b2168786408fcbce568238"],"id":1}'
+curl -X POST localhost:8545  -H "Content-Type:application/json" --data '{"jsonrpc":"2.0","method":"eth_getBlockByNumber","params":["0x6bcd", true],"id":1}'
 //Response
 {
 "id":1, 
-"jsonrpc":"2.0", 
+"jsonrpc":"2.0",
 "result": {
-    "hash":"0xc6ef2fc5426d6ad6fd9e2a26abeab0aa2411b7ab17f30a99d3cb96aed1d105 5b",
-    "nonce":"0x",
-    "blockHash": "0xbeab0aa2411b7ab17f30a99d3cb9c6ef2fc5426d6ad6fd9e2a26a6aed1d1055b",
-    "blockNumber": "0x15df", // 5599
-    "transactionIndex": "0x1", // 1 
-    "from":"0x407d73d8a49eeb85d32cf465507dd71d507100c1", "to":"0x85h43d8a49eeb85d32cf465507dd71d507100c1", 
-    "value":"0x7f110", // 520464
-    "gas": "0x7f110", // 520464 
-    "gasPrice":"0x09184e72a000", 
-    "input":"0x603880600c6000396000f300603880600c6000396000f3603880600c6000396000f360", 
+    "number": "0x1b4", // 436
+    "hash": "0xe670ec64341771606e55d6b4ca35a1a6b75ee3d5145a99d05921026d1527331",
+    "parentHash": "0x9646252be9520f6e71339a8df9c55e4d7619deeb018d2a3f2d21fc165dde5eb5",
+    "nonce": "0xe04d296d2460cfb8472af2c5fd05b5a214109c25688d3704aed5484f9a7792f2",
+    "sha3Uncles": "0x1dcc4de8dec75d7aab85b567b6ccd41ad312451b948a7413f0a142fd40d49347",
+    "logsBloom": "0xe670ec64341771606e55d6b4ca35a1a6b75ee3d5145a99d05921026d1527331",
+    "transactionsRoot": "0x56e81f171bcc55a6ff8345e692c0f86e5b48e01b996cadc001622fb5e363b421",
+    "stateRoot": "0xd5855eb08b3387c0af375e9cdb6acfc05eb8f519e419b874b6ff2ffda7ed1dff",
+    "miner": "0x4e65fda2159562a496f9f3522f89122a3088497a", "difficulty": "0x027f07", // 163591
+    "totalDifficulty": "0x027f07", // 163591
+    "extraData": "0x0000000000000000000000000000000000000000000000000000000 000000000",
+    "size": "0x027f07", // 163591
+    "gasLimit": "0x9f759", // 653145 
+    "gasUsed": "0x9f759", // 653145 
+    "timestamp": "0x54e34e8e" // 1424182926 
+    "transactions": [{...},{ ... }]
+    "uncles": ["0x1606e5...", "0xd5145a9..."] 
     }
 }
 ```
+## eth_getTransactionByHash
 
-## eth_getTransactionByBlockHashAndIn
+返回有关交易哈希请求的交易的信息
+
+**参数**
+
+- `DATA`, 32个字节 - 交易的哈希
+
+**返回**
+
+- `blockHash`: `DATA`, 32 Bytes -此交易所在的区块的哈希。当它还处于待定状态时为null。
+- `blockNumber`: `QUANTITY` - 此交易所在的区块的高度. 当它还处于待定状态时为null。
+- `from`: `DATA`, 20 个字节 -交易发起者的地址。
+- `gas`: `QUANTITY` -交易发起者提供的gas数。
+- `gasPrice`: `QUANTITY` - 发送者提供的gas的价格，以wei为单位。
+- `hash`: `DATA`, 32个字节 -交易的哈希
+- `input`: `DATA` - 随交易一起发送的数据。
+- `nonce`: `QUANTITY` - 发送方在此之前进行的交易数。
+- `to`: `DATA`, 20个字节 -接受者的地址，当交易是一个合约创建的时候，它的值为null。
+- `transactionIndex`: `QUANTITY` - 交易在块中的索引位置的整数。当它为待定状态时为null。
+- `value`: `QUANTITY` - 转账的数额，以wei为单位。
+- `v`: `QUANTITY` - ECDSA recovery id
+- `r`: `DATA`, 32 Bytes - ECDSA signature r
+- `s`: `DATA`, 32 Bytes - ECDSA signature s
+
+**示例**
+
+```json
+//Request
+curl -X POST localhost:8545  -H "Content-Type:application/json" --data '{"jsonrpc":"2.0","method":"eth_getTransactionByHash","params":["0x8e63b031ac4f3a9c38642d69a86f73368fee539d9351e4eb312b5cfb6cd4f3e6"],"id":1}'
+
+//Response
+{
+	"jsonrpc": "2.0",
+	"id": 1,
+	"result": {
+		"blockHash": "0xbe024aeab6138b6adffd616314c707e2af8d165f871c8068d1a4a9c38a59c69b",
+		"blockNumber": "0x6bcd",
+		"from": "0xd79b8287a827e1387e6f0ff6d300fc663e10f592",
+		"gas": "0x5c20",
+		"gasPrice": "0x218711a00",
+		"hash": "0x8e63b031ac4f3a9c38642d69a86f73368fee539d9351e4eb312b5cfb6cd4f3e6",
+		"input": "0xd3182ceafbaf2da3503237a4f60b74e30756e78f310d2b97761c38db06753c99353535363530",
+		"nonce": "0xecc",
+		"to": "0xd79b8287a827e1387e6f0ff6d300fc663e10f592",
+		"transactionIndex": "0x3",
+		"value": "0xde0b6b3a7640000",
+		"v": "0x26",
+		"r": "0x5076aebd122ba56eaa0d40a44ce950ac792851e97e1a4afcf660afbc8d1e625a",
+		"s": "0x7a7af2b80ccbdce36363b338b96a3f6c96aafa7057ea586a4dae0e30da607747"
+	}
+}
+```
+------
+
+## eth_getTransactionByBlockHashAndIndex
 
 返回指定块内具有指定索引序号的交易。
 
 **参数**
 
-- DATA, 32 字节 - 块哈希
-- QUANTITY - 交易在块内的索引序号
+- `DATA`, 32 字节 - 块哈希
+- `QUANTITY`, 交易在块内的索引序号
 
 **返回**
 
@@ -893,34 +980,39 @@ curl -X POST --data '{"jsonrpc":"2.0","method":"eth_getTransactionByHash","param
 
 ```javascript
 //Request
-curl -X POST --data '{"jsonrpc":"2.0","method":"eth_getTransactionByBlockHashAndInde x","params":["0xc6ef2fc5426d6ad6fd9e2a26abeab0aa2411b7ab17f30a99d3cb96aed1d10 55b", "0x0"],"id":1}'
+curl -X POST localhost:8545  -H "Content-Type:application/json" --data '{"jsonrpc":"2.0","method":"eth_getTransactionByBlockHashAndIndex","params":["0xbe024aeab6138b6adffd616314c707e2af8d165f871c8068d1a4a9c38a59c69b", "0x3"],"id":1}'
 //Response
 {
-"id":1, 
-"jsonrpc":"2.0", 
-"result": {
-    "hash":"0xc6ef2fc5426d6ad6fd9e2a26abeab0aa2411b7ab17f30a99d3cb96aed1d105 5b",
-    "nonce":"0x",
-    "blockHash": "0xbeab0aa2411b7ab17f30a99d3cb9c6ef2fc5426d6ad6fd9e2a26a6aed1d1055b",
-    "blockNumber": "0x15df", // 5599
-    "transactionIndex": "0x1", // 1 
-    "from":"0x407d73d8a49eeb85d32cf465507dd71d507100c1", "to":"0x85h43d8a49eeb85d32cf465507dd71d507100c1", 
-    "value":"0x7f110", // 520464
-    "gas": "0x7f110", // 520464 
-    "gasPrice":"0x09184e72a000", 
-    "input":"0x603880600c6000396000f300603880600c6000396000f3603880600c6000396000f360", 
-    }
+"jsonrpc": "2.0",
+	"id": 1,
+	"result": {
+		"blockHash": "0xbe024aeab6138b6adffd616314c707e2af8d165f871c8068d1a4a9c38a59c69b",
+		"blockNumber": "0x6bcd",
+		"from": "0xd79b8287a827e1387e6f0ff6d300fc663e10f592",
+		"gas": "0x5c20",
+		"gasPrice": "0x218711a00",
+		"hash": "0x8e63b031ac4f3a9c38642d69a86f73368fee539d9351e4eb312b5cfb6cd4f3e6",
+		"input": "0xd3182ceafbaf2da3503237a4f60b74e30756e78f310d2b97761c38db06753c99353535363530",
+		"nonce": "0xecc",
+		"to": "0xd79b8287a827e1387e6f0ff6d300fc663e10f592",
+		"transactionIndex": "0x3",
+		"value": "0xde0b6b3a7640000",
+		"v": "0x26",
+		"r": "0x5076aebd122ba56eaa0d40a44ce950ac792851e97e1a4afcf660afbc8d1e625a",
+		"s": "0x7a7af2b80ccbdce36363b338b96a3f6c96aafa7057ea586a4dae0e30da607747"
+	}
 }
 ```
+------
 
 ## eth_getTransactionByBlockNumberAndIndex
 
-返回指定编号的块内具有指定索引序号的交易。
+按区块数（区块高度）和交易索引位置返回有关交易的信息。
 
 **参数**
 
-- QUANTITY|TAG - 整数块编号，或字符串"earliest"、"latest" 或"pending" 
-- QUANTITY - 交易索引序号
+- `QUANTITY|TAG` - 整数块编号，或字符串"earliest"、"latest" 或"pending" 
+- `QUANTITY` - 交易索引序号
 
 **返回值**
 
@@ -940,7 +1032,7 @@ curl -X POST --data '{"jsonrpc":"2.0","method":"eth_getTransactionByBlockHashAnd
 
 ```javascript
 //Request
-curl -X POST --data '{"jsonrpc":"2.0","method":"eth_getTransactionByBlockNumberAndIn dex","params":["0x29c", "0x0"],"id":1}'
+curl -X POST localhost:8545  -H "Content-Type:application/json" --data '{"jsonrpc":"2.0","method":"eth_getTransactionByBlockNumberAndIn dex","params":["0x29c", "0x0"],"id":1}'
 //Response
 {
 "id":1, 
@@ -962,7 +1054,7 @@ curl -X POST --data '{"jsonrpc":"2.0","method":"eth_getTransactionByBlockNumberA
 
 ## eth_getTransactionReceipt
 
-返回指定交易的收据，使用哈希指定交易。需要指出的是，挂起的交易其收据无效
+根据交易哈希返回一个交易的收据,注意:收据不可用于待处理的交易。
 
 **参数**
 
@@ -988,7 +1080,7 @@ curl -X POST --data '{"jsonrpc":"2.0","method":"eth_getTransactionByBlockNumberA
 
 ```javascript
 //Request
-curl -X POST --data '{"jsonrpc":"2.0","method":"eth_getTransactionReceipt","params":["0x b903239f8543d04b5dc1ba6579132b143087c68db1b2168786408fcbce568238"],"id":1}'
+curl -X POST localhost:8545  -H "Content-Type:application/json" --data '{"jsonrpc":"2.0","method":"eth_getTransactionReceipt","params":["0x b903239f8543d04b5dc1ba6579132b143087c68db1b2168786408fcbce568238"],"id":1}'
 //Response
 {
 "id":1,
@@ -1006,37 +1098,76 @@ logsBloom: "0x00...0", // 256 byte bloom filter
 status: '0x1' }
 }
 ```
+
 ## eth_getUncleByBlockHashAndIndex
 
-根据指定的块哈希和索引位置查找的叔块。
+根据哈希和叔块索引位置返回有关块的叔块的信息。
 
 **参数**
 
-- DATA, 32 字节 - 块哈希 
-- QUANTITY - 叔索引位置
+- `DATA`, 32字节,块哈希 
+- `QUANTITY`, 叔索引位置
 
 **返回值**
 
+- `number:` QUANTITY - 块编号，挂起块为 null
+- `hash:` DATA, 32 Bytes - 块哈希，挂起块为 null
+- `parentHash:` DATA, 32 Bytes - 父块的哈希
+- `nonce:` DATA, 8 Bytes - 生成的 pow 哈希，挂起块为 null
+- `sha3Uncles:` DATA, 32 Bytes - 块中叔数据的 SHA3 哈希
+- `logsBloom:` DATA, 256 Bytes - 块日志的 bloom 过滤器，挂起块为null
+- `ansactionsRoot:` DATA, 32 Bytes - 块中的交易树根节点
+- `stateRoot:` DATA, 32 Bytes - 块最终状态树的根节点
+- `receiptsRoot:` DATA, 32 Bytes - 块交易收据树的根节点 
+- `miner:` DATA, 20 Bytes - 挖矿奖励的接收账户
+- `difficulty`: QUANTITY - 块难度，整数
+- `totalDifficulty:` QUANTITY - 截止到本块的链上总难度 
+- `extraData:` DATA - 块额外数据
+- `size:` QUANTITY - 本块字节数
+- `gasLimit:` QUANTITY - 本块允许的最大 gas 用量
+- `gasUsed:` QUANTITY - 本块中所有交易使用的总 gas 用量
+- `timestamp:` QUANTITY - 块时间戳
+- `transactions:` Array - 交易对象数组，或 32 字节长的交易哈希数组
+- `uncles:` Array - 叔哈希数组
 
 **示例**
 ```javascript
 //Request
+curl -X POST localhost:8545  -H "Content-Type:application/json" --data '{"jsonrpc":"2.0","method":"eth_getUncleByBlockHashAndIndex","params":["0x58052e3424b8c03643a3cd3595cad1a6104ab195cc78108318699f2bfa429d8f",'0x0'],"id":1}'
 
 //Response
-
-示例
-
-**参数**
-
-```javascript
-//Request
-curl -X POST --data '{"jsonrpc":"2.0","method":"eth_getUncleByBlockHashAndIndex","par ams":["0xc6ef2fc5426d6ad6fd9e2a26abeab0aa2411b7ab17f30a99d3cb96aed1d1055b", " 0x0"],"id":1}'
-//Response
+{
+	"jsonrpc": "2.0",
+	"id": 1,
+	"result": {
+		"difficulty": "0x267c3",
+		"extraData": "0xd983010000847369706588676f312e31312e318664617277696e",
+		"gasLimit": "0x12804",
+		"gasUsed": "0x0",
+		"hash": "0x7937f1ac55c87d4fb649c17d0c9411e8837d32e10bf5e8723611120b50154c16",
+		"logsBloom": "0x00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+		"miner": "0x41da014ee4c2f583ba222344c095a631e739f2f1",
+		"mixHash": "0xa50630bdd5800368de83fa719373ccceaaf69e56f07d32db11b2069c2af9a611",
+		"nonce": "0x4f0713dd54bb9301",
+		"number": "0x1b5",
+		"parentHash": "0xf2ad2fbdd67936df73c447eabb49965d2bced51df9c1a80545b001600547d81a",
+		"receiptsRoot": "0x56e81f171bcc55a6ff8345e692c0f86e5b48e01b996cadc001622fb5e363b421",
+		"sha3Uncles": "0x1dcc4de8dec75d7aab85b567b6ccd41ad312451b948a7413f0a142fd40d49347",
+		"size": "0x21b",
+		"stateRoot": "0xbfb096cd9832414ad738ff806dcfb1e48d9836c00d130b723a3bb808098b1099",
+		"timestamp": "0x5c2e3b64",
+		"totalDifficulty": null,
+		"transactionsRoot": "0x56e81f171bcc55a6ff8345e692c0f86e5b48e01b996cadc001622fb5e363b421",
+		"uncles": []
+	}
+}
 ```
+注意: 叔块不包含单独的交易。
+---
 
 ## eth_getUncleByBlockNumberAndIndex
 
-根据制定的编号和索引序号查找叔块
+根据区块数（区块高度）和叔块索引位置返回有关叔块的信息.
 
 **参数**
 
@@ -1045,19 +1176,67 @@ curl -X POST --data '{"jsonrpc":"2.0","method":"eth_getUncleByBlockHashAndIndex"
 
 **返回**
 
--
+- `number:` QUANTITY - 块编号，挂起块为 null
+- `hash:` DATA, 32 Bytes - 块哈希，挂起块为 null
+- `parentHash:` DATA, 32 Bytes - 父块的哈希
+- `nonce:` DATA, 8 Bytes - 生成的 pow 哈希，挂起块为 null
+- `sha3Uncles:` DATA, 32 Bytes - 块中叔数据的 SHA3 哈希
+- `logsBloom:` DATA, 256 Bytes - 块日志的 bloom 过滤器，挂起块为null
+- `ansactionsRoot:` DATA, 32 Bytes - 块中的交易树根节点
+- `stateRoot:` DATA, 32 Bytes - 块最终状态树的根节点
+- `receiptsRoot:` DATA, 32 Bytes - 块交易收据树的根节点 
+- `miner:` DATA, 20 Bytes - 挖矿奖励的接收账户
+- `difficulty`: QUANTITY - 块难度，整数
+- `totalDifficulty:` QUANTITY - 截止到本块的链上总难度 
+- `extraData:` DATA - 块额外数据
+- `size:` QUANTITY - 本块字节数
+- `gasLimit:` QUANTITY - 本块允许的最大 gas 用量
+- `gasUsed:` QUANTITY - 本块中所有交易使用的总 gas 用量
+- `timestamp:` QUANTITY - 块时间戳
+- `transactions:` Array - 交易对象数组，或 32 字节长的交易哈希数组
+- `uncles:` Array - 叔哈希数组
+
 **示例**
 
 ```javascript
 //Request
-curl -X POST --data '{"jsonrpc":"2.0","method":"eth_getUncleByBlockNumberAndIndex"," params":["0x29c", "0x0"],"id":1}'
+curl -X POST localhost:8545  -H "Content-Type:application/json" --data '{"jsonrpc":"2.0","method":"eth_getUncleByBlockNumberAndIndex","params":["0x1bb","0x0"],"id":1}'
 //Response
+{
+	"jsonrpc": "2.0",
+	"id": 1,
+	"result": {
+		"difficulty": "0x267c3",
+		"extraData": "0xd983010000847369706588676f312e31312e318664617277696e",
+		"gasLimit": "0x12804",
+		"gasUsed": "0x0",
+		"hash": "0x7937f1ac55c87d4fb649c17d0c9411e8837d32e10bf5e8723611120b50154c16",
+		"logsBloom": "0x00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+		"miner": "0x41da014ee4c2f583ba222344c095a631e739f2f1",
+		"mixHash": "0xa50630bdd5800368de83fa719373ccceaaf69e56f07d32db11b2069c2af9a611",
+		"nonce": "0x4f0713dd54bb9301",
+		"number": "0x1b5",
+		"parentHash": "0xf2ad2fbdd67936df73c447eabb49965d2bced51df9c1a80545b001600547d81a",
+		"receiptsRoot": "0x56e81f171bcc55a6ff8345e692c0f86e5b48e01b996cadc001622fb5e363b421",
+		"sha3Uncles": "0x1dcc4de8dec75d7aab85b567b6ccd41ad312451b948a7413f0a142fd40d49347",
+		"size": "0x21b",
+		"stateRoot": "0xbfb096cd9832414ad738ff806dcfb1e48d9836c00d130b723a3bb808098b1099",
+		"timestamp": "0x5c2e3b64",
+		"totalDifficulty": null,
+		"transactionsRoot": "0x56e81f171bcc55a6ff8345e692c0f86e5b48e01b996cadc001622fb5e363b421",
+		"uncles": []
+	}
+}
 
+注意: 叔块不包含单独的交易
+------
 ```
 
 ## eth_newFilter
 
-基于给定的选项创建一个过滤器对象，接收状态变化时的通知。要检查状态是否变化，请调用`eth_getFilterChanges`。
+根据过滤器器选项创建过滤器对象，以便在状态更改（日志）时通知。要检查状态是否已更改，请调用eth getfilterchanges。
+
+**关于指定主题过滤器的说明:**
 
 关于特定主题过滤器的说明:主题是顺序相关的。如果一个交易的日志有主题[A, ，那么将被以下的主题过滤器匹配:
 
@@ -1069,28 +1248,30 @@ curl -X POST --data '{"jsonrpc":"2.0","method":"eth_getUncleByBlockNumberAndInde
 
 **参数**
 
-- `fromBlock:` QUANTITY|TAG - 可选，默认值:"latest"。整数块编号，或字符串
-"latesr"表示最后挖出的块，"pending"或"earliest"用于未挖出的交易。 
-- `toBlock:` QUANTITY|TAG - 可选，默认值:"latest"。整数块编号，或字符串
-"latesr"表示最后挖出的块，"pending"或"earliest"用于未挖出的交易。 
+- `fromBlock:` QUANTITY|TAG - 可选，默认值:"latest"。整数块编号，或字符串"latesr"表示最后挖出的块，"pending"或"earliest"用于未挖出的交易。 
+
+
+- `toBlock:` QUANTITY|TAG - 可选，默认值:"latest"。整数块编号，或字符串"latesr"表示最后挖出的块，"pending"或"earliest"用于未挖出的交易。 
 - `address:` DATA|Array, 20 字节 - 可选，合约地址或生成日志的一组地址
 - `topics:` Array of DATA, - 可选，32 字节主题数组，每个主题可以是数组或使用 or 选项连接
 
-**返回值**
+**返回**
 
- - QUANTITY，过滤器编号
+- QUANTITY，过滤器编号
 
 **示例**
 
 ```javascript
 //Request
-curl -X POST --data '{"jsonrpc":"2.0","method":"eth_newBlockFilter","params":[],"id":73}'
+curl -X POST localhost:8545  -H "Content-Type:application/json" --data '{"jsonrpc":"2.0","method":"eth_newBlockFilter","params":[],"id":73}'
 //Response
 {
+"jsonrpc": "2.0", 
 "id":1,
-"jsonrpc": "2.0", "result": "0x1" // 1
+"result": "0x1" // 1
 }
 ```
+
 ## eth_newBlockFilter
 
 在节点中创建一个过滤器，以便当新块生成时进行通知。要检查状态是否变化，请调用`eth_getFilterChanges`.
@@ -1101,17 +1282,18 @@ curl -X POST --data '{"jsonrpc":"2.0","method":"eth_newBlockFilter","params":[],
 
 **返回**
 
-- QUANTITY 过滤器编号
+- `QUANTITY` 过滤器编号
 
 **示例**
 
 ```javascript
 //Request
-curl -X POST --data '{"jsonrpc":"2.0","method":"eth_newBlockFilter","params":[],"id":73}'
+curl -X POST localhost:8545  -H "Content-Type:application/json" --data '{"jsonrpc":"2.0","method":"eth_newBlockFilter","params":[],"id":73}'
 //Response
 {
+"jsonrpc": "2.0",
 "id":1,
-"jsonrpc": "2.0", "result": "0x1" // 1
+"result": "0x1" // 1
 }
 ```
 
@@ -1125,13 +1307,13 @@ curl -X POST --data '{"jsonrpc":"2.0","method":"eth_newBlockFilter","params":[],
 
 **返回值**
 
-- QUANTITY 过滤器编号
+- `QUANTITY`, 过滤器编号
 
 **示例**
 
 ```javascript
 //Request
-curl -X POST --data '{"jsonrpc":"2.0","method":"eth_newPendingTransactionFilter","para ms":[],"id":73}'
+curl -X POST localhost:8545  -H "Content-Type:application/json" --data '{"jsonrpc":"2.0","method":"eth_newPendingTransactionFilter","para ms":[],"id":73}'
 //Response
 {
 "id":1,
@@ -1145,21 +1327,21 @@ curl -X POST --data '{"jsonrpc":"2.0","method":"eth_newPendingTransactionFilter"
 
 **参数**
 
-- QUANTITY, 过滤器编号
+- `QUANTITY`, 过滤器编号
 
 **返回**
 
-- Boolean, 如果成功卸载则返回true,否则返回false
+- `Boolean`, 如果成功卸载则返回true,否则返回false
 
 **示例**
 
 ```javascript
 //Request
-curl -X POST --data '{"jsonrpc":"2.0","method":"eth_uninstallFilter","params":["0xb"],"id":7 3}'
+curl -X POST localhost:8545  -H "Content-Type:application/json" --data '{"jsonrpc":"2.0","method":"eth_uninstallFilter","params":["0xb"],"id":7 3}'
 //Response
 {
-  "id":1,
   "jsonrpc": "2.0",
+  "id":1,
   "result": true 
 }
 ```
@@ -1170,12 +1352,14 @@ curl -X POST --data '{"jsonrpc":"2.0","method":"eth_uninstallFilter","params":["
 
 **参数**
 
-- QUANTITY, 过滤器编号
+- `QUANTITY`, 过滤器编号
  
 **返回值**
 
-- Array, 日志对象数组，如果没有新生成的日志，则返回空数组。使用`eth_newBlockerFilter`创建的过滤器将返回块哈希(32 字节)，例如[")x3454645634534"]。
-使用`eth_newPendingTransactionFilter`创建的过滤器将返回交易哈希 (32 字节)，例如["0x6345343454645..."]。使用`eth_newFilter`创建的过滤器，日志对象具有如下数参数：
+- `Array`, 日志对象数组，如果没有新生成的日志，则返回空数组。
+- 使用`eth_newBlockerFilter`创建的过滤器将返回块哈希(32 字节)，例如[")x3454645634534"]。
+- 使用`eth_newPendingTransactionFilter`创建的过滤器将返回交易哈希 (32 字节)，例如["0x6345343454645..."]。
+使用`eth_newFilter`创建的过滤器，日志对象具有如下数参数：
 
 - `removed:` TAG - 如果日志已被删除则返回 true，如果是有效日志则返回false
 - `logIndex:` QUANTITY - 日志在块内的索引序号。对于挂起日志，该值为 null
@@ -1191,7 +1375,7 @@ curl -X POST --data '{"jsonrpc":"2.0","method":"eth_uninstallFilter","params":["
 
 ```javascript
 //Request
-curl -X POST --data '{"jsonrpc":"2.0","method":"eth_getFilterChanges","params":["0x16"]," id":73}'
+curl -X POST localhost:8545  -H "Content-Type:application/json" --data '{"jsonrpc":"2.0","method":"eth_getFilterChanges","params":["0x16"]," id":73}'
 //Response
 {
   "id":1,
@@ -1209,11 +1393,11 @@ curl -X POST --data '{"jsonrpc":"2.0","method":"eth_getFilterChanges","params":[
 
 ## eth_getFilterLogs
 
-返回指定编号过滤器中的全部日志。
+返回与给定ID匹配的过滤器的所有日志的数组.
 
 **参数**
 
-- QUANTITY, 过滤器编号
+- `QUANTITY`, 过滤器编号
 
 **返回**
 
@@ -1231,7 +1415,7 @@ curl -X POST --data '{"jsonrpc":"2.0","method":"eth_getFilterChanges","params":[
 
 ```javascript
 //Request
-curl -X POST --data '{"jsonrpc":"2.0","method":"eth_getFilterLogs","params":["0x16"],"id": 74}'
+curl -X POST localhost:8545  -H "Content-Type:application/json" --data '{"jsonrpc":"2.0","method":"eth_getFilterLogs","params":["0x16"],"id": 74}'
 //Response
 {
   "id":1,
@@ -1249,7 +1433,7 @@ curl -X POST --data '{"jsonrpc":"2.0","method":"eth_getFilterLogs","params":["0x
  
 ## eth_getLogs
 
-返回指定过滤器中的所有日志。
+返回与给定过滤器对象匹配的所有日志的数组。
 
 **参数**
 
@@ -1260,11 +1444,26 @@ curl -X POST --data '{"jsonrpc":"2.0","method":"eth_getFilterLogs","params":["0x
 
 **返回值**
 
+- `Array`, 日志对象数组，如果没有新生成的日志，则返回空数组。
+- 使用`eth_newBlockerFilter`创建的过滤器将返回块哈希(32 字节)，例如[")x3454645634534"]。
+- 使用`eth_newPendingTransactionFilter`创建的过滤器将返回交易哈希 (32 字节)，例如["0x6345343454645..."]。
+使用`eth_newFilter`创建的过滤器，日志对象具有如下数参数：
+
+- `removed:` TAG - 如果日志已被删除则返回 true，如果是有效日志则返回false
+- `logIndex:` QUANTITY - 日志在块内的索引序号。对于挂起日志，该值为 null
+- `transactionIndex:` QUANTITY - 创建日志的交易索引序号，对于挂起日志，该值为 null
+- `transactionHash:` DATA, 32 字节 - 创建该日志的交易的哈希。对于挂起日志，该值为 null
+- `blockHash:` DATA, 32 字节 - 该日志所在块的哈希。对于挂起日志，该值为null
+- `blockNumber:` QUANTITY - 该日志所在块的编号。对于挂起日志，该值为 null
+- `address:` DATA, 20 字节 - 该日志的源地址
+- `data:` DATA - 包含该日志的一个或多个 32 字节无索引参数
+- `topics:` Array of DATA -0~4 个 32 字节索引日志参数的数据。在 `solidity` 中，第一个主题是事件签名，例如 `Deposit(address,bytes32,uint256)`，除非你声明的是匿名事件
+
 **示例**
 
 ```javascript
 //Request
-curl -X POST --data '{"jsonrpc":"2.0","method":"eth_getLogs","params":[{"topics":["0x0000 00000000000000000000a94f5374fce5edbc8e2a8697c15331677e6ebf0b"]}],"id":74}'
+curl -X POST localhost:8545  -H "Content-Type:application/json" --data '{"jsonrpc":"2.0","method":"eth_getLogs","params":[{"topics":["0x0000 00000000000000000000a94f5374fce5edbc8e2a8697c15331677e6ebf0b"]}],"id":74}'
 //Response
 {
   "id":1,
@@ -1282,11 +1481,11 @@ curl -X POST --data '{"jsonrpc":"2.0","method":"eth_getLogs","params":[{"topics"
 ```
 ## eth_getWork
 
-返回当前块的哈希、种子哈希，以及要满足的边界条件，即目标。
+返回当前块的哈希、seedhash和要满足的边界条件
 
 **参数**
 
-无
+`无`
 
 **返回值**
 
@@ -1296,7 +1495,7 @@ curl -X POST --data '{"jsonrpc":"2.0","method":"eth_getLogs","params":[{"topics"
  
 ```javascript
 //Request
-curl -X POST --data '{"jsonrpc":"2.0","method":"eth_getWork","params":[],"id":73}'
+curl -X POST localhost:8545  -H "Content-Type:application/json" --data '{"jsonrpc":"2.0","method":"eth_getWork","params":[],"id":73}'
 //Response
 {
    "id":1,
@@ -1324,7 +1523,7 @@ curl -X POST --data '{"jsonrpc":"2.0","method":"eth_getWork","params":[],"id":73
 
 ```javascript
 //Request
-curl -X POST --data '{"jsonrpc":"2.0", "method":"eth_submitWork", "params":["0x000000 0000000001", "0x1234567890abcdef1234567890abcdef1234567890abcdef1234567890a bcdef", "0xD1GE5700000000000000000000000000D1GE5700000000000000000000000 000"],"id":73}'
+curl -X POST localhost:8545  -H "Content-Type:application/json" --data '{"jsonrpc":"2.0", "method":"eth_submitWork", "params":["0x000000 0000000001", "0x1234567890abcdef1234567890abcdef1234567890abcdef1234567890a bcdef", "0xD1GE5700000000000000000000000000D1GE5700000000000000000000000 000"],"id":73}'
 //Response
 {
   "id":73,
@@ -1350,7 +1549,7 @@ curl -X POST --data '{"jsonrpc":"2.0", "method":"eth_submitWork", "params":["0x0
 
 ```javascript
 //Request
-curl -X POST --data '{"jsonrpc":"2.0", "method":"eth_submitHashrate", "params":["0x000 0000000000000000000000000000000000000000000000000000000500000", "0x59daa2 6581d0acd1fce254fb7e85952f4c09d0915afd33d3886cd914bc7d283c"],"id":73}'
+curl -X POST localhost:8545  -H "Content-Type:application/json" --data '{"jsonrpc":"2.0", "method":"eth_submitHashrate", "params":["0x000 0000000000000000000000000000000000000000000000000000000500000", "0x59daa2 6581d0acd1fce254fb7e85952f4c09d0915afd33d3886cd914bc7d283c"],"id":73}'
 //Response
 {
    "id":73,
@@ -1365,17 +1564,17 @@ curl -X POST --data '{"jsonrpc":"2.0", "method":"eth_submitHashrate", "params":[
 
 **参数**
 
-无
+`无`
 
 **返回值**
 
-- QUANTITY, 节点当前块编号
+- `QUANTITY`, 节点当前块编号
 
 **示例**
 
 ```javascript
 //Request
-curl -X POST --data '{"jsonrpc":"2.0","method":"eth_blockNumber","params":[],"id":83}'
+curl -X POST localhost:8545  -H "Content-Type:application/json" --data '{"jsonrpc":"2.0","method":"eth_blockNumber","params":[],"id":83}'
 //Response
 {
 "id":83,
