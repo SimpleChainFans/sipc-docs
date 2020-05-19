@@ -11,37 +11,38 @@ sidebar_label: Sipc API
 - [`net_version`](#net_version)
 - [`net_listening`](#net_listening)
 - [`net_peerCount`](#net_peerCount)
+- [`eth_protocolVersion`](#eth_protocolVersion)
 - [`eth_syncing`](#eth_syncing)
+- [`eth_coinbase`](#eth_coinbase)
 - [`eth_mining`](#eth_mining)
 - [`eth_hashrate`](#eth_hashrate)
 - [`eth_gasPrice`](#eth_gasPrice)
 - [`eth_accounts`](#eth_accounts)
+- [`eth_blockNumber`](#eth_blockNumber)
 - [`eth_getBalance`](#eth_getBalance)
 - [`eth_getStorageAt`](#eth_getTransactionCount)
 - [`eth_getBlockTransactionCountByHash`](#eth_getBlockTransactionCountByHash)
 - [`eth_getBlockTransactionCountByNumb`](#eth_getBlockTransactionCountByNumb)
 - [`eth_getUncleCountByBlockHash`](#eth_getUncleCountByBlockHash)
+- [`eth_getUncleCountByBlockNumber`](#eth_getUncleCountByBlockNumber)
 - [`eth_getCode`](#eth_getCode)
+- [`eth_sign`](#eth_sign)
 - [`eth_sendTransaction`](#eth_sendTransaction)
 - [`eth_sendRawTransaction`](#eth_sendRawTransaction)
-- [`eth_getTransactionReceipt`](#eth_getTransactionReceipt)
 - [`eth_call`](#eth_call)
 - [`eth_estimateGas`](#eth_estimateGas)
 - [`eth_getBlockByHash`](#eth_getBlockByHash)
-- [`eth_getTransactionByHash`](#eth_getTransactionByHash)
-- [`eth_getTransactionReceipt`](#eth_getTransactionReceipt)
-- [`eth_getTransactionByHash`](#eth_getTransactionByHash)
+- [`eth_getBlockByNumber`](#eth_getBlockByNumber)
+- [`eth_getTransactionByNUmber`](#eth_getTransactionByNumber)
 - [`eth_getUncleByBlockHashAndIndex`](#eth_getUncleByBlockHashAndIndex)
-- [`eth_getBlockByHash`](#eth_getBlockByHash)
-- [`eth_getBlockByHash`](#eth_getBlockByHash)
-- [`eth_getBlockByHash`](#eth_getBlockByHash)
+- [`eth_getUncleByBlockNumberAndIndex`](#eth_getUncleByBlockNumberAndIndex)
+- [`eth_newFilter`](#eth_newFilter)
 - [`eth_newBlockFilter`](#eth_newBlockFilter)
 - [`eth_newPendingTransactionFilter`](#eth_newPendingTransactionFilter)
+- [`eth_uninstallFilter`](#eth_uninstallFilter)
 - [`eth_getFilterChanges`](#eth_getFilterChanges)
 - [`eth_getFilterLogs`](#eth_getFilterLogs)
-- [`eth_getFilterChanges`](#eth_getFilterChanges)
 - [`eth_getLogs`](#eth_getLogs)
-- [`eth_getFilterChanges`](#eth_getFilterChanges)
 - [`eth_getWork`](#eth_getWork)
 - [`eth_submitWork`](#eth_submitWork)
 - [`eth_submitHashrate`](#eth_submitHashrate)
@@ -1161,8 +1162,8 @@ curl -X POST localhost:8545  -H "Content-Type:application/json" --data '{"jsonrp
 		"uncles": []
 	}
 }
-```
 注意: 叔块不包含单独的交易。
+```
 ---
 
 ## eth_getUncleByBlockNumberAndIndex

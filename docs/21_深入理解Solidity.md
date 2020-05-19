@@ -378,24 +378,21 @@ Solidity 提供了几种基本类型，可以用来组合出复杂类型。
 可以使用 ``balance`` 属性来查询一个地址的余额，
 也可以使用 ``transfer`` 函数向一个地址发送 |ether| （以 wei 为单位）：
 
-::
+```bash
 
     address x = 0x123;
     address myAddress = this;
     if (x.balance < 10 && myAddress.balance >= 10) x.transfer(10);
+```
 
-.. note::
-    如果 ``x`` 是一个合约地址，它的代码（更具体来说是它的 fallback 函数，如果有的话）会跟 ``transfer`` 函数调用一起执行（这是 EVM 的一个特性，无法阻止）。
-    如果在执行过程中用光了 gas 或者因为任何原因执行失败，|ether| 交易会被打回，当前的合约也会在终止的同时抛出异常。
+> 如果 ``x`` 是一个合约地址，它的代码（更具体来说是它的 fallback 函数，如果有的话）会跟 ``transfer`` 函数调用一起执行（这是 EVM 的一个特性，无法阻止）。
+如果在执行过程中用光了 gas 或者因为任何原因执行失败，|ether| 交易会被打回，当前的合约也会在终止的同时抛出异常。
 
 * ``send``
 
 ``send`` 是 ``transfer`` 的低级版本。如果执行失败，当前的合约不会因为异常而终止，但 ``send`` 会返回 ``false``。
 
-.. warning::
-    在使用 ``send`` 的时候会有些风险：如果调用栈深度是 1024 会导致发送失败（这总是可以被调用者强制），如果接收者用光了 gas 也会导致发送失败。
-    所以为了保证 |ether| 发送的安全，一定要检查 ``send`` 的返回值，使用 ``transfer`` 或者更好的办法：
-    使用一种接收者可以取回资金的模式。
+> 在使用 ``send`` 的时候会有些风险：如果调用栈深度是 1024 会导致发送失败（这总是可以被调用者强制），如果接收者用光了 gas 也会导致发送失败。所以为了保证 |ether| 发送的安全，一定要检查 ``send`` 的返回值，使用 ``transfer`` 或者更好的办法：使用一种接收者可以取回资金的模式。
 
 * ``call``， ``callcode`` 和 ``delegatecall``
 
@@ -404,51 +401,44 @@ Solidity 提供了几种基本类型，可以用来组合出复杂类型。
 其中一个例外是当第一个参数被编码成正好 4 个字节的情况。
 在这种情况下，这个参数后边不会填充后续参数编码，以允许使用函数签名。
 
-::
-
+```bash
     address nameReg = 0x72ba7d8e73fe8eb666ea66babc8116a41bfb10e2;
     nameReg.call("register", "MyName");
     nameReg.call(bytes4(keccak256("fun(uint256)")), a);
+```
 
 ``call`` 返回的布尔值表明了被调用的函数已经执行完毕（``true``）或者引发了一个 EVM 异常（``false``）。
 无法访问返回的真实数据（为此我们需要事先知道编码和大小）。
 
-可以使用 ``.gas()`` |modifier| 调整提供的 gas 数量 ::
+可以使用 ``.gas()`` |modifier| 调整提供的 gas 数量:
 
     namReg.call.gas(1000000)("register", "MyName");
 
-类似地，也能控制提供的 |ether| 的值 ::
+类似地，也能控制提供的 |ether| 的值 :
 
+```bash
    nameReg.call.value(1 ether)("register", "MyName"); 
+```
 
-最后一点，这些 |modifier| 可以联合使用。每个修改器出现的顺序不重要 ::
+最后一点，这些 |modifier| 可以联合使用。每个修改器出现的顺序不重要 :
 
+```bash
    nameReg.call.gas(1000000).value(1 ether)("register", "MyName"); 
+```
 
-.. note::
-    目前还不能在重载函数中使用 gas 或者 value |modifier| 。
+目前还不能在重载函数中使用 gas 或者 value。一种解决方案是给 gas 和值引入一个特例，并重新检查它们是否在重载的地方出现。
 
-    一种解决方案是给 gas 和值引入一个特例，并重新检查它们是否在重载的地方出现。
-
-类似地，也可以使用 ``delegatecall``：
-区别在于只使用给定地址的代码，其它属性（存储，余额，……）都取自当前合约。
-``delegatecall`` 的目的是使用存储在另外一个合约中的库代码。
-用户必须确保两个合约中的存储结构都适用于 delegatecall。
-在 homestead 版本之前，只有一个功能类似但作用有限的 ``callcode`` 的函数可用，但它不能获取委托方的 ``msg.sender`` 和 ``msg.value``。
+类似地，也可以使用 ``delegatecall``：区别在于只使用给定地址的代码，其它属性（存储，余额，……）都取自当前合约。``delegatecall`` 的目的是使用存储在另外一个合约中的库代码。用户必须确保两个合约中的存储结构都适用于 delegatecall。在 homestead 版本之前，只有一个功能类似但作用有限的 ``callcode`` 的函数可用，但它不能获取委托方的 ``msg.sender`` 和 ``msg.value``。
 
 这三个函数 ``call``， ``delegatecall`` 和 ``callcode`` 都是非常低级的函数，应该只把它们当作 *最后一招* 来使用，因为它们破坏了 Solidity 的类型安全性。
 
-.. note::
-    所有合约都继承了地址（address）的成员变量，因此可以使用 ``this.balance`` 查询当前合约的余额。
+> 所有合约都继承了地址（address）的成员变量，因此可以使用 ``this.balance`` 查询当前合约的余额。
 
-.. note::
-    不鼓励使用 ``callcode``，在未来也会将其移除。
 
-.. warning::
-    这三个函数都属于低级函数，需要谨慎使用。
-    具体来说，任何未知的合约都可能是恶意的。
-    你在调用一个合约的同时就将控制权交给了它，它可以反过来调用你的合约，
-    因此，当调用返回时要为你的状态变量的改变做好准备。
+> 不鼓励使用 ``callcode``，在未来也会将其移除。
+
+
+> 这三个函数都属于低级函数，需要谨慎使用。具体来说，任何未知的合约都可能是恶意的。你在调用一个合约的同时就将控制权交给了它，它可以反过来调用你的合约，因此，当调用返回时要为你的状态变量的改变做好准备。
 
 ### 定长字节数组
 
@@ -467,9 +457,7 @@ Solidity 提供了几种基本类型，可以用来组合出复杂类型。
 
 * ``.length`` 表示这个字节数组的长度（只读）.
 
-.. note::
-    可以将 ``byte[]`` 当作字节数组使用，但这种方式非常浪费存储空间，准确来说，是在传入调用时，每个元素会浪费 31 字节。
-    更好地做法是使用 ``bytes``。
+> 可以将 ``byte[]`` 当作字节数组使用，但这种方式非常浪费存储空间，准确来说，是在传入调用时，每个元素会浪费 31 字节。 更好地做法是使用 ``bytes``。
 
 ### 变长字节数组
 
@@ -478,33 +466,20 @@ Solidity 提供了几种基本类型，可以用来组合出复杂类型。
 ``string``:
     变长 UTF-8 编码字符串类型，参见 :ref:`arrays`。并不是值类型。
 
-.. index:: address, literal;address
-
-.. _address_literals:
-
 ### 地址字面常数（Address Literals）
 
-比如像 ``0xdCad3a6d3569DF655070DEd06cb7A1b2Ccd1D3AF`` 这样的通过了地址校验和测试的十六进制字面常数属于 ``address`` 类型。
-长度在 39 到 41 个数字的，没有通过校验和测试而产生了一个警告的十六进制字面常数视为正常的有理数字面常数。
+比如像 ``0xdCad3a6d3569DF655070DEd06cb7A1b2Ccd1D3AF`` 这样的通过了地址校验和测试的十六进制字面常数属于 ``address`` 类型。长度在 39 到 41 个数字的，没有通过校验和测试而产生了一个警告的十六进制字面常数视为正常的有理数字面常数。
 
-.. note::
-    混合大小写的地址校验和格式定义在 `EIP-55 <https://github.com/ethereum/EIPs/blob/master/EIPS/eip-55.md>`_ 中。
-
-.. index:: literal, literal;rational
-
-.. _rational_literals:
+> 混合大小写的地址校验和格式定义在 [EIP-55](https://github.com/ethereum/EIPs/blob/master/EIPS/eip-55.md)中。
 
 ### 有理数和整数字面常数
 
-整数字面常数由范围在 0-9 的一串数字组成，表现成十进制。
-例如，`69` 表示数字 69。
-Solidity 中是没有八进制的，因此前置 0 是无效的。
+整数字面常数由范围在 0-9 的一串数字组成，表现成十进制。例如，`69` 表示数字 69。
+`Solidity` 中是没有八进制的，因此前置 0 是无效的。
 
-十进制小数字面常数带有一个 ``.``，至少在其一边会有一个数字。
-比如：``1.``，``.1``，和 ``1.3``。
+十进制小数字面常数带有一个 ``.``，至少在其一边会有一个数字。比如：``1.``，``.1``，和 ``1.3``。
 
-科学符号也是支持的，尽管指数必须是整数，但底数可以是小数。
-比如：``2e10``， ``-2e10``， ``2e-10``， ``2.5e1``。
+科学符号也是支持的，尽管指数必须是整数，但底数可以是小数。比如：``2e10``， ``-2e10``， ``2e-10``， ``2.5e1``。
 
 数值字面常数表达式本身支持任意精度，除非它们被转换成了非字面常数类型（也就是说，当它们出现在非字面常数表达式中时就会发生转换）。
 这意味着在数值常量表达式中, 计算不会溢出而除法也不会截断。
@@ -535,8 +510,7 @@ Solidity 中是没有八进制的，因此前置 0 是无效的。
 不像在 C 语言中那样带有结束符；``"foo"`` 相当于 3 个字节而不是 4 个。
 和整数字面常数一样，字符串字面常数的类型也可以发生改变，但它们可以隐式地转换成 ``bytes1``，……，``bytes32``，如果合适的话，还可以转换成 ``bytes`` 以及 ``string``。
 
-字符串字面常数支持转义字符，例如 ``\n``，``\xNN`` 和 ``\uNNNN``。``\xNN`` 表示一个 16 进制值，最终转换成合适的字节，
-而 ``\uNNNN`` 表示 Unicode 编码值，最终会转换为 UTF-8 的序列。
+字符串字面常数支持转义字符，例如 ``\n``，``\xNN`` 和 ``\uNNNN``。``\xNN`` 表示一个 16 进制值，最终转换成合适的字节，而 ``\uNNNN`` 表示 Unicode 编码值，最终会转换为 UTF-8 的序列。
 
 
 ### 十六进制字面常数
@@ -587,9 +561,11 @@ Solidity 中是没有八进制的，因此前置 0 是无效的。
 
 函数类型表示成如下的形式 ::
 
-    function (<parameter types>) {internal|external} [pure|constant|view|payable] [returns (<return types>)]
+```bash
+function (<parameter types>) {internal|external} [pure|constant|view|payable] [returns (<return types>)]
+```
 
-与参数类型相反，返回类型不能为空 —— 如果函数类型不需要返回，则需要删除整个 ``returns (<return types>)`` 部分。
+与参数类型相反，返回类型不能为空 —— 如果函数类型不需要返回，则需要删除整个 `returns` 部分。
 
 函数类型默认是内部函数，因此不需要声明 ``internal`` 关键字。
 与此相反的是，合约中的函数本身默认是 public 的，只有当它被当做类型名称时，默认才是内部函数。
@@ -606,8 +582,9 @@ Solidity 中是没有八进制的，因此前置 0 是无效的。
 请注意，当前合约的 public 函数既可以被当作内部函数也可以被当作外部函数使用。
 如果想将一个函数当作内部函数使用，就用 ``f`` 调用，如果想将其当作外部函数，使用 ``this.f`` 。
 
-除此之外，public（或 external）函数也有一个特殊的成员变量称作 ``selector``，可以返回 :ref:`ABI 函数选择器 <abi_function_selector>`::
+除此之外，public（或 external）函数也有一个特殊的成员变量称作 ``selector``，可以返回`ABI 函数选择器`
 
+```bash
     pragma solidity ^0.4.16;
 
     contract Selector {
@@ -615,9 +592,11 @@ Solidity 中是没有八进制的，因此前置 0 是无效的。
         return this.f.selector;
       }
     }
+```
 
 如果使用内部函数类型的例子::
 
+```bash
     pragma solidity ^0.4.16;
 
     library ArrayUtils {
@@ -666,9 +645,11 @@ Solidity 中是没有八进制的，因此前置 0 是无效的。
         return x + y;
       }
     }
+```
 
 另外一个使用外部函数类型的例子::
 
+```bash
     pragma solidity ^0.4.11;
 
     contract Oracle {
@@ -698,30 +679,25 @@ Solidity 中是没有八进制的，因此前置 0 是无效的。
         // 使用数据
       }
     }
-
+```
 
 >  Lambda 表达式或者内联函数的引入在计划内，但目前还没支持。
 
 ### 引用类型
 
 比起之前讨论过的值类型，在处理复杂的类型（即占用的空间超过 256 位的类型）时，我们需要更加谨慎。
-由于拷贝这些类型变量的开销相当大，我们不得不考虑它的存储位置，是将它们保存在 ** |memory| ** （并不是永久存储）中，
-还是 ** |storage| ** （保存状态变量的地方）中。
+由于拷贝这些类型变量的开销相当大，我们不得不考虑它的存储位置，是将它们保存在 `memory`（并不是永久存储）中，
+还是 `storage`（保存状态变量的地方）中。
 
 ### 数据位置
 
-所有的复杂类型，即 *数组* 和 *结构* 类型，都有一个额外属性，“数据位置”，说明数据是保存在 |memory| 中还是 |storage| 中。
-根据上下文不同，大多数时候数据有默认的位置，但也可以通过在类型名后增加关键字 ``storage`` 或 ``memory`` 进行修改。
-函数参数（包括返回的参数）的数据位置默认是 ``memory``，
-局部变量的数据位置默认是 ``storage``，状态变量的数据位置强制是 ``storage`` （这是显而易见的）。
+所有的复杂类型，即 *数组* 和 *结构* 类型，都有一个额外属性，“数据位置”，说明数据是保存在 `memory` 中还是 `storage` 中。根据上下文不同，大多数时候数据有默认的位置，但也可以通过在类型名后增加关键字 ``storage`` 或 ``memory`` 进行修改。函数参数（包括返回的参数）的数据位置默认是 ``memory``，局部变量的数据位置默认是 ``storage``，状态变量的数据位置强制是 ``storage`` （这是显而易见的）。
 
-也存在第三种数据位置， ``calldata`` ，这是一块只读的，且不会永久存储的位置，用来存储函数参数。
-外部函数的参数（非返回参数）的数据位置被强制指定为 ``calldata`` ，效果跟 ``memory`` 差不多。
+也存在第三种数据位置， ``calldata`` ，这是一块只读的，且不会永久存储的位置，用来存储函数参数。外部函数的参数（非返回参数）的数据位置被强制指定为 ``calldata`` ，效果跟 ``memory`` 差不多。
 
 数据位置的指定非常重要，因为它们影响着赋值行为：
-在 |storage| 和 |memory| 之间两两赋值，或者 |storage| 向状态变量（甚至是从其它状态变量）赋值都会创建一份独立的拷贝。
-然而状态变量向局部变量赋值时仅仅传递一个引用，而且这个引用总是指向状态变量，因此后者改变的同时前者也会发生改变。
-另一方面，从一个 |memory| 存储的引用类型向另一个 |memory| 存储的引用类型赋值并不会创建拷贝。
+
+在 `storage` 和 `memory` 之间两两赋值，或者 `storage` 向状态变量（甚至是从其它状态变量）赋值都会创建一份独立的拷贝。然而状态变量向局部变量赋值时仅仅传递一个引用，而且这个引用总是指向状态变量，因此后者改变的同时前者也会发生改变。另一方面，从一个 `memory` 存储的引用类型向另一个 `memory` 存储的引用类型赋值并不会创建拷贝。
 
 ```sh
 
@@ -766,8 +742,8 @@ Solidity 中是没有八进制的，因此前置 0 是无效的。
 #### 数组
 
 数组可以在声明时指定长度，也可以动态调整大小。
-对于 |storage| 的数组来说，元素类型可以是任意的（即元素也可以是数组类型，映射类型或者结构体）。
-对于 |memory| 的数组来说，元素类型不能是映射类型，如果作为 public 函数的参数，它只能是 ABI 类型。
+对于 `storage` 的数组来说，元素类型可以是任意的（即元素也可以是数组类型，映射类型或者结构体）。
+对于 `memory` 的数组来说，元素类型不能是映射类型，如果作为 public 函数的参数，它只能是 ABI 类型。
 
 一个元素类型为 ``T``，固定长度为 ``k`` 的数组可以声明为 ``T[k]``，而动态数组声明为 ``T[]``。
 举个例子，一个长度为 5，元素类型为 ``uint`` 的动态数组的数组，应声明为 ``uint[][5]`` （注意这里跟其它语言比，数组长度的声明位置是反的）。
@@ -781,15 +757,13 @@ Solidity 中是没有八进制的，因此前置 0 是无效的。
     如果想要访问以字节表示的字符串 ``s``，请使用 ``bytes(s).length`` / ``bytes(s)[7] = 'x';``。
     注意这时你访问的是 UTF-8 形式的低级 bytes 类型，而不是单个的字符。
 
-可以将数组标识为 ``public``，从而让 Solidity 创建一个 :ref:`getter <visibility-and-getters>`。
+可以将数组标识为 ``public``，从而让 Solidity 创建一个 `getter`。
 之后必须使用数字下标作为参数来访问 getter。
-
 
 **创建内存数组**
 
-
 可使用 ``new`` 关键字在内存中创建变长数组。
-与 |storage| 数组相反的是，你 *不能* 通过修改成员变量 ``.length`` 改变 |memory| 数组的大小。
+与 `storage` 数组相反的是，你 *不能* 通过修改成员变量 `length` 改变 `memory` 数组的大小。
 
 ```sh
 
@@ -806,7 +780,6 @@ Solidity 中是没有八进制的，因此前置 0 是无效的。
 ```
 
 **数组字面常数 / 内联数组**
-
 
 数组字面常数是写作表达式形式的数组，并且不会立即赋值给变量。
 
@@ -827,7 +800,7 @@ Solidity 中是没有八进制的，因此前置 0 是无效的。
 数组字面常数是一种定长的 |memory| 数组类型，它的基础类型由其中元素的普通类型决定。
 例如，``[1, 2, 3]`` 的类型是 ``uint8[3] memory``，因为其中的每个字面常数的类型都是 ``uint8``。
 正因为如此，有必要将上面这个例子中的第一个元素转换成 ``uint`` 类型。
-目前需要注意的是，定长的 |memory| 数组并不能赋值给变长的 |memory| 数组，下面是个反例：
+目前需要注意的是，定长的 `memory` 数组并不能赋值给变长的 `memory` 数组，下面是个反例：
 
 ```sh
     // 这段代码并不能编译。
@@ -843,31 +816,26 @@ Solidity 中是没有八进制的，因此前置 0 是无效的。
     }
 ```
 
-已经计划在未来移除这样的限制，但目前数组在 ABI 中传递的问题造成了一些麻烦。
+已经计划在未来移除这样的限制，但目前数组在 `ABI` 中传递的问题造成了一些麻烦。
 
 #### 成员
 
 **length**:
-    数组有 ``length`` 成员变量表示当前数组的长度。
-    动态数组可以在 |storage| （而不是 |memory| ）中通过改变成员变量 ``.length`` 改变数组大小。
-    并不能通过访问超出当前数组长度的方式实现自动扩展数组的长度。
-    一经创建，|memory| 数组的大小就是固定的（但却是动态的，也就是说，它依赖于运行时的参数）。
+
+数组有 ``length`` 成员变量表示当前数组的长度。动态数组可以在 `storage`（而不是 `memory` ）中通过改变成员变量 ``.length`` 改变数组大小。并不能通过访问超出当前数组长度的方式实现自动扩展数组的长度。一经创建，`memory` 数组的大小就是固定的（但却是动态的，也就是说，它依赖于运行时的参数）。
 
 **push**:
-    变长的 |storage| 数组以及 ``bytes`` 类型（而不是 ``string`` 类型）都有一个叫做 ``push`` 的成员函数，它用来附加新的元素到数组末尾。
-    这个函数将返回新的数组长度。
 
-.. warning::
-    在外部函数中目前还不能使用多维数组。
+ 变长的 |storage| 数组以及 ``bytes`` 类型（而不是 ``string`` 类型）都有一个叫做 ``push`` 的成员函数，它用来附加新的元素到数组末尾。这个函数将返回新的数组长度。
 
-.. warning::
-    由于 |evm| 的限制，不能通过外部函数调用返回动态的内容。
-    例如，如果通过 web3.js 调用 ``contract C { function f() returns (uint[]) { ... } }`` 中的 ``f`` 函数，它会返回一些内容，但通过 Solidity 不可以。
 
-    目前唯一的变通方法是使用大型的静态数组。
+>  在外部函数中目前还不能使用多维数组。
 
-::
+>  由于 |evm| 的限制，不能通过外部函数调用返回动态的内容。例如，如果通过 web3.js 调用 ``contract C { function f() returns (uint[]) { ... } }`` 中的 ``f`` 函数，它会返回一些内容，但通过 Solidity 不可以。
 
+目前唯一的变通方法是使用大型的静态数组。
+
+```bash
     pragma solidity ^0.4.16;
 
     contract ArrayContract {
@@ -926,19 +894,13 @@ Solidity 中是没有八进制的，因此前置 0 是无效的。
             return b;
         }
     }
+```
 
-
-.. index:: ! struct, ! type;struct
-
-.. _structs:
-
-结构体
--------
+### 结构体
 
 Solidity 支持通过构造结构体的形式定义新的类型，以下是一个结构体使用的示例：
 
-::
-
+```bash
     pragma solidity ^0.4.11;
 
     contract CrowdFunding {
@@ -984,43 +946,32 @@ Solidity 支持通过构造结构体的形式定义新的类型，以下是一�
             return true;
         }
     }
+```
 
 上面的合约只是一个简化版的众筹合约，但它已经足以让我们理解结构体的基础概念。
 结构体类型可以作为元素用在映射和数组中，其自身也可以包含映射和数组作为成员变量。
 
-尽管结构体本身可以作为映射的值类型成员，但它并不能包含自身。
-这个限制是有必要的，因为结构体的大小必须是有限的。
+尽管结构体本身可以作为映射的值类型成员，但它并不能包含自身。这个限制是有必要的，因为结构体的大小必须是有限的。
 
-注意在函数中使用结构体时，一个结构体是如何赋值给一个局部变量（默认存储位置是 |storage| ）的。
-在这个过程中并没有拷贝这个结构体，而是保存一个引用，所以对局部变量成员的赋值实际上会被写入状态。
+注意在函数中使用结构体时，一个结构体是如何赋值给一个局部变量（默认存储位置是 `storage`）的。在这个过程中并没有拷贝这个结构体，而是保存一个引用，所以对局部变量成员的赋值实际上会被写入状态。
 
 当然，你也可以直接访问结构体的成员而不用将其赋值给一个局部变量，就像这样，
 ``campaigns[campaignID].amount = 0``。
 
-.. index:: !mapping
-
-映射
-=====
+#### 映射
 
 映射类型在声明时的形式为 ``mapping(_KeyType => _ValueType)``。
 其中 ``_KeyType`` 可以是除了映射、变长数组、合约、枚举以及结构体以外的几乎所有类型。
 ``_ValueType`` 可以是包括映射类型在内的任何类型。
 
-映射可以视作 `哈希表 <https://en.wikipedia.org/wiki/Hash_table>`，它们在实际的初始化过程中创建每个可能的 key，
-并将其映射到字节形式全是零的值：一个类型的 :ref:`默认值 <default-value>`。然而下面是映射与哈希表不同的地方：
+映射可以视作 [哈希表](https://en.wikipedia.org/wiki/Hash_table)，它们在实际的初始化过程中创建每个可能的 key，并将其映射到字节形式全是零的值：一个类型的`默认值`。然而下面是映射与哈希表不同的地方：
+
 在映射中，实际上并不存储 key，而是存储它的 ``keccak256`` 哈希值，从而便于查询实际的值。
+正因为如此，映射是没有长度的，也没有 key 的集合或 value 的集合的概念。只有状态变量（或者在 internal 函数中的对于存储变量的引用）可以使用映射类型。。
 
-正因为如此，映射是没有长度的，也没有 key 的集合或 value 的集合的概念。
+可以将映射声明为 ``public``，然后来让 Solidity 创建一个`getter `。``_KeyType`` 将成为 getter 的必须参数，并且 getter 会返回 ``_ValueType``。``_ValueType`` 也可以是一个映射。这时在使用 getter 时将将需要递归地传入每个 ``_KeyType`` 参数。
 
-只有状态变量（或者在 internal 函数中的对于存储变量的引用）可以使用映射类型。。
-
-可以将映射声明为 ``public``，然后来让 Solidity 创建一个 :ref:`getter <visibility-and-getters>`。
-``_KeyType`` 将成为 getter 的必须参数，并且 getter 会返回 ``_ValueType``。
-
-``_ValueType`` 也可以是一个映射。这时在使用 getter 时将将需要递归地传入每个 ``_KeyType`` 参数。
-
-::
-
+```bash
     pragma solidity ^0.4.0;
 
     contract MappingExample {
@@ -1038,16 +989,11 @@ Solidity 支持通过构造结构体的形式定义新的类型，以下是一�
             return m.balances(this);
         }
     }
+```
 
+>  映射不支持迭代，但可以在此之上实现一个这样的数据结构。例子可以参考: [可迭代的映射](https://github.com/ethereum/dapp-bin/blob/master/library/iterable_mapping.sol)
 
-.. note::
-  映射不支持迭代，但可以在此之上实现一个这样的数据结构。
-  例子可以参考 `可迭代的映射 <https://github.com/ethereum/dapp-bin/blob/master/library/iterable_mapping.sol>`_。
-
-.. index:: assignment, ! delete, lvalue
-
-涉及 LValues 的运算符
-=====================
+#### 涉及 LValues 的运算符
 
 如果 ``a`` 是一个 LValue（即一个变量或者其它可以被赋值的东西），以下运算符都可以使用简写：
 
@@ -1055,8 +1001,7 @@ Solidity 支持通过构造结构体的形式定义新的类型，以下是一�
 ``a++`` 和 ``a--`` 分别等同于 ``a += 1`` 和 ``a -= 1``，但表达式本身的值等于 ``a`` 在计算之前的值。
 与之相反，``--a`` 和 ``++a`` 虽然最终 ``a`` 的结果与之前的表达式相同，但表达式的返回值是计算之后的值。
 
-删除
------
+### 删除
 
 ``delete a`` 的结果是将 ``a`` 的类型在初始化时的值赋值给 ``a``。即对于整型变量来说，相当于 ``a = 0``，
 但 delete 也适用于数组，对于动态数组来说，是将数组的长度设为 0，而对于静态数组来说，是将数组中的所有元素重置。
@@ -1068,8 +1013,7 @@ Solidity 支持通过构造结构体的形式定义新的类型，以下是一�
 
 理解 ``delete a`` 的效果就像是给 ``a`` 赋值很重要，换句话说，这相当于在 ``a`` 中存储了一个新的对象。
 
-::
-
+```bash
     pragma solidity ^0.4.0;
 
     contract DeleteExample {
@@ -1087,59 +1031,48 @@ Solidity 支持通过构造结构体的形式定义新的类型，以下是一�
             // 另一方面："delete y" 是非法的，引用了 storage 对象的局部变量只能由已有的 storage 对象赋值。
         }
     }
+```
 
-.. index:: ! type;conversion, ! cast
+### 基本类型之间的转换
 
-基本类型之间的转换
-==================
+#### 隐式转换
 
-隐式转换
----------
+如果一个运算符用在两个不同类型的变量之间，那么编译器将隐式地将其中一个类型转换为另一个类型（不同类型之间的赋值也是一样）。一般来说，只要值类型之间的转换在语义上行得通，而且转换的过程中没有信息丢失，那么隐式转换基本都是可以实现的：
 
-如果一个运算符用在两个不同类型的变量之间，那么编译器将隐式地将其中一个类型转换为另一个类型（不同类型之间的赋值也是一样）。
-一般来说，只要值类型之间的转换在语义上行得通，而且转换的过程中没有信息丢失，那么隐式转换基本都是可以实现的：
-``uint8`` 可以转换成 ``uint16``，``int128`` 转换成 ``int256``，但 ``int8`` 不能转换成 ``uint256``
-（因为 ``uint256`` 不能涵盖某些值，例如，``-1``）。
-更进一步来说，无符号整型可以转换成跟它大小相等或更大的字节类型，但反之不能。
-任何可以转换成 ``uint160`` 的类型都可以转换成 ``address`` 类型。
+``uint8`` 可以转换成 ``uint16``，``int128`` 转换成 ``int256``，但 ``int8`` 不能转换成 ``uint256``（因为 ``uint256`` 不能涵盖某些值，例如，``-1``）。更进一步来说，无符号整型可以转换成跟它大小相等或更大的字节类型，但反之不能。任何可以转换成 ``uint160`` 的类型都可以转换成 ``address`` 类型。
 
-显式转换
----------
+#### 显式转换
 
 如果某些情况下编译器不支持隐式转换，但是你很清楚你要做什么，这种情况可以考虑显式转换。
 注意这可能会发生一些无法预料的后果，因此一定要进行测试，确保结果是你想要的！
 下面的示例是将一个 ``int8`` 类型的负数转换成 ``uint``：
 
-::
-
-    int8 y = -3;
-    uint x = uint(y);
+```bash
+int8 y = -3;
+uint x = uint(y);
+```
 
 这段代码的最后，``x`` 的值将是 ``0xfffff..fd`` （64 个 16 进制字符），因为这是 -3 的 256 位补码形式。
 
-如果一个类型显式转换成更小的类型，相应的高位将被舍弃 ::
+如果一个类型显式转换成更小的类型，相应的高位将被舍弃:
 
-    uint32 a = 0x12345678;
-    uint16 b = uint16(a); // 此时 b 的值是 0x5678
+```bash
+uint32 a = 0x12345678;
+uint16 b = uint16(a); // 此时 b 的值是 0x5678
+```
 
-.. index:: ! type;deduction, ! var
+#### 类型推断
 
-.. _type-deduction:
+为了方便起见，没有必要每次都精确指定一个变量的类型，编译器会根据分配该变量的第一个表达式的类型自动推断该变量的类型:
 
-类型推断
-=========
-
-为了方便起见，没有必要每次都精确指定一个变量的类型，编译器会根据分配该变量的第一个表达式的类型自动推断该变量的类型 ::
-
-    uint24 x = 0x123;
-    var y = x;
-
+```bash
+uint24 x = 0x123;
+var y = x;
+```
 这里 ``y`` 的类型将是 ``uint24``。不能对函数参数或者返回参数使用 ``var``。
 
-.. warning::
-    类型只能从第一次赋值中推断出来，因此以下代码中的循环是无限的，
-    原因是``i`` 的类型是 ``uint8``，而这个类型变量的最大值比 ``2000`` 小。
-    ``for (var i = 0; i < 2000; i++) { ... }``
+
+> 类型只能从第一次赋值中推断出来，因此以下代码中的循环是无限的，原因是``i`` 的类型是 ``uint8``，而这个类型变量的最大值比 ``2000`` 小。``for (var i = 0; i < 2000; i++) { ... }``
 
 
 ## 单元和全局变量
@@ -1207,17 +1140,15 @@ sipc单位之间的换算就是在数字后边加上 ``wei``、 ``finney``、 ``
 
 ### ABI 编码函数
 
-- ``abi.encode(...) returns (bytes)``： :ref:`ABI <ABI>` - 对给定参数进行编码
-- ``abi.encodePacked(...) returns (bytes)``：对给定参数执行 :ref:`紧打包编码 <abi_packed_mode>`
-- ``abi.encodeWithSelector(bytes4 selector, ...) returns (bytes)``： :ref:`ABI <ABI>` - 对给定参数进行编码，并以给定的函数选择器作为起始的 4 字节数据一起返回
+- ``abi.encode(...) returns (bytes)``：`ABI`对给定参数进行编码
+- ``abi.encodePacked(...) returns (bytes)``：对给定参数执行`紧打包编码`
+- ``abi.encodeWithSelector(bytes4 selector, ...) returns (bytes)``：`ABI`对给定参数进行编码，并以给定的函数选择器作为起始的 4 字节数据一起返回
 - ``abi.encodeWithSignature(string signature, ...) returns (bytes)``：等价于 ``abi.encodeWithSelector(bytes4(keccak256(signature), ...)``
 
-.. note::
-    这些编码函数可以用来构造函数调用数据，而不用实际进行调用。此外，``keccak256(abi.encodePacked(a, b))`` 是更准确的方法来计算在未来版本不推荐使用的 ``keccak256(a, b)``。
+> 这些编码函数可以用来构造函数调用数据，而不用实际进行调用。此外，``keccak256(abi.encodePacked(a, b))`` 是更准确的方法来计算在未来版本不推荐使用的 ``keccak256(a, b)``。
 
-更多详情请参考 :ref:`ABI <ABI>` 和 :ref:`紧打包编码 <abi_packed_mode>`。
+更多详情请参考`ABI`和 `紧打包编码`。
 
-.. index:: assert, revert, require
 
 #### 错误处理
 
@@ -1232,27 +1163,23 @@ sipc单位之间的换算就是在数字后边加上 ``wei``、 ``finney``、 ``
 ``revert(string reason)``:
     终止运行并撤销状态更改，可以同时提供一个解释性的字符串。
 
-.. index:: keccak256, ripemd160, sha256, ecrecover, addmod, mulmod, cryptography,
-
 #### 数学和密码学函数
 
-``addmod(uint x, uint y, uint k) returns (uint)``:
-    计算 ``(x + y) % k``，加法会在任意精度下执行，并且加法的结果即使超过 ``2**256`` 也不会被截取。从 0.5.0 版本的编译器开始会加入对 ``k != 0`` 的校验（assert）。
-``mulmod(uint x, uint y, uint k) returns (uint)``:
-    计算 ``(x * y) % k``，乘法会在任意精度下执行，并且乘法的结果即使超过 ``2**256`` 也不会被截取。从 0.5.0 版本的编译器开始会加入对 ``k != 0`` 的校验（assert）。
-``keccak256(...) returns (bytes32)``:
-    计算 :ref:`(tightly packed) arguments <abi_packed_mode>` 的 Ethereum-SHA-3 （Keccak-256）哈希。
-``sha256(...) returns (bytes32)``:
-    计算 :ref:`(tightly packed) arguments <abi_packed_mode>` 的 SHA-256 哈希。
-``sha3(...) returns (bytes32)``:
-     等价于 keccak256。
-``ripemd160(...) returns (bytes20)``:
-    计算 :ref:`(tightly packed) arguments <abi_packed_mode>` 的 RIPEMD-160 哈希。
-``ecrecover(bytes32 hash, uint8 v, bytes32 r, bytes32 s) returns (address)`` ：
-    利用椭圆曲线签名恢复与公钥相关的地址，错误返回零值。
-    (`example usage <https://ethereum.stackexchange.com/q/1777/222>`_)
+``addmod(uint x, uint y, uint k) returns (uint)``:计算 ``(x + y) % k``，加法会在任意精度下执行，并且加法的结果即使超过 ``2**256`` 也不会被截取。从 0.5.0 版本的编译器开始会加入对 ``k != 0`` 的校验（assert）。
 
-上文中的“tightly packed”是指不会对参数值进行 padding 处理（就是说所有参数值的字节码是连续存放的，译者注），这意味着下边这些调用都是等价的：
+``mulmod(uint x, uint y, uint k) returns (uint)``:计算 ``(x * y) % k``，乘法会在任意精度下执行，并且乘法的结果即使超过 ``2**256`` 也不会被截取。从 0.5.0 版本的编译器开始会加入对 ``k != 0`` 的校验（assert）。
+
+``keccak256(...) returns (bytes32)``: 计算 :ref:`(tightly packed) arguments <abi_packed_mode>` 的 Ethereum-SHA-3 （Keccak-256）哈希。
+
+``sha256(...) returns (bytes32)``:计算 :ref:`(tightly packed) arguments <abi_packed_mode>` 的 SHA-256 哈希。
+
+``sha3(...) returns (bytes32)``:等价于 keccak256。
+
+``ripemd160(...) returns (bytes20)``:计算 :ref:`(tightly packed) arguments <abi_packed_mode>` 的 RIPEMD-160 哈希。
+
+``ecrecover(bytes32 hash, uint8 v, bytes32 r, bytes32 s) returns (address)`` ：利用椭圆曲线签名恢复与公钥相关的地址，错误返回零值。[example usage](https://ethereum.stackexchange.com/q/1777/222)
+
+上文中的`tightly packed`是指不会对参数值进行 `padding` 处理（就是说所有参数值的字节码是连续存放的，译者注），这意味着下边这些调用都是等价的：
 
     keccak256("ab", "c")
     keccak256("abc")
@@ -1266,23 +1193,19 @@ sipc单位之间的换算就是在数字后边加上 ``wei``、 ``finney``、 ``
 
 在一个私链上，你很有可能碰到由于 ``sha256``、``ripemd160`` 或者 ``ecrecover`` 引起的 Out-of-Gas。原因是因为这些密码学函数在以太坊虚拟机(EVM)中以“预编译合约”形式存在的，且在第一次收到消息后才被真正存在（尽管合约代码是EVM中已存在的硬编码）。因此发送到不存在的合约的消息非常昂贵，所以实际的执行会导致 Out-of-Gas 错误。在你实际使用你的合约之前，给每个合约发送一点儿以太币，比如 1 Wei。这在官方网络或测试网络上不是问题。
 
-.. index:: balance, send, transfer, call, callcode, delegatecall
-.. _address_related:
-
 #### 地址相关
 
-``<address>.balance`` (``uint256``):
-    以 Wei 为单位的 :ref:`address` 的余额。
-``<address>.transfer(uint256 amount)``:
-    向 :ref:`address` 发送数量为 amount 的 Wei，失败时抛出异常，发送 2300 gas 的矿工费，不可调节。
-``<address>.send(uint256 amount) returns (bool)``:
-    向 :ref:`address` 发送数量为 amount 的 Wei，失败时返回 ``false``，发送 2300 gas 的矿工费用，不可调节。
-``<address>.call(...) returns (bool)``:
-    发出低级函数 ``CALL``，失败时返回 ``false``，发送所有可用 gas，可调节。
-``<address>.callcode(...) returns (bool)``：
-    发出低级函数 ``CALLCODE``，失败时返回 ``false``，发送所有可用 gas，可调节。
-``<address>.delegatecall(...) returns (bool)``:
-    发出低级函数 ``DELEGATECALL``，失败时返回 ``false``，发送所有可用 gas，可调节。
+``<address>.balance`` (``uint256``):以 Wei 为单位的 :ref:`address` 的余额。
+
+``<address>.transfer(uint256 amount)``:向 :ref:`address` 发送数量为 amount 的 Wei，失败时抛出异常，发送 2300 gas 的矿工费，不可调节。
+
+``<address>.send(uint256 amount) returns (bool)``:向 :ref:`address` 发送数量为 amount 的 Wei，失败时返回 ``false``，发送 2300 gas 的矿工费用，不可调节。
+
+``<address>.call(...) returns (bool)``:发出低级函数 ``CALL``，失败时返回 ``false``，发送所有可用 gas，可调节。
+
+``<address>.callcode(...) returns (bool)``：发出低级函数 ``CALLCODE``，失败时返回 ``false``，发送所有可用 gas，可调节。
+
+``<address>.delegatecall(...) returns (bool)``:发出低级函数 ``DELEGATECALL``，失败时返回 ``false``，发送所有可用 gas，可调节。
 
 更多信息，参考 :ref:`address` 部分：
 
@@ -1295,14 +1218,11 @@ sipc单位之间的换算就是在数字后边加上 ``wei``、 ``finney``、 ``
 合约相关
 
 
-``this`` (current contract's type):
-    当前合约，可以明确转换为 :ref:`address`。
+``this`` (current contract's type):当前合约，可以明确转换为 :ref:`address`。
 
-``selfdestruct(address recipient)``:
-    销毁合约，并把余额发送到指定 :ref:`address`。
+``selfdestruct(address recipient)``:销毁合约，并把余额发送到指定 :ref:`address`。
 
-``suicide(address recipient)``:
-    与 selfdestruct 等价，但已不推荐使用。
+``suicide(address recipient)``:与 selfdestruct 等价，但已不推荐使用。
 
 此外，当前合约内的所有函数都可以被直接调用，包括当前函数。
 
@@ -1311,15 +1231,14 @@ sipc单位之间的换算就是在数字后边加上 ``wei``、 ``finney``、 ``
 
 ### 输入参数和输出参数
 
-与 Javascript 一样，函数可能需要参数作为输入;
-而与 Javascript 和 C 不同的是，它们可能返回任意数量的参数作为输出。
+与 Javascript 一样，函数可能需要参数作为输入;而与 Javascript 和 C 不同的是，它们可能返回任意数量的参数作为输出。
 
 #### 输入参数
 
 输入参数的声明方式与变量相同。但是有一个例外，未使用的参数可以省略参数名。
 例如，如果我们希望合约接受有两个整数形参的函数的外部调用，我们会像下面这样写
-::
 
+```bash
     pragma solidity ^0.4.16;
 
     contract Simple {
@@ -1327,14 +1246,15 @@ sipc单位之间的换算就是在数字后边加上 ``wei``、 ``finney``、 ``
             // 用 _a 和 _b 实现相关功能.
         }
     }
+```
 
 #### 输出参数
 
 
 输出参数的声明方式在关键词 ``returns`` 之后，与输入参数的声明方式相同。
 例如，如果我们需要返回两个结果：两个给定整数的和与积，我们应该写作
-::
 
+```bash
     pragma solidity ^0.4.16;
 
     contract Simple {
@@ -1347,50 +1267,31 @@ sipc单位之间的换算就是在数字后边加上 ``wei``、 ``finney``、 ``
             o_product = _a * _b;
         }
     }
+```
 
 输出参数名可以被省略。输出值也可以使用 ``return`` 语句指定。
 ``return`` 语句也可以返回多值，参阅：ref:`multi-return`。
 返回的输出参数被初始化为 0；如果它们没有被显式赋值，它们就会一直为 0。
 
-
 输入参数和输出参数可以在函数体中用作表达式。因此，它们也可用在等号左边被赋值。
-
-
-.. index:: if, else, while, do/while, for, break, continue, return, switch, goto
 
 ### 控制结构
 
+JavaScript 中的大部分控制结构在 Solidity 中都是可用的，除了 ``switch`` 和 ``goto``。因此 Solidity 中有 ``if``，``else``，``while``，``do``，``for``，``break``，``continue``，``return``，``? :`` 这些与在 C 或者 JavaScript 中表达相同语义的关键词。
 
-JavaScript 中的大部分控制结构在 Solidity 中都是可用的，除了 ``switch`` 和 ``goto``。
-因此 Solidity 中有 ``if``，``else``，``while``，``do``，``for``，``break``，``continue``，``return``，``? :`` 这些与在 C 或者 JavaScript 中表达相同语义的关键词。
-
-
-用于表示条件的括号 *不可以* 被省略，单语句体两边的花括号可以被省略。
-
-
-注意，与 C 和 JavaScript 不同， Solidity 中非布尔类型数值不能转换为布尔类型，因此 ``if (1) { ... }`` 的写法在 Solidity 中 *无效* 。
-
-
-
-.. _multi-return:
+用于表示条件的括号 *不可以* 被省略，单语句体两边的花括号可以被省略。注意，与 C 和 JavaScript 不同， Solidity 中非布尔类型数值不能转换为布尔类型，因此 ``if (1) { ... }`` 的写法在 Solidity 中 *无效* 。
 
 ### 返回多个值
 
-
-
 当一个函数有多个输出参数时， ``return (v0, v1, ...,vn)`` 写法可以返回多个值。不过元素的个数必须与输出参数的个数相同。
-
-
-.. index:: ! function;call, function;internal, function;external
-
-.. _function-calls:
 
 ### 函数调用
 
 #### 内部函数调用
 
 当前合约中的函数可以直接（“从内部”）调用，也可以递归调用，就像下边这个荒谬的例子一样
-::
+
+```bash
 
     pragma solidity ^0.4.16;
 
@@ -1398,6 +1299,7 @@ JavaScript 中的大部分控制结构在 Solidity 中都是可用的，除了 `
         function g(uint a) public pure returns (uint ret) { return f(); }
         function f() internal pure returns (uint ret) { return g(7) + f(); }
     }
+```
 
 这些函数调用在 EVM 中被解释为简单的跳转。这样做的效果就是当前内存不会被清除，也就是说，通过内部调用在函数之间传递内存引用是非常有效的。
 
@@ -1406,13 +1308,11 @@ JavaScript 中的大部分控制结构在 Solidity 中都是可用的，除了 `
 表达式 ``this.g(8);`` 和 ``c.g(2);`` （其中 ``c`` 是合约实例）也是有效的函数调用，但是这种情况下，函数将会通过一个消息调用来被“外部调用”，而不是直接的跳转。
 请注意，不可以在构造函数中通过 this 来调用函数，因为此时真实的合约实例还没有被创建。
 
-
 如果想要调用其他合约的函数，需要外部调用。对于一个外部调用，所有的函数参数都需要被复制到内存。
-
 
 当调用其他合约的函数时，随函数调用发送的 Wei 和 gas 的数量可以分别由特定选项 ``.value()`` 和 ``.gas()`` 指定::
 
-
+```bash
     pragma solidity ^0.4.0;
 
     contract InfoFeed {
@@ -1424,28 +1324,23 @@ JavaScript 中的大部分控制结构在 Solidity 中都是可用的，除了 `
         function setFeed(address addr) public { feed = InfoFeed(addr); }
         function callFeed() public { feed.info.value(10).gas(800)(); }
     }
+```
 
 ``payable`` 修饰符要用于修饰 ``info``，否则，`.value()` 选项将不可用。
-
 
 注意，表达式 ``InfoFeed(addr)`` 进行了一个的显式类型转换，说明”我们知道给定地址的合约类型是 ``InfoFeed`` “并且这不会执行构造函数。
 显式类型转换需要谨慎处理。绝对不要在一个你不清楚类型的合约上执行函数调用。
 
-
 我们也可以直接使用 ``function setFeed(InfoFeed _feed) { feed = _feed; }`` 。
 注意一个事实，``feed.info.value(10).gas(800)`` 只（局部地）设置了与函数调用一起发送的 Wei 值和 gas 的数量，只有最后的圆括号执行了真正的调用。
-
 
 如果被调函数所在合约不存在（也就是账户中不包含代码）或者被调用合约本身抛出异常或者 gas 用完等，函数调用会抛出异常。
 
 
-.. warning::
-
-	任何与其他合约的交互都会强加潜在危险，尤其是在不能预先知道合约代码的情况下。
+>	任何与其他合约的交互都会强加潜在危险，尤其是在不能预先知道合约代码的情况下。
 	当前合约将控制权移交给被调用合约，而被调用合约可能做任何事。即使被调用合约从一个已知父合约继承，继承的合约也只需要有一个正确的接口就可以了。
 	被调用合约的实现可以完全任意，因此会带来危险。此外，请小心万一它再调用你系统中的其他合约，或者甚至在第一次调用返回之前返回到你的调用合约。
 	这意味着被调用合约可以通过它自己的函数改变调用合约的状态变量。。一个建议的函数写法是，例如，在你合约中状态变量进行各种变化后再调用外部函数，这样，你的合约就不会轻易被滥用的重入 (reentrancy) 所影响
-
 
 
 ### 具名调用和匿名函数参数
@@ -1453,8 +1348,8 @@ JavaScript 中的大部分控制结构在 Solidity 中都是可用的，除了 `
 
 如果它们被包含在 ``{}`` 中，函数调用参数也可以按照任意顺序由名称给出，
 如以下示例中所示。参数列表必须按名称与函数声明中的参数列表相符，但可以按任意顺序排列。
-::
 
+```bash
     pragma solidity ^0.4.0;
 
     contract C {
@@ -1467,13 +1362,13 @@ JavaScript 中的大部分控制结构在 Solidity 中都是可用的，除了 `
             f({value: 2, key: 3});
         }
     }
+```
 
 ### 省略函数参数名称
 
-
 未使用参数的名称（特别是返回参数）可以省略。这些参数仍然存在于堆栈中，但它们无法访问。
-::
 
+```bash
     pragma solidity ^0.4.16;
 
     contract C {
@@ -1482,17 +1377,13 @@ JavaScript 中的大部分控制结构在 Solidity 中都是可用的，除了 `
             return k;
         }
     }
-
-.. index:: ! new, contracts;creating
-
-.. _creating-contracts:
+```
 
 ### 通过 ``new`` 创建合约
 
-
 使用关键字 ``new`` 可以创建一个新合约。待创建合约的完整代码必须事先知道，因此递归的创建依赖是不可能的。
-::
 
+```bash
     pragma solidity ^0.4.0;
 
     contract D {
@@ -1514,28 +1405,22 @@ JavaScript 中的大部分控制结构在 Solidity 中都是可用的，除了 `
             D newD = (new D).value(amount)(arg);
         }
     }
+```
 
 如示例中所示，使用 ``.value（）`` 选项创建 ``D`` 的实例时可以转发 Ether，但是不可能限制 gas 的数量。如果创建失败（可能因为栈溢出，或没有足够的余额或其他问题），会引发异常。
 
 ### 表达式计算顺序
 
-
 表达式的计算顺序不是特定的（更准确地说，表达式树中某节点的字节点间的计算顺序不是特定的，但它们的结算肯定会在节点自己的结算之前）。该规则只能保证语句按顺序执行，布尔表达式的短路执行。更多相关信息，请参阅：:ref:`order`。
 
-
-.. index:: ! assignment
-
 ### 赋值
-
-
-.. index:: ! assignment;destructuring
 
 #### 解构赋值和返回多值
 
 
 Solidity 内部允许元组 (tuple) 类型，也就是一个在编译时元素数量固定的对象列表，列表中的元素可以是不同类型的对象。这些元组可以用来同时返回多个数值，也可以用它们来同时给多个新声明的变量或者既存的变量（或通常的 LValues）：
 
-::
+```bash
 
     pragma solidity >0.4.23 <0.5.0;
 
@@ -1559,18 +1444,14 @@ Solidity 内部允许元组 (tuple) 类型，也就是一个在编译时元素�
             //相当于 1。
         }
     }
+```
 
-.. note::
-    直到 0.4.24 版本，给具有更少的元素数的元组赋值都可以可能的，无论是在左边还是右边（比如在最后空出若干元素）。现在，这已经不推荐了，赋值操作的两边应该具有相同个数的组成元素。
+> 直到 0.4.24 版本，给具有更少的元素数的元组赋值都可以可能的，无论是在左边还是右边（比如在最后空出若干元素）。现在，这已经不推荐了，赋值操作的两边应该具有相同个数的组成元素。
 
 ### 数组和结构体的复杂性
 
 赋值语义对于像数组和结构体这样的非值类型来说会有些复杂。
 为状态变量 *赋值* 经常会创建一个独立副本。另一方面，对局部变量的赋值只会为基本类型（即 32 字节以内的静态类型）创建独立的副本。如果结构体或数组（包括 ``bytes`` 和 ``string``）被从状态变量分配给局部变量，局部变量将保留对原始状态变量的引用。对局部变量的第二次赋值不会修改状态变量，只会改变引用。赋值给局部变量的成员（或元素）则 *改变* 状态变量。
-
-.. index:: ! scoping, declarations, default value
-
-.. _default-value:
 
 ### 作用域和声明
 
@@ -1583,7 +1464,7 @@ Solidity 中的作用域规则遵循了 C99（与其他很多语言一样）：�
 
 基于以上的规则，下边的例子不会出现编译警告，因为那两个变量虽然名字一样，但却在不同的作用域里。
 
-::
+```bash
 
     pragma solidity >0.4.24;
     contract C {
@@ -1597,11 +1478,11 @@ Solidity 中的作用域规则遵循了 C99（与其他很多语言一样）：�
             }
         }
     }
+```
 
 作为 C99 作用域规则的特例，请注意在下边的例子里，第一次对 ``x`` 的赋值会改变上一层中声明的变量值。如果外层声明的变量被“影子化”（就是说被在内部作用域中由一个同名变量所替代）你会得到一个警告。
 
-::
-
+```bash
     pragma solidity >0.4.24;
     contract C {
         function f() pure public returns (uint) {
@@ -1613,11 +1494,13 @@ Solidity 中的作用域规则遵循了 C99（与其他很多语言一样）：�
             return x; // x has value 2
         }
     }
+```
 
-.. warning::
-    在 Solidity 0.5.0 之前的版本，作用域规则都沿用了 Javascript 的规则，即一个变量可以声明在函数的任意位置，都可以使他在整个函数范围内可见。而这种规则会从 0.5.0 版本起被打破。从 0.5.0 版本开始，下面例子中的代码段会导致编译错误。
 
- ::
+>  在 Solidity 0.5.0 之前的版本，作用域规则都沿用了 Javascript 的规则，即一个变量可以声明在函数的任意位置，都可以使他在整个函数范围内可见。而这种规则会从 0.5.0 版本起被打破。从 0.5.0 版本开始，下面例子中的代码段会导致编译错误。
+
+
+```bash
 
     // 这将无法编译通过
 
@@ -1629,11 +1512,9 @@ Solidity 中的作用域规则遵循了 C99（与其他很多语言一样）：�
             return x;
         }
     }
-
-.. index:: ! exception, ! throw, ! assert, ! require, ! revert
+```
 
 ### 错误处理：Assert, Require, Revert and Exceptions
-
 
 Solidity 使用状态恢复异常来处理错误。这种异常将撤消对当前调用（及其所有子调用）中的状态所做的所有更改，并且还向调用者标记错误。
 便利函数 ``assert`` 和 ``require`` 可用于检查条件并在条件不满足时抛出异常。``assert`` 函数只能用于测试内部错误，并检查非变量。
@@ -1645,21 +1526,15 @@ Solidity 使用状态恢复异常来处理错误。这种异常将撤消对当�
 还有另外两种触发异常的方法：``revert`` 函数可以用来标记错误并恢复当前的调用。
 ``revert`` 调用中包含有关错误的详细信息是可能的，这个消息会被返回给调用者。已经不推荐的关键字 ``throw`` 也可以用来替代 ``revert()`` （但无法返回错误消息）。
 
-
-.. note::
-    从 0.4.13 版本开始，``throw`` 这个关键字被弃用，并且将来会被逐渐淘汰。
+> 从 0.4.13 版本开始，``throw`` 这个关键字被弃用，并且将来会被逐渐淘汰。
 
 当子调用发生异常时，它们会自动“冒泡”（即重新抛出异常）。这个规则的例外是 ``send`` 和低级函数 ``call`` ， ``delegatecall`` 和 ``callcode`` --如果这些函数发生异常，将返回 false ，而不是“冒泡”。
 
-
-.. warning::
-    作为 EVM 设计的一部分，如果被调用合约帐户不存在，则低级函数 ``call`` ， ``delegatecall`` 和 ``callcode`` 将返回 success。因此如果需要使用低级函数时，必须在调用之前检查被调用合约是否存在。
-	
-异常捕获还未实现
+>    作为 EVM 设计的一部分，如果被调用合约帐户不存在，则低级函数 ``call`` ，``delegatecall`` 和 ``callcode`` 将返回 success。因此如果需要使用低级函数时，必须在调用之前检查被调用合约是否存在。异常捕获还未实现
 
 在下例中，你可以看到如何轻松使用``require``检查输入条件以及如何使用``assert``检查内部错误，注意，你可以给 ``require`` 提供一个消息字符串，而 ``assert`` 不行。
 
-::
+```bash
 
     pragma solidity ^0.4.22;
 
@@ -1673,40 +1548,35 @@ Solidity 使用状态恢复异常来处理错误。这种异常将撤消对当�
             return this.balance;
         }
     }
+```
 
 下列情况将会产生一个 ``assert`` 式异常：
 
-#. 如果你访问数组的索引太大或为负数（例如 ``x[i]`` 其中 ``i >= x.length`` 或 ``i < 0``）。
-#. 如果你访问固定长度 ``bytesN`` 的索引太大或为负数。
-#. 如果你用零当除数做除法或模运算（例如 ``5 / 0`` 或 ``23 % 0`` ）。
-#. 如果你移位负数位。
-#. 如果你将一个太大或负数值转换为一个枚举类型。
-#. 如果你调用内部函数类型的零初始化变量。
-#. 如果你调用 ``assert`` 的参数（表达式）最终结算为 false。
-
-
+- 如果你访问数组的索引太大或为负数（例如 ``x[i]`` 其中 ``i >= x.length`` 或 ``i < 0``）。
+- 如果你访问固定长度 ``bytesN`` 的索引太大或为负数。
+- 如果你用零当除数做除法或模运算（例如 ``5 / 0`` 或 ``23 % 0`` ）。
+- 如果你移位负数位。
+- 如果你将一个太大或负数值转换为一个枚举类型。
+- 如果你调用内部函数类型的零初始化变量。
+- 如果你调用 ``assert`` 的参数（表达式）最终结算为 false。
 
 下列情况将会产生一个 ``require`` 式异常：
 
+- 调用 ``throw`` 。
+- 如果你调用 ``require`` 的参数（表达式）最终结算为 ``false`` 。
+- 如果你通过消息调用调用某个函数，但该函数没有正确结束（它耗尽了 gas，没有匹配函数，或者本身抛出一个异常），上述函数不包括低级别的操作 ``call`` ， ``send`` ， ``delegatecall`` 或者 ``callcode`` 。低级操作不会抛出异常，而通过返回 ``false`` 来指示失败。
+- 如果你使用 ``new`` 关键字创建合约，但合约没有正确创建（请参阅上条有关”未正确完成“的定义）。
+- 如果你对不包含代码的合约执行外部函数调用。
+- 如果你的合约通过一个没有 ``payable`` 修饰符的公有函数（包括构造函数和 fallback 函数）接收 Ether。
+- 如果你的合约通过公有 getter 函数接收 Ether 。
+- 如果 ``.transfer()`` 失败。
 
-#. 调用 ``throw`` 。
-#. 如果你调用 ``require`` 的参数（表达式）最终结算为 ``false`` 。
-#. 如果你通过消息调用调用某个函数，但该函数没有正确结束（它耗尽了 gas，没有匹配函数，或者本身抛出一个异常），上述函数不包括低级别的操作 ``call`` ， ``send`` ， ``delegatecall`` 或者 ``callcode`` 。低级操作不会抛出异常，而通过返回 ``false`` 来指示失败。
-#. 如果你使用 ``new`` 关键字创建合约，但合约没有正确创建（请参阅上条有关”未正确完成“的定义）。
-#. 如果你对不包含代码的合约执行外部函数调用。
-#. 如果你的合约通过一个没有 ``payable`` 修饰符的公有函数（包括构造函数和 fallback 函数）接收 Ether。
-#. 如果你的合约通过公有 getter 函数接收 Ether 。
-#. 如果 ``.transfer()`` 失败。
 
-
-在内部， Solidity 对一个 ``require`` 式的异常执行回退操作（指令 ``0xfd`` ）并执行一个无效操作（指令 ``0xfe`` ）来引发 ``assert`` 式异常。
-在这两种情况下，都会导致 EVM 回退对状态所做的所有更改。回退的原因是不能继续安全地执行，因为没有实现预期的效果。
-因为我们想保留交易的原子性，所以最安全的做法是回退所有更改并使整个交易（或至少是调用）不产生效果。
-请注意， ``assert`` 式异常消耗了所有可用的调用 gas ，而从 Metropolis 版本起 ``require`` 式的异常不会消耗任何 gas。
+在内部， Solidity 对一个 ``require`` 式的异常执行回退操作（指令 ``0xfd`` ）并执行一个无效操作（指令 ``0xfe`` ）来引发 ``assert`` 式异常。在这两种情况下，都会导致 EVM 回退对状态所做的所有更改。回退的原因是不能继续安全地执行，因为没有实现预期的效果。因为我们想保留交易的原子性，所以最安全的做法是回退所有更改并使整个交易（或至少是调用）不产生效果。请注意， ``assert`` 式异常消耗了所有可用的调用 gas ，而从 Metropolis 版本起 ``require`` 式的异常不会消耗任何 gas。
 
 下边的例子展示了如何在 revert 和 require 中使用错误字符串：
 
-::
+```bash
 
     pragma solidity ^0.4.22;
 
@@ -1722,46 +1592,35 @@ Solidity 使用状态恢复异常来处理错误。这种异常将撤消对当�
             // 执行购买操作
         }
     }
+```
 
 这里提供的字符串应该是经过 :ref:`ABI 编码 <ABI>` 之后的，因为它实际上是调用了 ``Error(string)`` 函数。在上边的例子里，``revert("Not enough Ether provided.");`` 会产生如下的十六进制错误返回值： 
 
-.. code::
-
-    0x08c379a0                                                         // Error(string) 的函数选择器
-    0x0000000000000000000000000000000000000000000000000000000000000020 // 数据的偏移量（32）
-    0x000000000000000000000000000000000000000000000000000000000000001a // 字符串长度（26）
-    0x4e6f7420656e6f7567682045746865722070726f76696465642e000000000000 // 字符串数据（"Not enough Ether provided." 的 ASCII 编码，26字节）
+- 0x08c379a0                                                         // Error(string) 的函数选择器
+- 0x0000000000000000000000000000000000000000000000000000000000000020 // 数据的偏移量（32）
+- 0x000000000000000000000000000000000000000000000000000000000000001a // 字符串长度（26）
+- 0x4e6f7420656e6f7567682045746865722070726f76696465642e000000000000 // 字符串数据（"Not enough Ether provided." 的 ASCII 编码，26字节）
 
 
 ## 合约
 
-Solidity 合约类似于面向对象语言中的类。合约中有用于数据持久化的状态变量，和可以修改状态变量的函数。
+`Solidity` 合约类似于面向对象语言中的类。合约中有用于数据持久化的状态变量，和可以修改状态变量的函数。
 调用另一个合约实例的函数时，会执行一个 EVM 函数调用，这个操作会切换执行时的上下文，这样，前一个合约的状态变量就不能访问了。
 
-.. index:: ! contract;creation, constructor
+### 创建合约
 
-**********
-创建合约
-**********
+可以通过Simplechain交易“从外部”或从 Solidity 合约内部创建合约。
 
-可以通过以太坊交易“从外部”或从 Solidity 合约内部创建合约。
-
-一些集成开发环境，例如 `Remix <https://remix.ethereum.org/>`_, 通过使用一些用户界面元素使创建过程更加流畅。
-在以太坊上编程创建合约最好使用 JavaScript API `web3.js <https://github.com/ethereum/web3.js>`_。
-现在，我们已经有了一个叫做 `web3.eth.Contract <https://web3js.readthedocs.io/en/1.0/web3-eth-contract.html#new-contract>`_ 的方法能够更容易的创建合约。
+一些集成开发环境，例如 [Remix](https://remix.ethereum.org/), 通过使用一些用户界面元素使创建过程更加流畅。在以太坊上编程创建合约最好使用 JavaScript API [web3.j](https://github.com/ethereum/web3.js)。现在，我们已经有了一个叫做 [web3.eth.Contract](https://web3js.readthedocs.io/en/1.0/web3-eth-contract.html#new-contract) 的方法能够更容易的创建合约。
 
 创建合约时，会执行一次构造函数（与合约同名的函数）。构造函数是可选的。只允许有一个构造函数，这意味着不支持重载。
 
-.. index:: constructor;arguments
-
-在内部，构造函数参数在合约代码之后通过 :ref:`ABI 编码 <ABI>` 传递，但是如果你使用 ``web3.js``
-则不必关心这个问题。
+在内部，构造函数参数在合约代码之后通`ABI 编码`传递，但是如果你使用 ``web3.js``则不必关心这个问题。
 
 如果一个合约想要创建另一个合约，那么创建者必须知晓被创建合约的源代码(和二进制代码)。
 这意味着不可能循环创建依赖项。
 
-::
-
+```bash
     pragma solidity ^0.4.16;
 
     contract OwnedToken {
@@ -1827,53 +1686,38 @@ Solidity 合约类似于面向对象语言中的类。合约中有用于数据�
             return (keccak256(newOwner) & 0xff) == (bytes20(tokenAddress) & 0xff);
         }
     }
+```
 
-.. index:: ! visibility, external, public, private, internal
+### 可见性和 getter 函数
 
-.. _visibility-and-getters:
-
-**********************
-可见性和 getter 函数
-**********************
-
-由于 Solidity 有两种函数调用（内部调用不会产生实际的 EVM 调用或称为“消息调用”，而外部调用则会产生一个 EVM 调用），
-函数和状态变量有四种可见性类型。
-函数可以指定为 ``external`` ，``public`` ，``internal`` 或者 ``private``，默认情况下函数类型为 ``public``。
+由于 Solidity 有两种函数调用（内部调用不会产生实际的 EVM 调用或称为“消息调用”，而外部调用则会产生一个 EVM 调用），函数和状态变量有四种可见性类型。函数可以指定为 ``external`` ，``public`` ，``internal`` 或者 ``private``，默认情况下函数类型为 ``public``。
 对于状态变量，不能设置为 ``external`` ，默认是 ``internal`` 。
 
-``external`` ：
-    外部函数作为合约接口的一部分，意味着我们可以从其他合约和交易中调用。
+- ``external`` ：外部函数作为合约接口的一部分，意味着我们可以从其他合约和交易中调用。
     一个外部函数 ``f`` 不能从内部调用（即 ``f`` 不起作用，但 ``this.f()`` 可以）。
     当收到大量数据的时候，外部函数有时候会更有效率。
-``public`` ：
-    public 函数是合约接口的一部分，可以在内部或通过消息调用。对于公共状态变量，
-    会自动生成一个 getter 函数（见下面）。
-``internal`` ：
-    这些函数和状态变量只能是内部访问（即从当前合约内部或从它派生的合约访问），不使用 ``this`` 调用。
-``private`` ：
-    private 函数和状态变量仅在当前定义它们的合约中使用，并且不能被派生合约使用。
+- ``public`` ：public 函数是合约接口的一部分，可以在内部或通过消息调用。对于公共状态变量，会自动生成一个 getter 函数（见下面）。
+- ``internal`` ：这些函数和状态变量只能是内部访问（即从当前合约内部或从它派生的合约访问），不使用 ``this`` 调用。
+``private`` ：private 函数和状态变量仅在当前定义它们的合约中使用，并且不能被派生合约使用。
 
-.. note::
-    合约中的所有内容对外部观察者都是可见的。设置一些 ``private`` 类型只能阻止其他合约访问和修改这些信息，
-    但是对于区块链外的整个世界它仍然是可见的。
+> 合约中的所有内容对外部观察者都是可见的。设置一些 ``private`` 类型只能阻止其他合约访问和修改这些信息，但是对于区块链外的整个世界它仍然是可见的。
 
 可见性标识符的定义位置，对于状态变量来说是在类型后面，对于函数是在参数列表和返回关键字中间。
 
-::
+```bash
+pragma solidity ^0.4.16;
 
-    pragma solidity ^0.4.16;
-
-    contract C {
-        function f(uint a) private pure returns (uint b) { return a + 1; }
-        function setData(uint a) internal { data = a; }
-        uint public data;
-    }
+contract C {
+    function f(uint a) private pure returns (uint b) { return a + 1; }
+    function setData(uint a) internal { data = a; }
+    uint public data;
+}
+```
 
 在下面的例子中，``D`` 可以调用 ``c.getData（）`` 来获取状态存储中 ``data`` 的值，但不能调用 ``f`` 。
 合约 ``E`` 继承自 ``C`` ，因此可以调用 ``compute``。
 
-::
-
+```bash
     // 下面代码编译错误
 
     pragma solidity ^0.4.0;
@@ -1903,18 +1747,14 @@ Solidity 合约类似于面向对象语言中的类。合约中有用于数据�
             uint val = compute(3, 5); // 访问内部成员（从继承合约访问父合约成员）
         }
     }
+```
 
-.. index:: ! getter;function, ! function;getter
-.. _getter-functions:
-
-Getter 函数
-================
+#### Getter 函数
 
 编译器自动为所有 **public** 状态变量创建 getter 函数。对于下面给出的合约，编译器会生成一个名为 ``data`` 的函数，
 该函数不会接收任何参数并返回一个 ``uint`` ，即状态变量 ``data`` 的值。可以在声明时完成状态变量的初始化。
 
-::
-
+```bash
     pragma solidity ^0.4.0;
 
     contract C {
@@ -1927,11 +1767,12 @@ Getter 函数
             uint local = c.data();
         }
     }
+```
 
 getter 函数具有外部可见性。如果在内部访问 getter（即没有 ``this.`` ），它被认为一个状态变量。
 如果它是外部访问的（即用 ``this.`` ），它被认为为一个函数。
 
-::
+```bash
 
     pragma solidity ^0.4.0;
 
@@ -1942,10 +1783,11 @@ getter 函数具有外部可见性。如果在内部访问 getter（即没有 ``
             uint val = this.data(); // 外部访问
         }
     }
+```
 
 下一个例子稍微复杂一些：
 
-::
+```bash
 
     pragma solidity ^0.4.0;
 
@@ -1957,29 +1799,26 @@ getter 函数具有外部可见性。如果在内部访问 getter（即没有 ``
         }
         mapping (uint => mapping(bool => Data[])) public data;
     }
+```
 
 这将会生成以下形式的函数 ::
 
-    function data(uint arg1, bool arg2, uint arg3) public returns (uint a, bytes3 b) {
-        a = data[arg1][arg2][arg3].a;
-        b = data[arg1][arg2][arg3].b;
-    }
+```bash
+function data(uint arg1, bool arg2, uint arg3) public returns (uint a, bytes3 b) {
+    a = data[arg1][arg2][arg3].a;
+    b = data[arg1][arg2][arg3].b;
+}
+```
 
 请注意，因为没有好的方法来提供映射的键，所以结构中的映射被省略。
 
-.. index:: ! function;modifier
-
-.. _modifiers:
-
-******************
-函数 |modifier|
-******************
+#### 函数 |modifier|
 
 使用 |modifier| 可以轻松改变函数的行为。 例如，它们可以在执行函数之前自动检查某个条件。
 |modifier| 是合约的可继承属性，
 并可能被派生合约覆盖。
 
-::
+```bash
 
     pragma solidity ^0.4.11;
 
@@ -2045,39 +1884,25 @@ getter 函数具有外部可见性。如果在内部访问 getter（即没有 ``
             return 7;
         }
     }
+```
 
-如果同一个函数有多个 |modifier|，它们之间以空格隔开，|modifier| 会依次检查执行。
+如果同一个函数有多个 `modifier`，它们之间以空格隔开，`modifier`会依次检查执行。
 
-.. warning::
-    在早期的 Solidity 版本中，有 |modifier| 的函数，``return`` 语句的行为表现不同。
+> 在早期的 Solidity 版本中，有 |modifier| 的函数，``return`` 语句的行为表现不同。
 
-|modifier| 或函数体中显式的 return 语句仅仅跳出当前的 |modifier| 和函数体。
+`modifier` 或函数体中显式的 return 语句仅仅跳出当前的 `modifier` 和函数体。
 返回变量会被赋值，但整个执行逻辑会从前一个 |modifier| 中的定义的 “_” 之后继续执行。
 
-|modifier| 的参数可以是任意表达式，在此上下文中，所有在函数中可见的符号，在 |modifier| 中均可见。
-在 |modifier| 中引入的符号在函数中不可见（可能被重载改变）。
+`modifier`的参数可以是任意表达式，在此上下文中，所有在函数中可见的符号，在 `modifier` 中均可见。在 `modifier` 中引入的符号在函数中不可见（可能被重载改变）。
 
-.. index:: ! constant
+### Constant 状态变量
 
-************************
-Constant 状态变量
-************************
-
-状态变量可以被声明为 ``constant``。在这种情况下，只能使用那些在编译时有确定值的表达式来给它们赋值。
-任何通过访问 storage，区块链数据（例如 ``now``, ``this.balance`` 或者 ``block.number``）或执行数据（ ``msg.gas`` ）
-或对外部合约的调用来给它们赋值都是不允许的。
-在内存分配上有边界效应（side-effect）的表达式是允许的，但对其他内存对象产生边界效应的表达式则不行。
-内建（built-in）函数 ``keccak256``，``sha256``，``ripemd160``，``ecrecover``，``addmod`` 和 ``mulmod`` 是允许的（即使他们确实会调用外部合约）。
+状态变量可以被声明为 ``constant``。在这种情况下，只能使用那些在编译时有确定值的表达式来给它们赋值。任何通过访问 storage，区块链数据（例如 ``now``, ``this.balance`` 或者 ``block.number``）或执行数据（ ``msg.gas`` ）或对外部合约的调用来给它们赋值都是不允许的。在内存分配上有边界效应（`side-effect`）的表达式是允许的，但对其他内存对象产生边界效应的表达式则不行。内建（built-in）函数 ``keccak256``，``sha256``，``ripemd160``，``ecrecover``，``addmod`` 和 ``mulmod`` 是允许的（即使他们确实会调用外部合约）。
 
 允许带有边界效应的内存分配器的原因是这将允许构建复杂的对象，比如查找表（lookup-table）。
-此功能尚未完全可用。
+此功能尚未完全可用。编译器不会为这些变量预留存储，它们的每次出现都会被替换为相应的常量表达式（这将可能被优化器计算为实际的某个值）。不是所有类型的状态变量都支持用 constant 来修饰，当前支持的仅有值类型和字符串。
 
-编译器不会为这些变量预留存储，它们的每次出现都会被替换为相应的常量表达式（这将可能被优化器计算为实际的某个值）。
-
-不是所有类型的状态变量都支持用 constant 来修饰，当前支持的仅有值类型和字符串。
-
-::
-
+```bash
     pragma solidity ^0.4.0;
 
     contract C {
@@ -2085,37 +1910,26 @@ Constant 状态变量
         string constant text = "abc";
         bytes32 constant myHash = keccak256("abc");
     }
+```
 
-.. index:: ! functions
+### 函数
 
-.. _functions:
-
-******
-函数
-******
-
-.. index:: ! view function, function;view
-
-.. _view-functions:
-
-View 函数
-==============
+#### View 函数
 
 可以将函数声明为 ``view`` 类型，这种情况下要保证不修改状态。
 
 下面的语句被认为是修改状态：
 
-#. 修改状态变量。
-#. :ref:`产生事件 <events>`。
-#. :ref:`创建其它合约 <creating-contracts>`。
-#. 使用 ``selfdestruct``。
-#. 通过调用发送以太币。
-#. 调用任何没有标记为 ``view`` 或者 ``pure`` 的函数。
-#. 使用低级调用。
-#. 使用包含特定操作码的内联汇编。
+- 修改状态变量。
+- `产生事件`。
+- `创建其它合约`。
+- 使用`selfdestruct`。
+- 通过调用发送以太币。
+- 调用任何没有标记为 ``view`` 或者 ``pure`` 的函数。
+- 使用低级调用。
+- 使用包含特定操作码的内联汇编。
 
-::
-
+```bash
     pragma solidity ^0.4.16;
 
     contract C {
@@ -2123,35 +1937,25 @@ View 函数
             return a * (b + 42) + now;
         }
     }
+```
 
-.. note::
-  ``constant`` 是 ``view`` 的别名。
+>  ``constant`` 是 ``view`` 的别名。
 
-.. note::
-  Getter 方法被标记为 ``view``。
+>  Getter 方法被标记为 ``view``。
 
-.. warning::
-  编译器没有强制 ``view`` 方法不能修改状态。
+>  编译器没有强制 ``view`` 方法不能修改状态。
 
-.. index:: ! pure function, function;pure
+#### Pure 函数
 
-.. _pure-functions:
+函数可以声明为 ``pure`` ，在这种情况下，承诺不读取或修改状态。除了上面解释的状态修改语句列表之外，以下被认为是从状态中读取：
 
-Pure 函数
-==============
+- 读取状态变量。
+- 访问 ``this.balance`` 或者 ``<address>.balance``。
+- 访问 ``block``，``tx``， ``msg`` 中任意成员 （除 ``msg.sig`` 和 ``msg.data`` 之外）。
+- 调用任何未标记为 ``pure`` 的函数。
+- 使用包含某些操作码的内联汇编。
 
-函数可以声明为 ``pure`` ，在这种情况下，承诺不读取或修改状态。
-
-除了上面解释的状态修改语句列表之外，以下被认为是从状态中读取：
-
-#. 读取状态变量。
-#. 访问 ``this.balance`` 或者 ``<address>.balance``。
-#. 访问 ``block``，``tx``， ``msg`` 中任意成员 （除 ``msg.sig`` 和 ``msg.data`` 之外）。
-#. 调用任何未标记为 ``pure`` 的函数。
-#. 使用包含某些操作码的内联汇编。
-
-::
-
+```bash
     pragma solidity ^0.4.16;
 
     contract C {
@@ -2159,25 +1963,17 @@ Pure 函数
             return a * (b + 42);
         }
     }
+```
 
-.. warning::
-  编译器没有强制 ``pure`` 方法不能读取状态。
+>  编译器没有强制 ``pure`` 方法不能读取状态。
 
-.. index:: ! fallback function, function;fallback
+#### Fallback 函数
 
-.. _fallback-function:
+合约可以有一个未命名的函数。这个函数不能有参数也不能有返回值。如果在一个到合约的调用中，没有其他函数与给定的函数标识符匹配（或没有提供调用数据），那么这个函数（fallback 函数）会被执行。
 
-Fallback 函数
-=================
+除此之外，每当合约收到以太币（没有任何数据），这个函数就会执行。此外，为了接收以太币，fallback 函数必须标记为 ``payable``。如果不存在这样的函数，则合约不能通过常规交易接收以太币。
 
-合约可以有一个未命名的函数。这个函数不能有参数也不能有返回值。
-如果在一个到合约的调用中，没有其他函数与给定的函数标识符匹配（或没有提供调用数据），那么这个函数（fallback 函数）会被执行。
-
-除此之外，每当合约收到以太币（没有任何数据），这个函数就会执行。此外，为了接收以太币，fallback 函数必须标记为 ``payable``。
-如果不存在这样的函数，则合约不能通过常规交易接收以太币。
-
-在这样的上下文中，通常只有很少的 gas 可以用来完成这个函数调用（准确地说，是 2300 gas），所以使 fallback 函数的调用尽量廉价很重要。
-请注意，调用 fallback 函数的交易（而不是内部调用）所需的 gas 要高得多，因为每次交易都会额外收取 21000 gas 或更多的费用，用于签名检查等操作。
+在这样的上下文中，通常只有很少的 gas 可以用来完成这个函数调用（准确地说，是 2300 gas），所以使 fallback 函数的调用尽量廉价很重要。请注意，调用 fallback 函数的交易（而不是内部调用）所需的 gas 要高得多，因为每次交易都会额外收取 21000 gas 或更多的费用，用于签名检查等操作。
 
 具体来说，以下操作会消耗比 fallback 函数更多的 gas：
 
@@ -2188,21 +1984,17 @@ Fallback 函数
 
 请确保您在部署合约之前彻底测试您的 fallback 函数，以确保执行成本低于 2300 个 gas。
 
-.. note::
-    即使 fallback 函数不能有参数，仍然可以使用 ``msg.data`` 来获取随调用提供的任何有效数据。
+>  即使 fallback 函数不能有参数，仍然可以使用 ``msg.data`` 来获取随调用提供的任何有效数据。
 
-.. warning::
-    一个没有定义 fallback 函数的合约，直接接收以太币（没有函数调用，即使用 ``send`` 或 ``transfer``）会抛出一个异常，
-    并返还以太币（在 Solidity v0.4.0 之前行为会有所不同）。所以如果你想让你的合约接收以太币，必须实现 fallback 函数。
+>  一个没有定义 fallback 函数的合约，直接接收以太币（没有函数调用，即使用 ``send`` 或 ``transfer``）会抛出一个异常，并返还以太币（在 Solidity v0.4.0 之前行为会有所不同）。所以如果你想让你的合约接收以太币，必须实现 fallback 函数。
 
-.. warning::
-    一个没有 payable fallback 函数的合约，可以作为 `coinbase transaction` （又名 `miner block reward` ）的接收者或者作为 ``selfdestruct`` 的目标来接收以太币。
+>  一个没有 payable fallback 函数的合约，可以作为 `coinbase transaction` （又名 `miner block reward` ）的接收者或者作为 ``selfdestruct`` 的目标来接收以太币。
 
-    一个合约不能对这种以太币转移做出反应，因此也不能拒绝它们。这是 EVM 在设计时就决定好的，而且 Solidity 无法绕过这个问题。
+>  一个合约不能对这种以太币转移做出反应，因此也不能拒绝它们。这是 EVM 在设计时就决定好的，而且 Solidity 无法绕过这个问题。
 
-    这也意味着 ``this.balance`` 可以高于合约中实现的一些手工记帐的总和（即在 fallback 函数中更新的累加器）。
+>  这也意味着 ``this.balance`` 可以高于合约中实现的一些手工记帐的总和（即在 fallback 函数中更新的累加器）。
 
-::
+```bash
 
     pragma solidity ^0.4.0;
 
@@ -2212,13 +2004,10 @@ Fallback 函数
         function() public { x = 1; }
         uint x;
     }
-
-
     // 这个合约会保留所有发送给它的以太币，没有办法返还。
     contract Sink {
         function() public payable { }
     }
-
     contract Caller {
         function callTest(Test test) public {
             test.call(0xabcdef01); // 不存在的哈希
@@ -2227,17 +2016,13 @@ Fallback 函数
             // test.send(2 ether）;
         }
     }
+```
 
-.. index:: ! overload
-
-.. _overload-function:
-
-函数重载
-====================
+#### 函数重载
 
 合约可以具有多个不同参数的同名函数。这也适用于继承函数。以下示例展示了合约 ``A`` 中的重载函数 ``f``。
 
-::
+```bash
 
     pragma solidity ^0.4.16;
 
@@ -2253,8 +2038,7 @@ Fallback 函数
 
 重载函数也存在于外部接口中。如果两个外部可见函数仅区别于 Solidity 内的类型而不是它们的外部类型则会导致错误。
 
-::
-
+```bash
     // 以下代码无法编译
     pragma solidity ^0.4.16;
 
@@ -2270,21 +2054,18 @@ Fallback 函数
 
     contract B {
     }
-
+```
 
 以上两个 ``f`` 函数重载都接受了 ABI 的地址类型，虽然它们在 Solidity 中被认为是不同的。
 
-重载解析和参数匹配
------------------------------------------
+#### 重载解析和参数匹配
 
 通过将当前范围内的函数声明与函数调用中提供的参数相匹配，可以选择重载函数。
 如果所有参数都可以隐式地转换为预期类型，则选择函数作为重载候选项。如果一个候选都没有，解析失败。
 
-.. note::
-    返回参数不作为重载解析的依据。
+>  返回参数不作为重载解析的依据。
 
-::
-
+```bash
     pragma solidity ^0.4.16;
 
     contract A {
@@ -2296,41 +2077,26 @@ Fallback 函数
             out = _in;
         }
     }
+```
 
-调用  ``f(50)`` 会导致类型错误，因为 ``50`` 既可以被隐式转换为 ``uint8`` 也可以被隐式转换为 ``uint256``。
-另一方面，调用 ``f(256)`` 则会解析为 ``f(uint256)`` 重载，因为 ``256`` 不能隐式转换为 ``uint8``。
+调用  ``f(50)`` 会导致类型错误，因为 ``50`` 既可以被隐式转换为 ``uint8`` 也可以被隐式转换为 ``uint256``。另一方面，调用 ``f(256)`` 则会解析为 ``f(uint256)`` 重载，因为 ``256`` 不能隐式转换为 ``uint8``。
 
-.. index:: ! event
+### 事件
 
-.. _events:
+事件允许我们方便地使用 EVM 的日志基础设施。我们可以在 dapp 的用户界面中监听事件，EVM 的日志机制可以反过来“调用”用来监听事件的 Javascript 回调函数。
 
-******
-事件
-******
+事件在合约中可被继承。当他们被调用时，会使参数被存储到交易的日志中 —— 一种区块链中的特殊数据结构。这些日志与地址相关联，被并入区块链中，只要区块可以访问就一直存在（在 Frontier 和 Homestead 版本中会被永久保存，在 Serenity 版本中可能会改动)。日志和事件在合约内不可直接被访问（甚至是创建日志的合约也不能访问）。
 
-事件允许我们方便地使用 EVM 的日志基础设施。
-我们可以在 dapp 的用户界面中监听事件，EVM 的日志机制可以反过来“调用”用来监听事件的 Javascript 回调函数。
-
-事件在合约中可被继承。当他们被调用时，会使参数被存储到交易的日志中 —— 一种区块链中的特殊数据结构。
-这些日志与地址相关联，被并入区块链中，只要区块可以访问就一直存在（在 Frontier 和 Homestead 版本中会被永久保存，在 Serenity 版本中可能会改动)。
-日志和事件在合约内不可直接被访问（甚至是创建日志的合约也不能访问）。
-
-对日志的 SPV（Simplified Payment Verification）证明是可能的，如果一个外部实体提供了一个带有这种证明的合约，它可以检查日志是否真实存在于区块链中。
-但需要留意的是，由于合约中仅能访问最近的 256 个区块哈希，所以还需要提供区块头信息。
+对日志的 SPV（Simplified Payment Verification）证明是可能的，如果一个外部实体提供了一个带有这种证明的合约，它可以检查日志是否真实存在于区块链中。但需要留意的是，由于合约中仅能访问最近的 256 个区块哈希，所以还需要提供区块头信息。
 
 最多三个参数可以接收 ``indexed`` 属性，从而使它们可以被搜索：在用户界面上可以使用 indexed 参数的特定值来进行过滤。
 
-如果数组（包括 ``string`` 和 ``bytes``）类型被标记为索引项，则它们的 keccak-256 哈希值会被作为 topic 保存。
+如果数组（包括 ``string`` 和 ``bytes``）类型被标记为索引项，则它们的 keccak-256 哈希值会被作为 topic 保存。除非你用 ``anonymous`` 说明符声明事件，否则事件签名的哈希值是 topic 之一。同时也意味着对于匿名事件无法通过名字来过滤。所有非索引参数都将存储在日志的数据部分中。
 
-除非你用 ``anonymous`` 说明符声明事件，否则事件签名的哈希值是 topic 之一。
-同时也意味着对于匿名事件无法通过名字来过滤。
 
-所有非索引参数都将存储在日志的数据部分中。
+>  索引参数本身不会被保存。你只能搜索它们的值（来确定相应的日志数据是否存在），而不能获取它们的值本身。
 
-.. note::
-    索引参数本身不会被保存。你只能搜索它们的值（来确定相应的日志数据是否存在），而不能获取它们的值本身。
-
-::
+```bash
 
     pragma solidity ^0.4.0;
 
@@ -2346,10 +2112,11 @@ Fallback 函数
             Deposit(msg.sender, _id, msg.value);
         }
     }
+```
 
 使用 JavaScript API 调用事件的用法如下：
 
-::
+```bash
 
     var abi = /* abi 由编译器产生 */;
     var ClientReceipt = web3.eth.contract(abi);
@@ -2369,18 +2136,12 @@ Fallback 函数
         if (!error)
             console.log(result);
     });
+```
+#### 日志的底层接口
 
-.. index:: ! log
+通过函数 ``log0``，``log1``， ``log2``， ``log3`` 和 ``log4`` 可以访问日志机制的底层接口。``logi``  接受 ``i + 1`` 个 ``bytes32`` 类型的参数。其中第一个参数会被用来做为日志的数据部分，其它的会做为 topic。上面的事件调用可以以相同的方式执行。
 
-日志的底层接口
-===========================
-
-通过函数 ``log0``，``log1``， ``log2``， ``log3`` 和 ``log4`` 可以访问日志机制的底层接口。
-``logi``  接受 ``i + 1`` 个 ``bytes32`` 类型的参数。其中第一个参数会被用来做为日志的数据部分，
-其它的会做为 topic。上面的事件调用可以以相同的方式执行。
-
-::
-
+```bash
     pragma solidity ^0.4.10;
 
     contract C {
@@ -2394,35 +2155,25 @@ Fallback 函数
             );
         }
     }
+```
 
 其中的长十六进制数的计算方法是 ``keccak256("Deposit(address,hash256,uint256)")``，即事件的签名。
 
-其它学习事件机制的资源
-==============================================
+#### 其它学习事件机制的资源
+ 
+- [Javascript 文档](https://github.com/ethereum/wiki/wiki/JavaScript-API#contract-events)
+- [事件使用例程](https://github.com/debris/smart-exchange/blob/master/lib/contracts/SmartExchange.sol)
+- [如何在 js 中访问它们](https://github.com/debris/smart-exchange/blob/master/lib/exchange_transactions.js)
 
-- `Javascript 文档 <https://github.com/ethereum/wiki/wiki/JavaScript-API#contract-events>`_
-- `事件使用例程 <https://github.com/debris/smart-exchange/blob/master/lib/contracts/SmartExchange.sol>`_
-- `如何在 js 中访问它们 <https://github.com/debris/smart-exchange/blob/master/lib/exchange_transactions.js>`_
+### 继承
 
-.. index:: ! inheritance, ! base class, ! contract;base, ! deriving
+通过复制包括多态的代码，Solidity 支持多重继承。所有的函数调用都是虚拟的，这意味着最远的派生函数会被调用，除非明确给出合约名称。当一个合约从多个合约继承时，在区块链上只有一个合约被创建，所有基类合约的代码被复制到创建的合约中。
 
-***********
-继承
-***********
-
-通过复制包括多态的代码，Solidity 支持多重继承。
-
-所有的函数调用都是虚拟的，这意味着最远的派生函数会被调用，除非明确给出合约名称。
-
-当一个合约从多个合约继承时，在区块链上只有一个合约被创建，所有基类合约的代码被复制到创建的合约中。
-
-总的来说，Solidity 的继承系统与 `Python的继承系统 <https://docs.python.org/3/tutorial/classes.html#inheritance>`_ ，非常
-相似，特别是多重继承方面。
+总的来说，Solidity 的继承系统与 [Python的继承系统](https://docs.python.org/3/tutorial/classes.html#inheritance)，非常相似，特别是多重继承方面。
 
 下面的例子进行了详细的说明。
 
-::
-
+```bash
     pragma solidity ^0.4.16;
 
     contract owned {
@@ -2483,10 +2234,11 @@ Fallback 函数
 
        uint info;
     }
+```
 
-注意，在上边的代码中，我们调用 ``mortal.kill()`` 来“转发”销毁请求。
-这样做法是有问题的，在下面的例子中可以看到::
+注意，在上边的代码中，我们调用 ``mortal.kill()`` 来“转发”销毁请求。这样做法是有问题的，在下面的例子中可以看到::
 
+```bash
     pragma solidity ^0.4.0;
 
     contract owned {
@@ -2510,10 +2262,11 @@ Fallback 函数
 
     contract Final is Base1, Base2 {
     }
+```
 
-调用 ``Final.kill()`` 时会调用最远的派生重载函数 ``Base2.kill``，但是会绕过 ``Base1.kill``，
-主要是因为它甚至都不知道 ``Base1`` 的存在。解决这个问题的方法是使用 ``super``::
+调用 ``Final.kill()`` 时会调用最远的派生重载函数 ``Base2.kill``，但是会绕过 ``Base1.kill``，主要是因为它甚至都不知道 ``Base1`` 的存在。解决这个问题的方法是使用 ``super``:
 
+```bash
     pragma solidity ^0.4.0;
 
     contract owned {
@@ -2538,20 +2291,17 @@ Fallback 函数
 
     contract Final is Base1, Base2 {
     }
+```
 
 如果 ``Base2`` 调用 ``super`` 的函数，它不会简单在其基类合约上调用该函数。
-相反，它在最终的继承关系图谱的下一个基类合约中调用这个函数，所以它会调用 ``Base1.kill()``
-（注意最终的继承序列是——从最远派生合约开始：Final, Base2, Base1, mortal, ownerd）。
-在类中使用 super 调用的实际函数在当前类的上下文中是未知的，尽管它的类型是已知的。
+相反，它在最终的继承关系图谱的下一个基类合约中调用这个函数，所以它会调用 ``Base1.kill()``（注意最终的继承序列是——从最远派生合约开始：Final, Base2, Base1, mortal, ownerd）。在类中使用 super 调用的实际函数在当前类的上下文中是未知的，尽管它的类型是已知的。
 这与普通的虚拟方法查找类似。
 
-.. index:: ! base;constructor
-
-基类构造函数的参数
-===============================
+### 基类构造函数的参数
 
 派生合约需要提供基类构造函数需要的所有参数。这可以通过两种方式来完成::
 
+```bash
     pragma solidity ^0.4.0;
 
     contract Base {
@@ -2563,26 +2313,18 @@ Fallback 函数
         function Derived(uint _y) Base(_y * _y) public {
         }
     }
+```
 
-一种方法直接在继承列表中调用基类构造函数（``is Base(7)``）。
-另一种方法是像 |modifier| 使用方法一样，
-作为派生合约构造函数定义头的一部分，（``Base(_y * _y)``)。
-如果构造函数参数是常量并且定义或描述了合约的行为，使用第一种方法比较方便。
-如果基类构造函数的参数依赖于派生合约，那么必须使用第二种方法。
-如果像这个简单的例子一样，两个地方都用到了，优先使用 |modifier| 风格的参数。
+一种方法直接在继承列表中调用基类构造函数（``is Base(7)``）。另一种方法是像 |modifier| 使用方法一样，作为派生合约构造函数定义头的一部分，（``Base(_y * _y)``)。如果构造函数参数是常量并且定义或描述了合约的行为，使用第一种方法比较方便。如果基类构造函数的参数依赖于派生合约，那么必须使用第二种方法。如果像这个简单的例子一样，两个地方都用到了，优先使用 |modifier| 风格的参数。
 
-.. index:: ! inheritance;multiple, ! linearization, ! C3 linearization
-
-多重继承与线性化
-======================================
+### 多重继承与线性化
 
 编程语言实现多重继承需要解决几个问题。
-一个问题是 `钻石问题 <https://en.wikipedia.org/wiki/Multiple_inheritance#The_diamond_problem>`_。
-Solidity 借鉴了 Python 的方式并且使用“ `C3 线性化 <https://en.wikipedia.org/wiki/C3_linearization>`_ ”强制一个由基类构成的 DAG（有向无环图）保持一个特定的顺序。
-这最终反映为我们所希望的唯一化的结果，但也使某些继承方式变为无效。尤其是，基类在 ``is`` 后面的顺序很重要。
-在下面的代码中，Solidity 会给出“ Linearization of inheritance graph impossible ”这样的错误。
+一个问题是[钻石问题](https://en.wikipedia.org/wiki/Multiple_inheritance#The_diamond_problem)
+Solidity 借鉴了 Python 的方式并且使用 [C3 线性化](https://en.wikipedia.org/wiki/C3_linearization) 强制一个由基类构成的 DAG（有向无环图）保持一个特定的顺序。
+这最终反映为我们所希望的唯一化的结果，但也使某些继承方式变为无效。尤其是，基类在 ``is`` 后面的顺序很重要。在下面的代码中，Solidity 会给出“ Linearization of inheritance graph impossible ”这样的错误。
 
-::
+```bash
 
     // 以下代码编译出错
 
@@ -2591,36 +2333,34 @@ Solidity 借鉴了 Python 的方式并且使用“ `C3 线性化 <https://en.wik
     contract X {}
     contract A is X {}
     contract C is A, X {}
+```
 
 代码编译出错的原因是 ``C`` 要求 ``X`` 重写 ``A`` （因为定义的顺序是 ``A, X`` ），
 但是 ``A`` 本身要求重写 ``X``，无法解决这种冲突。
 
-可以通过一个简单的规则来记忆：
-以从“最接近的基类”（most base-like）到“最远的继承”（most derived）的顺序来指定所有的基类。
+可以通过一个简单的规则来记忆：以从“最接近的基类”（most base-like）到“最远的继承”（most derived）的顺序来指定所有的基类。
 
-继承有相同名字的不同类型成员
-======================================================
+#### 继承有相同名字的不同类型成员
 
 当继承导致一个合约具有相同名字的函数和 |modifier| 时，这会被认为是一个错误。
 当事件和 |modifier| 同名，或者函数和事件同名时，同样会被认为是一个错误。
 有一种例外情况，状态变量的 getter 可以覆盖一个 public 函数。
 
-.. index:: ! contract;abstract, ! abstract contract
+### 抽象合约
 
-******************
-抽象合约
-******************
+合约函数可以缺少实现，如下例所示（请注意函数声明头由 ``;`` 结尾）:
 
-合约函数可以缺少实现，如下例所示（请注意函数声明头由 ``;`` 结尾）::
-
+```
     pragma solidity ^0.4.0;
 
     contract Feline {
         function utterance() public returns (bytes32);
     }
+```
 
 这些合约无法成功编译（即使它们除了未实现的函数还包含其他已经实现了的函数），但他们可以用作基类合约::
 
+```bash
     pragma solidity ^0.4.0;
 
     contract Feline {
@@ -2630,22 +2370,20 @@ Solidity 借鉴了 Python 的方式并且使用“ `C3 线性化 <https://en.wik
     contract Cat is Feline {
         function utterance() public returns (bytes32) { return "miaow"; }
     }
+```
 
 如果合约继承自抽象合约，并且没有通过重写来实现所有未实现的函数，那么它本身就是抽象的。
 
-.. index:: ! contract;interface, ! interface contract
+### 接口
 
-**********
-接口
-**********
 
 接口类似于抽象合约，但是它们不能实现任何函数。还有进一步的限制：
 
-#. 无法继承其他合约或接口。
-#. 无法定义构造函数。
-#. 无法定义变量。
-#. 无法定义结构体
-#. 无法定义枚举。
+- 无法继承其他合约或接口。
+- 无法定义构造函数。
+- 无法定义变量。
+- 无法定义结构体
+- 无法定义枚举。
 
 将来可能会解除这里的某些限制。
 
@@ -2653,44 +2391,27 @@ Solidity 借鉴了 Python 的方式并且使用“ `C3 线性化 <https://en.wik
 
 接口由它们自己的关键字表示：
 
-::
+```bash
 
     pragma solidity ^0.4.11;
 
     interface Token {
         function transfer(address recipient, uint amount) public;
     }
+```
 
 就像继承其他合约一样，合约可以继承接口。
 
-.. index:: ! library, callcode, delegatecall
+### 库
 
-.. _libraries:
+库与合约类似，它们只需要在特定的地址部署一次，并且它们的代码可以通过 EVM 的 ``DELEGATECALL``(Homestead 之前使用 ``CALLCODE`` 关键字)特性进行重用。这意味着如果库函数被调用，它的代码在调用合约的上下文中执行，即 ``this`` 指向调用合约，特别是可以访问调用合约的存储。因为每个库都是一段独立的代码，所以它仅能访问调用合约明确提供的状态变量（否则它就无法通过名字访问这些变量）。因为我们假定库是无状态的，所以如果它们不修改状态（也就是说，如果它们是 ``view`` 或者 ``pure`` 函数），库函数仅可以通过直接调用来使用（即不使用 ``DELEGATECALL`` 关键字），特别是，除非能规避 Solidity 的类型系统，否则是不可能销毁任何库的。
 
-************
-库
-************
-
-库与合约类似，它们只需要在特定的地址部署一次，并且它们的代码可以通过 EVM 的 ``DELEGATECALL``
-(Homestead 之前使用 ``CALLCODE`` 关键字)特性进行重用。
-这意味着如果库函数被调用，它的代码在调用合约的上下文中执行，即 ``this`` 指向调用合约，特别是可以访问调用合约的存储。
-因为每个库都是一段独立的代码，所以它仅能访问调用合约明确提供的状态变量（否则它就无法通过名字访问这些变量）。
-因为我们假定库是无状态的，所以如果它们不修改状态（也就是说，如果它们是 ``view`` 或者 ``pure`` 函数），
-库函数仅可以通过直接调用来使用（即不使用 ``DELEGATECALL`` 关键字），
-特别是，除非能规避 Solidity 的类型系统，否则是不可能销毁任何库的。
-
-库可以看作是使用他们的合约的隐式的基类合约。虽然它们在继承关系中不会显式可见，但调用库函数与调用显式的基类合约十分类似
-（如果 ``L`` 是库的话，可以使用 ``L.f()`` 调用库函数）。此外，就像库是基类合约一样，对所有使用库的合约，库的 ``internal`` 函数都是可见的。
-当然，需要使用内部调用约定来调用内部函数，这意味着所有内部类型，内存类型都是通过引用而不是复制来传递。
-为了在 EVM 中实现这些，内部库函数的代码和从其中调用的所有函数都在编译阶段被拉取到调用合约中，然后使用一个 ``JUMP`` 调用来代替 ``DELEGATECALL``。
-
-
-.. index:: using for, set
+库可以看作是使用他们的合约的隐式的基类合约。虽然它们在继承关系中不会显式可见，但调用库函数与调用显式的基类合约十分类似（如果 ``L`` 是库的话，可以使用 ``L.f()`` 调用库函数）。此外，就像库是基类合约一样，对所有使用库的合约，库的 ``internal`` 函数都是可见的。
+当然，需要使用内部调用约定来调用内部函数，这意味着所有内部类型，内存类型都是通过引用而不是复制来传递。为了在 EVM 中实现这些，内部库函数的代码和从其中调用的所有函数都在编译阶段被拉取到调用合约中，然后使用一个 ``JUMP`` 调用来代替 ``DELEGATECALL``。
 
 下面的示例说明如何使用库（但也请务必看看 :ref:`using for <using-for>` 有一个实现 set 更好的例子）。
 
-::
-
+```bash
     pragma solidity ^0.4.16;
 
     library Set {
@@ -2738,18 +2459,15 @@ Solidity 借鉴了 Python 的方式并且使用“ `C3 线性化 <https://en.wik
         }
         // 如果我们愿意，我们也可以在这个合约中直接访问 knownValues.flags。
     }
+```
 
-当然，你不必按照这种方式去使用库：它们也可以在不定义结构数据类型的情况下使用。
-函数也不需要任何存储引用参数，库可以出现在任何位置并且可以有多个存储引用参数。
+当然，你不必按照这种方式去使用库：它们也可以在不定义结构数据类型的情况下使用。函数也不需要任何存储引用参数，库可以出现在任何位置并且可以有多个存储引用参数。
 
-调用 ``Set.contains``，``Set.insert`` 和 ``Set.remove`` 都被编译为外部调用（ ``DELEGATECALL`` ）。
-如果使用库，请注意实际执行的是外部函数调用。
-``msg.sender``， ``msg.value`` 和 ``this`` 在调用中将保留它们的值，
-（在 Homestead 之前，因为使用了 ``CALLCODE``，改变了 ``msg.sender`` 和 ``msg.value``)。
+调用 ``Set.contains``，``Set.insert`` 和 ``Set.remove`` 都被编译为外部调用（ ``DELEGATECALL`` ）。如果使用库，请注意实际执行的是外部函数调用。``msg.sender``， ``msg.value`` 和 ``this`` 在调用中将保留它们的值，（在 Homestead 之前，因为使用了 ``CALLCODE``，改变了 ``msg.sender`` 和 ``msg.value``)。
 
 以下示例展示了如何在库中使用内存类型和内部函数来实现自定义类型，而无需支付外部函数调用的开销：
 
-::
+```bash
 
     pragma solidity ^0.4.16;
 
@@ -2803,11 +2521,11 @@ Solidity 借鉴了 Python 的方式并且使用“ `C3 线性化 <https://en.wik
             var z = x.add(y);
         }
     }
+```
 
 由于编译器无法知道库的部署位置，我们需要通过链接器将这些地址填入最终的字节码中
 （请参阅 :ref:`commandline-compiler` 以了解如何使用命令行编译器来链接字节码）。
-如果这些地址没有作为参数传递给编译器，编译后的十六进制代码将包含 ``__Set______`` 形式的占位符（其中 ``Set`` 是库的名称）。
-可以手动填写地址来将那 40 个字符替换为库合约地址的十六进制编码。
+如果这些地址没有作为参数传递给编译器，编译后的十六进制代码将包含 ``__Set______`` 形式的占位符（其中 ``Set`` 是库的名称）。可以手动填写地址来将那 40 个字符替换为库合约地址的十六进制编码。
 
 与合约相比，库的限制：
 
@@ -2817,40 +2535,24 @@ Solidity 借鉴了 Python 的方式并且使用“ `C3 线性化 <https://en.wik
 
 （将来有可能会解除这些限制）
 
-库的调用保护
-=============================
+#### 库的调用保护
 
-如果库的代码是通过 ``CALL`` 来执行，而不是 ``DELEGATECALL`` 或者 ``CALLCODE`` 那么执行的结果会被回退，
-除非是对 ``view`` 或者 ``pure`` 函数的调用。
-
-EVM 没有为合约提供检测是否使用 ``CALL`` 的直接方式，但是合约可以使用 ``ADDRESS`` 操作码找出正在运行的“位置”。
-生成的代码通过比较这个地址和构造时的地址来确定调用模式。
+如果库的代码是通过 ``CALL`` 来执行，而不是 ``DELEGATECALL`` 或者 ``CALLCODE`` 那么执行的结果会被回退，除非是对 ``view`` 或者 ``pure`` 函数的调用。EVM 没有为合约提供检测是否使用 ``CALL`` 的直接方式，但是合约可以使用 ``ADDRESS`` 操作码找出正在运行的“位置”。生成的代码通过比较这个地址和构造时的地址来确定调用模式。
 
 更具体地说，库的运行时代码总是从一个 push 指令开始，它在编译时是 20 字节的零。当部署代码运行时，这个常数
 被内存中的当前地址替换，修改后的代码存储在合约中。在运行时，这导致部署时地址是第一个被 push 到堆栈上的常数，
 对于任何 non-view 和 non-pure 函数，调度器代码都将对比当前地址与这个常数是否一致。
 
-.. index:: ! using for, library
-
-.. _using-for:
-
-*********
-Using For
-*********
+### Using For
 
 指令 ``using A for B;`` 可用于附加库函数（从库 ``A``）到任何类型（``B``）。
 这些函数将接收到调用它们的对象作为它们的第一个参数（像 Python 的 ``self`` 变量）。
+``using A for *;`` 的效果是，库 ``A`` 中的函数被附加在任意的类型上。在这两种情况下，所有函数都会被附加一个参数，即使它们的第一个参数类型与对象的类型不匹配。
+函数调用和重载解析时才会做类型检查。``using A for B;`` 指令仅在当前作用域有效，目前仅限于在当前合约中，后续可能提升到全局范围。通过引入一个模块，不需要再添加代码就可以使用包括库函数在内的数据类型。
 
-``using A for *;`` 的效果是，库 ``A`` 中的函数被附加在任意的类型上。
+让我们用这种方式将`libraries`中的 set 例子重写::
 
-在这两种情况下，所有函数都会被附加一个参数，即使它们的第一个参数类型与对象的类型不匹配。
-函数调用和重载解析时才会做类型检查。
-
-``using A for B;`` 指令仅在当前作用域有效，目前仅限于在当前合约中，后续可能提升到全局范围。
-通过引入一个模块，不需要再添加代码就可以使用包括库函数在内的数据类型。
-
-让我们用这种方式将 :ref:`libraries` 中的 set 例子重写::
-
+```bash
     pragma solidity ^0.4.16;
 
     // 这是和之前一样的代码，只是没有注释。
@@ -2900,8 +2602,11 @@ Using For
             require(knownValues.insert(value));
         }
     }
+```
 
-也可以像这样扩展基本类型::
+也可以像这样扩展基本类型:
+
+```bash
 
     pragma solidity ^0.4.16;
 
@@ -2935,8 +2640,9 @@ Using For
         }
     }
 
-注意，所有库调用都是实际的 EVM 函数调用。这意味着如果传递内存或值类型，都将产生一个副本，即使是 ``self`` 变量。
-使用存储引用变量是唯一不会发生拷贝的情况。 
+```
+
+注意，所有库调用都是实际的 EVM 函数调用。这意味着如果传递内存或值类型，都将产生一个副本，即使是 ``self`` 变量。]使用存储引用变量是唯一不会发生拷贝的情况。 
 
 ## Solidity汇编
 
@@ -2960,11 +2666,9 @@ Solidity 的内联汇编试图通过提供以下特性来解决这个问题以�
 
 现在我们详细讲解内联汇编语言。
 
-.. warning::
-    内联汇编是一种在底层访问以太坊虚拟机的语言。这抛弃了很多 Solidity 提供的重要安全特性。
+> 内联汇编是一种在底层访问以太坊虚拟机的语言。这抛弃了很多 Solidity 提供的重要安全特性。
 
-.. note::
-    TODO：写出在内联汇编中作用域规则的细微差别，以及在使用库合约的内部函数时产生的复杂性。此外，还要编写有关编译器定义的符号。
+> TODO：写出在内联汇编中作用域规则的细微差别，以及在使用库合约的内部函数时产生的复杂性。此外，还要编写有关编译器定义的符号。
 
 例子
 -------
@@ -2972,7 +2676,7 @@ Solidity 的内联汇编试图通过提供以下特性来解决这个问题以�
 下面例子展示了一个库合约的代码，它可以取得另一个合约的代码，并将其加载到一个 ``bytes`` 变量中。
 这对于“常规 Solidity”来说是根本不可能的，汇编库合约则可以通过这种方式来增强语言特性。
 
-.. code::
+```bash
 
     pragma solidity ^0.4.0;
 
@@ -2993,11 +2697,12 @@ Solidity 的内联汇编试图通过提供以下特性来解决这个问题以�
             }
         }
     }
+```
 
 在优化器无法生成高效代码的情况下，内联汇编也可能更有好处。请注意，由于编译器无法对汇编语句进行相关的检查，所以编写汇编代码肯定更加困难；
 因此只有在处理一些相对复杂的问题时才需要使用它，并且你需要明确知道自己要做什么。
 
-.. code::
+```bash
 
     pragma solidity ^0.4.16;
 
@@ -3045,10 +2750,10 @@ Solidity 的内联汇编试图通过提供以下特性来解决这个问题以�
             }
         }
     }
+```
 
 
-语法
-------
+#### 语法
 
 和 Solidity 一样，Assembly 也会解析注释、文字和标识符，所以你可以使用通常的 ``//`` 和 ``/* */`` 来进行注释。
 内联汇编程序由 ``assembly { ... }`` 来标记，在这些大括号内可以使用以下内容（更多详细信息请参阅后面部分）。
@@ -3067,216 +2772,121 @@ Solidity 的内联汇编试图通过提供以下特性来解决这个问题以�
 
 本文档不是以太坊虚拟机的详细描述，但下边的列表可以作为操作码参考。
 
-如果一个操作码需要参数（总是来自堆栈顶部），它们会在括号中给出。请注意：参数顺序可以看作是在非函数风格中逆序（下面会解释）。
-标有 ``-`` 的操作码不会向栈中压入（push）数据，标有 ``*`` 的操作码有特殊操作，而所有其他操作码都只会将一个数据压入（push）栈中。
-用 ``F``、``H``、``B`` 或 ``C`` 标记的操作码代表它们从 Frontier、Homestead、Byzantium 或 Constantinople 开始被引入。
-Constantinople 目前仍在计划中，所以标记为 ``C`` 的指令目前都会导致一个非法指令异常。
-
-在下表中，``mem[a...b)`` 表示从位置 ``a`` 开始至（不包括）位置 ``b`` 的内存字节数，``storage[p]`` 表示位置 ``p`` 处的存储内容。
-
+如果一个操作码需要参数（总是来自堆栈顶部），它们会在括号中给出。请注意：参数顺序可以看作是在非函数风格中逆序（下面会解释）。标有 ``-`` 的操作码不会向栈中压入（push）数据，标有 ``*`` 的操作码有特殊操作，而所有其他操作码都只会将一个数据压入（push）栈中。
+用 ``F``、``H``、``B`` 或 ``C`` 标记的操作码代表它们从 Frontier、Homestead、Byzantium 或 Constantinople 开始被引入。Constantinople 目前仍在计划中，所以标记为 ``C`` 的指令目前都会导致一个非法指令异常。在下表中，``mem[a...b)`` 表示从位置 ``a`` 开始至（不包括）位置 ``b`` 的内存字节数，``storage[p]`` 表示位置 ``p`` 处的存储内容。
 ``pushi`` 和 ``jumpdest`` 这两个操作码不能直接用。
 
 在语法表中，操作码是作为预定义标识符提供的。
 
-+-------------------------+-----+---+-----------------------------------------------------------------+
-| Instruction             |     |   | Explanation                                                     |
-+=========================+=====+===+=================================================================+
-| stop                    + `-` | F | 停止执行，与 return(0,0) 等价                                   |
-+-------------------------+-----+---+-----------------------------------------------------------------+
-| add(x, y)               |     | F | x + y                                                           |
-+-------------------------+-----+---+-----------------------------------------------------------------+
+Instruction | symbol |Bool | Explanation  
+-|-|-|-
+| stop  | `-` | F | 停止执行，与 return(0,0) 等价  |                                |
+| add(x, y)               |     | F | x + y       |
 | sub(x, y)               |     | F | x - y                                                           |
-+-------------------------+-----+---+-----------------------------------------------------------------+
 | mul(x, y)               |     | F | x * y                                                           |
-+-------------------------+-----+---+-----------------------------------------------------------------+
 | div(x, y)               |     | F | x / y                                                           |
-+-------------------------+-----+---+-----------------------------------------------------------------+
 | sdiv(x, y)              |     | F | x / y，以二进制补码作为符号                                     |
-+-------------------------+-----+---+-----------------------------------------------------------------+
 | mod(x, y)               |     | F | x % y                                                           |
-+-------------------------+-----+---+-----------------------------------------------------------------+
 | smod(x, y)              |     | F | x % y，以二进制补码作为符号                                     |
-+-------------------------+-----+---+-----------------------------------------------------------------+
 | exp(x, y)               |     | F | x 的 y 次幂                                                     |
-+-------------------------+-----+---+-----------------------------------------------------------------+
 | not(x)                  |     | F | ~x，对 x 按位取反                                               |
-+-------------------------+-----+---+-----------------------------------------------------------------+
 | lt(x, y)                |     | F | 如果 x < y 为 1，否则为 0                                       |
-+-------------------------+-----+---+-----------------------------------------------------------------+
 | gt(x, y)                |     | F | 如果 x > y 为 1，否则为 0                                       |
-+-------------------------+-----+---+-----------------------------------------------------------------+
 | slt(x, y)               |     | F | 如果 x < y 为 1，否则为 0，以二进制补码作为符号                 |
-+-------------------------+-----+---+-----------------------------------------------------------------+
 | sgt(x, y)               |     | F | 如果 x > y 为 1，否则为 0，以二进制补码作为符号                 |
-+-------------------------+-----+---+-----------------------------------------------------------------+
 | eq(x, y)                |     | F | 如果 x == y 为 1，否则为 0                                      |
-+-------------------------+-----+---+-----------------------------------------------------------------+
 | iszero(x)               |     | F | 如果 x == 0 为 1，否则为 0                                      |
-+-------------------------+-----+---+-----------------------------------------------------------------+
 | and(x, y)               |     | F | x 和 y 的按位与                                                 |
-+-------------------------+-----+---+-----------------------------------------------------------------+
 | or(x, y)                |     | F | x 和 y 的按位或                                                 |
-+-------------------------+-----+---+-----------------------------------------------------------------+
 | xor(x, y)               |     | F | x 和 y 的按位异或                                               |
-+-------------------------+-----+---+-----------------------------------------------------------------+
 | byte(n, x)              |     | F | x 的第 n 个字节，这个索引是从 0 开始的                          |
-+-------------------------+-----+---+-----------------------------------------------------------------+
 | shl(x, y)               |     | C | 将 y 逻辑左移 x 位                                              |
-+-------------------------+-----+---+-----------------------------------------------------------------+
-| shr(x, y)               |     | C | 将 y 逻辑右移 x 位                                              |
-+-------------------------+-----+---+-----------------------------------------------------------------+
+| shr(x, y)               |     | C | 将 y 逻��右移 x 位                                              |
 | sar(x, y)               |     | C | 将 y 算术右移 x 位                                              |
-+-------------------------+-----+---+-----------------------------------------------------------------+
 | addmod(x, y, m)         |     | F | 任意精度的 (x + y) % m                                          |
-+-------------------------+-----+---+-----------------------------------------------------------------+
 | mulmod(x, y, m)         |     | F | 任意精度的 (x * y) % m                                          |
-+-------------------------+-----+---+-----------------------------------------------------------------+
 | signextend(i, x)        |     | F | 对 x 的最低位到第 (i * 8 + 7) 进行符号扩展                      |
-+-------------------------+-----+---+-----------------------------------------------------------------+
 | keccak256(p, n)         |     | F | keccak(mem[p...(p + n)))                                        |
-+-------------------------+-----+---+-----------------------------------------------------------------+
 | jump(label)             | `-` | F | 跳转到标签 / 代码位置                                           |
-+-------------------------+-----+---+-----------------------------------------------------------------+
 | jumpi(label, cond)      | `-` | F | 如果条件为非零，跳转到标签                                      |
-+-------------------------+-----+---+-----------------------------------------------------------------+
 | pc                      |     | F | 当前代码位置                                                    |
-+-------------------------+-----+---+-----------------------------------------------------------------+
 | pop(x)                  | `-` | F | 删除（弹出）栈顶的 x 个元素                                     |
-+-------------------------+-----+---+-----------------------------------------------------------------+
 | dup1 ... dup16          |     | F | 将栈内第 i 个元素（从栈顶算起）复制到栈顶                       |
-+-------------------------+-----+---+-----------------------------------------------------------------+
 | swap1 ... swap16        | `*` | F | 将栈顶元素和其下第 i 个元素互换                                 |
-+-------------------------+-----+---+-----------------------------------------------------------------+
 | mload(p)                |     | F | mem[p...(p + 32))                                               |
-+-------------------------+-----+---+-----------------------------------------------------------------+
 | mstore(p, v)            | `-` | F | mem[p...(p + 32)) := v                                          |
-+-------------------------+-----+---+-----------------------------------------------------------------+
 | mstore8(p, v)           | `-` | F | mem[p] := v & 0xff （仅修改一个字节）                           |
-+-------------------------+-----+---+-----------------------------------------------------------------+
 | sload(p)                |     | F | storage[p]                                                      |
-+-------------------------+-----+---+-----------------------------------------------------------------+
 | sstore(p, v)            | `-` | F | storage[p] := v                                                 |
-+-------------------------+-----+---+-----------------------------------------------------------------+
 | msize                   |     | F | 内存大小，即最大可访问内存索引                                  |
-+-------------------------+-----+---+-----------------------------------------------------------------+
 | gas                     |     | F | 执行可用的 gas                                                  |
-+-------------------------+-----+---+-----------------------------------------------------------------+
 | address                 |     | F | 当前合约 / 执行上下文的地址                                     |
-+-------------------------+-----+---+-----------------------------------------------------------------+
 | balance(a)              |     | F | 地址 a 的余额，以 wei 为单位                                    |
-+-------------------------+-----+---+-----------------------------------------------------------------+
 | caller                  |     | F | 调用发起者（不包括 ``delegatecall``）                           |
-+-------------------------+-----+---+-----------------------------------------------------------------+
 | callvalue               |     | F | 随调用发送的 Wei 的数量                                         |
-+-------------------------+-----+---+-----------------------------------------------------------------+
 | calldataload(p)         |     | F | 位置 p 的调用数据（32 字节）                                    |
-+-------------------------+-----+---+-----------------------------------------------------------------+
 | calldatasize            |     | F | 调用数据的字节数大小                                            |
-+-------------------------+-----+---+-----------------------------------------------------------------+
 | calldatacopy(t, f, s)   | `-` | F | 从调用数据的位置 f 的拷贝 s 个字节到内存的位置 t                |
-+-------------------------+-----+---+-----------------------------------------------------------------+
 | codesize                |     | F | 当前合约 / 执行上下文地址的代码大小                             |
-+-------------------------+-----+---+-----------------------------------------------------------------+
 | codecopy(t, f, s)       | `-` | F | 从代码的位置 f 开始拷贝 s 个字节到内存的位置 t                  |
-+-------------------------+-----+---+-----------------------------------------------------------------+
 | extcodesize(a)          |     | F | 地址 a 的代码大小                                               |
-+-------------------------+-----+---+-----------------------------------------------------------------+
 | extcodecopy(a, t, f, s) | `-` | F | 和 codecopy(t, f, s) 类似，但从地址 a 获取代码                  |
-+-------------------------+-----+---+-----------------------------------------------------------------+
 | returndatasize          |     | B | 最后一个 returndata 的大小                                      |
-+-------------------------+-----+---+-----------------------------------------------------------------+
 | returndatacopy(t, f, s) | `-` | B | 从 returndata 的位置 f 拷贝 s 个字节到内存的位置 t              |
-+-------------------------+-----+---+-----------------------------------------------------------------+
-| create(v, p, s)         |     | F | 用 mem[p...(p + s)) 中的代码创建一个新合约、发送 v wei 并返回   |
-|                         |     |   | 新地址                                                          |
-+-------------------------+-----+---+-----------------------------------------------------------------+
-| create2(v, n, p, s)     |     | C | 用 mem[p...(p + s)) 中的代码，在地址                            |
-|                         |     |   | keccak256(<address> . n . keccak256(mem[p...(p + s))) 上        |
-|                         |     |   | 创建新合约、发送 v wei 并返回新地址                             |
-+-------------------------+-----+---+-----------------------------------------------------------------+
-| call(g, a, v, in,       |     | F | 使用 mem[in...(in + insize)) 作为输入数据，                     |
-| insize, out, outsize)   |     |   | 提供 g gas 和 v wei 对地址 a 发起消息调用，                     |
-|                         |     |   | 输出结果数据保存在 mem[out...(out + outsize))，                 |
-|                         |     |   | 发生错误（比如 gas 不足）时返回 0，正确结束返回 1               |
-+-------------------------+-----+---+-----------------------------------------------------------------+
-| callcode(g, a, v, in,   |     | F | 与 ``call`` 等价，但仅使用地址 a 中的代码                       |
-| insize, out, outsize)   |     |   | 且保持当前合约的执行上下文                                      |
-+-------------------------+-----+---+-----------------------------------------------------------------+
-| delegatecall(g, a, in,  |     | F | 与 ``callcode`` 等价且保留 ``caller`` 和 ``callvalue``          |
-| insize, out, outsize)   |     |   |                                                                 |
-+-------------------------+-----+---+-----------------------------------------------------------------+
-| staticcall(g, a, in,    |     | F | 与 ``call(g, a, 0, in, insize, out, outsize)`` 等价             |
-| insize, out, outsize)   |     |   | 但不允许状态修改                                                |
-+-------------------------+-----+---+-----------------------------------------------------------------+
+| create(v, p, s)         |     | F | 用 mem[p...(p + s)) 中的代码创建一个新合约、发送 v wei 并返回新地址    |
+| create2(v, n, p, s)     |     | C | 用 mem[p...(p + s)) 中的代码，在地址keccak256(<address> . n . keccak256(mem[p...(p + s)))创建新合约、发送 v wei 并返回新地址上 |
+| call(g, a, v, in,insize, out, outsize)       |     | F | 使用 mem[in...(in + insize)) 作为输入数据，提供 g gas 和 v wei 对地址 a 发起消息调用，输出结果数据保存在 mem[out...(out + outsize))，发生错误（比如 gas 不足）时返回 0，正确结束返回 1 |                
+| callcode(g, a, v, in,insize, out, outsize)   |     | F | 与 ``call`` 等价，但仅使用地址 a 中的代码 且保持当前合约的执行上下文    |
+| delegatecall(g, a, in,insize, out, outsize)  |     | F | 与 ``callcode`` 等价且保留 ``caller`` 和 ``callvalue``          |
+| staticcall(g, a, in,insize, out, outsize)    |     | F | 与 ``call(g, a, 0, in, insize, out, outsize)`` 等价,但不允许状态修改  |
 | return(p, s)            | `-` | F | 终止运行，返回 mem[p...(p + s)) 的数据                          |
-+-------------------------+-----+---+-----------------------------------------------------------------+
 | revert(p, s)            | `-` | B | 终止运行，撤销状态变化，返回 mem[p...(p + s)) 的数据            |
-+-------------------------+-----+---+-----------------------------------------------------------------+
 | selfdestruct(a)         | `-` | F | 终止运行，销毁当前合约并且把资金发送到地址 a                    |
-+-------------------------+-----+---+-----------------------------------------------------------------+
 | invalid                 | `-` | F | 以无效指令终止运行                                              |
-+-------------------------+-----+---+-----------------------------------------------------------------+
 | log0(p, s)              | `-` | F | 以 mem[p...(p + s)) 的数据产生不带 topic 的日志                 |
-+-------------------------+-----+---+-----------------------------------------------------------------+
 | log1(p, s, t1)          | `-` | F | 以 mem[p...(p + s)) 的数据和 topic t1 产生日志                  |
-+-------------------------+-----+---+-----------------------------------------------------------------+
 | log2(p, s, t1, t2)      | `-` | F | 以 mem[p...(p + s)) 的数据和 topic t1、t2 产生日志              |
-+-------------------------+-----+---+-----------------------------------------------------------------+
 | log3(p, s, t1, t2, t3)  | `-` | F | 以 mem[p...(p + s)) 的数据和 topic t1、t2、t3 产生日志          |
-+-------------------------+-----+---+-----------------------------------------------------------------+
-| log4(p, s, t1, t2, t3,  | `-` | F | 以 mem[p...(p + s)) 的数据和 topic t1、t2、t3 和 t4 产生日志    |
-| t4)                     |     |   |                                                                 |
-+-------------------------+-----+---+-----------------------------------------------------------------+
+| log4(p, s, t1, t2, t3, t4)   | `-` | F | 以 mem[p...(p + s)) 的数据和 topic t1、t2、t3 和 t4 产生日志    |
 | origin                  |     | F | 交易发起者地址                                                  |
-+-------------------------+-----+---+-----------------------------------------------------------------+
 | gasprice                |     | F | 交易所指定的 gas 价格                                           |
-+-------------------------+-----+---+-----------------------------------------------------------------+
 | blockhash(b)            |     | F | 区块号 b 的哈希 - 目前仅适用于不包括当前区块的最后 256 个区块   |
-+-------------------------+-----+---+-----------------------------------------------------------------+
 | coinbase                |     | F | 当前的挖矿收益者地址                                            |
-+-------------------------+-----+---+-----------------------------------------------------------------+
 | timestamp               |     | F | 从当前 epoch 开始的当前区块时间戳（以秒为单位）                 |
-+-------------------------+-----+---+-----------------------------------------------------------------+
 | number                  |     | F | 当前区块号                                                      |
-+-------------------------+-----+---+-----------------------------------------------------------------+
 | difficulty              |     | F | 当前区块难度                                                    |
-+-------------------------+-----+---+-----------------------------------------------------------------+
 | gaslimit                |     | F | 当前区块的 gas 上限                                             |
-+-------------------------+-----+---+-----------------------------------------------------------------+
+| |  |
 
-字面常量
---------
+#### 字面常量
 
 你可以直接键入十进制或十六进制符号来作为整型常量使用，这会自动生成相应的 ``PUSHi`` 指令。
 下面的代码将计算 2 加 3（等于 5），然后计算其与字符串 “abc” 的按位与。字符串在存储时为左对齐，且长度不能超过 32 字节。
 
-.. code::
+```bash
+assembly { 2 3 add "abc" and }
+```
 
-    assembly { 2 3 add "abc" and }
-
-函数风格
------------------
+#### 函数风格
 
 你可以像使用字节码那样在操作码之后键入操作码。例如，把 ``3`` 与内存位置 ``0x80`` 处的数据相加就是
 
-.. code::
-
-    3 0x80 mload add 0x80 mstore
+```bash
+3 0x80 mload add 0x80 mstore
+```
 
 由于通常很难看到某些操作码的实际参数是什么，所以 Solidity 内联汇编还提供了一种“函数风格”表示法，同样功能的代码可以写做
 
-.. code::
-
-    mstore(0x80, add(mload(0x80), 3))
+```bash
+mstore(0x80, add(mload(0x80), 3))
+```
 
 函数风格表达式内不能使用指令风格的写法，即 ``1 2 mstore(0x80, add)`` 是无效汇编语句，
 它必须写成 ``mstore(0x80, add(2, 1))`` 这种形式。对于不带参数的操作码，括号可以省略。
 
 注意，在函数风格写法中参数的顺序与指令风格相反。如果使用函数风格写法，第一个参数将会位于栈顶。
 
-
-访问外部变量和函数
-------------------------------------------
+#### 访问外部变量和函数
 
 通过简单使用它们名称就可以访问 Solidity 变量和其他标识符。对于内存变量，这会将地址而不是值压入栈中。
 存储变量是不同的，因为存储变量的值可能不占用完整的存储槽，因此其“地址”由存储槽和槽内的字节偏移量组成。
@@ -3291,7 +2901,7 @@ Constantinople 目前仍在计划中，所以标记为 ``C`` 的指令目前都�
 
 这个特性使用起来还是有点麻烦，因为在调用过程中堆栈偏移量发生了根本变化，因此对局部变量的引用将会出错。
 
-.. code::
+```bash
 
     pragma solidity ^0.4.11;
 
@@ -3303,25 +2913,20 @@ Constantinople 目前仍在计划中，所以标记为 ``C`` 的指令目前都�
             }
         }
     }
+```
 
-.. note::
-    如果你访问一个实际数据位数小于 256 位的数据类型（比如 ``uint64``、``address``、``bytes16`` 或 ``byte``），
-    不要对这种类型经过编码后未使用的数据位上的数值做任何假设。尤其是不要假设它们肯定为 0。
-    安全起见，在某个上下文中使用这种数据之前，请一定先将其数据清空为 0，这非常重要：
-    ``uint32 x = f(); assembly { x := and(x, 0xffffffff) /* now use x */ }``
-    要清空有符号类型，你可以使用 ``signextend`` 操作码。
 
-标签
-------
+> 如果你访问一个实际数据位数小于 256 位的数据类型（比如 ``uint64``、``address``、``bytes16`` 或 ``byte``），不要对这种类型经过编码后未使用的数据位上的数值做任何假设。尤其是不要假设它们肯定为 0。安全起见，在某个上下文中使用这种数据之前，请一定先将其数据清空为 0，这非常重要：``uint32 x = f(); assembly { x := and(x, 0xffffffff) /* now use x */ }``要清空有符号类型，你可以使用 ``signextend`` 操作码。
 
-.. note::
-    标签已经不推荐使用。请使用函数、循环、if 或 switch 语句。
+#### 标签
+
+>    标签已经不推荐使用。请使用函数、循环、if 或 switch 语句。
 
 EVM 汇编的另一个问题是 jump 和 jumpi 函数使用绝对地址，这些绝对地址很容易改变。
 Solidity 内联汇编提供了标签，以便更容易地使用 jump。注意，标签具有底层特征，使用循环、if 和 switch 指令（参见下文）而不使用标签也能写出高效汇编代码。
 以下代码用来计算斐波那契数列中的一个元素。
 
-.. code::
+```bash
 
     {
         let n := calldataload(4)
@@ -3336,13 +2941,14 @@ Solidity 内联汇编提供了标签，以便更容易地使用 jump。注意，
         mstore(0, a)
         return(0, 0x20)
     }
+```
 
 请注意：只有汇编程序知道当前栈高度时，才能自动访问堆栈变量。如果 jump 源和目标的栈高度不同，访问将失败。
 虽然我们可以这么使用 jump，但在这种情况下，你不应该去访问任何栈里的变量（即使是汇编变量）。
 
 此外，栈高度分析器还可以通过操作码（而不是根据控制流）检查代码操作码，因此在下面的情况下，汇编程序对标签 ``two`` 处的堆栈高度会产生错误的印象：
 
-.. code::
+```bash
 
     {
         let x := 8
@@ -3359,15 +2965,15 @@ Solidity 内联汇编提供了标签，以便更容易地使用 jump。注意，
             jump(one)
         three:
     }
+```
 
-汇编局部变量声明
-----------------------------------
+#### 汇编局部变量声明
 
 你可以使用 ``let`` 关键字来声明只在内联汇编中可见的变量，实际上只在当前的 ``{...}`` 块中可见。
 下面发生的事情应该是：``let`` 指令将创建一个为变量保留的新数据槽，并在到达块末尾时自动删除。
 你需要为变量提供一个初始值，它可以只是 ``0``，但它也可以是一个复杂的函数风格表达式。
 
-.. code::
+```bash
 
     pragma solidity ^0.4.16;
 
@@ -3384,17 +2990,17 @@ Solidity 内联汇编提供了标签，以便更容易地使用 jump。注意，
             } // v 会在这里被“清除”
         }
     }
+```
 
+#### 赋值
 
-赋值
------------
 
 可以给汇编局部变量和函数局部变量赋值。请注意：当给指向内存或存储的变量赋值时，你只是更改指针而不是数据。
 
 有两种赋值方式：函数风格和指令风格。对于函数风格赋值（``变量 := 值``），你需要在函数风格表达式中提供一个值，它恰好可以产生一个栈里的值；
 对于指令风格赋值（``=: 变量``），则仅从栈顶部获取数据。对于这两种方式，冒号均指向变量名称。赋值则是通过用新值替换栈中的变量值来实现的。
 
-.. code::
+```bash
 
     {
         let v := 0 // 作为变量声明的函数风格赋值
@@ -3402,30 +3008,31 @@ Solidity 内联汇编提供了标签，以便更容易地使用 jump。注意，
         sload(10)
         =: v // 指令风格的赋值，将 sload(10) 的结果赋给 v
     }
+```
 
-.. note::
-    指令风格的赋值已经不推荐。
+> 指令风格的赋值已经不推荐。
 
-If
---
+#### If
+
 
 if 语句可以用于有条件地执行代码，且没有“else”部分；如果需要多种选择，你可以考虑使用“switch”（见下文）。
 
-.. code::
+```bash
 
     {
         if eq(value, 0) { revert(0, 0) }
     }
+```
 
 代码主体的花括号是必需的。
 
-Switch
-------
+#### Switch
+
 
 作为“if/else”的非常初级的版本，你可以使用 switch 语句。它计算表达式的值并与几个常量进行比较。选出与匹配常数对应的分支。
 与某些编程语言容易出错的情况不同，控制流不会从一种情形继续执行到下一种情形。我们可以设定一个 fallback 或称为 ``default`` 的默认情况。
 
-.. code::
+```bash
 
     {
         let x := 0
@@ -3438,18 +3045,18 @@ Switch
         }
         sstore(0, div(x, 2))
     }
+```
 
 Case 列表里面不需要大括号，但 case 主体需要。
 
-循环
------
+#### 循环
 
 汇编语言支持一个简单的 for-style 循环。For-style 循环有一个头，它包含初始化部分、条件和迭代后处理部分。
 条件必须是函数风格表达式，而另外两个部分都是语句块。如果起始部分声明了某个变量，这些变量的作用域将扩展到循环体中（包括条件和迭代后处理部分）。
 
 下面例子是计算某个内存区域中的数值总和。
 
-.. code::
+```bash
 
     {
         let x := 0
@@ -3457,10 +3064,11 @@ Case 列表里面不需要大括号，但 case 主体需要。
             x := add(x, mload(i))
         }
     }
+```
 
 For 循环也可以写成像 while 循环一样：只需将初始化部分和迭代后处理两部分留空。
 
-.. code::
+```bash
 
     {
         let x := 0
@@ -3470,59 +3078,46 @@ For 循环也可以写成像 while 循环一样：只需将初始化部分和迭
             i := add(i, 0x20)
         }
     }
+```
 
-函数
----------
+#### 函数
 
-汇编语言允许定义底层函数。底层函数需要从栈中取得它们的参数（和返回 PC），并将结果放入栈中。调用函数的方式与执行函数风格操作码相同。
-
-函数可以在任何地方定义，并且在声明它们的语句块中可见。函数内部不能访问在函数之外定义的局部变量。这里没有严格的 ``return`` 语句。
-
-如果调用会返回多个值的函数，则必须使用 ``a，b：= f(x)`` 或 ``let a，b：= f(x)`` 的方式把它们赋值到一个元组。
+汇编语言允许定义底层函数。底层函数需要从栈中取得它们的参数（和返回 PC），并将结果放入栈中。调用函数的方式与执行函数风格操作码相同。函数可以在任何地方定义，并且在声明它们的语句块中可见。函数内部不能访问在函数之外定义的局部变量。这里没有严格的 ``return`` 语句。如果调用会返回多个值的函数，则必须使用 ``a，b：= f(x)`` 或 ``let a，b：= f(x)`` 的方式把它们赋值到一个元组。
 
 下面例子通过平方和乘法实现了幂运算函数。
 
-.. code::
+```bash
+{
+  function power(base, exponent) -> result {
+    switch exponent
+    case 0 { result := 1 }
+    case 1 { result := base }
+    default {
+        result := power(mul(base, base), div(exponent, 2))
+        switch mod(exponent, 2)
+        case 1 { result := mul(base, result) }
+    } 
+ }
+}
+```
 
-    {
-        function power(base, exponent) -> result {
-            switch exponent
-            case 0 { result := 1 }
-            case 1 { result := base }
-            default {
-                result := power(mul(base, base), div(exponent, 2))
-                switch mod(exponent, 2)
-                    case 1 { result := mul(base, result) }
-            }
-        }
-    }
-
-注意事项
----------------
+#### 注意事项
 
 内联汇编语言可能具有相当高级的外观，但实际上它是非常低级的编程语言。函数调用、循环、if 语句和 switch 语句通过简单的重写规则进行转换，
 然后，汇编程序为你做的唯一事情就是重新组织函数风格操作码、管理 jump 标签、计算访问变量的栈高度，还有在到达语句块末尾时删除局部汇编变量的栈数据。
 特别是对于最后两种情况，汇编程序仅会按照代码的顺序计算栈的高度，而不一定遵循控制流程；了解这一点非常重要。此外，swap 等操作只会交换栈内的数据，而不是变量位置。
 
-Solidity 惯例
------------------------
+#### Solidity 惯例
 
-与 EVM 汇编语言相比，Solidity 能够识别小于 256 位的类型，例如 ``uint24``。为了提高效率，大多数算术运算只将它们视为 256 位数字，
-仅在必要时才清除未使用的数据位，即在将它们写入内存或执行比较之前才会这么做。这意味着，如果从内联汇编中访问这样的变量，你必须先手工清除那些未使用的数据位。
+与 EVM 汇编语言相比，Solidity 能够识别小于 256 位的类型，例如 ``uint24``。为了提高效率，大多数算术运算只将它们视为 256 位数字，仅在必要时才清除未使用的数据位，即在将它们写入内存或执行比较之前才会这么做。这意味着，如果从内联汇编中访问这样的变量，你必须先手工清除那些未使用的数据位。
 
-Solidity 以一种非常简单的方式管理内存：在 ``0x40`` 的位置有一个“空闲内存指针”。如果你打算分配内存，只需从此处开始使用内存，然后相应地更新指针即可。
+Solidity 以一种非常简单的方式管理内存：在 ``0x40`` 的位置有一个“空闲内存指针”。如果你打算分配内存，只需从此处开始使用内存，然后相应地更新指针即可。内存的开头 64 字节可以用来作为临时分配的“暂存空间”。“空闲内存指针”之后的 32 字节位置（即从 ``0x60`` 开始的位置）将永远为 0，可以用来初始化空的动态内存数组。
 
-内存的开头 64 字节可以用来作为临时分配的“暂存空间”。“空闲内存指针”之后的 32 字节位置（即从 ``0x60`` 开始的位置）将永远为 0，可以用来初始化空的动态内存数组。
+在 Solidity 中，内存数组的元素总是占用 32 个字节的倍数（是的，甚至对于 ``byte[]`` 都是这样，只有 ``bytes`` 和 ``string`` 不是这样）。多维内存数组就是指向内存数组的指针。动态数组的长度存储在数组的第一个槽中，其后才是数组元素。
 
-在 Solidity 中，内存数组的元素总是占用 32 个字节的倍数（是的，甚至对于 ``byte[]`` 都是这样，只有 ``bytes`` 和 ``string`` 不是这样）。
-多维内存数组就是指向内存数组的指针。动态数组的长度存储在数组的第一个槽中，其后才是数组元素。
-
-.. warning::
-    静态内存数组没有长度字段，但很快就会增加，这是为了可以更好地进行静态数组和动态数组之间的转换，所以请不要依赖这点。
-
+>   静态内存数组没有长度字段，但很快就会增加，这是为了可以更好地进行静态数组和动态数组之间的转换，所以请不要依赖这点。
 
 ### 独立汇编
-
 
 以上内联汇编描述的汇编语言也可以单独使用，实际上，计划是将其用作 Solidity 编译器的中间语言。在这种意义下，它试图实现以下几个目标：
 
