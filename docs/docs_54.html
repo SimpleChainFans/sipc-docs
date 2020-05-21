@@ -1,0 +1,103 @@
+<!DOCTYPE html><html lang="en"><head><meta charSet="utf-8"/><meta http-equiv="X-UA-Compatible" content="IE=edge"/><title>跨链流程 · SimpleChain开发文档</title><meta name="viewport" content="width=device-width"/><meta name="generator" content="Docusaurus"/><meta name="description" content="Simplechain是一个主子链架构的混合公链，不同链之间的资产跨平台越迁就会涉及到跨链操作。下面是跨链的详细流程："/><meta name="docsearch:language" content="en"/><meta property="og:title" content="跨链流程 · SimpleChain开发文档"/><meta property="og:type" content="website"/><meta property="og:url" content="https://simplechain.github.io/sipc-docs/"/><meta property="og:description" content="Simplechain是一个主子链架构的混合公链，不同链之间的资产跨平台越迁就会涉及到跨链操作。下面是跨链的详细流程："/><meta name="twitter:card" content="summary"/><link rel="shortcut icon" href="/sipc-docs/"/><link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/default.min.css"/><script type="text/javascript" src="https://buttons.github.io/buttons.js"></script><script src="/sipc-docs/js/scrollSpy.js"></script><link rel="stylesheet" href="/sipc-docs/css/main.css"/><script src="/sipc-docs/js/codetabs.js"></script></head><body class="sideNavVisible separateOnPageNav"><div class="fixedHeaderContainer"><div class="headerWrapper wrapper"><header><a href="/sipc-docs/"><h2 class="headerTitle">SimpleChain开发文档</h2></a><div class="navigationWrapper navigationSlider"><nav class="slidingNav"><ul class="nav-site nav-site-internal"><li class="siteNavGroupActive"><a href="/sipc-docs/docs/docs_1" target="_self">文档</a></li><li class="siteNavGroupActive"><a href="/sipc-docs/docs/docs_25" target="_self">API</a></li><li class="siteNavGroupActive"><a href="/sipc-docs/docs/docs_50" target="_self">FAQ</a></li><li class="siteNavGroupActive"><a href="/sipc-docs/docs/docs_51" target="_self">在线技术支持</a></li></ul></nav></div></header></div></div><div class="navPusher"><div class="docMainWrapper wrapper"><div class="docsNavContainer" id="docsNav"><nav class="toc"><div class="toggleNav"><section class="navWrapper wrapper"><div class="navBreadcrumb wrapper"><div class="navToggle" id="navToggler"><div class="hamburger-menu"><div class="line1"></div><div class="line2"></div><div class="line3"></div></div></div><h2><i>›</i><span>跨链</span></h2><div class="tocToggler" id="tocToggler"><i class="icon-toc"></i></div></div><div class="navGroups"><div class="navGroup"><h3 class="navGroupCategoryTitle">快速了解</h3><ul class=""><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_1">概述</a></li><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_2">快速开始</a></li><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_3">搭建节点</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">sipc和sipc代币协议</h3><ul class=""><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_52">技术术语</a></li><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_4">sipc代币</a></li><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_5">在SIPC上发行代币</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">基础数据结构</h3><ul class=""><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_6">配置</a></li><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_7">创世块</a></li><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_8">账户</a></li><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_9">交易</a></li><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_10">区块</a></li><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_11">交易回执</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">架构</h3><ul class=""><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_12">架构设计</a></li><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_13">同步优化</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">底层核心技术</h3><ul class=""><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_14">共识算法</a></li><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_15">P2P网络</a></li><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_16">交易存储</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">虚拟机</h3><ul class=""><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_17">虚拟机</a></li><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_18">运行机制</a></li><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_19">异常处理</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">智能合约</h3><ul class=""><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_20">智能合约</a></li><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_21">深入理解Solidity</a></li><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_22">合约模版</a></li><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_23">合约开发和部署</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">开发者工具</h3><ul class=""><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_24">搭建测试链</a></li><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_25">Sipc API</a></li><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_26">跨链API</a></li><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_27">js_sdk</a></li><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_28">java_sdk</a></li><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_29">python_sdk</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">跨链</h3><ul class=""><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_53">跨链方案</a></li><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_30">子链模版</a></li><li class="navListItem navListItemActive"><a class="navItem" href="/sipc-docs/docs/docs_54">跨链流程</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">Dapp开发</h3><ul class=""><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_31">合约编译器</a></li><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_32">编写合约</a></li><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_33">发布合约</a></li><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_34">开发流程</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">挖矿</h3><ul class=""><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_35">Sipc挖矿</a></li><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_36">矿池接入</a></li><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_37">GPU挖矿</a></li><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_38">SimPool</a></li><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_39">SimpleNode x1挖矿教程</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">客户端</h3><ul class=""><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_40">SIPC.VIP</a></li><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_41">Sipc全节点钱包</a></li><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_42">ChainBox</a></li><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_43">区块链浏览器</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">生态</h3><ul class=""><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_44">交易所对接</a></li><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_45">社区项目</a></li><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_46">社区活动</a></li><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_47">社区入口</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">落地方案</h3><ul class=""><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_48">落地案例</a></li><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_49">构建应用</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">FAQ</h3><ul class=""><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_50">FAQ</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">技术支持</h3><ul class=""><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_51">在线技术支持</a></li></ul></div></div></section></div><script>
+            var coll = document.getElementsByClassName('collapsible');
+            var checkActiveCategory = true;
+            for (var i = 0; i < coll.length; i++) {
+              var links = coll[i].nextElementSibling.getElementsByTagName('*');
+              if (checkActiveCategory){
+                for (var j = 0; j < links.length; j++) {
+                  if (links[j].classList.contains('navListItemActive')){
+                    coll[i].nextElementSibling.classList.toggle('hide');
+                    coll[i].childNodes[1].classList.toggle('rotate');
+                    checkActiveCategory = false;
+                    break;
+                  }
+                }
+              }
+
+              coll[i].addEventListener('click', function() {
+                var arrow = this.childNodes[1];
+                arrow.classList.toggle('rotate');
+                var content = this.nextElementSibling;
+                content.classList.toggle('hide');
+              });
+            }
+
+            document.addEventListener('DOMContentLoaded', function() {
+              createToggler('#navToggler', '#docsNav', 'docsSliderActive');
+              createToggler('#tocToggler', 'body', 'tocActive');
+
+              var headings = document.querySelector('.toc-headings');
+              headings && headings.addEventListener('click', function(event) {
+                var el = event.target;
+                while(el !== headings){
+                  if (el.tagName === 'A') {
+                    document.body.classList.remove('tocActive');
+                    break;
+                  } else{
+                    el = el.parentNode;
+                  }
+                }
+              }, false);
+
+              function createToggler(togglerSelector, targetSelector, className) {
+                var toggler = document.querySelector(togglerSelector);
+                var target = document.querySelector(targetSelector);
+
+                if (!toggler) {
+                  return;
+                }
+
+                toggler.onclick = function(event) {
+                  event.preventDefault();
+
+                  target.classList.toggle(className);
+                };
+              }
+            });
+        </script></nav></div><div class="container mainContainer docsContainer"><div class="wrapper"><div class="post"><header class="postHeader"><h1 id="__docusaurus" class="postHeaderTitle">跨链流程</h1></header><article><div><span><p>Simplechain是一个主子链架构的混合公链，不同链之间的资产跨平台越迁就会涉及到跨链操作。下面是跨链的详细流程：</p>
+<h3><a class="anchor" aria-hidden="true" id="下载chainbox"></a><a href="#下载chainbox" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>下载ChainBox</h3>
+<p>根据自己移动设备系统下载对应的<code>ChainBox</code>安装包，注册钱包后保管好自己的私钥。找到钱包地址，复制钱包地址。如下图：</p>
+<p><img src="img/54.1.png" alt=""></p>
+<h3><a class="anchor" aria-hidden="true" id="领取测试资产"></a><a href="#领取测试资产" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>领取测试资产</h3>
+<p>打开水龙头，水龙头地址：<a href="http://47.110.48.207:8080/">测试网水龙头</a></p>
+<p>将上一步复制的钱包地址输入到水龙头中，就可以领取测试币。如下图：</p>
+<p><img src="img/54.18.png" alt=""></p>
+<h3><a class="anchor" aria-hidden="true" id="进行跨链交易"></a><a href="#进行跨链交易" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>进行跨链交易</h3>
+<h4><a class="anchor" aria-hidden="true" id="跨链入口"></a><a href="#跨链入口" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>跨链入口</h4>
+<p>打开钱包进入首页，钱包资产中显示该钱包在上链生态中的所有币及其折价（如下图）</p>
+<p><img src="img/54.2.png" alt=""></p>
+<p>点击某一项钱包资产（TEST）进入主链交易页面（如下图）</p>
+<p><img src="img/54.3.png" alt=""></p>
+<p>点击上图中的“跨链”按钮进入交易对选择界面（如下图），这里暂时只提供一个交易对。</p>
+<p><img src="img/54.4.png" alt=""></p>
+<p>点击<code>SUB</code>进入跨链交易市场。下图中跨链列表显示主子链间的订单，红色单价的纪录为主链发往子链的订单，绿色单价的记录为子链发往主链的订单。跨链列表按单价由高到低排列，更多的记录可点击Tab页面<code>可接单</code>和<code>发单列表</code>查询展示。当前委托页面显示的是当前账号参与的跨链交易订单，点击<code>全部</code>可以显示所有委托订单和历史跨链交易记录。</p>
+<p><img src="img/54.5.png" alt=""></p>
+<h4><a class="anchor" aria-hidden="true" id="接单："></a><a href="#接单：" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>接单：</h4>
+<p>点击上图红色线框中的接单即可成交一笔跨链交易。该笔交易的意思是您卖出1个TEST，获得10个SUB，单价为0.1SUB/TEST。参见下图</p>
+<p><img src="img/54.6.png" alt=""></p>
+<p>输入钱包密码后点“确认”发出一笔链上交易，待交易确认后即可成交（约6分钟）。
+点击“全部”—&gt;“历史记录”可以看见刚刚成交的跨链交易记录，如下图：</p>
+<p><img src="img/54.7.png" alt=""></p>
+<h4><a class="anchor" aria-hidden="true" id="浏览器查看交易详情"></a><a href="#浏览器查看交易详情" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>浏览器查看交易详情</h4>
+<p>查看跨链记录：</p>
+<p><img src="img/54.8.png" alt=""></p>
+<p>查看交易详情：</p>
+<p><img src="img/54.9.png" alt=""></p>
+<p>浏览器查看详情：</p>
+<p><img src="img/54.10.png" alt=""></p>
+<p>回到钱包首页发现子链币增长了10 SUB，手续费0.001 TEST，远小于普通交易所的0.2%的手续费率 。</p>
+<p><img src="img/54.11.png" alt=""></p>
+<h4><a class="anchor" aria-hidden="true" id="发单"></a><a href="#发单" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>发单</h4>
+<p>点击跨链交易市场中的“发单”按钮，进入发单流程。</p>
+<p><img src="img/54.12.png" alt=""></p>
+<p>点击“下一步”，输入密码后点“确认”。</p>
+<p><img src="img/54.13.png" alt=""></p>
+<p>交易发送成功后，待交易确认后（约3分钟），我们可以发现在账号的当前委托页面新增了一条记录，此刻全网用户均可查询到该笔委托，说明发单成功。用户的<code>TEST</code>减少1个</p>
+<p><img src="img/54.14.png" alt=""></p>
+<h4><a class="anchor" aria-hidden="true" id="撤单"></a><a href="#撤单" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>撤单</h4>
+<p>选择上面的委托记录，点击“撤单”，进入撤单流程。</p>
+<p><img src="img/54.15.png" alt=""></p>
+<p>输入密码，点击“确认”，发送交易，待交易确认后（约6分钟）。用户委托列表空了，历史记录中新增了一条撤单记录。</p>
+<p><img src="img/54.16.png" alt=""></p>
+<p>回到首页，刚刚减少的TEST也回来了。</p>
+</span></div></article></div><div class="docs-prevnext"><a class="docs-prev button" href="/sipc-docs/docs/docs_30"><span class="arrow-prev">← </span><span>子链模版</span></a><a class="docs-next button" href="/sipc-docs/docs/docs_31"><span>合约编译器</span><span class="arrow-next"> →</span></a></div></div></div><nav class="onPageNav"></nav></div><footer class="nav-footer" id="footer"><section class="sitemap"><a href="/sipc-docs/" class="nav-home"></a><div><h5>文档</h5><a href="/sipc-docs/docs/en/doc1.html">快速开始</a><a href="/sipc-docs/docs/en/doc2.html">引导</a><a href="/sipc-docs/docs/en/doc3.html">API接口</a></div><div><h5>社区</h5><a href="/sipc-docs/en/https://t.me/SimpleChainOfficial">Telegram</a><a href="https://medium.com/@SimpleChain" target="_blank" rel="noreferrer noopener">Medium</a><a href="https://twitter.com/SimpleChain">Twitter</a><a href="https://www.linkedin.com/company/simplechain-foundation/" target="_blank" rel="noreferrer noopener">Linkedln</a></div><div><h5>更多</h5><a href="https://www.simplechain.com">官网</a><a href="https://github.com/simplechain-org">GitHub</a><a class="github-button" data-icon="octicon-star" data-count-href="/facebook/docusaurus/stargazers" data-show-count="true" data-count-aria-label="# stargazers on GitHub" aria-label="Star this project on GitHub">Star</a></div></section><section class="copyright">Copyright © 2020 SimpleChain Community</section></footer></div></body></html>
