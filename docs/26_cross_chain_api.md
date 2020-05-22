@@ -15,6 +15,16 @@ sidebar_label: 跨链API
 - [`eth_ctxStats`](#eth_ctxStats)
 - [`eth_poolStats`](#eth_poolStats)
 
+## JSON-RPC Endpoint
+
+Default JSON-RPC endpoints:
+
+| Client | URL                                             |
+| ------ | ----------------------------------------------- |
+| Go     | [http://localhost:8545](http://localhost:8545/) |
+
+---
+
 ## eth_ctxQuery
 
 通过TxHash跨链交易单。
