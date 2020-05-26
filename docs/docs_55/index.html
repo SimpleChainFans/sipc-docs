@@ -1,0 +1,182 @@
+<!DOCTYPE html><html lang="en"><head><meta charSet="utf-8"/><meta http-equiv="X-UA-Compatible" content="IE=edge"/><title>数据同步优化 · SimpleChain开发文档</title><meta name="viewport" content="width=device-width"/><meta name="generator" content="Docusaurus"/><meta name="description" content="# 同步基础流程"/><meta name="docsearch:language" content="en"/><meta property="og:title" content="数据同步优化 · SimpleChain开发文档"/><meta property="og:type" content="website"/><meta property="og:url" content="https://simplechain.github.io/sipc-docs/"/><meta property="og:description" content="# 同步基础流程"/><meta name="twitter:card" content="summary"/><link rel="shortcut icon" href="/sipc-docs/"/><link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/default.min.css"/><script type="text/javascript" src="https://buttons.github.io/buttons.js"></script><script src="/sipc-docs/js/scrollSpy.js"></script><link rel="stylesheet" href="/sipc-docs/css/main.css"/><script src="/sipc-docs/js/codetabs.js"></script></head><body class="sideNavVisible separateOnPageNav"><div class="fixedHeaderContainer"><div class="headerWrapper wrapper"><header><a href="/sipc-docs/"><h2 class="headerTitle">SimpleChain开发文档</h2></a><div class="navigationWrapper navigationSlider"><nav class="slidingNav"><ul class="nav-site nav-site-internal"><li class="siteNavGroupActive"><a href="/sipc-docs/docs/docs_1" target="_self">文档</a></li><li class="siteNavGroupActive"><a href="/sipc-docs/docs/docs_25" target="_self">API</a></li><li class="siteNavGroupActive"><a href="/sipc-docs/docs/docs_50" target="_self">FAQ</a></li><li class="siteNavGroupActive"><a href="/sipc-docs/docs/docs_51" target="_self">在线技术支持</a></li></ul></nav></div></header></div></div><div class="navPusher"><div class="docMainWrapper wrapper"><div class="docsNavContainer" id="docsNav"><nav class="toc"><div class="toggleNav"><section class="navWrapper wrapper"><div class="navBreadcrumb wrapper"><div class="navToggle" id="navToggler"><div class="hamburger-menu"><div class="line1"></div><div class="line2"></div><div class="line3"></div></div></div><h2><i>›</i><span>架构</span></h2><div class="tocToggler" id="tocToggler"><i class="icon-toc"></i></div></div><div class="navGroups"><div class="navGroup"><h3 class="navGroupCategoryTitle">快速了解</h3><ul class=""><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_1">概述</a></li><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_2">快速开始</a></li><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_3">搭建节点</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">sipc和sipc代币协议</h3><ul class=""><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_52">技术术语</a></li><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_4">sipc代币</a></li><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_5">在SIPC上发行代币</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">基础数据结构</h3><ul class=""><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_6">配置</a></li><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_7">创世块</a></li><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_8">账户</a></li><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_9">交易</a></li><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_10">区块</a></li><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_11">交易回执</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">架构</h3><ul class=""><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_12">SimpleChain架构设计</a></li><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_13">数据结构和存储</a></li><li class="navListItem navListItemActive"><a class="navItem" href="/sipc-docs/docs/docs_55">数据同步优化</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">底层核心技术</h3><ul class=""><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_15">P2P网络</a></li><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_16">交易存储</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">虚拟机</h3><ul class=""><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_17">虚拟机</a></li><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_18">运行机制</a></li><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_19">异常处理</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">智能合约</h3><ul class=""><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_20">智能合约</a></li><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_21">深入理解Solidity</a></li><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_22">合约模版</a></li><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_23">合约开发和部署</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">开发者工具</h3><ul class=""><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_24">搭建测试链</a></li><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_25">Sipc API</a></li><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_26">跨链API</a></li><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_27">SimPlug</a></li><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_28">sdk</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">跨链</h3><ul class=""><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_53">跨链方案</a></li><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_30">子链模版</a></li><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_54">跨链流程</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">Dapp开发</h3><ul class=""><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_31">合约编译器</a></li><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_32">编写合约</a></li><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_33">发布合约</a></li><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_34">开发流程</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">挖矿</h3><ul class=""><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_35">Sipc挖矿</a></li><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_36">矿池接入</a></li><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_37">GPU挖矿</a></li><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_38">SimPool</a></li><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_39">SimpleNode x1挖矿教程</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">客户端</h3><ul class=""><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_40">SIPC.VIP</a></li><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_41">Sipc全节点钱包</a></li><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_42">ChainBox</a></li><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_43">区块链浏览器</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">生态</h3><ul class=""><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_44">交易所对接</a></li><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_45">社区项目</a></li><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_46">社区活动</a></li><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_47">社区入口</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">落地方案</h3><ul class=""><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_48">落地案例</a></li><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_49">构建应用</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">FAQ</h3><ul class=""><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_50">FAQ</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">技术支持</h3><ul class=""><li class="navListItem"><a class="navItem" href="/sipc-docs/docs/docs_51">在线技术支持</a></li></ul></div></div></section></div><script>
+            var coll = document.getElementsByClassName('collapsible');
+            var checkActiveCategory = true;
+            for (var i = 0; i < coll.length; i++) {
+              var links = coll[i].nextElementSibling.getElementsByTagName('*');
+              if (checkActiveCategory){
+                for (var j = 0; j < links.length; j++) {
+                  if (links[j].classList.contains('navListItemActive')){
+                    coll[i].nextElementSibling.classList.toggle('hide');
+                    coll[i].childNodes[1].classList.toggle('rotate');
+                    checkActiveCategory = false;
+                    break;
+                  }
+                }
+              }
+
+              coll[i].addEventListener('click', function() {
+                var arrow = this.childNodes[1];
+                arrow.classList.toggle('rotate');
+                var content = this.nextElementSibling;
+                content.classList.toggle('hide');
+              });
+            }
+
+            document.addEventListener('DOMContentLoaded', function() {
+              createToggler('#navToggler', '#docsNav', 'docsSliderActive');
+              createToggler('#tocToggler', 'body', 'tocActive');
+
+              var headings = document.querySelector('.toc-headings');
+              headings && headings.addEventListener('click', function(event) {
+                var el = event.target;
+                while(el !== headings){
+                  if (el.tagName === 'A') {
+                    document.body.classList.remove('tocActive');
+                    break;
+                  } else{
+                    el = el.parentNode;
+                  }
+                }
+              }, false);
+
+              function createToggler(togglerSelector, targetSelector, className) {
+                var toggler = document.querySelector(togglerSelector);
+                var target = document.querySelector(targetSelector);
+
+                if (!toggler) {
+                  return;
+                }
+
+                toggler.onclick = function(event) {
+                  event.preventDefault();
+
+                  target.classList.toggle(className);
+                };
+              }
+            });
+        </script></nav></div><div class="container mainContainer docsContainer"><div class="wrapper"><div class="post"><header class="postHeader"><h1 id="__docusaurus" class="postHeaderTitle">数据同步优化</h1></header><article><div><span><h1><a class="anchor" aria-hidden="true" id="同步基础流程"></a><a href="#同步基础流程" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>同步基础流程</h1>
+<p>同步，是区块链节点非常重要的功能。它是<code>共识</code>的辅助，给共识提供必需的运行条件。同步分为交易的同步和状态的同步。交易的同步，确保了每笔交易能正确的到达每个节点上。状态的同步，能确保区块落后的节点能正确的回到最新的状态。只有持有最新区块状态的节点，才能参与到共识中去。</p>
+<h2><a class="anchor" aria-hidden="true" id="交易同步"></a><a href="#交易同步" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>交易同步</h2>
+<p>交易同步，是让区块链的上的交易尽可能的到达所有的节点。为共识中将交易打包成区块提供基础。</p>
+<p>一笔交易（tx1），从客户端上发往某个节点，节点在接收到交易后，会将交易放入自身的交易池（Tx Pool）中供共识去打包。与此同时，节点会将交易广播给其它的节点，其它节点收到交易后，也会将交易放到自身的交易池中。交易在发送的过程中，会有丢失的情况，为了能让交易尽可能的到达所有的节点，收到广播过来交易的节点，会根据一定的策略，选择其它的节点，再进行一次广播。</p>
+<p><strong>交易广播策略</strong></p>
+<p>如果每个节点都没有限制的转发/广播收到的交易，带宽将被占满，出现交易广播雪崩的问题。为了避免交易广播的雪崩，Simplechain根据经验，选择了较为精巧的交易广播策略。在尽可能保证交易可达性的前提下，尽量的减少重复的交易广播。</p>
+<ul>
+<li>对于SDK来的交易，广播给所有的节点</li>
+<li>对于其它节点广播来的交易，随机选择25%的节点再次广播</li>
+<li>一条交易在一个节点上，只广播一次，当收到了重复的交易，不会进行二次广播</li>
+</ul>
+<p>通过上述的策略，能够尽量的让交易到达所有的节点，但也会在极小的概率下出现某交易无法到达某节点的情况。此情况是允许的。交易尽可能到达更多的节点，是为了让此交易尽快的被打包、共识、确认，尽量的让交易能够更快的得到执行的结果。当交易未到达某个节点时，只会使得交易的执行时间变长，不会影响交易的正确性。</p>
+<h2><a class="anchor" aria-hidden="true" id="状态同步"></a><a href="#状态同步" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>状态同步</h2>
+<p>状态同步，是让区块链节点的状态保持在最新。区块链的状态的新旧，是指区块链节点当前持有数据的新旧，即节点持有的当前区块块高的高低。若一个节点的块高是区块链的最高块高，则此节点就拥有区块链的最新状态。只有拥有最新状态的节点，才能参与到共识中去，进行下一个新区块的共识。</p>
+<p>在一个全新的节点加入到区块链上，或一个已经断网的节点恢复了网络时，此节点的区块落后于其它节点，状态不是最新的。此时就需要进行状态同步。如图，需要状态同步的节点（Node 1），会主动向其它节点请求下载区块。整个下载的过程会将下载的负载分散到多个节点上。</p>
+<p><strong>状态同步与下载队列</strong></p>
+<p>区块链节点在运行时，会定时向其它节点广播自身的最高块高。节点收到其它节点广播过来的块高后，会和自身的块高进行比较，若自身的块高落后于此块高，就会启动区块下载流程。</p>
+<p>区块的下载通过请求的方式完成。进入下载流程的节点，会随机的挑选满足要求的节点，发送需要下载的区块区间。收到下载请求的节点，会根据请求的内容，回复相应的区块。</p>
+<p><img src="../../../images/sync/Download.png" alt=""></p>
+<p>收到回复区块的节点，在本地维护一个下载队列，用来对下载下来的区块进行缓冲和排序。下载队列是一个以块高为顺序的优先队列。下载下来的区块，会不断的插入到下载队列中，当队列中的区块能连接上节点当前本地的区块链，则将区块从下载队列中取出，真正的连接到当前本地的区块链上。</p>
+<h2><a class="anchor" aria-hidden="true" id="同步场景举例"></a><a href="#同步场景举例" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>同步场景举例</h2>
+<h3><a class="anchor" aria-hidden="true" id="交易同步-1"></a><a href="#交易同步-1" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>交易同步</h3>
+<p>一笔交易被广播到所有节点的过程：</p>
+<ol>
+<li>一笔交易通过channel或RPC发送到某节点上</li>
+<li>收到交易的节点全量广播此交易给其它节点</li>
+<li>其它节点收到交易后，为了保险起见，选择25%的节点再广播一次</li>
+<li>节点收到广播过的交易，不会再次广播</li>
+</ol>
+<h3><a class="anchor" aria-hidden="true" id="状态同步-1"></a><a href="#状态同步-1" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>状态同步</h3>
+<p>节点出块时的广播逻辑</p>
+<ol>
+<li>某个节点出块</li>
+<li>此节点将自己最新的状态（最新块高，最高块哈希，创世块哈希）广播给所有的节点</li>
+<li>其它的节点收到peer的状态后，更新在本地管理的peer数据</li>
+</ol>
+<p><strong>组内成员的同步</strong></p>
+<p>组内成员在某时刻意外关闭，但其它成员在出块，当此组员再次启动时，发现区块落后于其它组员：</p>
+<ol>
+<li>组员再次启动</li>
+<li>收到其它组员发来的状态包</li>
+<li>比较发现自己的最高块高落后于其它组员，启动下载流程</li>
+<li>将相差的区块按区间划分成多个下载请求包，发送给多个组员，负载均衡</li>
+<li>等待其它节点回复区块包</li>
+<li>其它节点接受响应，从自己的区块链上查询出区块，回复给启动的节点</li>
+<li>节点收到区块，放入下载队列</li>
+<li>节点从下载队列中将区块拿出，写到区块链上</li>
+<li>若下载未结束，则继续请求，若下载结束，则切换自身状态，开启交易同步，开启共识</li>
+</ol>
+<p><strong>新组员的同步</strong></p>
+<p>非组员作为一个新组员加入到某个组中，且此节点第一次启动，从原来的组员中同步区块：</p>
+<ol>
+<li>非组员未被注册到组中，但非组员先启动</li>
+<li>此时发现自己不在组中，不进行状态广播，也不进行交易广播，只等待其它组员发来状态消息</li>
+<li>此时组员中并没有此新组员，不会向新组员广播状态</li>
+<li>管理员将新组员加入到组中</li>
+<li>组员向新组员广播自身状态</li>
+<li>新组员收到组员状态，比较自身块高（为0），启动下载流程</li>
+<li>之后的下载流程，与组内成员区块同步流程相同</li>
+</ol>
+<h1><a class="anchor" aria-hidden="true" id="区块同步优化"></a><a href="#区块同步优化" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>区块同步优化</h1>
+<p>为了增强区块链系统在网络带宽受限情况下的可扩展性，Simplechain v2.2.0对区块同步进行了优化：</p>
+<ul>
+<li><p>为了降低单个节点的出带宽，消除网络带宽对网络规模的限制，支持更大网络规模，采用树状拓扑进行区块同步</p></li>
+<li><p>采用gossip协议来保障树状拓扑区块同步的健壮性，定期同步区块状态，使得在部分节点网络断连的情况下，所有节点均能同步到最新区块状态</p></li>
+</ul>
+<h2><a class="anchor" aria-hidden="true" id="背景"></a><a href="#背景" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>背景</h2>
+<p>考虑到目前使用BFT类共识算法的区块链网络复杂度较高、不具有无限可扩展性，因此大部分业务架构仅有部分节点作为共识节点，其他节点均作为观察节点(不参与共识，但拥有区块链全量数据)，如下图所示。</p>
+<p><img src="../../../images/sync/common_blockchain_system.png" alt=""></p>
+<p>在这种架构中，大部分观察节点均随机从拥有最新区块的共识节点同步区块，在包含<code>n</code>个共识节点、<code>m</code>个观察节点的区块链系统中，设每个区块大小为<code>block_size</code>，理想情况下(即负载均衡)，每共识一个区块，每个共识节点需要向<code>m/n</code>个观察节点发送区块，共识节点出带宽大约是<code>(m/n)*block_size</code>，设网络带宽是<code>bandwidth</code>，则每个共识节点最多可向<code>(bandwidth/block_size)</code>个节点同步区块，即区块链网络规模最大是<code>(n*bandwidth/block_size)</code>，在公网带宽<code>bandwidth</code>较小，区块较大的情况下，能容纳的节点数有限，因此随机的区块同步策略不具有可扩展性。</p>
+<h2><a class="anchor" aria-hidden="true" id="区块状态树状广播"></a><a href="#区块状态树状广播" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>区块状态树状广播</h2>
+<p>为降低多个观察节点向单个共识节点同步区块时，共识节点的网络出带宽对网络规模的影响，Simplechain v2.2.0实现了区块状态树状广播策略。下图是由3个共识节点、18个观察节点构成的区块链系统沿三叉树进行区块同步的示意图：
+<img src="../../../images/sync/tree_topology_blockchain_system.png" alt=""></p>
+<p>该策略将观察节点分摊给每个共识节点，并以共识节点为顶点构造一颗三叉树，共识节点出块后，优先向其子观察节点发送最新区块状态，子观察节点同步最新区块后，优先向自己的子节点发送最新区块状态，以此类推。采用了区块状态树状广播策略后，每个节点仅将最新区块状态发送给子节点，设区块大小为<code>block_size</code>，树的宽度为<code>w</code>，则用于区块同步的网络带宽均为<code>(block_size * w)</code>，与区块链系统的节点总数无关，具有可扩展性。上图所示的共识节点采用区块状态树状广播后，出带宽降低了2倍。</p>
+<p>区块状态树状广播工作流程如下：</p>
+<ul>
+<li><p>共识节点共识提交新区块<code>block i</code>后，若其与子节点连通，则向其子节点同步最新区块状态，包括高度和区块哈希，记为<code>{i, block_hash(i)}</code>；否则递归判断是否与孙子节点连通，若连通，则向孙子节点同步最新区块状态；</p></li>
+<li><p>子节点收到共识节点的区块状态后，判断接收到的区块状态<code>{i, block_hash(i)}</code>比自身区块状态新，则向共识节点发送区块请求，共识节点收到请求后，向该节点发送对应的区块；</p></li>
+<li><p>子节点收到共识节点的区块后，验证成功后将其落盘，继续向自己的子节点发送自身的区块状态，同样，若该节点与自己的子节点断连，会递归判断是否与孙子节点连通，并向连通的孙子节点发送最新区块状态；</p></li>
+<li><p>收到新区块状态的子节点，重复步骤(2)，进行区块同步。</p></li>
+</ul>
+<p>当然，使用区块状态树状广播策略时，由于区块并非由拥有最新区块的根节点直接下发到所有观察者节点，作为叶子节点的观察者节点同步区块的时延会相对长一些。</p>
+<p>下图展示了各层节点提交n个区块的时延，设树的深度为<code>d</code>，每个区块提交时延为<code>t</code>，则根节点(共识节点)提交<code>n</code>个区块的时延为<code>n*t</code>，第一层节点(观察者节点)同步并提交区块的时延为<code>n*t + 1</code>，第二层节点(观察者节点)同步并提交区块的时延为<code>n*t + 2</code>，叶子节点同步并提交区块的时延为<code>n*t + d * t</code>，与共识节点的时延差为<code>d*t</code>，<code>n</code>远大于<code>d</code>时，这个时延几乎可以忽略，因此该策略对观察者节点TPS的影响非常小。</p>
+<p><img src="../../../images/sync/tree_topology_delay.png" alt=""></p>
+<h2><a class="anchor" aria-hidden="true" id="定期同步区块状态"></a><a href="#定期同步区块状态" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>定期同步区块状态</h2>
+<p>考虑到若树状拓扑中部分节点断连，可能会导致区块无法到达部分节点，区块状态树状广播优化策略还采用了gossip协议定期同步区块状态。</p>
+<p>即：随机挑选若干个节点，同步最新区块状态信息。由于最终区块状态信息会收敛所有区块链节点，树状拓扑中断连节点也能从其邻居节点同步最新区块，保证了树状区块状态广播的健壮性。</p>
+<p><img src="../../../images/sync/gossip.png" alt=""></p>
+<p>上图展示了各个节点如何使用gossip协议定期同步区块状态：</p>
+<ul>
+<li>各个区块链节点每2s随机选择三个邻居节点广播当前区块状态，包括{区块高度，区块哈希}</li>
+<li>节点收到这些区块状态包后，更新本地缓存的各个节点区块状态到最新</li>
+<li>若某节点区块高度高于本节点区块高度，该节点会向拥有更高区块的节点同步区块</li>
+</ul>
+<p>由于区块链节点之间定期同步区块状态，即使树状拓扑中部分节点断连，也可以保证每个节点同步到尽可能多的节点区块状态，并从拥有最高区块的节点下载最新区块，保障了树状区块状态广播可扩展性的同时，增强了整个系统的健壮性。</p>
+<h2><a class="anchor" aria-hidden="true" id="带宽对比"></a><a href="#带宽对比" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>带宽对比</h2>
+<p>下图是采用了区块状态树状广播、定期同步区块状态策略后，区块同步优化效果：</p>
+<p><img src="../../../images/sync/bandwidth.png" alt=""></p>
+<p>整个区块链网络中包含10个共识节点，90个观察者节点，树的度设置为2。优化前，观察者节点主要从10个共识节点下载区块，共识节点的出流量可达到5000MB；优化后，部分下载流量分摊到了观察者节点，节点由区块下载带来的流量开销降低到了1400MB，降低了3倍多，基本接近最优(最优的情况是优化前峰值出带宽是优化后峰值出带宽的4.5倍，由于gossip协议导致的区块随机拉取情况的存在，无法达到最优，只能接近最优)。</p>
+<h1><a class="anchor" aria-hidden="true" id="交易同步优化"></a><a href="#交易同步优化" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>交易同步优化</h1>
+<p>区块链系统中，为了保障客户端发送的交易能到达所有节点，SDK直连的区块链节点需要将收到的交易广播给其他节点，如下图所示：</p>
+<p><img src="../../../images/sync/txs_sync.png" alt=""></p>
+<p>显然，SDK直连节点的出带宽与区块链节点总数成正比，随着区块链系统节点数的增加，该节点必然成为整个系统的瓶颈。</p>
+<p>此外，为了保障节点网络断连的情况下，交易也能尽量到达所有节点，还引入了交易转发逻辑，节点收到其他节点广播过来的交易后，会随机选取25%的邻居节点转发收到的交易，在网络全连的情况下，这种交易转发策略无疑会带来巨大的带宽浪费，且节点数目越多，因交易转发带来的数据包冗余越多。</p>
+<p>为降低SDK直连节点的出带宽、降低交易转发引起的大量冗余消息包，提升区块链系统的可扩展性，Simplechain v2.2.0提出了<strong>交易广播优化策略</strong>和<strong>交易转发优化策略</strong>。</p>
+<h2><a class="anchor" aria-hidden="true" id="交易广播优化策略"></a><a href="#交易广播优化策略" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>交易广播优化策略</h2>
+<p>为了降低SDK直连节点交易广播带来的网络压力，Simplechain v2.2.0中，SDK直连节点收到交易后，沿着树状拓扑广播交易(树的宽度默认为3)。下图展示了优化前后7节点区块链系统交易广播拓扑：</p>
+<p><img src="../../../images/sync/txs_broadcast_optimize.png" alt=""></p>
+<ul>
+<li>优化前：节点收到SDK的交易后，全量广播给其他节点；</li>
+<li>优化后：节点收到SDK的交易后，将其发送给子节点，子节点收到交易后，继续将其发送给自身的子节点。</li>
+</ul>
+<p>采用交易树状广播后，上图所示的7节点区块链系统，SDK直连节点的带宽降低为原先的一半，且由于SDK直连节点以及其他节点广播交易的出带宽仅与树状拓扑的宽度有关，因此优化后的交易同步具有可扩展性。</p>
+<h2><a class="anchor" aria-hidden="true" id="交易转发优化策略"></a><a href="#交易转发优化策略" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>交易转发优化策略</h2>
+<p>交易转发对于交易同步尤为重要，可以包含部分节点网络断连情况下，SDK发出的交易能尽量到达所有节点。但正如前面提到的，已有的交易转发策略会带来大量的带宽冗余，因此在交易树状广播的基础上，Simplechain v2.2.0提出了交易转发优化策略，如下图所示，优化后的交易转发策略不直接转发交易，仅转发交易状态，节点根据其他节点的交易状态，获取缺失的交易，然后直接向对应节点请求交易。</p>
+<p><img src="../../../images/sync/txs_status.png" alt=""></p>
+<p>上图中，SDK直连<code>node0</code>，但是<code>node0</code>与<code>node1</code>断连，此时<code>node0</code>仅能将交易广播给<code>node2</code>和<code>node3</code>。<code>node2</code>和<code>node3</code>收到交易后，将最新交易的列表打包成状态包发送给其他节点，<code>node1</code>和<code>node4</code>收到状态包后，与本地交易池内的交易列表做对比，获取缺失的交易列表，并批量向拥有这些交易的<code>node2</code>或<code>node3</code>请求这些交易。</p>
+<p>交易转发具体流程如下：</p>
+<ul>
+<li>节点收到新交易<code>txs</code>后，获取所有新交易的哈希，记为<code>txs_hash_list</code>，并将其打包成状态包，随机发送给25%的节点；</li>
+<li>节点<code>node_x</code>收到某节点<code>node_i</code>交易状态包后，从中解出交易哈希列表<code>txs_hash_list</code>，并将其与本地交易池中的交易列表做对比，获取缺失的交易列表，记为<code>missed_txs_hash_list</code>，将其打包成交易请求，向<code>node_i</code>发出交易请求；</li>
+<li><code>node_i</code>接收到交易请求后，从交易池中取出<code>missed_txs_hash_list</code>对应的所有交易，回复给<code>node_x</code>。</li>
+</ul>
+<p>由于在全连的网络拓扑中，所有节点交易状态基本一致，因此节点间交易请求较少，相较于直接转发交易，大大降低了转发冗余交易引起的带宽浪费。</p>
+</span></div></article></div><div class="docs-prevnext"><a class="docs-prev button" href="/sipc-docs/docs/docs_13"><span class="arrow-prev">← </span><span>数据结构和存储</span></a><a class="docs-next button" href="/sipc-docs/docs/docs_14"><span>Next</span><span class="arrow-next"> →</span></a></div></div></div><nav class="onPageNav"><ul class="toc-headings"><li><a href="#交易同步">交易同步</a></li><li><a href="#状态同步">状态同步</a></li><li><a href="#同步场景举例">同步场景举例</a><ul class="toc-headings"><li><a href="#交易同步-1">交易同步</a></li><li><a href="#状态同步-1">状态同步</a></li></ul></li><li><a href="#背景">背景</a></li><li><a href="#区块状态树状广播">区块状态树状广播</a></li><li><a href="#定期同步区块状态">定期同步区块状态</a></li><li><a href="#带宽对比">带宽对比</a></li><li><a href="#交易广播优化策略">交易广播优化策略</a></li><li><a href="#交易转发优化策略">交易转发优化策略</a></li></ul></nav></div><footer class="nav-footer" id="footer"><section class="sitemap"><a href="/sipc-docs/" class="nav-home"></a><div><h5>文档</h5><a href="/sipc-docs/docs/en/doc1.html">快速开始</a><a href="/sipc-docs/docs/en/doc2.html">引导</a><a href="/sipc-docs/docs/en/doc3.html">API接口</a></div><div><h5>社区</h5><a href="/sipc-docs/en/https://t.me/SimpleChainOfficial">Telegram</a><a href="https://medium.com/@SimpleChain" target="_blank" rel="noreferrer noopener">Medium</a><a href="https://twitter.com/SimpleChain">Twitter</a><a href="https://www.linkedin.com/company/simplechain-foundation/" target="_blank" rel="noreferrer noopener">Linkedln</a></div><div><h5>更多</h5><a href="https://www.simplechain.com">官网</a><a href="https://github.com/simplechain-org">GitHub</a><a class="github-button" data-icon="octicon-star" data-count-href="/facebook/docusaurus/stargazers" data-show-count="true" data-count-aria-label="# stargazers on GitHub" aria-label="Star this project on GitHub">Star</a></div></section><section class="copyright">Copyright © 2020 SimpleChain Community</section></footer></div></body></html>
