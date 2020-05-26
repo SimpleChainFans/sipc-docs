@@ -1,5 +1,5 @@
 ---
-id: docs_27
+id: docs_28
 title:  SDK
 sidebar_label: sdk
 ---
@@ -21,18 +21,14 @@ sidebar_label: sdk
 组员管理
 权限设置
 
-#### 内置控制台
-
-为了方便开发者，部分SDK内置了`javascript`控制台的功能。开发者可直接通过用命令行进行上述功能的操作。如编译合约、部署合约、发送交易、查询交易、链管理等等。
-
 #### 多种语言SDK
 
 目前，SimpleChain 提供的SDK包括：
 
-[Java SDK（稳定、功能强大]()
+[Java SDK（稳定、功能强大)]()
 
-[Python SDK（简单轻便、）]()
+[Python SDK（简单轻便）]()
 
-[Node-js SDK（简单轻便、有内置控制台）]()
+[Node-js SDK（简单轻便）]()
 
 
