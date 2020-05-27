@@ -45,7 +45,7 @@ sidebar_label: SIPC.VIP
 
 在[SIPC.VIP官网](http://www.sipc.vip/)下载SIPC移动端(如果你有海外的苹果ID账户，可以直接在App Store里面搜索`SIPC`下载。
 
-![](img/40.1.jpeg)
+![41.1.png](http://ww1.sinaimg.cn/large/007csy4ply1gf7503r8h0j31o01lsh82.jpg)
 
 
 
