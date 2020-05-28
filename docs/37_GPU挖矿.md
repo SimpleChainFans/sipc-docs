@@ -30,25 +30,24 @@ https://github.com/simplechain-org/gpuminer/releases
 
 地址在这里：https://github.com/simplechain-org/gpuminer/releases（一定要下载最新版，最新版效率更高哦！）
 
-![](https://upload-images.jianshu.io/upload_images/13694105-7c1c17b81f995302.png?imageMogr2/auto-orient/strip|imageView2/2/w/831)
+![37.1.png](http://ww1.sinaimg.cn/large/007csy4ply1gf8dwpq81vj31a60jqq84.jpg)
  
 最新版本是1.0.3
 三、解压修改文件
 
 把压缩文件解压成文件夹
 
-
-![](https://upload-images.jianshu.io/upload_images/13694105-5b536f012545d352.png?imageMogr2/auto-orient/strip|imageView2/2/w/94)
+![37.2.png](http://ww1.sinaimg.cn/large/007csy4ply1gf8dwpppsrj305804i0td.jpg)
 
 点进去，找到文件start.bat文件，用记事本编辑它：
 
-![](https://upload-images.jianshu.io/upload_images/13694105-2c49e8b5f8c63597.png?imageMogr2/auto-orient/strip|imageView2/2/w/416)
+![37.3.png](http://ww1.sinaimg.cn/large/007csy4ply1gf8dwppk9cj30n40403zj.jpg)
 
-![](https://upload-images.jianshu.io/upload_images/13694105-fd0ca3ccee02e912.png?imageMogr2/auto-orient/strip|imageView2/2/w/1200)
+![37.4.png](http://ww1.sinaimg.cn/large/007csy4ply1gf8dwpql78j31uo0rs42x.jpg)
 
 修改完之后，双击start.bat即可链接矿池，成功后的截图：
 
-![](https://upload-images.jianshu.io/upload_images/13694105-bfb37ce5ba394d89.png?imageMogr2/auto-orient/strip|imageView2/2/w/978)
+![37.5.png](http://ww1.sinaimg.cn/large/007csy4ply1gf8dwpqi6gj31ic0nm777.jpg)
 
 接入矿池后即可在各个矿池官网登录自己的矿池账户查看自己收益。
 
@@ -82,7 +81,7 @@ https://github.com/simplechain-org/gpuminer/releases
 
 https://github.com/simplechain-org/gpuminer/releases
 
-![](https://upload-images.jianshu.io/upload_images/13694105-8dd067e04d3f1106.png?imageMogr2/auto-orient/strip|imageView2/2/w/831)
+![37.6.png](http://ww1.sinaimg.cn/large/007csy4ply1gf8dwpvxhfj31a60jqq84.jpg)
 
 下载所需的文件
 
@@ -90,23 +89,21 @@ https://github.com/simplechain-org/gpuminer/releases
 
 把压缩文件解压成文件，放到桌面：
 
-![](https://upload-images.jianshu.io/upload_images/13694105-ac17269a060d06a2.png?imageMogr2/auto-orient/strip|imageView2/2/w/132)
+![37.7.png](http://ww1.sinaimg.cn/large/007csy4ply1gf8dwpuznxj307c074413.jpg)
 
 然后打开命令行模式，找到终端、终端在实用工具里：
 
-![](https://upload-images.jianshu.io/upload_images/13694105-9eb5a40c6b078efd.png?imageMogr2/auto-orient/strip|imageView2/2/w/419)
+![37.8.png](http://ww1.sinaimg.cn/large/007csy4ply1gf8dwq11ljj30na0es7c1.jpg)
 
-![](https://upload-images.jianshu.io/upload_images/13694105-672de6d7fe44f1a0.png?imageMogr2/auto-orient/strip|imageView2/2/w/416)
+![37.9.png](http://ww1.sinaimg.cn/large/007csy4ply1gf8dwq54ixj30n40eitfv.jpg)
  
-
 先用cd desktop进入桌面（默认刚刚下载的文件在桌面），然后获得操作刚刚下载文件的权限，chmod +x gpuminer（如果文件在桌面，负责粘贴就可以用！）：
 
-![](https://upload-images.jianshu.io/upload_images/13694105-08d99e08c7022d79.png?imageMogr2/auto-orient/strip|imageView2/2/w/687)
-
+![37.10.png](http://ww1.sinaimg.cn/large/007csy4ply1gf8dwq9vd7j31260naaon.jpg)
 
 获得权限后，输入命令启动文件：./gpuminer –server simpool.vip:8801 –name abc(118.31.45.65:8801是矿池地址，每个矿池的地址不一样，abc是账户名称,一定填自己账户。)运行成功后：
 
-![](https://upload-images.jianshu.io/upload_images/13694105-89a2ff3dbed40a49.png?imageMogr2/auto-orient/strip|imageView2/2/w/687)
+![37.11.png](http://ww1.sinaimg.cn/large/007csy4ply1gf8dwq42rvj31260naaon.jpg)
 
  
 

@@ -363,13 +363,9 @@ Solidity 提供了几种基本类型，可以用来组合出复杂类型。
 
 * ``<=``， ``<``， ``==``， ``!=``， ``>=`` 和 ``>``
 
-.. note::
-    从 0.5.0 版本开始，合约不会从地址类型派生，但仍然可以显式地转换成地址类型。
-
-.. _members-of-addresses:
+>  从 0.5.0 版本开始，合约不会从地址类型派生，但仍然可以显式地转换成地址类型。
 
 地址类型成员变量
-^^^^^^^^^^^^^^^^
 
 * ``balance`` 和 ``transfer``
 
@@ -379,10 +375,9 @@ Solidity 提供了几种基本类型，可以用来组合出复杂类型。
 也可以使用 ``transfer`` 函数向一个地址发送 |ether| （以 wei 为单位）：
 
 ```bash
-
-    address x = 0x123;
-    address myAddress = this;
-    if (x.balance < 10 && myAddress.balance >= 10) x.transfer(10);
+address x = 0x123;
+address myAddress = this;
+if (x.balance < 10 && myAddress.balance >= 10) x.transfer(10);
 ```
 
 > 如果 ``x`` 是一个合约地址，它的代码（更具体来说是它的 fallback 函数，如果有的话）会跟 ``transfer`` 函数调用一起执行（这是 EVM 的一个特性，无法阻止）。
