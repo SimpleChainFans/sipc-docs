@@ -205,7 +205,7 @@
     }
 </code></pre>
 <h3><a class="anchor" aria-hidden="true" id="事件"></a><a href="#事件" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>事件</h3>
-<p>事件是能方便地调用以太坊虚拟机日志功能的接口。</p>
+<p>事件是能方便地调用Simplechain虚拟机日志功能的接口。</p>
 <pre><code class="hljs css language-sh">
     pragma solidity ^0.4.21;
     contract SimpleAuction {
@@ -301,7 +301,7 @@ Solidity 提供了几种基本类型，可以用来组合出复杂类型。</p>
 在前者中整数部分和小数部分（小数点后的部分）需要的位数是灵活可变的，而后者中这两部分的长度受到严格的规定。
 一般来说，在浮点型中，几乎整个空间都用来表示数字，但只有少数的位来表示小数点的位置。</p>
 <h3><a class="anchor" aria-hidden="true" id="地址类型"></a><a href="#地址类型" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>地址类型</h3>
-<p><code>address</code>：地址类型存储一个 20 字节的值（以太坊地址的大小）。
+<p><code>address</code>：地址类型存储一个 20 字节的值（Simplechain地址的大小）。
 地址类型也有成员变量，并作为所有合约的基础。</p>
 <p>运算符：</p>
 <ul>
@@ -981,7 +981,7 @@ keccak256(97, 98, 99)
 </code></pre>
 <p>如果需要 padding，可以使用显式类型转换：<code>keccak256(&quot;\x00\x12&quot;)</code> 和 <code>keccak256(uint16(0x12))</code> 是一样的。</p>
 <p>请注意，常量值会使用存储它们所需要的最少字节数进行打包。例如：<code>keccak256(0) == keccak256(uint8(0))</code>，<code>keccak256(0x12345678) == keccak256(uint32(0x12345678))</code>。</p>
-<p>在一个私链上，你很有可能碰到由于 <code>sha256</code>、<code>ripemd160</code> 或者 <code>ecrecover</code> 引起的 Out-of-Gas。原因是因为这些密码学函数在以太坊虚拟机(EVM)中以“预编译合约”形式存在的，且在第一次收到消息后才被真正存在（尽管合约代码是EVM中已存在的硬编码）。因此发送到不存在的合约的消息非常昂贵，所以实际的执行会导致 Out-of-Gas 错误。在你实际使用你的合约之前，给每个合约发送一点儿以太币，比如 1 Wei。这在官方网络或测试网络上不是问题。</p>
+<p>在一个私链上，你很有可能碰到由于 <code>sha256</code>、<code>ripemd160</code> 或者 <code>ecrecover</code> 引起的 Out-of-Gas。原因是因为这些密码学函数在Simplechain虚拟机中以“预编译合约”形式存在的，且在第一次收到消息后才被真正存在（尽管合约代码是EVM中已存在的硬编码）。因此发送到不存在的合约的消息非常昂贵，所以实际的执行会导致 Out-of-Gas 错误。在你实际使用你的合约之前，给每个合约发送一点儿Sipc，比如 1 Wei。这在官方网络或测试网络上不是问题。</p>
 <h4><a class="anchor" aria-hidden="true" id="地址相关"></a><a href="#地址相关" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>地址相关</h4>
 <p><code>&lt;address&gt;.balance</code> (<code>uint256</code>):以 Wei 为单位的 :ref:<code>address</code> 的余额。</p>
 <p><code>&lt;address&gt;.transfer(uint256 amount)</code>:向 :ref:<code>address</code> 发送数量为 amount 的 Wei，失败时抛出异常，发送 2300 gas 的矿工费，不可调节。</p>
@@ -1300,7 +1300,7 @@ keccak256(97, 98, 99)
 调用另一个合约实例的函数时，会执行一个 EVM 函数调用，这个操作会切换执行时的上下文，这样，前一个合约的状态变量就不能访问了。</p>
 <h3><a class="anchor" aria-hidden="true" id="创建合约"></a><a href="#创建合约" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>创建合约</h3>
 <p>可以通过Simplechain交易“从外部”或从 Solidity 合约内部创建合约。</p>
-<p>一些集成开发环境，例如 <a href="https://remix.ethereum.org/">Remix</a>, 通过使用一些用户界面元素使创建过程更加流畅。在以太坊上编程创建合约最好使用 JavaScript API <a href="https://github.com/ethereum/web3.js">web3.j</a>。现在，我们已经有了一个叫做 <a href="https://web3js.readthedocs.io/en/1.0/web3-eth-contract.html#new-contract">web3.eth.Contract</a> 的方法能够更容易的创建合约。</p>
+<p>一些集成开发环境，例如 <a href="https://remix.ethereum.org/">Remix</a>, 通过使用一些用户界面元素使创建过程更加流畅。在Simplechain上编程创建合约最好使用 JavaScript API <a href="https://github.com/ethereum/web3.js">web3.j</a>。现在，我们已经有了一个叫做 <a href="https://web3js.readthedocs.io/en/1.0/web3-eth-contract.html#new-contract">web3.eth.Contract</a> 的方法能够更容易的创建合约。</p>
 <p>创建合约时，会执行一次构造函数（与合约同名的函数）。构造函数是可选的。只允许有一个构造函数，这意味着不支持重载。</p>
 <p>在内部，构造函数参数在合约代码之后通<code>ABI 编码</code>传递，但是如果你使用 <code>web3.js</code>则不必关心这个问题。</p>
 <p>如果一个合约想要创建另一个合约，那么创建者必须知晓被创建合约的源代码(和二进制代码)。
@@ -2218,7 +2218,7 @@ Solidity 的内联汇编试图通过提供以下特性来解决这个问题以�
 </ul>
 <p>现在我们详细讲解内联汇编语言。</p>
 <blockquote>
-<p>内联汇编是一种在底层访问以太坊虚拟机的语言。这抛弃了很多 Solidity 提供的重要安全特性。</p>
+<p>内联汇编是一种在底层访问Simplechain虚拟机的语言。这抛弃了很多 Solidity 提供的重要安全特性。</p>
 </blockquote>
 <blockquote>
 <p>TODO：写出在内联汇编中作用域规则的细微差别，以及在使用库合约的内部函数时产生的复杂性。此外，还要编写有关编译器定义的符号。</p>
@@ -2312,7 +2312,7 @@ Solidity 的内联汇编试图通过提供以下特性来解决这个问题以�
 <li>一些控制局部变量作用域的语句块，比如 <code>{let x := 3 { let y := add(x，1) }}</code></li>
 </ul>
 <h4><a class="anchor" aria-hidden="true" id="操作码"></a><a href="#操作码" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>操作码</h4>
-<p>本文档不是以太坊虚拟机的详细描述，但下边的列表可以作为操作码参考。</p>
+<p>参考操作码：</p>
 <p>如果一个操作码需要参数（总是来自堆栈顶部），它们会在括号中给出。请注意：参数顺序可以看作是在非函数风格中逆序（下面会解释）。标有 <code>-</code> 的操作码不会向栈中压入（push）数据，标有 <code>*</code> 的操作码有特殊操作，而所有其他操作码都只会将一个数据压入（push）栈中。
 用 <code>F</code>、<code>H</code>、<code>B</code> 或 <code>C</code> 标记的操作码代表它们从 Frontier、Homestead、Byzantium 或 Constantinople 开始被引入。Constantinople 目前仍在计划中，所以标记为 <code>C</code> 的指令目前都会导致一个非法指令异常。在下表中，<code>mem[a...b)</code> 表示从位置 <code>a</code> 开始至（不包括）位置 <code>b</code> 的内存字节数，<code>storage[p]</code> 表示位置 <code>p</code> 处的存储内容。
 <code>pushi</code> 和 <code>jumpdest</code> 这两个操作码不能直接用。</p>
