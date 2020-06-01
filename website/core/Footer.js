@@ -36,20 +36,20 @@ class Footer extends React.Component {
             )}
           </a>
           <div>
-            <h5>文档</h5>
-            <a href={this.docUrl('doc1.html', this.props.language)}>
-             快速开始
-            </a>
-            <a href={this.docUrl('doc2.html', this.props.language)}>
-             引导
-            </a>
-            <a href={this.docUrl('doc3.html', this.props.language)}>
-             API接口
-            </a>
+            <h5>联系我们</h5>
+            <a href="https://github.com/simplechain-org/go-simplechain/issues">产品技术反馈</a>
+            <a href="http://xdrwj5ahy41m77hm.mikecrm.com/lHTqCbD">领取赏金任务</a>
+            <a href="https://simplechainfans.github.io/sipc-docs/docs/docs_51">技术支持</a>
           </div>
           <div>
             <h5>社区</h5>
-            <a href={this.pageUrl('https://t.me/SimpleChainOfficial', this.props.language)}>
+            {/* <a href={this.pageUrl('https://t.me/SimpleChainOfficial', this.props.language)}>
+              Telegram
+            </a> */}
+            <a
+              href="https://t.me/SimpleChainOfficial"
+              target="_blank"
+              rel="noreferrer noopener">
               Telegram
             </a>
             <a
@@ -67,9 +67,11 @@ class Footer extends React.Component {
             </a>
           </div>
           <div>
-            <h5>更多</h5>
+            <h5>开发者资源</h5>
             <a href="https://www.simplechain.com">官网</a>
-            <a href="https://github.com/simplechain-org">GitHub</a>
+            <a href="https://explorer.simplechain.com/">浏览器</a>
+            <a href="https://simpool.sipc.vip/">矿池</a>
+            <a href="https://github.com/simplechain-org">Github</a>
             <a
               className="github-button"
               href={this.props.config.repoUrl}

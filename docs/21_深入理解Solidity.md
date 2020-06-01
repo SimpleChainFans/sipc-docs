@@ -429,7 +429,6 @@ if (x.balance < 10 && myAddress.balance >= 10) x.transfer(10);
 
 > 所有合约都继承了地址（address）的成员变量，因此可以使用 ``this.balance`` 查询当前合约的余额。
 
-
 > 不鼓励使用 ``callcode``，在未来也会将其移除。
 
 
