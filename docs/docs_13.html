@@ -55,52 +55,166 @@
               }
             });
         </script></nav></div><div class="container mainContainer docsContainer"><div class="wrapper"><div class="post"><header class="postHeader"><h1 id="__docusaurus" class="postHeaderTitle">数据结构和存储</h1></header><article><div><span><p>Simplechain的区块、交易等数据最终都是存储在<code>Level DB</code>数据库中。<code>Level DB</code> 数据库是一个键值对（ key-value ）数据库， key一般与散列相关，value则是存储内容的RLP编码。</p>
-<h2><a class="anchor" aria-hidden="true" id="数据组织形式"></a><a href="#数据组织形式" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>数据组织形式</h2>
-<p>Simplechain 使用了MPT树（Merkle Patricia Trie），作为数据组织形式，用来组织管理用户的账户状态、交易信息等重要数据。MMPT是一种加密认证的数据结构，它融合了Merkle树和Trie树（前缀树）两种数据类型的优点。</p>
-<h2><a class="anchor" aria-hidden="true" id="merkle树"></a><a href="#merkle树" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Merkle树</h2>
-<p>Merkle树是一种树形数据结构，可以是二叉树，也可以是多叉树。它由一组叶节点、一组中间节点和一个根节点构成。最下面的叶节点包含基础数据，每个中间节点是它的子节点的散列，根节点是它的子节点的散列，代表了Merkle树的根部。</p>
-<p>创建Merkle树的目的是允许区块的数据可以零散地传送；节点可以从一个节点下载区块头，从另外的源下载与其相关的树的其他部分，而依然能够确认所有的数据都是正确的。</p>
-<p>Merkle树可以用来存储所有键值对，Merkle树具有下列特性：</p>
-<ol>
-<li>每个数据集对应一个唯一合法的根散列值。</li>
-<li>很容易更新、添加或者删除树节点，以及生成新的根散列值。</li>
-<li>不改变根散列值的话就没有办法修改树的任何部分，所以如果根散列值被包括在签名的文档或有效区块中，就可以保证这棵树的正确性。</li>
-<li>任何人可以只提供一个到特定节点的分支，并通过密码学方法证明拥有对应内容的节点确实在树里。</li>
-</ol>
-<h2><a class="anchor" aria-hidden="true" id="trie树"></a><a href="#trie树" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Trie树</h2>
-<p>key代表的是从树根到对应value的一条路径。即从根节点开始， key 中的每个字符（从前到后）都代表着从根节点出发寻找相应value 所要经过的子节点。value 存储在叶节点中，是每条路径的最终节点。</p>
-<h2><a class="anchor" aria-hidden="true" id="mpt树"></a><a href="#mpt树" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>MPT树</h2>
-<p>结合merkle和Trie,并做了以下改进：</p>
-<ol>
-<li><p>为了保证树的加密安全，每个节点通过它的散列值被引用</p></li>
-<li><p>对于存储在Leve IDB 数据库中的非叶节点，key代表着节点的RLP编码的SHA3散列值， value是节点的RLP编码。</p></li>
-<li><p>引入了很多节点类型来提高效率：</p>
-<blockquote>
-<p>3.1 空节点：简单的表示空，在代码中就是一个空串</p>
-</blockquote>
-<blockquote>
-<p>3.2叶节点：键值对的一个列表，其中key是一种特殊的十六进制编码， value是RLP编码。</p>
-</blockquote>
-<blockquote>
-<p>3.3扩展节点：键值对的列表，但是这里的value 是其他节点的散列值，通过这个散列值可以链接到其他节点。</p>
-</blockquote>
-<blockquote>
-<p>3.4分支节点：一个长度为17 的列表。MPT 中的key 被编码成一种特殊的十六进制的表示，再加上最后的value ，前16 个元素对应key 中的16 个可能的十六进制字符，如果有一个键值对在这个分支节点终止，则最后一个元素代表一个值，即分支节点既可以是搜索路径的终止，也可以是路径的中间节点。</p>
-</blockquote></li>
-<li><p>用于对key 进行编码的特殊十六进制前缀编码（ HP ）</p></li>
-</ol>
-<h2><a class="anchor" aria-hidden="true" id="三颗树"></a><a href="#三颗树" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>三颗树</h2>
-<p>Simplechain的区块头就是使用三颗树</p>
-<h2><a class="anchor" aria-hidden="true" id="状态树"></a><a href="#状态树" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>状态树</h2>
-<p>状态树包含一个键值映射，其中键是账户地址，值是账户内容，主要是｛ nonce, balance,codeHash, storageRoot ｝ 。nonce 是账户交易的序数， balance 是账户余额， codeHash 是代码的散列值， storageRoot 是另一棵树的根节点。状态树代表访问区块后的整个状态。</p>
-<p>Simplechain 是一个以账户为基础的区块链应用平台，账户的状态不是直接存储在每个区块中，所有的账户状态都是以“状态数据”的形式存储在Simplechain的节点中。</p>
-<h2><a class="anchor" aria-hidden="true" id="交易树"></a><a href="#交易树" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>交易树</h2>
-<p>每个区块都有一棵独立的交易树。</p>
-<p>区块中交易的顺序主要由“矿工”决定，在这个块被挖出前这些数据都是未知的。不过“矿工” 一般会根据交易的GasPrice 和nonce 对交易进行排序。首先会将交易列表中的交易划分到各个发送账户，每个账户的交易根据这些交易的nonce 来排序。每个账户的交易排序完成后，再通过比较每个账户的第一条交易，选出最高价格的交易，这些是通过一个堆（heap）来实现的</p>
-<p>在交易树包含的键值对中，其中每个键是交易的编号，值是交易内容</p>
-<h2><a class="anchor" aria-hidden="true" id="收据树"></a><a href="#收据树" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>收据树</h2>
-<p>每个区块都有自己的收据树，收据树不需要更新，收据树代表每笔交易相应的收据。</p>
-<p>交易的收据是一个 <code>RLP</code> 编码的数据结构：［medstate, Gas_ used, logbloom,logs ］ 。其中， medstate 是交易处理后树根的状态； Gas_used 是交易处理后Gas 的使用量；logs 是表格［ address, [topicl, topic2 ,…], data ］元素的列表，表格由交易执行期间调用的操作码LOGO …LOG4 生成（包含主调用和子调用）， address 是生成日志的合约地址， topicn是最多4 个32 字节的值， data 是任意字节大小的数组； logbloom 是交易中所有logs 的address 和topic 组成的布隆过滤器.</p>
-<h2><a class="anchor" aria-hidden="true" id="数据库支持一一leveldb"></a><a href="#数据库支持一一leveldb" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>数据库支持一一LevelDB</h2>
-<p><code>LeveIDB</code> 是 <code>Google</code> 实现的一个非常高效的键值对数据库，其中键值都是二进制的，目前能够支持十亿级别的数据量，在这个数据量下还有着非常高的性能。Simplechain中共有三个<code>LeveDB</code>数据库，分别是 <code>BlockDB</code> 、<code>StateDB</code> 和 <code>ExtrasDB</code>。<code>BlockDB</code>保存了块的主体内容，包括块头和交易；<code>StateDB</code>保存了账户的状态数据；<code>ExtrasDB</code> 保存了收据信息和其他辅助信息。</p>
-</span></div></article></div><div class="docs-prevnext"><a class="docs-prev button" href="/sipc-docs/docs/docs_12"><span class="arrow-prev">← </span><span class="function-name-prevnext">SimpleChain架构设计</span></a><a class="docs-next button" href="/sipc-docs/docs/docs_55"><span>数据同步优化</span><span class="arrow-next"> →</span></a></div></div></div><nav class="onPageNav"><ul class="toc-headings"><li><a href="#数据组织形式">数据组织形式</a></li><li><a href="#merkle树">Merkle树</a></li><li><a href="#trie树">Trie树</a></li><li><a href="#mpt树">MPT树</a></li><li><a href="#三颗树">三颗树</a></li><li><a href="#状态树">状态树</a></li><li><a href="#交易树">交易树</a></li><li><a href="#收据树">收据树</a></li><li><a href="#数据库支持一一leveldb">数据库支持一一LevelDB</a></li></ul></nav></div><footer class="nav-footer" id="footer"><section class="sitemap"><a href="/sipc-docs/" class="nav-home"></a><div><h5>联系我们</h5><a href="https://github.com/simplechain-org/go-simplechain/issues">产品技术反馈</a><a href="http://xdrwj5ahy41m77hm.mikecrm.com/lHTqCbD">领取赏金任务</a><a href="https://simplechainfans.github.io/sipc-docs/docs/docs_51">技术支持</a></div><div><h5>社区</h5><a href="https://t.me/SimpleChainOfficial" target="_blank" rel="noreferrer noopener">Telegram</a><a href="https://medium.com/@SimpleChain" target="_blank" rel="noreferrer noopener">Medium</a><a href="https://twitter.com/SimpleChain">Twitter</a><a href="https://www.linkedin.com/company/simplechain-foundation/" target="_blank" rel="noreferrer noopener">Linkedln</a></div><div><h5>开发者资源</h5><a href="https://www.simplechain.com">官网</a><a href="https://explorer.simplechain.com/">浏览器</a><a href="https://simpool.sipc.vip/">矿池</a><a href="https://github.com/simplechain-org">Github</a><a class="github-button" data-icon="octicon-star" data-count-href="/facebook/docusaurus/stargazers" data-show-count="true" data-count-aria-label="# stargazers on GitHub" aria-label="Star this project on GitHub">Star</a></div></section><section class="copyright">Copyright © 2020 SimpleChain Community</section></footer></div></body></html>
+<h2><a class="anchor" aria-hidden="true" id="一、kv存储leveldb"></a><a href="#一、kv存储leveldb" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>一、KV存储LevelDB</h2>
+<h3><a class="anchor" aria-hidden="true" id="mpt树"></a><a href="#mpt树" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>MPT树</h3>
+<p>MPT(Merkle Patricia Trie)，是一种用hash索引数据的前缀树。</p>
+<p>从宏观上来说，MPT树是一棵前缀树，用key查询value。通过key去查询value，就是用key去在MPT树上进行索引，在经过多个中间节点后，最终到达存储数据的叶子节点。</p>
+<p>从细节上来说，MPT树，是一棵Merkle树，每个树上节点的索引，都是这个节点的hash值。在用key查找value的时候，是根据key在某节点内部，获取下一个需要跳转的节点的hash值，拿到下一个节点的hash值，才能从底层的数据库中取出下一个节点的数据，之后，再用key，去下一个节点中查询下下个节点的hash值，直至到达value所在的叶子节点。</p>
+<p>当MPT树上某个叶子节点的数据更新后，此叶子节点的hash也会更新，随之而来的，是这个叶子节点回溯到根节点的所有中间节点的hash都会更新。最终，MPT根节点的hash也会更新。当要索引这个新的数据时，用MPT新的根节点hash，从底层数据库查出新的根节点，再往后一层层遍历，最终找到新的数据。而如果要查询历史数据，则可用老的树根hash，从底层数据库取出老的根节点，再往下遍历，就可查询到历史的数据。</p>
+<p>MPT树的实现图（图片来自以太坊黄皮书）</p>
+<p><img src="https://uploader.shimo.im/f/Jl1M7q2iSum6C2Kx.png!thumbnail" alt="图片"></p>
+<h3><a class="anchor" aria-hidden="true" id="账户state"></a><a href="#账户state" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>账户State</h3>
+<p>在Simplechain上，数据是以account为单位存储的，每个account内，保存着这个合约(用户)的代码、参数、nonce等数据。account的数据，通过account的地址（address）进行索引。</p>
+<p>随着account数据的改变，account的hash也进行改变。于此同时，MPT的根的hash也会改变。不同的时候，account的数据不同，对应的MPT的根就不同。此处，以太坊把这层含义进行了具体化，提出了“状态”的概念。把MPT根的hash，叫state root。不同的state root，对应着不同的“状态”，对应查询到不同的MPT根节点，再用account的address从不同的MPT根节点查询到此状态下的account数据。不同的state，拿到的MPT根节点不同，查询的account也许会有不同。</p>
+<p>state root是区块中的一个字段，每个区块对应着不同的“状态”。区块中的交易会对account进行操作，进而改变account中的数据。不同的区块下，account的数据有所不同，即此区块的状态有所不同，具体的，是state root不同。从某个区块中取出这个区块的state root，查询到MPT的根节点，就能索引到这个区块当时account的数据历史。</p>
+<p>(图片来自以太坊白皮书)</p>
+<p><img src="https://uploader.shimo.im/f/bIPmpZI7n84LluPT.png!thumbnail" alt="图片"></p>
+<h2><a class="anchor" aria-hidden="true" id="二、索引存储stormdb"></a><a href="#二、索引存储stormdb" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>二、索引存储StormDB</h2>
+<p>StormDB(a simple and powerful toolkit for <a href="https://github.com/coreos/bbolt">BoltDB</a>)是一种基于boltDB实现的数据库，它支持索引与搜索查询，相对于传统关系数据库MySQL、Oracle等，StormDB使用单一文件存储，没有单独的服务，更加轻量便于系统移植，SImplechain使用它来存储跨链交易。</p>
+<h3><a class="anchor" aria-hidden="true" id="名词解释"></a><a href="#名词解释" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>名词解释</h3>
+<p><strong>Bucket</strong></p>
+<p>自定义对象的存储单元</p>
+<p><strong>Id</strong></p>
+<p>存储对象的主键索引，唯一不可重复</p>
+<p><strong>Index</strong></p>
+<p>排序索引，目前只支持数值类型的字段排序(int8, int16, int32, int64, uint8, uint16, uint32, uint64)，其他类型皆使用编码后字节比较的方式来进行排序。</p>
+<p><strong>Unique</strong></p>
+<p>唯一哈希索引</p>
+<p><strong>Options</strong></p>
+<p>查询选项，支持Limit(限制条数)、OrderBy(根据字段排序)、Skip(跳过的条数)等</p>
+<p><strong>Matcher</strong></p>
+<p>查询的传入条件，支持Eq、Gt(greater than)、Lt(less than)、And、Or、Not、Re(正则匹配)等</p>
+<h3><a class="anchor" aria-hidden="true" id="举例"></a><a href="#举例" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>举例</h3>
+<p>以跨链交易存储结构为例，解释上述名词。</p>
+<pre><code class="hljs css language-go"><span class="hljs-keyword">type</span> CrossTransactionIndexed <span class="hljs-keyword">struct</span> {
+   PK       <span class="hljs-keyword">uint64</span>         <span class="hljs-string">`storm:"id,increment"`</span>
+   CtxId    common.Hash    <span class="hljs-string">`storm:"unique"`</span>
+   From     common.Address <span class="hljs-string">`storm:"index"`</span>
+   To       common.Address <span class="hljs-string">`storm:"index"`</span>
+   TxHash   common.Hash    <span class="hljs-string">`storm:"index"`</span>
+   Price    *big.Float     <span class="hljs-string">`storm:"index"`</span>
+   
+   Status <span class="hljs-keyword">uint8</span> <span class="hljs-string">`storm:"index"`</span>
+   Value            *big.Int
+   BlockNum         <span class="hljs-keyword">uint64</span> <span class="hljs-string">`storm:"index"`</span>
+   BlockHash        common.Hash
+   DestinationId    *big.Int
+   DestinationValue *big.Int <span class="hljs-string">`storm:"index"`</span>
+   Input            []<span class="hljs-keyword">byte</span>
+   
+   V []*big.Int
+   R []*big.Int
+   S []*big.Int
+}
+</code></pre>
+<p>解释如下：</p>
+<ul>
+<li>storm:&quot;id,increment&quot;：表示此字段为主键，increment表示在插入时自动递增</li>
+<li>storm:&quot;unique&quot;：表示此字段使用不可重复的哈希索引</li>
+<li>storm:&quot;index&quot;：表示此字段使用排序索引</li>
+</ul>
+<h3><a class="anchor" aria-hidden="true" id="crud与事务"></a><a href="#crud与事务" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>CRUD与事务</h3>
+<p><strong>插入对象</strong></p>
+<pre><code class="hljs css language-go">user := User{
+  ID: <span class="hljs-number">10</span>,
+  Group: <span class="hljs-string">"staff"</span>,
+  Email: <span class="hljs-string">"john@provider.com"</span>,
+  Name: <span class="hljs-string">"John"</span>,
+  Age: <span class="hljs-number">21</span>,
+  CreatedAt: time.Now(),
+}
+err := db.Save(&amp;user)
+<span class="hljs-comment">// err == nil</span>
+user.ID++
+err = db.Save(&amp;user)
+<span class="hljs-comment">// err == storm.ErrAlreadyExists</span>
+</code></pre>
+<p><strong>更新对象</strong></p>
+<pre><code class="hljs css language-go"><span class="hljs-comment">// Update multiple fields</span>
+err := db.Update(&amp;User{ID: <span class="hljs-number">10</span>, Name: <span class="hljs-string">"Jack"</span>, Age: <span class="hljs-number">45</span>})
+<span class="hljs-comment">// Update a single field</span>
+err := db.UpdateField(&amp;User{ID: <span class="hljs-number">10</span>}, <span class="hljs-string">"Age"</span>, <span class="hljs-number">0</span>)
+</code></pre>
+<p><strong>删除对象</strong></p>
+<pre><code class="hljs css language-go">err := db.DeleteStruct(&amp;user)
+</code></pre>
+<p><strong>删除Bucket</strong></p>
+<pre><code class="hljs css language-go">err := db.Drop(&amp;User)
+<span class="hljs-comment">//OR</span>
+err := db.Drop(<span class="hljs-string">"User"</span>)
+</code></pre>
+<p><strong>查询对象</strong></p>
+<pre><code class="hljs css language-go"><span class="hljs-keyword">var</span> users []User
+err := db.Find(<span class="hljs-string">"Group"</span>, <span class="hljs-string">"staff"</span>, &amp;users, storm.Skip(<span class="hljs-number">10</span>))
+err = db.Find(<span class="hljs-string">"Group"</span>, <span class="hljs-string">"staff"</span>, &amp;users, storm.Limit(<span class="hljs-number">10</span>))
+err = db.Find(<span class="hljs-string">"Group"</span>, <span class="hljs-string">"staff"</span>, &amp;users, storm.Reverse())
+err = db.Find(<span class="hljs-string">"Group"</span>, <span class="hljs-string">"staff"</span>, &amp;users, storm.Limit(<span class="hljs-number">10</span>), storm.Skip(<span class="hljs-number">10</span>), storm.Reverse())
+err = db.All(&amp;users, storm.Limit(<span class="hljs-number">10</span>), storm.Skip(<span class="hljs-number">10</span>), storm.Reverse())
+err = db.AllByIndex(<span class="hljs-string">"CreatedAt"</span>, &amp;users, storm.Limit(<span class="hljs-number">10</span>), storm.Skip(<span class="hljs-number">10</span>), storm.Reverse())
+err = db.Range(<span class="hljs-string">"Age"</span>, <span class="hljs-number">10</span>, <span class="hljs-number">21</span>, &amp;users, storm.Limit(<span class="hljs-number">10</span>), storm.Skip(<span class="hljs-number">10</span>), storm.Reverse())
+</code></pre>
+<p><strong>条件查询</strong></p>
+<pre><code class="hljs css language-go">query := db.Select(q.Gte(<span class="hljs-string">"Age"</span>, <span class="hljs-number">7</span>), q.Lte(<span class="hljs-string">"Age"</span>, <span class="hljs-number">77</span>))
+<span class="hljs-keyword">var</span> users []User
+err = query.Find(&amp;users)
+</code></pre>
+<p><strong>使用事务</strong></p>
+<pre><code class="hljs css language-go">tx, err := db.Begin(<span class="hljs-literal">true</span>)
+<span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
+  <span class="hljs-keyword">return</span> err
+}
+<span class="hljs-keyword">defer</span> tx.Rollback()
+accountA.Amount -= <span class="hljs-number">100</span>
+accountB.Amount += <span class="hljs-number">100</span>
+err = tx.Save(accountA)
+<span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
+  <span class="hljs-keyword">return</span> err
+}
+err = tx.Save(accountB)
+<span class="hljs-keyword">if</span> err != <span class="hljs-literal">nil</span> {
+  <span class="hljs-keyword">return</span> err
+}
+<span class="hljs-keyword">return</span> tx.Commit()
+</code></pre>
+<h2><a class="anchor" aria-hidden="true" id="三、高效内存多索引存储"></a><a href="#三、高效内存多索引存储" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>三、高效内存多索引存储</h2>
+<p>为了适应不同要求的索引类型以及效率需求，单独使用stormDB已难以满足，因此在内存中引入多索引结构来存储高读写频次的数据。</p>
+<h3><a class="anchor" aria-hidden="true" id="哈希索引"></a><a href="#哈希索引" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>哈希索引</h3>
+<p>Simplechain中使用的哈希索引皆为键值唯一的哈希索引，因此直接使用map存储。</p>
+<p><strong>插入与更新</strong></p>
+<pre><code class="hljs css language-go">idx := <span class="hljs-built_in">make</span>(<span class="hljs-keyword">map</span>[Key]Value)
+idx[key]=value
+</code></pre>
+<p><strong>删除</strong></p>
+<pre><code class="hljs css language-go"><span class="hljs-built_in">delete</span>(idx,key)
+</code></pre>
+<p><strong>读取</strong></p>
+<pre><code class="hljs css language-go"><span class="hljs-keyword">if</span> v,ok := idx[key]; ok {<span class="hljs-comment">//...}</span>
+</code></pre>
+<h3><a class="anchor" aria-hidden="true" id="排序索引"></a><a href="#排序索引" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>排序索引</h3>
+<p>Simplechain使用红黑树作为排序索引，用于存储任意有顺序要求的数据类型。</p>
+<p><strong>初始化</strong></p>
+<pre><code class="hljs css language-go"><span class="hljs-comment">//comparator:key的比较方法</span>
+<span class="hljs-comment">//isMulti:是否允许key值重复</span>
+redblacktree.NewWith(container.UInt64Comparator, <span class="hljs-literal">true</span>)
+</code></pre>
+<p><strong>插入与更新</strong></p>
+<pre><code class="hljs css language-go">idx.Put(key,value)
+</code></pre>
+<p><strong>查询</strong></p>
+<pre><code class="hljs css language-go"><span class="hljs-comment">//返回迭代器，在multi模式下，返回lowerbound</span>
+itr := idx.Get(key)
+</code></pre>
+<p><strong>删除key</strong></p>
+<pre><code class="hljs css language-go"><span class="hljs-comment">//在multi模式下，删除此key关联的所有value</span>
+idx.Remove(key)
+</code></pre>
+<p><strong>删除特定对象</strong></p>
+<pre><code class="hljs css language-go"><span class="hljs-comment">//获得key的lowerBound与upperBound迭代器，遍历删除满足条件的对象</span>
+<span class="hljs-keyword">for</span> it:=idx.LowerBound(key); it!=idx.UpperBound(key); it.Next() {
+   <span class="hljs-keyword">if</span> ... {
+      idx.RemoveOne(itr)
+      <span class="hljs-keyword">break</span>
+   }
+}
+</code></pre>
+</span></div></article></div><div class="docs-prevnext"><a class="docs-prev button" href="/sipc-docs/docs/docs_12"><span class="arrow-prev">← </span><span class="function-name-prevnext">SimpleChain架构设计</span></a><a class="docs-next button" href="/sipc-docs/docs/docs_55"><span>数据同步优化</span><span class="arrow-next"> →</span></a></div></div></div><nav class="onPageNav"><ul class="toc-headings"><li><a href="#一、kv存储leveldb">一、KV存储LevelDB</a><ul class="toc-headings"><li><a href="#mpt树">MPT树</a></li><li><a href="#账户state">账户State</a></li></ul></li><li><a href="#二、索引存储stormdb">二、索引存储StormDB</a><ul class="toc-headings"><li><a href="#名词解释">名词解释</a></li><li><a href="#举例">举例</a></li><li><a href="#crud与事务">CRUD与事务</a></li></ul></li><li><a href="#三、高效内存多索引存储">三、高效内存多索引存储</a><ul class="toc-headings"><li><a href="#哈希索引">哈希索引</a></li><li><a href="#排序索引">排序索引</a></li></ul></li></ul></nav></div><footer class="nav-footer" id="footer"><section class="sitemap"><a href="/sipc-docs/" class="nav-home"></a><div><h5>联系我们</h5><a href="https://github.com/simplechain-org/go-simplechain/issues">产品技术反馈</a><a href="http://xdrwj5ahy41m77hm.mikecrm.com/lHTqCbD">领取赏金任务</a><a href="https://simplechainfans.github.io/sipc-docs/docs/docs_51">技术支持</a></div><div><h5>社区</h5><a href="https://t.me/SimpleChainOfficial" target="_blank" rel="noreferrer noopener">Telegram</a><a href="https://medium.com/@SimpleChain" target="_blank" rel="noreferrer noopener">Medium</a><a href="https://twitter.com/SimpleChain">Twitter</a><a href="https://www.linkedin.com/company/simplechain-foundation/" target="_blank" rel="noreferrer noopener">Linkedln</a></div><div><h5>开发者资源</h5><a href="https://www.simplechain.com">官网</a><a href="https://explorer.simplechain.com/">浏览器</a><a href="https://simpool.sipc.vip/">矿池</a><a href="https://github.com/simplechain-org">Github</a><a class="github-button" data-icon="octicon-star" data-count-href="/facebook/docusaurus/stargazers" data-show-count="true" data-count-aria-label="# stargazers on GitHub" aria-label="Star this project on GitHub">Star</a></div></section><section class="copyright">Copyright © 2020 SimpleChain Community</section></footer></div></body></html>

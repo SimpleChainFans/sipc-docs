@@ -59,7 +59,7 @@
 <h2><a class="anchor" aria-hidden="true" id="二-单个众筹合约实现"></a><a href="#二-单个众筹合约实现" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>二. 单个众筹合约实现</h2>
 <h3><a class="anchor" aria-hidden="true" id="1创建空合约crowfunding"></a><a href="#1创建空合约crowfunding" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>1.创建空合约CrowFunding</h3>
 <p>进⼊到项⽬⽬录，创建⽂件<code>basicFunding.sol</code></p>
-<p><img src="img/33.1.png" alt=""></p>
+<p><img src="https://i.loli.net/2020/06/09/nWhL2mjlqwIEa4t.png" alt="33.1.png"></p>
 <p>并添加如下代码：</p>
 <pre><code class="hljs css language-go">pragma solidity ^<span class="hljs-number">0.4</span><span class="hljs-number">.24</span>;
 
@@ -100,16 +100,8 @@ constructor(<span class="hljs-keyword">string</span> _projectName, <span class="
    } 
 }
 </code></pre>
-<p><strong>第一次测试</strong></p>
-<p><img src="img/33.2.png" alt=""></p>
-<p><strong>提交代码</strong></p>
-<p>查看修改文件</p>
-<p><img src="img/33.3.png" alt=""></p>
-<pre><code class="hljs css language-bash">git add basicFunding.sol
-git commit -m <span class="hljs-string">"实现构造函数并测试成功"</span>
-git <span class="hljs-built_in">log</span>
-</code></pre>
-<p><img src="img/33.4.png" alt=""></p>
+<p><strong>测试</strong></p>
+<p><img src="https://i.loli.net/2020/06/09/qWgeNnbSyvUOo3P.png" alt=""></p>
 <h3><a class="anchor" aria-hidden="true" id="4参与众筹"></a><a href="#4参与众筹" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>4.参与众筹</h3>
 <p><strong>实现</strong></p>
 <p>添加参与人属性</p>
@@ -126,11 +118,9 @@ git <span class="hljs-built_in">log</span>
 <p>为了能够快速校验一个账户是否在参与人数组中，我们提供一个<code>mapping(address=&gt;bool)</code>来进行标记，<code>mapping</code>的特点是所有的key都默认存在，只不过默认值是<code>false</code>，如果不存在，则返回<code>false</code>,我们将用户地址作为<code>key</code>,设置值为<code>true</code>,即可完成索引，mapping是线性索引的，比使用for循环遍历<code>investors</code>数组高效且经济，所以还需要添加如下属性：</p>
 <pre><code class="hljs">mapping(address =&gt; bool) public investorExistMap; //标记一个人是否参与了当前众筹
 </code></pre>
-<p><strong>第二次测试</strong></p>
-<p>当前修改</p>
-<p><img src="img/33.5.png" alt=""></p>
+<p><strong>测试</strong></p>
 <p>测试，请部署后按照数字顺序操作</p>
-<p><img src="img/33.6.png" alt=""></p>
+<p><img src="https://i.loli.net/2020/06/09/2iB5fNXOwYkcFlM.png" alt="33.6.png"></p>
 <h3><a class="anchor" aria-hidden="true" id="众筹失败退款（实现）"></a><a href="#众筹失败退款（实现）" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>众筹失败退款（实现）</h3>
 <p>退款即将所有筹到的钱逐一退换还给投资者人。同时增加了两个辅助函数，便于测试。</p>
 <pre><code class="hljs css language-go"><span class="hljs-comment">//众筹失败，退款</span>
@@ -147,8 +137,8 @@ function getInvestors() public view returns(address[]) {
     <span class="hljs-keyword">return</span> investors;
 }
 </code></pre>
-<p><strong>第三次测试</strong></p>
-<p><img src="img/33.7.png" alt=""></p>
+<p><strong>测试</strong></p>
+<p><img src="https://i.loli.net/2020/06/09/tpwDoV3yMWrjxN4.png" alt="33.7.png"></p>
 <h3><a class="anchor" aria-hidden="true" id="花费请求实现"></a><a href="#花费请求实现" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>花费请求(实现)</h3>
 <ul>
 <li>定义结构
@@ -192,10 +182,76 @@ function createRequest(<span class="hljs-keyword">string</span> _purpose, <span 
       requests.push(request); <span class="hljs-comment">//将新的请求添加至数组中</span>
 }
 </code></pre>
-<p><strong>第四次测试</strong></p>
+<p><strong>测试</strong></p>
 <p>在<code>createRequest</code>中添加参数：</p>
 <pre><code class="hljs css language-json">"小胖子减肥", 100, "0xca35b7d915458ef540ade6068dfe2f44e8fa733c"
 </code></pre>
 <p>在request中搜索第0个请求，图示如下：</p>
-<p><img src="img/33.9.png" alt=""></p>
-</span></div></article></div><div class="docs-prevnext"><a class="docs-prev button" href="/sipc-docs/docs/docs_32"><span class="arrow-prev">← </span><span>编写合约</span></a><a class="docs-next button" href="/sipc-docs/docs/docs_34"><span>Dapp前端实现</span><span class="arrow-next"> →</span></a></div></div></div><nav class="onPageNav"><ul class="toc-headings"><li><a href="#一-项目代码管理">一. 项目代码管理</a></li><li><a href="#二-单个众筹合约实现">二. 单个众筹合约实现</a><ul class="toc-headings"><li><a href="#1创建空合约crowfunding">1.创建空合约CrowFunding</a></li><li><a href="#2基本属性状态变量">2.基本属性(状态变量)</a></li><li><a href="#3构造函数实现">3.构造函数实现</a></li><li><a href="#4参与众筹">4.参与众筹</a></li><li><a href="#众筹失败退款（实现）">众筹失败退款（实现）</a></li><li><a href="#花费请求实现">花费请求(实现)</a></li></ul></li></ul></nav></div><footer class="nav-footer" id="footer"><section class="sitemap"><a href="/sipc-docs/" class="nav-home"></a><div><h5>联系我们</h5><a href="https://github.com/simplechain-org/go-simplechain/issues">产品技术反馈</a><a href="http://xdrwj5ahy41m77hm.mikecrm.com/lHTqCbD">领取赏金任务</a><a href="https://simplechainfans.github.io/sipc-docs/docs/docs_51">技术支持</a></div><div><h5>社区</h5><a href="https://t.me/SimpleChainOfficial" target="_blank" rel="noreferrer noopener">Telegram</a><a href="https://medium.com/@SimpleChain" target="_blank" rel="noreferrer noopener">Medium</a><a href="https://twitter.com/SimpleChain">Twitter</a><a href="https://www.linkedin.com/company/simplechain-foundation/" target="_blank" rel="noreferrer noopener">Linkedln</a></div><div><h5>开发者资源</h5><a href="https://www.simplechain.com">官网</a><a href="https://explorer.simplechain.com/">浏览器</a><a href="https://simpool.sipc.vip/">矿池</a><a href="https://github.com/simplechain-org">Github</a><a class="github-button" data-icon="octicon-star" data-count-href="/facebook/docusaurus/stargazers" data-show-count="true" data-count-aria-label="# stargazers on GitHub" aria-label="Star this project on GitHub">Star</a></div></section><section class="copyright">Copyright © 2020 SimpleChain Community</section></footer></div></body></html>
+<p><img src="https://i.loli.net/2020/06/09/Nyg2HJB6Q1DtUiq.png" alt="33.9.png"></p>
+<h3><a class="anchor" aria-hidden="true" id="批准支付申请"></a><a href="#批准支付申请" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>批准支付申请</h3>
+<p><strong>实现</strong></p>
+<p>项目方发起申请后，由众筹人进行审批，如果投资人不支持。则无需理会，默认为false(不支持)，如果想支持，则需要执行批准动作。即对申请结构的数据进行状态修改，包括：</p>
+<ol>
+<li>检验这个人是否投票过，若未通过，则允许投票，反之退出。</li>
+<li>voteCount 数据加1。</li>
+<li>将该投票人再investorVotedMap映射中的值设为true。</li>
+</ol>
+<p>代码如下：</p>
+<pre><code class="hljs css language-golang"><span class="hljs-comment">//批准⽀付申请</span>
+function approveRequest(uint256 index) public {
+    <span class="hljs-comment">// 1. 检验这个⼈是否投过票，若未投过，则允许投票，反之退出</span>
+    <span class="hljs-comment">// 2. voteCount数据加1。</span>
+    <span class="hljs-comment">// 3. 将该投票⼈在investorVotedMap映射中的值设置为true。</span>
+
+    <span class="hljs-comment">//⾸先要确保是参与众筹的⼈，否则⽆权投票</span>
+    require(investExitMapping[msg.sender]);
+    <span class="hljs-comment">//根据索引找到特定的请求</span>
+    Request storage req = requests[index];
+    <span class="hljs-comment">//确保没有投过票，⼈⼿⼀票</span>
+    require(req.investorVotedMap[msg.sender] == <span class="hljs-literal">false</span>);
+    <span class="hljs-comment">//如果已经完成，或者已经获得批准了，就不⽤投票了，当前投票不会影响决策。</span>
+    require(req.status == RequestStatus.Voting);
+
+    <span class="hljs-comment">//⽀持票数加1</span>
+    req.voteCount += <span class="hljs-number">1</span>;
+    <span class="hljs-comment">//标记为已投票</span>
+    req.investorVotedMap[msg.sender] = <span class="hljs-literal">true</span>;
+    <span class="hljs-keyword">if</span> (req.voteCount * <span class="hljs-number">2</span> &gt; investors.length) {
+        req.status == RequestStatus.Approved;
+    }
+}
+</code></pre>
+<p><strong>测试</strong></p>
+<p>批准侯查看该请求，voteCount变为1</p>
+<p><img src="https://i.loli.net/2020/06/09/5GvWw7rMt1H4RZU.png" alt="33.11.png"></p>
+<h3><a class="anchor" aria-hidden="true" id="完成花费请求"></a><a href="#完成花费请求" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>完成花费请求</h3>
+<p><strong>实现</strong></p>
+<p>当投票人数过半时，花费被批准，可以由项目方执行花费动作，也可以由项目方执行花费动作，也可以由合约自动执行。我们选择手动执行，因为有可能项目方改变注意了，计划右边不需要购买了等等因素，所以我们把权利下放到项目方。</p>
+<p>这个函数主要做两件事：</p>
+<p>1.票数过半，则执行转账。
+2.更新request的状态</p>
+<p>代卖如下：</p>
+<pre><code class="hljs css language-golang">function finalizeRequest(uint256 index) public onlyManager{
+    <span class="hljs-comment">// 这个函数主要做两件事：</span>
+    <span class="hljs-comment">// 1. 票数过半，则执⾏转账。</span>
+    <span class="hljs-comment">// 2. 更新request的状态。</span>
+
+    Request storage req = requests[index];
+    <span class="hljs-comment">//合约⾦额充⾜才可以执⾏</span>
+    require(address(this).balance &gt;= req.cost);
+    <span class="hljs-comment">//赞成⼈数过半</span>
+    require(req.voteCount * <span class="hljs-number">2</span> &gt; investors.length);
+    <span class="hljs-comment">//转账</span>
+    req.shopAddress.transfer(req.cost);
+    <span class="hljs-comment">//更新请求状态为已完成</span>
+    req.status = RequestStatus.Completed;
+}
+
+</code></pre>
+<p><strong>测试</strong></p>
+<p>三个人投资，一个人赞成，两个人反对，执行支付失败。</p>
+<p><img src="https://i.loli.net/2020/06/09/XLOFqN3Bs6gHSxh.png" alt="33.12.png"></p>
+<p>两个人赞成，执行支付成功</p>
+<p><img src="https://i.loli.net/2020/06/09/Bo82mNzg4kSIldP.png" alt="33.13.png"></p>
+<p>智能合约全部实现还需要实现几个方法，以及合约方法的互相调用。这些都可以直接在看源码学习。但是合约的编写，以及测试都在上面的几个基础方法中现在。</p>
+</span></div></article></div><div class="docs-prevnext"><a class="docs-prev button" href="/sipc-docs/docs/docs_32"><span class="arrow-prev">← </span><span>编写合约</span></a><a class="docs-next button" href="/sipc-docs/docs/docs_34"><span>Dapp前端实现</span><span class="arrow-next"> →</span></a></div></div></div><nav class="onPageNav"><ul class="toc-headings"><li><a href="#一-项目代码管理">一. 项目代码管理</a></li><li><a href="#二-单个众筹合约实现">二. 单个众筹合约实现</a><ul class="toc-headings"><li><a href="#1创建空合约crowfunding">1.创建空合约CrowFunding</a></li><li><a href="#2基本属性状态变量">2.基本属性(状态变量)</a></li><li><a href="#3构造函数实现">3.构造函数实现</a></li><li><a href="#4参与众筹">4.参与众筹</a></li><li><a href="#众筹失败退款（实现）">众筹失败退款（实现）</a></li><li><a href="#花费请求实现">花费请求(实现)</a></li><li><a href="#批准支付申请">批准支付申请</a></li><li><a href="#完成花费请求">完成花费请求</a></li></ul></li></ul></nav></div><footer class="nav-footer" id="footer"><section class="sitemap"><a href="/sipc-docs/" class="nav-home"></a><div><h5>联系我们</h5><a href="https://github.com/simplechain-org/go-simplechain/issues">产品技术反馈</a><a href="http://xdrwj5ahy41m77hm.mikecrm.com/lHTqCbD">领取赏金任务</a><a href="https://simplechainfans.github.io/sipc-docs/docs/docs_51">技术支持</a></div><div><h5>社区</h5><a href="https://t.me/SimpleChainOfficial" target="_blank" rel="noreferrer noopener">Telegram</a><a href="https://medium.com/@SimpleChain" target="_blank" rel="noreferrer noopener">Medium</a><a href="https://twitter.com/SimpleChain">Twitter</a><a href="https://www.linkedin.com/company/simplechain-foundation/" target="_blank" rel="noreferrer noopener">Linkedln</a></div><div><h5>开发者资源</h5><a href="https://www.simplechain.com">官网</a><a href="https://explorer.simplechain.com/">浏览器</a><a href="https://simpool.sipc.vip/">矿池</a><a href="https://github.com/simplechain-org">Github</a><a class="github-button" data-icon="octicon-star" data-count-href="/facebook/docusaurus/stargazers" data-show-count="true" data-count-aria-label="# stargazers on GitHub" aria-label="Star this project on GitHub">Star</a></div></section><section class="copyright">Copyright © 2020 SimpleChain Community</section></footer></div></body></html>
